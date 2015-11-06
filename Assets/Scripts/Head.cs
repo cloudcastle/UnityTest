@@ -7,6 +7,10 @@ public class Head : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.paused)
+        {
+            return;
+        }
         transform.RotateAround(transform.position, transform.right, -Input.GetAxis("Mouse Y") * verticalRotateSpeed);
     }
 }

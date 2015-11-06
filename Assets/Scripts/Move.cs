@@ -13,6 +13,10 @@ public class Move : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.paused)
+        {
+            return;
+        }
         transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0, Space.World);
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
