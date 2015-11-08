@@ -9,6 +9,8 @@ public class ChangeScale : MonoBehaviour
     public float scaleSpeed = 1;
     public Transform scalableBody;
     public float currentScale = 1;
+    public float minScale = 0.15F;
+    public float maxScale = float.PositiveInfinity;
 
     CharacterController characterController;
     float baseStepOffset;
@@ -49,6 +51,8 @@ public class ChangeScale : MonoBehaviour
             return;
         }
         currentScale *= Mathf.Pow(2, Input.GetAxis("Scale") * Time.deltaTime * scaleSpeed);
+        currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
+
         scalableBody.localScale = Vector3.one * currentScale;
         
         characterController.stepOffset = baseStepOffset * currentScale;
