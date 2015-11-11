@@ -9,8 +9,14 @@ public class Sticky : MonoBehaviour
     /// </summary>
     public Transform sample;
 
+    void Update() {
+    }
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        if (!enabled) {
+            return;
+        }
         if (hit.normal.y > 0.9f) 
         {
             if (hit.transform != transform.parent)
