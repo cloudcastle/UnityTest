@@ -3,13 +3,19 @@ using System.Collections;
 
 public class SightRayCaster : MonoBehaviour
 {
+    public static SightRayCaster instance;
+
     RaycastHit hit;
-    GameObject underSight;
+
+    public GameObject underSight;
+
+    void Awake() {
+        instance = this;
+    }
 
     void SetUnderSight(GameObject go) {
         if (go != underSight) {
             underSight = go;
-            Debug.Log("See: " + underSight);
         }
     }
 

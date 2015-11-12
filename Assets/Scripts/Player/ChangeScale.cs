@@ -17,11 +17,6 @@ public class ChangeScale : MonoBehaviour
     float baseHeight;
     float baseRadius;
 
-    Move move;
-    float baseSpeed;
-    float baseJumpSpeed;
-    float baseGravity;
-
     Crouch crouch;
 
     void Awake()
@@ -30,11 +25,6 @@ public class ChangeScale : MonoBehaviour
         baseStepOffset = characterController.stepOffset;
         baseRadius = characterController.radius;
         baseHeight = characterController.height;
-
-        move = GetComponent<Move>();
-        baseSpeed = move.speed;
-        baseJumpSpeed = move.jumpSpeed;
-        baseGravity = move.gravity;
 
         crouch = GetComponent<Crouch>();
     }
@@ -58,9 +48,5 @@ public class ChangeScale : MonoBehaviour
         characterController.stepOffset = baseStepOffset * currentScale;
         characterController.height = baseHeight * currentScale * CrouchHeightMultiplier();
         characterController.radius = baseRadius * currentScale;
-
-        move.speed = baseSpeed * currentScale;
-        move.jumpSpeed = baseJumpSpeed * currentScale;
-        move.gravity = baseGravity * currentScale;
     }
 }

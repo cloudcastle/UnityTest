@@ -1,82 +1,77 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 [RequireComponent(typeof(CharacterController))]
 public class Move : MonoBehaviour
 {
-    public static Move instance;
+    Vector3 velocity = Vector3.zero;
+    public Vector3 readonlyVelocity;
 
-    public float speed = 6.0F;
-    public float rotateSpeed = 6.0F;
-
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
-    public Vector3 moveDirection = Vector3.zero;
-
-    public float antigravitySpeed = 8;
-
-    [HideInInspector]
-    public float antigravityUntil = float.NegativeInfinity;
-    public bool antigravity;
-
-    public bool grounded;
+    public List<Func<Vector3>> additionalVelocities = new List<Func<Vector3>>();
 
     CharacterController controller;
+    ChangeScale changeScale;
 
-    public void checkFlags()
-    {
-        antigravity = Time.time < antigravityUntil;
-        grounded = controller.isGrounded;
-    }
+    Ground ground;
+    Jump jump;
+    AntigravityEffect antigravityEffect;
 
     void Awake()
     {
-        instance = this;
         controller = GetComponent<CharacterController>();
+        changeScale = GetComponent<ChangeScale>();
+
+        ground = GetComponent<Ground>();
+        jump = GetComponent<Jump>();
+        antigravityEffect = GetComponent<AntigravityEffect>();
     }
 
-    void Update()
+    Vector3 TotalVelocity() {
+        return additionalVelocities.Aggregate(velocity, (acc, av) => acc + av());
+    }
+
+    void SetVelocityX(float value) {
+        velocity.x = value;
+    }
+    void SetVelocityY(float value) {
+        velocity.y = value;
+    }
+    void SetVelocityZ(float value) {
+        velocity.z = value;
+    }
+    void ChangeVelocity(Action<Vector3, Action<float>, Action<float>, Action<float>> changer) {
+        changer(velocity, SetVelocityX, SetVelocityY, SetVelocityZ);
+    }
+
+    void FixedUpdate()
     {
         if (PauseManager.paused)
         {
             return;
         }
-        transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0, Space.World);
-        
-        var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        move = transform.TransformDirection(move);
-        move *= speed;
-        moveDirection = new Vector3(move.x, moveDirection.y, move.z);
-        
-        if (grounded)
-        {
-            if (moveDirection.y < 0)
-            {
-                moveDirection.y = 0;
-            }
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = jumpSpeed;
-            }
+        readonlyVelocity = velocity;
+
+        if (ground != null) {
+            ChangeVelocity(ground.ChangeVelocity);
+        }
+        if (jump != null) {
+            ChangeVelocity(jump.ChangeVelocity);
+        }
+        if (antigravityEffect != null) {
+            ChangeVelocity(antigravityEffect.ChangeVelocity);
         }
 
-        //moveDirection.y -= gravity * Time.deltaTime;
+        controller.Move(currentScale() * TotalVelocity() * Time.fixedDeltaTime);
+    }
 
-        checkFlags();
+    float currentScale() {
+        return (changeScale == null) ? 1 : changeScale.currentScale;
+    }
 
-        if (!antigravity)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
-        else
-        {
-            moveDirection.y = 0;
-        }
-        var totalMoveDirection = moveDirection;
-        if (antigravity)
-        {
-            totalMoveDirection += Vector3.up * antigravitySpeed;
-        }
-        controller.Move(totalMoveDirection * Time.deltaTime);
+    public void Accelerate(Vector3 value) {
+        velocity += value;
     }
 }

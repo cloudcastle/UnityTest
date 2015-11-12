@@ -21,7 +21,7 @@ public class CursorLock : MonoBehaviour
 
     void Update() {
         if (lockCursor) {
-            AssureCursorState(CursorLockMode.Confined, false);
+            AssureCursorState(CursorLockMode.Locked, false);
         } else {
             AssureCursorState(CursorLockMode.None, true);
         }
