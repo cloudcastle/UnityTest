@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [ExecuteInEditMode]
-public class Sphere : MonoBehaviour
+public class Sphere : Item
 {
     public Color color;
 
