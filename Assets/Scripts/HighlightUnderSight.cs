@@ -12,7 +12,7 @@ public class HighlightUnderSight : MonoBehaviour
     }
 
     bool UnderSight() {
-        return SightRayCaster.instance.underSight == gameObject;
+        return Eye.instance.underSight == gameObject;
     }
 
     void Update() {

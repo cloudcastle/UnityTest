@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SightRayCaster : MonoBehaviour
+public class Eye : MonoBehaviour
 {
-    public static SightRayCaster instance;
+    public static Eye instance;
 
     RaycastHit hit;
 
