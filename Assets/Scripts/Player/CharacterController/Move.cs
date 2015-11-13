@@ -9,6 +9,7 @@ public class Move : MonoBehaviour
 {
     Vector3 velocity = Vector3.zero;
     public Vector3 readonlyVelocity;
+    public bool readonlyGrounded;
 
     public List<Func<Vector3>> additionalVelocities = new List<Func<Vector3>>();
 
@@ -53,6 +54,7 @@ public class Move : MonoBehaviour
             return;
         }
         readonlyVelocity = velocity;
+        readonlyGrounded = controller.isGrounded;
 
         if (ground != null) {
             ChangeVelocity(ground.ChangeVelocity);

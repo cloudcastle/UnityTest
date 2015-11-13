@@ -16,6 +16,8 @@ public class ChangeScale : MonoBehaviour
     float baseStepOffset;
     float baseHeight;
     float baseRadius;
+    float baseSkinWidth;
+    float baseMinMoveDistance;
 
     Crouch crouch;
 
@@ -25,6 +27,7 @@ public class ChangeScale : MonoBehaviour
         baseStepOffset = characterController.stepOffset;
         baseRadius = characterController.radius;
         baseHeight = characterController.height;
+        baseSkinWidth = characterController.skinWidth;
 
         crouch = GetComponent<Crouch>();
     }
@@ -48,5 +51,6 @@ public class ChangeScale : MonoBehaviour
         characterController.stepOffset = baseStepOffset * currentScale;
         characterController.height = baseHeight * currentScale * CrouchHeightMultiplier();
         characterController.radius = baseRadius * currentScale;
+        characterController.skinWidth = baseSkinWidth * currentScale;
     }
 }
