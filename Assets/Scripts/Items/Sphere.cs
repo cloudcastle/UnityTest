@@ -12,8 +12,10 @@ public class Sphere : Item
     }
 
     void Update() {
-        var tempMaterial = new Material(meshRenderer.sharedMaterial);
-        tempMaterial.color = color;
-        meshRenderer.sharedMaterial = tempMaterial;
+        if (meshRenderer.sharedMaterial.color != color) {
+            var tempMaterial = new Material(meshRenderer.sharedMaterial);
+            tempMaterial.color = color;
+            meshRenderer.sharedMaterial = tempMaterial;
+        }
     }
 }
