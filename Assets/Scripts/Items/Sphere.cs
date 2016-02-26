@@ -4,6 +4,7 @@
 public class Sphere : Item
 {
     public Color color;
+    public Material material;
 
     MeshRenderer meshRenderer;
 
@@ -12,8 +13,11 @@ public class Sphere : Item
     }
 
     void Update() {
-        if (meshRenderer.sharedMaterial.color != color) {
-            var tempMaterial = new Material(meshRenderer.sharedMaterial);
+        if (material == null) {
+            material = meshRenderer.sharedMaterial;
+        }
+        if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color || meshRenderer.sharedMaterial.name != material.name) {
+            var tempMaterial = new Material(material);
             tempMaterial.color = color;
             meshRenderer.sharedMaterial = tempMaterial;
         }

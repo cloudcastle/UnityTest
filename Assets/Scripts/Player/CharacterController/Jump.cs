@@ -18,7 +18,6 @@ public class Jump : MonoBehaviour
     
     public void ChangeVelocity(Vector3 previousValue, Action<float> setX, Action<float> setY, Action<float> setZ) {
         if (characterController.isGrounded && Input.GetButton("Jump")) {
-            Debug.Log("Jump");
             setY(jumpSpeed);
         }
     }
