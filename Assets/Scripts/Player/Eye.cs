@@ -8,15 +8,17 @@ public class Eye : MonoBehaviour
     RaycastHit hit;
 
     public GameObject underSight;
+    public float distance;
 
     void Awake() {
         instance = this;
     }
 
-    void SetUnderSight(GameObject go) {
+    void SetUnderSight(GameObject go, float distance) {
         if (go != underSight) {
             underSight = go;
         }
+        this.distance = distance;
     }
 
     void Update()
@@ -27,9 +29,9 @@ public class Eye : MonoBehaviour
         }
         bool b = Physics.Raycast(new Ray(transform.position, transform.TransformDirection(Vector3.forward)), out hit);
         if (b) {
-            SetUnderSight(hit.collider.gameObject);
+            SetUnderSight(hit.collider.gameObject, hit.distance);
         } else {
-            SetUnderSight(null);
+            SetUnderSight(null, float.PositiveInfinity);
         }
     }
 }
