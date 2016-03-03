@@ -37,7 +37,7 @@ GameObject:
   - 114: {fileID: 11491600}
   - 114: {fileID: 11489038}
   - 114: {fileID: 11489262}
-  - 114: {fileID: 11414052}
+  - 114: {fileID: 11475858}
   m_Layer: 0
   m_Name: Player Main Unit
   m_TagString: Untagged
@@ -342,19 +342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sample: {fileID: 467852}
---- !u!114 &11414052
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40393dc4fab27084b93a1ee49df5572e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worldCamera: {fileID: 447682}
-  inventoryCamera: {fileID: 0}
 --- !u!114 &11417168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   underSight: {fileID: 0}
+  distance: 0
 --- !u!114 &11462626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,6 +425,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readonlyVelocity: {x: 0, y: 0, z: 0}
   readonlyGrounded: 0
+--- !u!114 &11475858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8d0d5e24b294c448631ebec0356cde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11476968
 MonoBehaviour:
   m_ObjectHideFlags: 1

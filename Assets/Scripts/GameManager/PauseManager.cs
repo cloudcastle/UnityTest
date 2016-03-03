@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PauseManager : MonoBehaviour
 {
-    public static bool paused = false;
+    public static bool paused = true;
 
     void Pause()
     {
