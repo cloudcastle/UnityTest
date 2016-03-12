@@ -12,4 +12,14 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel() {
         UI.instance.completionScreen.Show();
     }
+
+    public void Replay() {
+        Application.LoadLevel(Application.loadedLevelName);
+    }
+
+    void Update() {
+        if (Input.GetButtonDown("Replay")) {
+            Replay();
+        }
+    }
 }

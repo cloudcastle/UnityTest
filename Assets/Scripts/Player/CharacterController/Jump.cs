@@ -10,15 +10,24 @@ public class Jump : MonoBehaviour
 {
     public float jumpSpeed = 8;
 
+    bool jumpScheduled = false;
+
     CharacterController characterController;
 
     void Awake() {
         characterController = GetComponent<CharacterController>();
     }
+
+    void Update() {
+        if (characterController.isGrounded && Input.GetButtonDown("Jump")) {
+            jumpScheduled = true;
+        }
+    }
     
     public void ChangeVelocity(Vector3 previousValue, Action<float> setX, Action<float> setY, Action<float> setZ) {
-        if (characterController.isGrounded && Input.GetButton("Jump")) {
+        if (jumpScheduled) {
             setY(jumpSpeed);
+            jumpScheduled = false;
         }
     }
 }

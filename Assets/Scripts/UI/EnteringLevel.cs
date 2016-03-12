@@ -8,4 +8,8 @@ public class EnteringLevel : MonoBehaviour {
             PauseManager.paused = false;
         }
     }
+
+    void Awake() {
+        PauseManager.paused = true;
+    }
 }

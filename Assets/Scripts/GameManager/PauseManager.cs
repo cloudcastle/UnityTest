@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PauseManager : MonoBehaviour
 {
+    public bool pauseOnStart;
     public static bool paused = true;
 
     void Pause()
@@ -35,5 +36,9 @@ public class PauseManager : MonoBehaviour
         {
             SwitchPause();
         }
+    }
+
+    void Awake() {
+        paused = pauseOnStart;
     }
 }
