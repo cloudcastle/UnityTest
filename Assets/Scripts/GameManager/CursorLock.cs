@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(PauseManager))]
+[RequireComponent(typeof(TimeManager))]
 public class CursorLock : MonoBehaviour
 {
     bool lockCursor {
         get {
-            return !PauseManager.paused;
+            return !TimeManager.paused;
         }
     }
 

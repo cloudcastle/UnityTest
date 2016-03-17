@@ -23,7 +23,7 @@ public class Eye : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.paused)
+        if (TimeManager.paused)
         {
             return;
         }

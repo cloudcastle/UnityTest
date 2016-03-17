@@ -19,7 +19,7 @@ public class UI : MonoBehaviour {
     void Show(UIScreen screen) {
         HideAllUIScreens();
         screen.Show();
-        PauseManager.paused = true;
+        TimeManager.paused = true;
     }
 
     public void CompletionScreen() {

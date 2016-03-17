@@ -8,7 +8,7 @@ public class Picker : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.paused)
+        if (TimeManager.paused)
         {
             return;
         }

@@ -5,11 +5,11 @@ public class EnteringLevel : MonoBehaviour {
     void Update() {
         if (Input.anyKey) {
             gameObject.SetActive(false);
-            PauseManager.paused = false;
+            TimeManager.paused = false;
         }
     }
 
     void Awake() {
-        PauseManager.paused = true;
+        TimeManager.paused = true;
     }
 }

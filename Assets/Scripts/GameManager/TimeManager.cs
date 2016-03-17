@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PauseManager : MonoBehaviour
+public class TimeManager : MonoBehaviour
 {
     public bool pauseOnStart;
     public static bool paused = true;
+
+    public float time;
 
     void Pause()
     {
@@ -36,6 +38,7 @@ public class PauseManager : MonoBehaviour
         {
             SwitchPause();
         }
+        time = Time.time;
     }
 
     void Awake() {

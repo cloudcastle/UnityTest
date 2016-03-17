@@ -11,21 +11,29 @@ public class Activator : MonoBehaviour
         instance = this;
     }
 
-    public Activatable activatable;
+    public Activatable current;
+    public Activatable outOfRange;
+
+    void Reset() {
+        outOfRange = null;
+        current = null;
+    }
 
     void Check(Activatable target) {
         if (Eye.instance.distance < target.EffectiveMaxDistance()) {
-            activatable = target;
+            current = target;
+        } else {
+            outOfRange = target;
         }
     }
 
     void Update()
     {
-        if (PauseManager.paused)
+        if (TimeManager.paused)
         {
             return;
         }
-        activatable = null;
+        Reset();
         if (Eye.instance.underSight != null) {
             var target = Eye.instance.underSight.GetComponent<Activatable>();
             if (target != null) {
@@ -33,8 +41,8 @@ public class Activator : MonoBehaviour
             }
         }
         if (Input.GetButtonDown("Activate")) {
-            if (activatable != null) {
-                activatable.Activate();
+            if (current != null) {
+                current.Activate();
             }
         }
     }

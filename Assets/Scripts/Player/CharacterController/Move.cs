@@ -49,7 +49,7 @@ public class Move : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (PauseManager.paused)
+        if (TimeManager.paused)
         {
             return;
         }

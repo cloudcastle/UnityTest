@@ -13,7 +13,7 @@ public class MoveWithRigidBody : MonoBehaviour
 
     void Update()
     {
-        if (PauseManager.paused)
+        if (TimeManager.paused)
         {
             return;
         }
