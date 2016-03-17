@@ -13,8 +13,13 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    public Level CurrentLevel() {
+        return game.levels.FirstOrDefault(level => level.name == Application.loadedLevelName);
+    }
+
     public void CompleteLevel() {
-        game.levels.First(level => level.name == Application.loadedLevelName).completed = true;
+        var level = CurrentLevel();
+        level.completed = true;
         UI.instance.CompletionScreen();
     }
 

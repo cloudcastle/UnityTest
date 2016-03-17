@@ -24,7 +24,8 @@ public class MapScreen : UIScreen {
         Init();
         base.Show();
         Clear();
-        GameManager.game.levels.Where(level => level.Unlocked() && !level.completed).ToList().ForEach(AddButton);
+        var unlockedLevels = GameManager.game.levels.Where(level => level.Unlocked() && !level.completed).ToList();
+        unlockedLevels.ForEach(AddButton);
     }
 
     private void Clear() {
@@ -34,7 +35,7 @@ public class MapScreen : UIScreen {
 
     void AddButton(Level level) {
         var button = levelButtonsPool.Take();
-        button.transform.parent = levelList;
+        button.transform.SetParent(levelList, worldPositionStays: false);
         var buttonScript = button.GetComponent<LevelButton>();
         buttonScript.SetLevel(level);
         levelButtons.Add(buttonScript);
