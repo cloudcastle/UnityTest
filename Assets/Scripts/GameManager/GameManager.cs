@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
         Application.LoadLevel(Application.loadedLevelName);
     }
 
+    public void Play(Level level) {
+        Application.LoadLevel(level.name);
+    }
+
     public void Map() {
         UI.instance.Map();
     }

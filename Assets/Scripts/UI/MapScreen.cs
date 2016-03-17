@@ -36,7 +36,7 @@ public class MapScreen : UIScreen {
         var button = levelButtonsPool.Take();
         button.transform.parent = levelList;
         var buttonScript = button.GetComponent<LevelButton>();
-        buttonScript.SetLevel(level.name);
+        buttonScript.SetLevel(level);
         levelButtons.Add(buttonScript);
     }
 }
