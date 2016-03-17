@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void CompleteLevel() {
-        UI.instance.completionScreen.Show();
+        UI.instance.CompletionScreen();
     }
 
     public void Replay() {
         Application.LoadLevel(Application.loadedLevelName);
+    }
+
+    public void Map() {
+        UI.instance.Map();
     }
 
     void Update() {
