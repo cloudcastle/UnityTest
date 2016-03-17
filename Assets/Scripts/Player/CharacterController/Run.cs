@@ -4,18 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-[RequireComponent(typeof(Move))]
+[RequireComponent(typeof(Walk))]
 public class Run : MonoBehaviour
 {
-    public float speed = 6;
+    public float walkSpeed = 6;
+    public float runSpeed = 18;
+
+    Walk walk;
 
     void Awake() {
-        GetComponent<Move>().additionalVelocities.Add(() => {
-            var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            move = transform.TransformDirection(move);
-            move *= speed;
-            move.y = 0;
-            return move;
-        });
+        walk = GetComponent<Walk>();
+    }
+
+    public bool Running() {
+        return Input.GetButton("Run");
+    }
+
+    void Update() {
+        walk.speed = Running() ? runSpeed : walkSpeed;
     }
 }
