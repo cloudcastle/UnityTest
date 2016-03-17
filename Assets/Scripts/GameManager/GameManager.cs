@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public static Game game = new Game();
+
     public static GameManager instance;
 
     public void Awake() {
@@ -10,6 +14,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void CompleteLevel() {
+        game.levels.First(level => level.name == Application.loadedLevelName).completed = true;
         UI.instance.CompletionScreen();
     }
 

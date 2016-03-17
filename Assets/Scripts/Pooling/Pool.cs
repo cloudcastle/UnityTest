@@ -10,9 +10,11 @@ public class Pool
 
     public Pool(GameObject sample) {
         this.sample = sample;
-        Poolable poolable = sample.AddComponent<Poolable>();
+        Poolable poolable = sample.GetComponent<Poolable>();
+        if (poolable == null) {
+            poolable = sample.AddComponent<Poolable>();
+        }
         poolable.pool = this;
-        Disappear(sample);
     }
 
     void Disappear(GameObject instance) {

@@ -6,7 +6,7 @@ public class Poolable : MonoBehaviour
 {
     public Pool pool;
 
-    void ReturnToPool() {
+    public void ReturnToPool() {
         pool.Return(gameObject);
     }
 }
