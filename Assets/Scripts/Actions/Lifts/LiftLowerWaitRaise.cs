@@ -87,9 +87,5 @@ public class LiftLowerWaitRaise : Effect
     void Update()
     {
         state();
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            Run();
-        }
     }
 }
