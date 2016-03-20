@@ -16,6 +16,7 @@ public class Game
         var precaution = new Level("Precaution", depends: order);
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);
+        var hold = new Level("Hold", depends: precaution);
 
         var test1 = new Level("Test 1");
         var test2 = new Level("Test 2");
@@ -34,6 +35,7 @@ public class Game
             precaution,
             stairs,
             twoPits,
+            hold,
 
             test1,
             test2,
