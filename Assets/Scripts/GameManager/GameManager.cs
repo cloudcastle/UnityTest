@@ -31,6 +31,11 @@ public class GameManager : MonoBehaviour
         Application.LoadLevel(level.name);
     }
 
+    public void NewGame() {
+        game = new Game();
+        Play(game.levels.First());
+    }
+
     public void Map() {
         UI.instance.Map();
     }
@@ -38,6 +43,9 @@ public class GameManager : MonoBehaviour
     void Update() {
         if (Input.GetButtonDown("Replay")) {
             Replay();
+        }
+        if (Input.GetButtonDown("New Game")) {
+            NewGame();
         }
     }
 }

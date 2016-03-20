@@ -4,8 +4,8 @@
 public class Highlight : MonoBehaviour
 {
     MeshRenderer meshRenderer;
-    Color underSightEmission = new Color(0.4f, 0.4f, 0.4f);
-    Color baseEmission = Color.black;
+    public Color highlightEmission = new Color(0.4f, 0.4f, 0.4f);
+    public Color baseEmission = Color.black;
 
     public bool on;
 
@@ -15,6 +15,6 @@ public class Highlight : MonoBehaviour
 
     public void Switch(bool on) {
         this.on = on;
-        meshRenderer.material.SetColor("_EmissionColor", on ? underSightEmission : baseEmission);
+        meshRenderer.material.SetColor("_EmissionColor", on ? highlightEmission : baseEmission);
     }
 }

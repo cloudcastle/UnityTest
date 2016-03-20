@@ -8,10 +8,16 @@ public class LiftLowerWaitRaise : Effect
     public float speed = 1;
     public float pause = 1;
 
+    public float heightDelta = 0.05f;
+
     float currentHeight = 0;
     float startWaitingMoment;
 
     Action state;
+
+    float actualHeight() {
+        return height - heightDelta;
+    }
 
     void Idle()
     {
@@ -19,10 +25,10 @@ public class LiftLowerWaitRaise : Effect
 
     void MovingDown()
     {
-        float delta = Math.Min(height - currentHeight, speed * Time.deltaTime);
+        float delta = Math.Min(actualHeight() - currentHeight, speed * Time.deltaTime);
         currentHeight += delta;
         transform.Translate(Vector3.down * delta);
-        if (Mathf.Abs(currentHeight - height) < Mathf.Epsilon)
+        if (Mathf.Abs(currentHeight - actualHeight()) < Mathf.Epsilon)
         {
             state = Waiting;
             startWaitingMoment = Time.time;

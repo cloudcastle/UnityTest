@@ -11,6 +11,7 @@ public class Game
         var mouseMove = new Level("MouseMove", depends: click);
         var wasd = new Level("WASD", depends: mouseMove);
         var space = new Level("Space", depends: wasd);
+        var raise = new Level("Raise", depends: wasd);
         var test1 = new Level("Test 1");
         var test2 = new Level("Test 2");
         var test3 = new Level("Test 3");
@@ -23,6 +24,7 @@ public class Game
             mouseMove,
             wasd,
             space,
+            raise,
 
             test1,
             test2,
