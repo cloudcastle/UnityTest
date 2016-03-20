@@ -25,11 +25,18 @@ public class LiftLowerWaitRaise : Effect
 
     void MovingDown()
     {
-        float delta = Math.Min(actualHeight() - currentHeight, speed * Time.deltaTime);
+        float delta = speed * Time.deltaTime;
+        bool ready = false;
+        if (delta > actualHeight() - currentHeight) {
+            ready = true;
+            delta = actualHeight() - currentHeight;
+        };
         currentHeight += delta;
         transform.Translate(Vector3.down * delta);
-        if (Mathf.Abs(currentHeight - actualHeight()) < Mathf.Epsilon)
+        Debug.Log("MovingDown");
+        if (ready)
         {
+            Debug.Log("Ready");
             state = Waiting;
             startWaitingMoment = Time.time;
         }
@@ -37,6 +44,8 @@ public class LiftLowerWaitRaise : Effect
 
     void Waiting()
     {
+        Debug.Log("Time.time = " + Time.time);
+        Debug.Log("End waiting time = " + (startWaitingMoment + pause));
         if (Time.time > startWaitingMoment + pause)
         {
             state = MovingUp;
@@ -45,12 +54,14 @@ public class LiftLowerWaitRaise : Effect
 
     void MovingUp()
     {
+        Debug.Log("Moving up");
         float delta = Math.Min(currentHeight, speed * Time.deltaTime);
         currentHeight -= delta;
         transform.Translate(Vector3.up * delta);
         if (Mathf.Abs(currentHeight - 0) < Mathf.Epsilon)
         {
             state = Idle;
+            Debug.Log("Idle now");
         }
     }
 
