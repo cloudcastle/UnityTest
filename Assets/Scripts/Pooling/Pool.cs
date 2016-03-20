@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class Pool
 {
-    GameObject sample;
+    public GameObject sample;
 
-    List<GameObject> pool = new List<GameObject>();
+    public List<GameObject> pool = new List<GameObject>();
 
     public Pool(GameObject sample) {
         this.sample = sample;
@@ -18,7 +20,7 @@ public class Pool
     }
 
     void Disappear(GameObject instance) {
-        instance.transform.parent = PoolManager.instance.transform;
+        instance.transform.SetParent(PoolManager.instance.transform, worldPositionStays: false);
         instance.SetActive(false);
     }
 

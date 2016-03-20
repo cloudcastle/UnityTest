@@ -17,13 +17,6 @@ public class Game
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);
         var hold = new Level("Hold", depends: precaution);
-
-        var test1 = new Level("Test 1");
-        var test2 = new Level("Test 2");
-        var test3 = new Level("Test 3");
-        var test4 = new Level("Test 4");
-        var test5 = new Level("Test 5");
-        var test6 = new Level("Test 6");
      
         levels = new List<Level>() {
             click,
@@ -36,13 +29,6 @@ public class Game
             stairs,
             twoPits,
             hold,
-
-            test1,
-            test2,
-            test3,
-            test4,
-            test5,
-            test6,
         };
     }
 }
