@@ -3,6 +3,8 @@
 [RequireComponent(typeof(Activatable))]
 public class ActivatorHighlight : Blink
 {
+    public float lightPartOutOfRange = 0.5f;
+
     Activatable activatable;
 
     protected override void Awake() {
@@ -22,7 +24,7 @@ public class ActivatorHighlight : Blink
         if (UnderActivator()) {
             lightPart = 1;
         } else if (OutOfRange()) {
-            lightPart = 0.5f;
+            lightPart = lightPartOutOfRange;
         } else {
             lightPart = 0;
         }
