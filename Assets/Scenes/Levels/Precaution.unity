@@ -1215,6 +1215,47 @@ Material:
         first:
           name: _Color
         second: {r: 1, g: 0, b: 0, a: 0}
+--- !u!1 &1022595930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 187624, guid: 2f1516044957ef04f8bbfbfc2adc82c3, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1022595932}
+  - 114: {fileID: 1022595931}
+  m_Layer: 0
+  m_Name: Set All Lifts Pause
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1022595931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11433336, guid: 2f1516044957ef04f8bbfbfc2adc82c3,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022595930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f497c2a343a8248a501c93adad41b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pause: 5
+--- !u!4 &1022595932
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 425668, guid: 2f1516044957ef04f8bbfbfc2adc82c3, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1022595930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.6193771, y: -14.2515717, z: -10.9783783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
 --- !u!114 &1159419850 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11428954, guid: 69093b8a5f6f33a4ca1694c76051146b,

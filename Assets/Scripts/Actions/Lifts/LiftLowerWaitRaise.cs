@@ -68,7 +68,7 @@ public class LiftLowerWaitRaise : Effect
 
     public override bool Run()
     {
-        if (state != Idle) {
+        if (!Ready()) {
             return false;
         }
         state = MovingDown;
@@ -76,7 +76,7 @@ public class LiftLowerWaitRaise : Effect
     }
 
     public override bool Ready() {
-        return state == Idle;
+        return state != Waiting && state != MovingDown;
     }
 
     void Awake()
