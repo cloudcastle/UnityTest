@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Activatable))]
-public class ActivatorHighlight : Blink
+public class ActivatorHighlight : MonoBehaviour
 {
+    MeshRenderer meshRenderer;
+    public Color highlightEmission = new Color(0.4f, 0.4f, 0.4f);
+    public Color baseEmission = Color.black;
+    public Color notReadyEmission = new Color(0.7f, 0.7f, 0.7f);
+
+    public void SetEmission(Color emission) {
+        meshRenderer.material.SetColor("_EmissionColor", emission);
+    }
+
     public float lightPartOutOfRange = 0.5f;
 
     Activatable activatable;
 
-    protected override void Awake() {
-        base.Awake();
+    void Awake() {
         activatable = GetComponent<Activatable>();
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     bool UnderActivator() {
@@ -20,14 +29,17 @@ public class ActivatorHighlight : Blink
         return Activator.instance.outOfRange == activatable;
     }
 
-    protected override void Update() {
-        if (UnderActivator()) {
-            lightPart = 1;
-        } else if (OutOfRange()) {
-            lightPart = lightPartOutOfRange;
+    bool Ready() {
+        return activatable.Ready();
+    }
+
+    protected void Update() {
+        if (!Ready()) {
+            SetEmission(notReadyEmission);
+        } else if (UnderActivator()) {
+            SetEmission(highlightEmission);
         } else {
-            lightPart = 0;
+            SetEmission(baseEmission);
         }
-        base.Update();
     }
 }

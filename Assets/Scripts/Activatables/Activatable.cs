@@ -6,6 +6,10 @@ public abstract class Activatable : MonoBehaviour
     public float maxDistance = 0;
     public bool useActivatorMaxDistance = true;
 
+    public virtual bool Ready() {
+        return true;
+    }
+
     public virtual void Activate() {
         Debug.Log(string.Format("Activated: {0}", this));
     }

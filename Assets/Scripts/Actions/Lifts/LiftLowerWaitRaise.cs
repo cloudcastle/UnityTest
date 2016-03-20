@@ -23,6 +23,13 @@ public class LiftLowerWaitRaise : Effect
     {
     }
 
+    public float TimeToGo() {
+        if (state == Waiting) {
+            return startWaitingMoment + pause - Time.time;
+        }
+        return float.PositiveInfinity;
+    }
+
     void MovingDown()
     {
         float delta = speed * Time.deltaTime;
@@ -59,9 +66,17 @@ public class LiftLowerWaitRaise : Effect
         }
     }
 
-    public override void Run()
+    public override bool Run()
     {
+        if (state != Idle) {
+            return false;
+        }
         state = MovingDown;
+        return true;
+    }
+
+    public override bool Ready() {
+        return state == Idle;
     }
 
     void Awake()

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
+using System.Linq;
 
 public static class Extensions
 {
@@ -12,5 +15,12 @@ public static class Extensions
             path = "/" + obj.name + path;
         }
         return path;
+    }
+
+    public static float ExtMin<T>(this IEnumerable<T> collection, Func<T, float> criteria) {
+        if (collection.Count() == 0) {
+            return float.PositiveInfinity;
+        }
+        return collection.Min(criteria);
     }
 }

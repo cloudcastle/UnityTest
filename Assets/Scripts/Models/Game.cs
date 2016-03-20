@@ -13,7 +13,10 @@ public class Game
         var space = new Level("Space", depends: wasd);
         var raise = new Level("Raise", depends: wasd);
         var order = new Level("Order", depends: raise);
-        var precaution = new Level("Precaution", depends: raise);
+        var precaution = new Level("Precaution", depends: order);
+        var stairs = new Level("Stairs", depends: precaution);
+        var twoPits = new Level("Two pits", depends: precaution);
+
         var test1 = new Level("Test 1");
         var test2 = new Level("Test 2");
         var test3 = new Level("Test 3");
@@ -29,6 +32,8 @@ public class Game
             raise,
             order,
             precaution,
+            stairs,
+            twoPits,
 
             test1,
             test2,
