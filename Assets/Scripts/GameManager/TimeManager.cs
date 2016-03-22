@@ -5,6 +5,7 @@ public class TimeManager : MonoBehaviour
 {
     public bool pauseOnStart;
     public static bool paused = true;
+    public static bool timestopped = false;
 
     public float time;
 
@@ -18,6 +19,14 @@ public class TimeManager : MonoBehaviour
     {
         paused = false;
         Time.timeScale = 1;
+    }
+
+    public static float GameFixedDeltaTime() {
+        if (timestopped) {
+            return 0;
+        } else {
+            return Time.fixedDeltaTime;
+        }
     }
 
     void SwitchPause()
@@ -43,5 +52,6 @@ public class TimeManager : MonoBehaviour
 
     void Awake() {
         paused = pauseOnStart;
+        timestopped = false;
     }
 }
