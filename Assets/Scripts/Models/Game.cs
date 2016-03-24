@@ -20,7 +20,8 @@ public class Game
         var twoPits = new Level("Two pits", depends: precaution);
         var hold = new Level("Hold", depends: precaution);
 
-        var ascention = new Level("Ascention", depends: precaution);
+        var ascention = new Level("Ascention", depends: hold);
+        var launch = new Level("Launch", depends: hold);
      
         levels = new List<Level>() {
             click,
@@ -37,6 +38,7 @@ public class Game
             hold,
 
             ascention,
+            launch
         };
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class Clock : MonoBehaviour {
-    const float maxTime = 30;
+    const float maxTime = 9000;
 
     Text text;
     List<LiftLowerWaitRaise> lifts;
