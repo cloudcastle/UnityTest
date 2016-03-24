@@ -23,4 +23,8 @@ public static class Extensions
         }
         return collection.Min(criteria);
     }
+
+    public static string ExtToString<T>(this IEnumerable<T> collection, string delimiter = ", ") {
+        return String.Join(delimiter, collection.Select(obj => obj.ToString()).ToArray());
+    }
 }
