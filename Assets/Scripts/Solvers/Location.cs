@@ -14,6 +14,7 @@ namespace Solver
         public bool isExit;
 
         public List<Edge> edgesFrom = new List<Edge>();
+        public List<Edge> edgesTo = new List<Edge>();
 
         public Lift LiftTo(Location target) {
             Lift lift = new Lift();
@@ -49,6 +50,10 @@ namespace Solver
         public Location WithExit() {
             this.isExit = true;
             return this;
+        }
+
+        public void JumpTo(Location target) {
+            edgesFrom.Add(new Edge(this, target));
         }
     }
 }

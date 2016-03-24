@@ -10,12 +10,58 @@ namespace Terminal
     {
         static void Main(string[] args) {
             PrintAllSolutions();
+            Play();
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();
         }
 
+        private static void Play() {
+            var floor1 = "floor 1";
+            var floor2 = "floor 2";
+            var floor3 = "floor 3";
+            var floor4 = "floor 4";
+            var ground = "ground";
+            
+            Puzzle x = Puzzles.Ascention();
+            Solution s = Solver.Solver.Solve(x);
+            x.Start();
+            x.Call("1");
+            x.Move(floor1);
+            x.Call("2");
+            x.Move(ground);
+            x.Move(floor2);
+            x.Call("3");
+            x.Move(ground);
+            x.Move(floor3);
+            x.Call("4");
+            x.Move(floor2);
+            x.Call("3");
+            x.Move(ground);
+            x.Move(floor4);
+            x.Move(floor3);
+            x.Call("4");
+            x.Move(floor2);
+            x.Move(floor1);
+            x.Call("2");
+            x.Move(ground);
+            x.Move(floor3);
+            x.Move(floor2);
+            x.Call("3");
+            x.Move(ground);
+            x.Move(floor4);
+            x.Move(floor3);
+            x.Call("4");
+
+
+            Console.WriteLine(String.Format("Currest state: {0}\nThis state visited: {1}", x.state, s.reachedStates.Contains(x.state)));
+        }
+
         static void PrintAllSolutions() {
-            Console.WriteLine(Puzzles.Game().Select(Solver.Solver.Solve).ToList().ExtToString("\n"));
+            List<Solution> solutions = Puzzles.Game().Select(Solver.Solver.Solve).ToList();
+            if (solutions.Any(s => s.final == null)) {
+                throw new Exception("Unsolvable level!");
+            }
+            Console.WriteLine(solutions.ExtToString("\n"));
         }
 
         static void TestComparer() {

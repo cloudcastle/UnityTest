@@ -9,9 +9,10 @@ namespace Solver
 
         public List<Lift> calledLifts = new List<Lift>();
 
-        public State parent;
-
-        public Action action;
+        public State previous;
+        public Action actionFromPrevious;
+        public State next;
+        public Action actionToNext;
 
         public State() {
         }
@@ -25,9 +26,14 @@ namespace Solver
             return new State(position, new List<Lift>(calledLifts));
         }
 
-        public void Achieve(State parent, Action action) {
-            this.parent = parent;
-            this.action = action;
+        public void SetPrevious(State previous, Action actionFromPrevious) {
+            this.previous = previous;
+            this.actionFromPrevious = actionFromPrevious;
+        }
+
+        public void SetNext(State next, Action actionToNext) {
+            this.next = next;
+            this.actionToNext = actionToNext;
         }
 
         public override string ToString() {

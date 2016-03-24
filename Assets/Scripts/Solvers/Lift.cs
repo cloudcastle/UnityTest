@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 
 namespace Solver
 {
@@ -26,8 +27,10 @@ namespace Solver
             return this;
         }
 
-        public Lift CallFrom(Location location) {
-            location.buttons.Add(new Button(this));
+        public Lift CallFrom(params Location[] locations) {
+            locations.ToList().ForEach(location => {
+                location.buttons.Add(new Button(this));
+            });
             return this;
         }
     }

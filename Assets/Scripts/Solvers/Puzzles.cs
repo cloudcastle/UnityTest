@@ -70,6 +70,108 @@ namespace Solver
             return result;
         }
 
+        public static Puzzle Hold() {
+            var result = new Puzzle("Hold");
+
+            var ground = new Location("ground");
+            var pit = new Location("pit");  
+            var floor1 = new Location("floor 1");
+            var floor2 = new Location("floor 2").WithExit();
+            var tower1 = new Location("tower 1");
+            var tower2 = new Location("tower 2");
+            var tower3 = new Location("tower 3");
+
+            pit.DirectLiftTo(floor1).Named("launch").CallFrom(pit);
+            ground.LiftTo(floor1).Named("hold").CallFrom(floor1);
+            floor1.LiftTo(floor2).Named("final").CallFrom(tower3);
+            ground.DirectLiftTo(tower1).Named("tower 1 lift");
+            ground.LiftTo(tower2).Named("tower 2 lift").CallFrom(tower1);
+            ground.LiftTo(tower3).Named("tower 3 lift").CallFrom(tower2);
+            ground.JumpTo(pit);
+
+            return result;
+        }
+
+        public static Puzzle Ascention() {
+            var result = new Puzzle("Ascention");
+
+            var ground = new Location("ground");
+            var floor1 = new Location("floor 1");
+            var floor2 = new Location("floor 2");
+            var floor3 = new Location("floor 3");
+            var floor4 = new Location("floor 4");
+            var exitFloor1 = new Location("exit floor 1");
+            var exitFloor2 = new Location("exit floor 2");
+            var exitFloor3 = new Location("exit floor 3");
+            var exitFloor4 = new Location("exit floor 4").WithExit();
+
+            ground.LiftTo(floor1).Named("1").CallFrom(ground);
+            ground.LiftTo(floor2).Named("2").CallFrom(floor1);
+            ground.LiftTo(floor3).Named("3").CallFrom(floor2);
+            ground.LiftTo(floor4).Named("4").CallFrom(floor3);
+
+            floor4.JumpTo(floor3);
+            floor3.JumpTo(floor2);
+            floor2.JumpTo(floor1);
+            floor1.JumpTo(ground);
+
+            exitFloor4.JumpTo(ground);
+            exitFloor3.JumpTo(ground);
+            exitFloor2.JumpTo(ground);
+            exitFloor1.JumpTo(ground);
+
+            ground.LiftTo(exitFloor1).Named("E1").CallFrom(floor1);
+            exitFloor1.LiftTo(exitFloor2).Named("E2").CallFrom(floor2);
+            exitFloor2.LiftTo(exitFloor3).Named("E3").CallFrom(floor3);
+            exitFloor3.LiftTo(exitFloor4).Named("E4").CallFrom(floor4);
+            
+            return result;
+        }
+
+        public static Puzzle Launch() {
+            var result = new Puzzle("Launch");
+
+            var ground = new Location("ground");
+            var tower1 = new Location("tower 1");
+            var tower2 = new Location("tower 2");
+            var tower3 = new Location("tower 3");
+            var tower4 = new Location("tower 4");
+            var exitFloor1 = new Location("exit floor 1");
+            var exitFloor2 = new Location("exit floor 2");
+            var exitFloor3 = new Location("exit floor 3");
+            var exitFloor4 = new Location("exit floor 4").WithExit();
+            var top = new Location("top");
+
+            ground.DirectLiftTo(top).Named("main");
+
+            ground.LiftTo(tower1).Named("1").CallFrom(tower2);
+            ground.LiftTo(tower2).Named("2").CallFrom(tower1, tower3);
+            ground.LiftTo(tower3).Named("3").CallFrom(tower2, tower4);
+            ground.LiftTo(tower4).Named("4").CallFrom(tower3);
+
+            exitFloor4.JumpTo(ground);
+            exitFloor3.JumpTo(ground);
+            exitFloor2.JumpTo(ground);
+            exitFloor1.JumpTo(ground);
+
+            top.JumpTo(tower1);
+            top.JumpTo(tower2);
+            top.JumpTo(tower3);
+            top.JumpTo(tower4);
+
+            tower4.JumpTo(ground);
+            tower3.JumpTo(ground);
+            tower2.JumpTo(ground);
+            tower1.JumpTo(ground);
+
+            ground.LiftTo(exitFloor1).Named("E1").CallFrom(tower1);
+            exitFloor1.LiftTo(exitFloor2).Named("E2").CallFrom(tower2);
+            exitFloor2.LiftTo(exitFloor3).Named("E3").CallFrom(tower3);
+            exitFloor3.LiftTo(exitFloor4).Named("E4").CallFrom(tower4);
+            return result;
+        }
+
+
         public static List<Puzzle> Game() {
             return new List<Puzzle>()
             {
@@ -77,7 +179,10 @@ namespace Solver
                 Order(),
                 Precaution(),
                 Stairs(),
-                TwoPits()
+                TwoPits(),
+                Hold(),
+                Ascention(),
+                Launch(),
             };
         }
     }

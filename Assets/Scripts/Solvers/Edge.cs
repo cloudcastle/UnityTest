@@ -24,7 +24,20 @@ namespace Solver
             if (this.lift != null) {
                 result.calledLifts.RemoveAt(0);
             }
-            result.Achieve(state, new Move(this));
+            result.SetPrevious(state, new Move(this));
+            return result;
+        }
+
+        public State Unmove(State state) {
+            if (this.lift != null && (state.calledLifts.Contains(this.lift))) {
+                return null;
+            }
+            var result = state.Clone();
+            result.position = from;
+            if (this.lift != null) {
+                result.calledLifts.Insert(0, this.lift);
+            }
+            result.SetNext(state, new Move(this));
             return result;
         }
 

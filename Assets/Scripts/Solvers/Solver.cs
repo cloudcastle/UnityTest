@@ -11,7 +11,19 @@ namespace Solver
             State start = StartState(puzzle);
             Bfs(puzzle, reachedStates, start);
             State finish = reachedStates.FirstOrDefault(Final);
-            return new Solution(puzzle, finish);
+
+            //Preprocess(puzzle);
+            //State exit = 
+
+            return new Solution(puzzle, finish, reachedStates);
+        }
+
+        public static void Preprocess(Puzzle puzzle) {
+            puzzle.locations.ForEach(location => {
+                location.edgesFrom.ForEach(edge => {
+                    edge.to.edgesTo.Add(edge);
+                });
+            });
         }
 
         public static bool Final(State state) {
@@ -56,6 +68,23 @@ namespace Solver
                 var nextState = button.Push(state);
                 if (nextState != null) {
                     result.Add(nextState);
+                }
+            });
+            return result;
+        }
+
+        public static List<State> PreviousStates(Puzzle puzzle, State state) {
+            var result = new List<State>();
+            state.position.edgesTo.ForEach(edge => {
+                var prevState = edge.Unmove(state);
+                if (prevState != null) {
+                    result.Add(prevState);
+                }
+            });
+            state.position.buttons.ForEach(button => {
+                var prevState = button.Unpush(state);
+                if (prevState != null) {
+                    result.Add(prevState);
                 }
             });
             return result;
