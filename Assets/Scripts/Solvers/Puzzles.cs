@@ -70,6 +70,31 @@ namespace Solver
             return result;
         }
 
+        public static Puzzle TwoPitsModified() {
+            var result = new Puzzle("Two Pits");
+
+            var ground = new Location("ground");
+            var pit1 = new Location("pit 1");
+            var pit2 = new Location("pit 2");
+            var floor1 = new Location("floor 1");
+            var floor2 = new Location("floor 2");
+            var floor3 = new Location("floor 3");
+            var floor4 = new Location("floor 4").WithExit();
+
+            var l1 = ground.LiftTo(floor1).Named("L1").CallFrom(pit2);
+            var l2 = floor1.LiftTo(floor2).Named("L2").CallFrom(pit1);
+            var l3 = floor2.LiftTo(floor3).Named("L3").CallFrom(pit2);
+            var l4 = floor3.LiftTo(floor4).Named("L4").CallFrom(pit1);
+
+            var pit1self = pit1.DirectLiftTo(ground).Named("pit 1 self");
+            var pit2self = pit2.DirectLiftTo(ground).Named("pit 2 self");
+
+            var pit1other = pit1.LiftTo(ground).Named("pit 1 other").CallFrom(pit2);
+            var pit2other = pit2.LiftTo(ground).Named("pit 2 other").CallFrom(pit1);
+
+            return result;
+        }
+
         public static Puzzle Hold() {
             var result = new Puzzle("Hold");
 
@@ -179,7 +204,7 @@ namespace Solver
                 Order(),
                 Precaution(),
                 Stairs(),
-                TwoPits(),
+                TwoPitsModified(),
                 Hold(),
                 Ascention(),
                 Launch(),

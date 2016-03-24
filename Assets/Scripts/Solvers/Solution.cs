@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Solver
 {
@@ -34,7 +35,14 @@ namespace Solver
             if (final == null) {
                 return String.Format("Solution for {0} not found ({1} states reached, exit reached from {2} states)\n", puzzle, reachedStates.Count, statesExitReachedFrom.Count);
             }
-            return String.Format("Solution for {0} ({2} actions):\n{1}\n", puzzle, Actions().ExtToString("\n"), Actions().Count);
+            return String.Format(
+                "Solution for {0} ({2} actions, {3} moves, {4} calls):\n{1}\n", 
+                puzzle, 
+                Actions().ExtToString("\n"), 
+                Actions().Count, 
+                Actions().Where(a => a is Move).Count(),
+                Actions().Where(a => a is Push).Count()
+            );
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Terminal
     {
         static void Main(string[] args) {
             PrintAllSolutions();
-            Play();
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();
         }
@@ -54,6 +53,10 @@ namespace Terminal
 
 
             Console.WriteLine(String.Format("Currest state: {0}\nThis state visited: {1}", x.state, s.reachedStates.Contains(x.state)));
+        }
+
+        static void PrintSolution(Puzzle puzzle) {
+            Console.WriteLine(Solver.Solver.Solve(puzzle));
         }
 
         static void PrintAllSolutions() {
