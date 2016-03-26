@@ -58,25 +58,6 @@ namespace Solver
             var pit1 = new Location("pit 1");
             var pit2 = new Location("pit 2");
             var floor1 = new Location("floor 1");
-            var floor2 = new Location("floor 2").WithExit();
-
-            var l1 = ground.LiftTo(floor1).Named("L1").CallFrom(pit2);
-            var l2 = floor1.LiftTo(floor2).Named("L2").CallFrom(pit1);
-            var pit1self = pit1.DirectLiftTo(ground).Named("pit 1 self");
-            var pit2self = pit2.DirectLiftTo(ground).Named("pit 2 self");
-            var pit1other = pit1.LiftTo(ground).Named("pit 1 other").CallFrom(pit2);
-            var pit2other = pit2.LiftTo(ground).Named("pit 2 other").CallFrom(pit1);
-
-            return result;
-        }
-
-        public static Puzzle TwoPitsModified() {
-            var result = new Puzzle("Two Pits");
-
-            var ground = new Location("ground");
-            var pit1 = new Location("pit 1");
-            var pit2 = new Location("pit 2");
-            var floor1 = new Location("floor 1");
             var floor2 = new Location("floor 2");
             var floor3 = new Location("floor 3");
             var floor4 = new Location("floor 4").WithExit();
@@ -297,7 +278,7 @@ namespace Solver
                 Order(),
                 Precaution(),
                 Stairs(),
-                TwoPitsModified(),
+                TwoPits(),
                 Hold(),
                 Ascention(),
                 Launch(),
