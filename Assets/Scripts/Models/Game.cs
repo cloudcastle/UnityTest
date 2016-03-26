@@ -23,6 +23,7 @@ public class Game
         var ascention = new Level("Ascention", depends: hold);
         var launch = new Level("Launch", depends: hold);
         var temple = new Level("Temple", depends: hold);
+        var underground = new Level("Underground", depends: hold);
      
         levels = new List<Level>() {
             click,
@@ -40,7 +41,8 @@ public class Game
 
             ascention,
             launch,
-            temple
+            temple,
+            underground
         };
     }
 }
