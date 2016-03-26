@@ -16,10 +16,25 @@ namespace Solver
         public List<Edge> edgesFrom = new List<Edge>();
         public List<Edge> edgesTo = new List<Edge>();
 
-        public Lift LiftTo(Location target) {
-            Lift lift = new Lift();
+        public Lift LiftTo(Location target, Lift lift = null, bool jumpBack = true) {
+            if (lift == null) {
+                lift = new Lift();
+            }
             edgesFrom.Add(new Edge(this, target, lift));
-            target.edgesFrom.Add(new Edge(target, this));
+            if (jumpBack) {
+                target.edgesFrom.Add(new Edge(target, this));
+            }
+            return lift;
+        }
+
+        public Lift JumpLiftTo(Location target, Lift lift = null, bool back = true) {
+            if (lift == null) {
+                lift = new Lift();
+            }
+            edgesFrom.Add(new Edge(this, target, lift));
+            if (back) {
+                target.edgesFrom.Add(new Edge(target, this, lift));
+            }
             return lift;
         }
 

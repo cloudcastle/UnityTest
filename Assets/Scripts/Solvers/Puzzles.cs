@@ -196,6 +196,99 @@ namespace Solver
             return result;
         }
 
+        public static Puzzle LaunchModified() {
+            var result = new Puzzle("Launch");
+
+            var ground = new Location("ground");
+            var tower1 = new Location("tower 1");
+            var tower2 = new Location("tower 2");
+            var tower3 = new Location("tower 3");
+            var tower4 = new Location("tower 4");
+            var exitFloor1 = new Location("exit floor 1");
+            var exitFloor2 = new Location("exit floor 2");
+            var exitFloor3 = new Location("exit floor 3");
+            var exitFloor4 = new Location("exit floor 4");
+            var exitFloor5 = new Location("exit floor 5").WithExit();
+            var top = new Location("top");
+
+            ground.DirectLiftTo(top).Named("main");
+
+            ground.LiftTo(tower1).Named("1").CallFrom(tower2);
+            ground.LiftTo(tower2).Named("2").CallFrom(tower1, tower3);
+            ground.LiftTo(tower3).Named("3").CallFrom(tower2, tower4);
+            ground.LiftTo(tower4).Named("4").CallFrom(tower3);
+
+            exitFloor4.JumpTo(ground);
+            exitFloor3.JumpTo(ground);
+            exitFloor2.JumpTo(ground);
+            exitFloor1.JumpTo(ground);
+
+            top.JumpTo(tower1);
+            top.JumpTo(tower2);
+            top.JumpTo(tower3);
+            top.JumpTo(tower4);
+
+            top.JumpTo(ground);
+
+            tower4.JumpTo(ground);
+            tower3.JumpTo(ground);
+            tower2.JumpTo(ground);
+            tower1.JumpTo(ground);
+
+            ground.LiftTo(exitFloor1).Named("E1").CallFrom(tower1);
+            exitFloor1.LiftTo(exitFloor2).Named("E2").CallFrom(tower2);
+            exitFloor2.LiftTo(exitFloor3).Named("E3").CallFrom(tower3);
+            exitFloor3.LiftTo(exitFloor4).Named("E4").CallFrom(tower4);
+            exitFloor4.LiftTo(exitFloor5).Named("E5").CallFrom(tower1);
+            return result;
+        }
+
+        public static Puzzle Temple() {
+            var result = new Puzzle("Temple");
+
+            var ground = new Location("ground");
+            var floor1a = new Location("floor 1 A");
+            var floor1b = new Location("floor 1 B");
+            var floor2 = new Location("floor 2");
+            var floor3 = new Location("floor 3");
+            var highPit = new Location("high pit");
+            var lowPit = new Location("low pit");
+            var exit = new Location("exit").WithExit();
+
+            lowPit.DirectLiftTo(floor3).Named("low pit lift").CallFrom(floor1b);
+            floor3.LiftTo(exit).Named("exit lift").CallFrom(highPit);
+            highPit.DirectLiftTo(floor2).Named("high pit self").CallFrom(floor1a);
+            ground.LiftTo(floor1b).Named("floor 1 B lift").CallFrom(floor2);
+            floor1b.LiftTo(floor2).Named("floor 1 B - floor 2 lift").CallFrom(highPit);
+
+            floor3.JumpTo(floor2);
+            floor2.JumpTo(floor1a);
+            floor1a.JumpTo(ground);
+            ground.JumpTo(lowPit);
+
+            return result;
+        }
+
+        public static Puzzle Quarters() {
+            var result = new Puzzle("Quarters");
+
+            var zone1 = new Location("zone 1");
+            var zone2 = new Location("zone 2");
+            var zone3 = new Location("zone 3");
+            var zone4 = new Location("zone 4");
+            var exit = new Location("exit").WithExit();
+
+            zone1.JumpLiftTo(zone2).Named("12A").CallFrom(zone1, zone2);
+            zone1.JumpLiftTo(zone2).Named("12B").CallFrom(zone1, zone2);
+            zone2.JumpLiftTo(zone3).Named("23A").CallFrom(zone2, zone3);
+            zone2.JumpLiftTo(zone3).Named("23B").CallFrom(zone2, zone3);
+            zone3.JumpLiftTo(zone4).Named("34A").CallFrom(zone3, zone4);
+            zone3.JumpLiftTo(zone4).Named("34B").CallFrom(zone3, zone4);
+            zone4.JumpLiftTo(zone1, back: false).Named("R").CallFrom(zone4);
+            zone4.LiftTo(exit).Named("E").CallFrom(zone1);
+
+            return result;
+        }
 
         public static List<Puzzle> Game() {
             return new List<Puzzle>()

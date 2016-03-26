@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Solver;
+using System.IO;
 
 namespace Terminal
 {
     class Program
     {
         static void Main(string[] args) {
-            PrintAllSolutions();
-            Console.WriteLine("Press any key to exit");
-            Console.ReadLine();
+            var writer = new StreamWriter(new FileStream("output.txt", FileMode.Create, FileAccess.Write));
+            Console.SetOut(writer);
+            Work();
+            writer.Close();
+        }
+
+        static void Work() {
+            PrintSolution(Puzzles.Temple());
+            //Console.WriteLine("HW");
         }
 
         private static void Play() {
