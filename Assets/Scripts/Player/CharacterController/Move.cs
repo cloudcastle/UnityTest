@@ -8,6 +8,8 @@ using System;
 public class Move : MonoBehaviour
 {
     Vector3 velocity = Vector3.zero;
+    public Vector3Tracker velocityTracker;
+
     public Vector3 readonlyVelocity;
     public bool readonlyGrounded;
 
@@ -28,6 +30,13 @@ public class Move : MonoBehaviour
         ground = GetComponent<Ground>();
         jump = GetComponent<Jump>();
         antigravityEffect = GetComponent<AntigravityEffect>();
+    }
+
+    void Start() {
+        velocityTracker = new Vector3Tracker(
+            (v) => velocity = v,
+            () => velocity
+        );
     }
 
     Vector3 TotalVelocity() {
