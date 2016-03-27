@@ -27,6 +27,13 @@ public class Game
         var launch = new Level("Launch", depends: hold);
         var temple = new Level("Temple", depends: hold);
         var underground = new Level("Underground", depends: hold);
+        var tower = new Level("Tower", depends: hold);
+
+        var shift = new Level("Shift", depends: raise);
+        var gap = new Level("Gap", shift, space);
+
+        var sixBoxes = new Level("Six boxes", gap);
+
      
         levels = new List<Level>() {
             click,
@@ -45,7 +52,12 @@ public class Game
             ascention,
             launch,
             temple,
-            underground
+            underground,
+            tower,
+
+            shift,
+            gap,
+            sixBoxes
         };
     }
 
