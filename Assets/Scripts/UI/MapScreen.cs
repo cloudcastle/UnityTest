@@ -20,21 +20,22 @@ public class MapScreen : UIScreen {
         levelButtonsPool = new Pool(levelButtonSample);
     }
 
+    void SetLevelList(List<Level> levels) {
+        levels.ForEach(AddButton);
+    }
+
     public void UpdateLevelList() {
         Clear();
-
         if (Cheats.on) {
-            GameManager.game.levels.ForEach(AddButton);
+            SetLevelList(GameManager.game.levels);
         } else {
-            var unlockedLevels = GameManager.game.levels.Where(level => level.Unlocked() && !level.completed).ToList();
-            unlockedLevels.ForEach(AddButton);
+            SetLevelList(GameManager.game.AvailableLevelsInUnlockOrder());
         }
     }
 
     public override void Show() {
         Init();
         base.Show();
-
         UpdateLevelList();
     }
 

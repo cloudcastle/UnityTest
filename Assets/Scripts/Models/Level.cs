@@ -5,8 +5,6 @@ using System;
 [Serializable]
 public class Level
 {
-    public bool completed = false;
-
     public readonly string name;
 
     [NonSerialized]
@@ -18,6 +16,22 @@ public class Level
     }
 
     public bool Unlocked() {
-        return dependencies.All(level => level.completed);
+        return dependencies.All(level => level.Completed());
+    }
+
+    public bool Completed() {
+        return GameManager.game.completedLevels.Contains(this);
+    }
+
+    public int CompletionOrder() {
+        return GameManager.game.completedLevels.IndexOf(this);
+    }
+
+    public int UnlockOrder() {
+        return dependencies.Max(level => CompletionOrder());
+    }
+
+    public int GameOrder() {
+        return GameManager.game.levels.IndexOf(this);
     }
 }

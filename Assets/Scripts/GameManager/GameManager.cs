@@ -19,12 +19,20 @@ public class GameManager : MonoBehaviour
 
     public void CompleteLevel() {
         var level = CurrentLevel();
-        level.completed = true;
+        game.completedLevels.Add(level);
         UI.instance.CompletionScreen();
     }
 
     public void Replay() {
         Application.LoadLevel(Application.loadedLevelName);
+    }
+
+    public void PlayFirstUnlocked() {
+        Play(game.AvailableLevelsInUnlockOrder().First());
+    }
+
+    public void PlayLastUnlocked() {
+        Play(game.AvailableLevelsInUnlockOrder().Last());
     }
 
     public void Play(Level level) {
@@ -46,6 +54,15 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetButtonDown("New Game")) {
             NewGame();
+        }
+        if (Input.GetButtonDown("Map")) {
+            Map();
+        }
+        if (Input.GetButtonDown("Play First Unlocked")) {
+            PlayFirstUnlocked();
+        }
+        if (Input.GetButtonDown("Play Last Unlocked")) {
+            PlayLastUnlocked();
         }
     }
 }

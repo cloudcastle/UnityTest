@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 
 [Serializable]
 public class Game
 {
     public readonly List<Level> levels;
+
+    public List<Level> completedLevels = new List<Level>();
 
     public Game() {
         var click = new Level("Click");
@@ -44,5 +47,11 @@ public class Game
             temple,
             underground
         };
+    }
+
+    public List<Level> AvailableLevelsInUnlockOrder() {
+        var result = GameManager.game.levels.Where(level => level.Unlocked() && !level.Completed()).ToList();
+        result.Sort(new LevelComparerByUnlock());
+        return result;
     }
 }
