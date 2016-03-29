@@ -7,6 +7,8 @@ public class UI : MonoBehaviour {
     public CompletionScreen completionScreen;
     public MapScreen map;
 
+    public UIScreen currentScreen;
+
     void Awake() {
         instance = this;
     }
@@ -20,6 +22,7 @@ public class UI : MonoBehaviour {
         HideAllUIScreens();
         screen.Show();
         TimeManager.paused = true;
+        currentScreen = screen;
     }
 
     public void CompletionScreen() {

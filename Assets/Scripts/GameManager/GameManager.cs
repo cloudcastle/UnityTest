@@ -49,20 +49,22 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetButtonDown("Replay")) {
-            Replay();
-        }
-        if (Input.GetButtonDown("New Game")) {
-            NewGame();
-        }
         if (Input.GetButtonDown("Map")) {
             Map();
         }
-        if (Input.GetButtonDown("Play First Unlocked")) {
-            PlayFirstUnlocked();
-        }
-        if (Input.GetButtonDown("Play Last Unlocked")) {
-            PlayLastUnlocked();
+        if (UI.instance.currentScreen == UI.instance.map) {
+            if (Input.GetButtonDown("Replay")) {
+                Replay();
+            }
+            if (Input.GetButtonDown("New Game")) {
+                NewGame();
+            }
+            if (Input.GetButtonDown("Play First Unlocked")) {
+                PlayFirstUnlocked();
+            }
+            if (Input.GetButtonDown("Play Last Unlocked")) {
+                PlayLastUnlocked();
+            }
         }
     }
 }
