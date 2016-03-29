@@ -33,6 +33,7 @@ public class Game
         var gap = new Level("Gap", shift, space);
 
         var sixBoxes = new Level("Six boxes", gap);
+        var climb = new Level("Climb", gap);
 
      
         levels = new List<Level>() {
@@ -57,7 +58,9 @@ public class Game
 
             shift,
             gap,
-            sixBoxes
+
+            sixBoxes,
+            climb
         };
     }
 
