@@ -38,6 +38,8 @@ public class Game
         var pass = new Level("Pass", wasd);
         var fit = new Level("Fit", pass);
         var cleanHands = new Level("Clean hands", fit);
+        var repick = new Level("Repick", cleanHands);
+        var rightMouseButton = new Level("Right mouse button", repick);
 
      
         levels = new List<Level>() {
@@ -74,6 +76,8 @@ public class Game
             pass,
             fit,
             cleanHands,
+            repick,
+            rightMouseButton
         };
     }
 
