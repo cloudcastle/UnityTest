@@ -10,11 +10,10 @@ public class Item : Activatable
 
     public override void Activate(Activator activator) {
         base.Activate(activator);
-        Pick(activator);
+        activator.player.inventory.Pick(this);
     }
 
-    public virtual void Pick(Activator activator) {
-        activator.player.inventory.Pick(this);
+    public virtual void Pick(Player player) {
     }
 
     public virtual void Throw(Player thrower) {

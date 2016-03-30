@@ -5,5 +5,7 @@ public abstract class Effect : MonoBehaviour
 {
     public abstract bool Run();
 
-    public abstract bool Ready();
+    public virtual bool Ready() {
+        return transform;
+    }
 }

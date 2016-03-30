@@ -42,4 +42,12 @@ public static class Extensions
     public static bool Editor() {
         return Application.isEditor && !EditorApplication.isPlaying;
     }
+
+    public static List<T> GetComponentsInDirectChildren<T>(this Component component) {
+        List<T> result = new List<T>();
+        foreach (Transform t in component.transform) {
+            result = result.Concat(t.GetComponents<T>().ToList()).ToList();
+        }
+        return result;
+    }
 }

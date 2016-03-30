@@ -40,6 +40,7 @@ public class Game
         var cleanHands = new Level("Clean hands", fit);
         var repick = new Level("Repick", cleanHands);
         var rightMouseButton = new Level("Right mouse button", repick);
+        var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton);
 
      
         levels = new List<Level>() {
@@ -77,7 +78,8 @@ public class Game
             fit,
             cleanHands,
             repick,
-            rightMouseButton
+            rightMouseButton,
+            qeMouseWheel
         };
     }
 

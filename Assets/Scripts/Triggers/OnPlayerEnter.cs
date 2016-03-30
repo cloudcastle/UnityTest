@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OnPlayerEnter : MonoBehaviour
+public class OnPlayerEnter : AbstractTrigger
 {
-    public Effect effect;
-
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponent<Player>() != null)

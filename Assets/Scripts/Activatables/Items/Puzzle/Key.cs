@@ -23,9 +23,9 @@ public class Key : Item
         colored.color = keyColor.color;
     }
 
-    public override void Pick(Activator activator) {
-        base.Pick(activator);
-        keyColor.doors.ForEach(door => door.OpenFor(activator.player));
+    public override void Pick(Player player) {
+        base.Pick(player);
+        keyColor.doors.ForEach(door => door.OpenFor(player));
     }
 
     public override void Throw(Player thrower) {

@@ -22,10 +22,10 @@ public class Inventory : MonoBehaviour
     }
 
     public void Pick(Item item) {
-        items.Insert(0, item);
-        if (selected == null) {
-            selected = item;
-        }
+        items.Add(item);
+        selected = item;
+
+        item.Pick(player);
 
         Debug.Log(string.Format("Pick {0}", item));
         GameObject slotObject = slotPool.Take();
