@@ -37,13 +37,16 @@ public class Inventory : MonoBehaviour
 
     public void Throw(Item item) {
         if (selected == item) {
-            selected = items.CyclicNext(selected);
+            if (items.Count >= 2) {
+                selected = items.CyclicNext(selected);
+            } else {
+                selected = null; 
+            }
         }
         items.Remove(item);
         Debug.Log(string.Format("Throw {0}", item));
 
-        item.transform.SetParent(null, worldPositionStays: false);
-        item.transform.position = unit.position;
+        item.inventorySlot.Free();
 
         onChanged();
     }

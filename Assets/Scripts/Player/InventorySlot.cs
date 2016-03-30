@@ -19,11 +19,17 @@ public class InventorySlot : MonoBehaviour
     public void Init(Inventory inventory, Item item) {
         this.inventory = inventory;
         this.item = item;
+        item.inventorySlot = this;
 
         transform.SetParent(inventory.line.transform);
         item.transform.SetParent(transform, worldPositionStays: false);
         item.transform.localPosition = Vector3.zero;
         item.transform.localRotation = Quaternion.identity;
+
+        if (item.GetComponent<Rigidbody>() != null) {
+            item.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
         inventory.onChanged += OnInventoryChanged;
 
         transform.localPosition = TargetPosition();
@@ -44,11 +50,18 @@ public class InventorySlot : MonoBehaviour
         if (inventory.items.Contains(item)) {
             transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), Time.time + animationDelay));
         } else {
-            Die();
+            Free();
         }
     }
 
-    private void Die() {
+    public void Free() {
+        item.transform.SetParent(null, worldPositionStays: false);
+        item.transform.position = inventory.unit.position;
+
+        if (item.GetComponent<Rigidbody>() != null) {
+            item.GetComponent<Rigidbody>().isKinematic = false;
+        }
+
         inventory.onChanged -= OnInventoryChanged;
         GetComponent<Poolable>().ReturnToPool();
     }
