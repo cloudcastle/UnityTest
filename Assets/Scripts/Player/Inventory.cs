@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
     public void Throw(Item item) {
         if (selected == item) {
             if (items.Count >= 2) {
-                selected = items.CyclicNext(selected);
+                ChangeSelected(1);
             } else {
                 selected = null; 
             }
@@ -51,14 +51,26 @@ public class Inventory : MonoBehaviour
         onChanged();
     }
 
+    void ChangeSelected(int delta = 1) {
+        if (items.Count == 0) {
+            return;
+        }
+        selected = items.CyclicNext(selected, delta);
+        onChanged();
+    }
+
     void Update() {
         if (Input.GetButtonDown("Next Item")) {
-            selected = items.CyclicNext(selected);
-            onChanged();
+            ChangeSelected(1);
         }
         if (Input.GetButtonDown("Previous Item")) {
-            selected = items.CyclicNext(selected, -1);
-            onChanged();
+            ChangeSelected(-1);
+        }
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0) {
+            ChangeSelected(-1);
+        }
+        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0) {
+            ChangeSelected(1);
         }
     }
 }

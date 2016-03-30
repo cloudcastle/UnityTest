@@ -7,6 +7,9 @@ public class InventorySlot : MonoBehaviour
 {
     float animationDelay = 0.25f;
 
+    public float selectedZoomMultiplier = 1.5f;
+    public float baseZoom = 2f;
+
     public Inventory inventory;
     public Item item;
 
@@ -43,7 +46,7 @@ public class InventorySlot : MonoBehaviour
     }
 
     public Vector3 TargetScale() {
-        return Vector3.one * (inventory.selected == item ? 1.5f : 1);
+        return Vector3.one * (inventory.selected == item ? selectedZoomMultiplier : 1) * baseZoom;
     }
 
     void OnInventoryChanged() {
