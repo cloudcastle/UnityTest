@@ -3,14 +3,10 @@ using System.Collections;
 
 public class Activator : MonoBehaviour
 {
-    public static Activator instance;
-
     public float maxDistance = 2;
 
-    void Awake() {
-        instance = this;
-    }
-
+    public Player player;
+    
     public Activatable current;
     public Activatable outOfRange;
 
@@ -20,7 +16,7 @@ public class Activator : MonoBehaviour
     }
 
     void Check(Activatable target) {
-        if (Eye.instance.distance < target.EffectiveMaxDistance()) {
+        if (player.eye.distance < target.EffectiveMaxDistance(this)) {
             current = target;
         } else {
             outOfRange = target;
@@ -34,15 +30,15 @@ public class Activator : MonoBehaviour
             return;
         }
         Reset();
-        if (Eye.instance.underSight != null) {
-            var target = Eye.instance.underSight.GetComponent<Activatable>();
+        if (player.eye.underSight != null) {
+            var target = player.eye.underSight.GetComponent<Activatable>();
             if (target != null) {
                 Check(target);
             }
         }
         if (Input.GetButtonDown("Activate")) {
             if (current != null) {
-                current.Activate();
+                current.Activate(this);
             }
         }
     }

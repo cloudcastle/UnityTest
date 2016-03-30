@@ -27,4 +27,8 @@ public static class Extensions
     public static string ExtToString<T>(this IEnumerable<T> collection, string delimiter = ", ") {
         return String.Join(delimiter, collection.Select(obj => obj.ToString()).ToArray());
     }
+
+    public static T CyclicNext<T>(this List<T> list, T obj, int delta = 1) {
+        return list[((list.IndexOf(obj) + delta) % list.Count + list.Count) % list.Count];
+    }
 }

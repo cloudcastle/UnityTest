@@ -3,16 +3,10 @@ using System.Collections;
 
 public class Eye : MonoBehaviour
 {
-    public static Eye instance;
-
     RaycastHit hit;
 
     public GameObject underSight;
     public float distance;
-
-    void Awake() {
-        instance = this;
-    }
 
     void SetUnderSight(GameObject go, float distance) {
         if (go != underSight) {

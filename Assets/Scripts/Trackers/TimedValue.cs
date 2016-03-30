@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+[Serializable]
 public class TimedValue<T>
 {
     public T value;

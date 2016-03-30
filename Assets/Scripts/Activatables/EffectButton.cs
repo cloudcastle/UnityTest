@@ -7,8 +7,8 @@ public class EffectButton : Activatable
 {
     public List<Effect> effects;
 
-    public override void Activate() {
-        base.Activate();
+    public override void Activate(Activator activator) {
+        base.Activate(activator);
         effects.ForEach((effect) => effect.Run());
     }
 

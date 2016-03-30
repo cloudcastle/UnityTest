@@ -3,7 +3,7 @@
 public class HighlightUnderSight : Highlight
 {
     bool UnderSight() {
-        return Eye.instance.underSight == gameObject;
+        return Player.current.eye.underSight == gameObject;
     }
 
     void Update() {

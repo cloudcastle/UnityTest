@@ -22,11 +22,11 @@ public class ActivatorHighlight : MonoBehaviour
     }
 
     bool UnderActivator() {
-        return Activator.instance.current == activatable;
+        return Player.current.activator.current == activatable;
     }
 
     bool OutOfRange() {
-        return Activator.instance.outOfRange == activatable;
+        return Player.current.activator.outOfRange == activatable;
     }
 
     bool Ready() {

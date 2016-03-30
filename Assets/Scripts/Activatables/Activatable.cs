@@ -10,13 +10,13 @@ public abstract class Activatable : MonoBehaviour
         return true;
     }
 
-    public virtual void Activate() {
+    public virtual void Activate(Activator activator) {
         Debug.Log(string.Format("Activated: {0}", this));
     }
 
-    public float EffectiveMaxDistance() {
+    public float EffectiveMaxDistance(Activator activator) {
         if (useActivatorMaxDistance) {
-            return Activator.instance.maxDistance;
+            return activator.maxDistance;
         }
         return maxDistance;
     }

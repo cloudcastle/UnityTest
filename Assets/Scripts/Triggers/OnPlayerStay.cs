@@ -7,7 +7,7 @@ public class OnPlayerStay : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject == Player.instance)
+        if (other.gameObject.GetComponent<Player>() != null)
         {
             effect.Run();
         }

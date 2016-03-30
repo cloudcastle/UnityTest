@@ -7,7 +7,7 @@ public class OnPlayerEnter : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == Player.instance)
+        if (other.gameObject.GetComponent<Player>() != null)
         {
             effect.Run();
         }

@@ -3,10 +3,14 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    public static GameObject instance;
+    public static Player current;
+
+    public Activator activator;
+    public Eye eye;
+    public Inventory inventory;
 
     void Awake()
     {
-        instance = gameObject;
+        current = this;
     }
 }
