@@ -22,7 +22,6 @@ public class ThrowAbility : MonoBehaviour
     public void Throw() {
         var target = player.inventory.selected;
         player.inventory.Throw(target);
-        target.GetComponent<Item>().Throw(player);
         target.transform.position = player.eye.transform.position + player.eye.transform.forward * initialDistance;
         target.GetComponent<Rigidbody>().AddForce(currentForce * player.eye.transform.forward);
 

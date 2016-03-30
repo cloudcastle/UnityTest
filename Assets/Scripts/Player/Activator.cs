@@ -10,6 +10,8 @@ public class Activator : MonoBehaviour
     public Activatable current;
     public Activatable outOfRange;
 
+    public Cooldown stun = new Cooldown(0.2f);
+
     void Reset() {
         outOfRange = null;
         current = null;
@@ -30,6 +32,9 @@ public class Activator : MonoBehaviour
             return;
         }
         Reset();
+        if (stun.OnCooldown()) {
+            return;
+        }
         if (player.eye.underSight != null) {
             var target = player.eye.underSight.GetComponent<Activatable>();
             if (target != null) {

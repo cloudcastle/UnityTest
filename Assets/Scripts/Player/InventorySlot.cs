@@ -38,7 +38,6 @@ public class InventorySlot : MonoBehaviour
         transform.localPosition = TargetPosition();
         transform.localScale = TargetScale();
         transform.localRotation = Quaternion.identity;
-        Debug.Log(string.Format("Slot inited; id = {1}, transform.position = {0}", transform.position, GetInstanceID()));
     }
 
     public Vector3 TargetPosition() {
@@ -59,7 +58,7 @@ public class InventorySlot : MonoBehaviour
 
     public void Free() {
         item.transform.SetParent(null, worldPositionStays: false);
-        item.transform.position = inventory.unit.position;
+        item.transform.position = inventory.player.transform.position;
 
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = false;

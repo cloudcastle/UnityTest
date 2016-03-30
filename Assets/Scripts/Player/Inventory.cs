@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public GameObject slotSample;
     public GameObject line;
-    public Transform unit;
+    public Player player;
 
     Pool slotPool;
 
@@ -47,8 +47,15 @@ public class Inventory : MonoBehaviour
         Debug.Log(string.Format("Throw {0}", item));
 
         item.inventorySlot.Free();
+        item.Throw(player);
 
         onChanged();
+    }
+
+    public void DropAll() {
+        while (items.Count > 0) {
+            Throw(selected);
+        }
     }
 
     void ChangeSelected(int delta = 1) {

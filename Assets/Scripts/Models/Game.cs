@@ -35,32 +35,45 @@ public class Game
         var sixBoxes = new Level("Six boxes", gap);
         var climb = new Level("Climb", gap);
 
+        var pass = new Level("Pass", wasd);
+        var fit = new Level("Fit", pass);
+        var cleanHands = new Level("Clean hands", fit);
+
      
         levels = new List<Level>() {
+            // Intro
             click,
             mouseMove,
             wasd,
             space,
 
+            // Lift Intro
             raise,
             order,
             precaution,
 
+            // Lift
             stairs,
             twoPits,
             hold,
-
             ascention,
             launch,
             temple,
             underground,
             tower,
 
+            // Jump Intro
             shift,
             gap,
 
+            // Jump
             sixBoxes,
-            climb
+            climb,
+
+            // Key Intro
+            pass,
+            fit,
+            cleanHands,
         };
     }
 
