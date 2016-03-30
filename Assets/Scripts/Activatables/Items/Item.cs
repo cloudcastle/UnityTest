@@ -5,15 +5,19 @@ public class Item : Activatable
     float ghostTimeAfterThrow = 0.5f;
 
     public InventorySlot inventorySlot = null;
-    public GameObject thrower;
+    public Player thrower;
     public float thrownAt;
 
     public override void Activate(Activator activator) {
         base.Activate(activator);
+        Pick(activator);
+    }
+
+    public virtual void Pick(Activator activator) {
         activator.player.inventory.Pick(this);
     }
 
-    public void Throw(GameObject thrower) {
+    public virtual void Throw(Player thrower) {
         Physics.IgnoreCollision(thrower.GetComponent<Collider>(), GetComponent<Collider>());
         this.thrower = thrower;
         this.thrownAt = Time.time;

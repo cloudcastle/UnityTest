@@ -6,7 +6,7 @@ using System;
 
 public abstract class AbstractTracker<T> : MonoBehaviour
 {
-    ValueTracker<T> tracker;
+    public ValueTracker<T> tracker;
 
     protected abstract ValueTracker<T> CreateTracker();
 

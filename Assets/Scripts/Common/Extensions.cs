@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEditor;
 
 public static class Extensions
 {
@@ -30,5 +31,15 @@ public static class Extensions
 
     public static T CyclicNext<T>(this List<T> list, T obj, int delta = 1) {
         return list[((list.IndexOf(obj) + delta) % list.Count + list.Count) % list.Count];
+    }
+
+    public static void ChangeAlpha(this Material material, float alpha) {
+        Color c = material.color;
+        c.a = alpha;
+        material.color = c;
+    }
+
+    public static bool Editor() {
+        return Application.isEditor && !EditorApplication.isPlaying;
     }
 }
