@@ -9,6 +9,8 @@ public class UI : MonoBehaviour {
 
     public UIScreen currentScreen;
 
+    public UnityEngine.UI.Slider forceSlider;
+
     void Awake() {
         instance = this;
     }
@@ -31,5 +33,14 @@ public class UI : MonoBehaviour {
 
     public void Map() {
         Show(map);
+    }
+
+    public void ShowForce(float force) {
+        if (force > 0) {
+            forceSlider.gameObject.SetActive(true);
+            forceSlider.value = force;
+        } else {
+            forceSlider.gameObject.SetActive(false);
+        }
     }
 }

@@ -60,9 +60,5 @@ public class Inventory : MonoBehaviour
             selected = items.CyclicNext(selected, -1);
             onChanged();
         }
-        if (Input.GetButtonDown("Throw") && selected != null) {
-            Throw(selected);
-            onChanged();
-        }
     }
 }

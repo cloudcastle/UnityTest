@@ -248,6 +248,7 @@ GameObject:
   - 114: {fileID: 11464640}
   - 114: {fileID: 11419868}
   - 114: {fileID: 11499754}
+  - 114: {fileID: 11466032}
   m_Layer: 0
   m_Name: Player Main Unit
   m_TagString: Untagged
@@ -1345,6 +1346,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0
   useActivatorMaxDistance: 1
+  inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 0}
 --- !u!114 &11419868
@@ -1384,6 +1388,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0
   useActivatorMaxDistance: 1
+  inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 0}
 --- !u!114 &11425446
@@ -1478,6 +1485,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0
   useActivatorMaxDistance: 1
+  inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 1, g: 0, b: 0, a: 0}
   material: {fileID: 0}
 --- !u!114 &11449904
@@ -1533,6 +1543,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0
   useActivatorMaxDistance: 1
+  inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 0}
 --- !u!114 &11456928
@@ -1601,6 +1614,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
   item: {fileID: 0}
+--- !u!114 &11466032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec21abc897e4854bb94c44b5b84b489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxForce: 1000
+  fullChargeTime: 1
+  currentForce: 0
+  initialDistance: .100000001
+  player: {fileID: 11499482}
 --- !u!114 &11467034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1884,6 +1913,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0
   useActivatorMaxDistance: 1
+  inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 0}
 --- !u!114 &11496380

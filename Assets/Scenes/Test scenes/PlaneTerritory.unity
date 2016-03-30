@@ -574,9 +574,9 @@ GameObject:
   - 33: {fileID: 113430523}
   - 135: {fileID: 113430522}
   - 23: {fileID: 113430521}
-  - 114: {fileID: 113430520}
   - 114: {fileID: 113430519}
   - 54: {fileID: 113430524}
+  - 114: {fileID: 113430520}
   m_Layer: 0
   m_Name: Sphere (5)
   m_TagString: Untagged
@@ -610,6 +610,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 561267467}
 --- !u!114 &113430520
@@ -620,12 +622,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 113430517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &113430521
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -678,7 +681,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1999,6 +2002,73 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 310933020}
+--- !u!1 &311497213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 311497214}
+  - 222: {fileID: 311497216}
+  - 114: {fileID: 311497215}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &311497214
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311497213}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 652528305}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &311497215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311497213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &311497216
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 311497213}
 --- !u!1 &314170609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,9 +2542,9 @@ GameObject:
   - 33: {fileID: 371151775}
   - 135: {fileID: 371151774}
   - 23: {fileID: 371151773}
-  - 114: {fileID: 371151772}
   - 114: {fileID: 371151771}
   - 54: {fileID: 371151776}
+  - 114: {fileID: 371151772}
   m_Layer: 0
   m_Name: Sphere (4)
   m_TagString: Untagged
@@ -2508,6 +2578,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: 1, b: .420689583, a: 0}
   material: {fileID: 1764586677}
 --- !u!114 &371151772
@@ -2518,12 +2590,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 371151769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &371151773
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2576,7 +2649,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2593,9 +2666,9 @@ GameObject:
   - 33: {fileID: 385438867}
   - 135: {fileID: 385438866}
   - 23: {fileID: 385438865}
-  - 114: {fileID: 385438864}
   - 114: {fileID: 385438863}
   - 54: {fileID: 385438868}
+  - 114: {fileID: 385438864}
   m_Layer: 0
   m_Name: Sphere (10)
   m_TagString: Untagged
@@ -2629,6 +2702,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: 1, b: .420689583, a: 0}
   material: {fileID: 1764586677}
 --- !u!114 &385438864
@@ -2639,12 +2714,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 385438861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &385438865
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2697,7 +2773,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3415,6 +3491,39 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 485417158}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &499462295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 499462296}
+  m_Layer: 5
+  m_Name: Handle Slide Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &499462296
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 499462295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1815810867}
+  m_Father: {fileID: 638002317}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &500834377
 GameObject:
   m_ObjectHideFlags: 0
@@ -3756,9 +3865,9 @@ GameObject:
   - 33: {fileID: 527253114}
   - 135: {fileID: 527253113}
   - 23: {fileID: 527253112}
-  - 114: {fileID: 527253111}
   - 114: {fileID: 527253110}
   - 54: {fileID: 527253115}
+  - 114: {fileID: 527253111}
   m_Layer: 0
   m_Name: Sphere (8)
   m_TagString: Untagged
@@ -3792,6 +3901,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: .862069011, g: 1, b: 0, a: 0}
   material: {fileID: 281904485}
 --- !u!114 &527253111
@@ -3802,12 +3913,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 527253108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &527253112
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3860,7 +3972,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -5269,6 +5381,90 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 635163838}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &638002316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 638002317}
+  - 114: {fileID: 638002318}
+  m_Layer: 5
+  m_Name: Force Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &638002317
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 638002316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 650597745}
+  - {fileID: 652528305}
+  - {fileID: 499462296}
+  m_Father: {fileID: 1408459605}
+  m_RootOrder: 5
+  m_AnchorMin: {x: .5, y: 0}
+  m_AnchorMax: {x: .5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 30}
+  m_SizeDelta: {x: 160, y: 20}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &638002318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 638002316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: .960784316, g: .960784316, b: .960784316, a: 1}
+    m_PressedColor: {r: .784313738, g: .784313738, b: .784313738, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_ColorMultiplier: 1
+    m_FadeDuration: .100000001
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1815810868}
+  m_FillRect: {fileID: 311497214}
+  m_HandleRect: {fileID: 1815810867}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!21 &638904475
 Material:
   serializedVersion: 6
@@ -5405,6 +5601,73 @@ Material:
         first:
           name: _Color
         second: {r: 1, g: 0, b: 0, a: 0}
+--- !u!1 &650597744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 650597745}
+  - 222: {fileID: 650597747}
+  - 114: {fileID: 650597746}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &650597745
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650597744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 638002317}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: .25}
+  m_AnchorMax: {x: 1, y: .75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &650597746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650597744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &650597747
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650597744}
 --- !u!1 &651372470
 GameObject:
   m_ObjectHideFlags: 0
@@ -5467,6 +5730,39 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 651372470}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &652528304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 652528305}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &652528305
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 652528304}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 311497214}
+  m_Father: {fileID: 638002317}
+  m_RootOrder: 1
+  m_AnchorMin: {x: 0, y: .25}
+  m_AnchorMax: {x: 1, y: .75}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: .5, y: .5}
 --- !u!1 &672696138
 GameObject:
   m_ObjectHideFlags: 0
@@ -6508,9 +6804,9 @@ GameObject:
   - 33: {fileID: 828497447}
   - 135: {fileID: 828497446}
   - 23: {fileID: 828497445}
-  - 114: {fileID: 828497444}
   - 114: {fileID: 828497443}
   - 54: {fileID: 828497448}
+  - 114: {fileID: 828497444}
   m_Layer: 0
   m_Name: Sphere (11)
   m_TagString: Untagged
@@ -6544,6 +6840,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 561267467}
 --- !u!114 &828497444
@@ -6554,12 +6852,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 828497441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &828497445
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6612,7 +6911,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -8592,9 +8891,9 @@ GameObject:
   - 33: {fileID: 1131174958}
   - 135: {fileID: 1131174957}
   - 23: {fileID: 1131174956}
-  - 114: {fileID: 1131174955}
   - 114: {fileID: 1131174954}
   - 54: {fileID: 1131174959}
+  - 114: {fileID: 1131174955}
   m_Layer: 0
   m_Name: Sphere (6)
   m_TagString: Untagged
@@ -8628,6 +8927,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: .00689673424, b: 1, a: 0}
   material: {fileID: 561267467}
 --- !u!114 &1131174955
@@ -8638,12 +8939,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1131174952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &1131174956
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8696,7 +8998,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -8938,9 +9240,9 @@ GameObject:
   - 33: {fileID: 1164319343}
   - 135: {fileID: 1164319342}
   - 23: {fileID: 1164319341}
-  - 114: {fileID: 1164319340}
   - 114: {fileID: 1164319339}
   - 54: {fileID: 1164319344}
+  - 114: {fileID: 1164319340}
   m_Layer: 0
   m_Name: Sphere (3)
   m_TagString: Untagged
@@ -8974,6 +9276,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: .862069011, g: 1, b: 0, a: 0}
   material: {fileID: 281904485}
 --- !u!114 &1164319340
@@ -8984,12 +9288,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1164319337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &1164319341
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9042,7 +9347,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -9379,9 +9684,9 @@ GameObject:
   - 33: {fileID: 1221212977}
   - 135: {fileID: 1221212976}
   - 23: {fileID: 1221212975}
-  - 114: {fileID: 1221212974}
   - 114: {fileID: 1221212973}
   - 54: {fileID: 1221212978}
+  - 114: {fileID: 1221212974}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -9415,6 +9720,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: .862069011, g: 1, b: 0, a: 0}
   material: {fileID: 281904485}
 --- !u!114 &1221212974
@@ -9425,12 +9732,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1221212971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &1221212975
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9483,7 +9791,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -9568,6 +9876,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 638904475}
+    - target: {fileID: 11466032, guid: b8029dcee39cc12488df9a88f46ba86f, type: 2}
+      propertyPath: initialDistance
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8029dcee39cc12488df9a88f46ba86f, type: 2}
   m_IsPrefabParent: 0
@@ -9871,9 +10183,9 @@ GameObject:
   - 33: {fileID: 1275885889}
   - 135: {fileID: 1275885888}
   - 23: {fileID: 1275885887}
-  - 114: {fileID: 1275885890}
   - 114: {fileID: 1275885891}
   - 54: {fileID: 1275885892}
+  - 114: {fileID: 1275885890}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -9944,12 +10256,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1275885885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!114 &1275885891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9964,6 +10277,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: 1, b: .420689583, a: 0}
   material: {fileID: 1764586677}
 --- !u!54 &1275885892
@@ -9975,7 +10290,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -11256,9 +11571,9 @@ GameObject:
   - 33: {fileID: 1396805341}
   - 135: {fileID: 1396805340}
   - 23: {fileID: 1396805339}
-  - 114: {fileID: 1396805338}
   - 114: {fileID: 1396805337}
   - 54: {fileID: 1396805342}
+  - 114: {fileID: 1396805338}
   m_Layer: 0
   m_Name: Sphere (7)
   m_TagString: Untagged
@@ -11292,6 +11607,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: 0, g: 1, b: .420689583, a: 0}
   material: {fileID: 1764586677}
 --- !u!114 &1396805338
@@ -11302,12 +11619,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1396805335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &1396805339
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11360,7 +11678,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -11463,6 +11781,7 @@ RectTransform:
   - {fileID: 177246500}
   - {fileID: 1668847669}
   - {fileID: 449131334}
+  - {fileID: 638002317}
   m_Father: {fileID: 1134395503}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
@@ -11485,6 +11804,7 @@ MonoBehaviour:
   completionScreen: {fileID: 1668847670}
   map: {fileID: 1786792298}
   currentScreen: {fileID: 0}
+  forceSlider: {fileID: 638002318}
 --- !u!114 &1408459607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14296,6 +14616,73 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1808585546}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1815810866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1815810867}
+  - 222: {fileID: 1815810869}
+  - 114: {fileID: 1815810868}
+  m_Layer: 5
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1815810867
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815810866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 499462296}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 0}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1815810868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815810866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1815810869
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815810866}
 --- !u!1 &1832960472
 GameObject:
   m_ObjectHideFlags: 0
@@ -14995,9 +15382,9 @@ GameObject:
   - 33: {fileID: 1929525276}
   - 135: {fileID: 1929525275}
   - 23: {fileID: 1929525274}
-  - 114: {fileID: 1929525273}
   - 114: {fileID: 1929525272}
   - 54: {fileID: 1929525277}
+  - 114: {fileID: 1929525273}
   m_Layer: 0
   m_Name: Sphere (9)
   m_TagString: Untagged
@@ -15031,6 +15418,8 @@ MonoBehaviour:
   maxDistance: 0
   useActivatorMaxDistance: 1
   inventorySlot: {fileID: 0}
+  thrower: {fileID: 0}
+  thrownAt: 0
   color: {r: .862069011, g: 1, b: 0, a: 0}
   material: {fileID: 281904485}
 --- !u!114 &1929525273
@@ -15041,12 +15430,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1929525270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea764595928ebb4592dae594c6fcb43, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   highlightEmission: {r: .400000006, g: .400000006, b: .400000006, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
+  notReadyEmission: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  lightPartOutOfRange: .5
 --- !u!23 &1929525274
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15099,7 +15489,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 2
+  m_AngularDrag: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
