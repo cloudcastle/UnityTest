@@ -16,7 +16,9 @@ public class Key : Item
     void Start() {
 #if UNITY_EDITOR
         if (!Extensions.Editor()) {
+#endif
             keyColor.keys.Add(this);
+#if UNITY_EDITOR
         }
 #endif
     }

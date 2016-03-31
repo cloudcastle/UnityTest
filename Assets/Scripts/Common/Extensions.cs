@@ -46,6 +46,10 @@ public static class Extensions
     public static bool Editor() {
         return Application.isEditor && !EditorApplication.isPlaying;
     }
+#else 
+    public static bool Editor() {
+        return false;
+    }
 #endif
 
     public static List<T> GetComponentsInDirectChildren<T>(this Component component) {

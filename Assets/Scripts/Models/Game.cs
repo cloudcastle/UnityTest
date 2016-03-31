@@ -16,8 +16,9 @@ public class Game
         var space = new Level("Space", depends: wasd);
 
         var raise = new Level("Raise", depends: wasd);
+        var shift = new Level("Shift", depends: raise);
         var order = new Level("Order", depends: raise);
-        var precaution = new Level("Precaution", depends: order);
+        var precaution = new Level("Precaution", order, shift);
 
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);
@@ -29,7 +30,6 @@ public class Game
         var underground = new Level("Underground", depends: hold);
         var tower = new Level("Tower", depends: hold);
 
-        var shift = new Level("Shift", depends: raise);
         var gap = new Level("Gap", shift, space);
 
         var sixBoxes = new Level("Six boxes", gap);
