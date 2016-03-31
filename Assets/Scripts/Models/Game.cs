@@ -42,6 +42,8 @@ public class Game
         var rightMouseButton = new Level("Right mouse button", repick);
         var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton);
 
+        var blueDoor = new Level("Blue door", rightMouseButton);
+
      
         levels = new List<Level>() {
             // Intro
@@ -79,7 +81,10 @@ public class Game
             cleanHands,
             repick,
             rightMouseButton,
-            qeMouseWheel
+            qeMouseWheel,
+
+            // Key
+            blueDoor
         };
     }
 
