@@ -14,9 +14,11 @@ public class Key : Item
     }
 
     void Start() {
+#if UNITY_EDITOR
         if (!Extensions.Editor()) {
             keyColor.keys.Add(this);
         }
+#endif
     }
 
     void Update() {

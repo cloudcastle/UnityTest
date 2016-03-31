@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using UnityEditor;
+
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 public static class Extensions
 {
@@ -39,9 +42,11 @@ public static class Extensions
         material.color = c;
     }
 
+#if UNITY_EDITOR
     public static bool Editor() {
         return Application.isEditor && !EditorApplication.isPlaying;
     }
+#endif
 
     public static List<T> GetComponentsInDirectChildren<T>(this Component component) {
         List<T> result = new List<T>();

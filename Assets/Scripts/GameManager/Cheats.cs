@@ -23,7 +23,7 @@ public class Cheats : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.F5)) {
+        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.F5)) {
             Enable(!on);
         }
     }

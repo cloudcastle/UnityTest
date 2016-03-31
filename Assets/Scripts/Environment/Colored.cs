@@ -15,6 +15,7 @@ public class Colored : MonoBehaviour
     }
 
     void Update() {
+#if UNITY_EDITOR
         if (Extensions.Editor()) {
             if (material == null) {
                 material = meshRenderer.sharedMaterial;
@@ -24,6 +25,7 @@ public class Colored : MonoBehaviour
                 UpdateRendererMaterial();
             }
         }
+#endif
     }
 
     [ContextMenu("Update renderer material")]

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 
 [ExecuteInEditMode]
@@ -22,9 +21,11 @@ public class Door : MonoBehaviour
     }
 
     void Start() {
+#if UNITY_EDITOR
         if (!Extensions.Editor()) {
             keyColor.doors.Add(this);
         }
+#endif
     }
 
     public bool Opened(Player player) {
@@ -42,6 +43,7 @@ public class Door : MonoBehaviour
     }
 
     void Update() {
+#if UNITY_EDITOR
         if (Extensions.Editor()) {
             if (keyColor != oldKeyColor) {
                 oldKeyColor = keyColor;
@@ -51,7 +53,10 @@ public class Door : MonoBehaviour
             }
             colored.color = closed;
         } else {
+#endif
             GetComponent<MeshRenderer>().material.ChangeAlpha(Opened(Player.current) ? openedAlpha : closedAlpha);
+#if UNITY_EDITOR
         }
+#endif
     }
 }
