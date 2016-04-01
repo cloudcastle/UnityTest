@@ -17,8 +17,8 @@ public class Game
 
         var raise = new Level("Raise", depends: wasd);
         var shift = new Level("Shift", depends: raise);
-        var order = new Level("Order", depends: raise);
-        var precaution = new Level("Precaution", order, shift);
+        var order = new Level("Order", depends: shift);
+        var precaution = new Level("Precaution", depends: order);
 
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);

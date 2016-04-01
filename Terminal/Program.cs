@@ -17,7 +17,7 @@ namespace Terminal
         }
 
         static void Work() {
-            PrintSolution(Puzzles.Temple());
+            PrintAllSolutions();
             //Console.WriteLine("HW");
         }
 
