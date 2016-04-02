@@ -18,6 +18,9 @@ public class Gravity : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if (TimeManager.paused) {
+            return;
+        }
         if (!characterController.isGrounded) {
             move.Accelerate(Time.fixedDeltaTime * gravity * Vector3.down);
         }

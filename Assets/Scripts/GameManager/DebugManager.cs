@@ -2,16 +2,21 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 public class DebugManager : MonoBehaviour
 {
-    public List<string> levels;
-    public List<string> availableLevels;
-    public List<string> completedLevels;
+    public List<Level> levels;
+    public List<Level> availableLevels;
+    public List<Level> completedLevels;
+
+    public List<string> levelsUnlockOrders;
 
     void Update() {
-        levels = GameManager.game.levels.Select(l => l.name).ToList();
-        availableLevels = GameManager.game.levels.Where(l => l.Unlocked()).Select(l => l.name).ToList();
-        completedLevels = GameManager.game.levels.Where(l => l.Completed()).Select(l => l.name).ToList();
+        levels = GameManager.game.levels;
+        availableLevels = GameManager.game.AvailableLevelsInUnlockOrder();
+        completedLevels = GameManager.game.levels.Where(l => l.Completed()).ToList();
+
+        levelsUnlockOrders = GameManager.game.levels.Select(level => String.Format("{0} unlocked at {1}", level, level.UnlockOrder())).ToList();
     }
 }

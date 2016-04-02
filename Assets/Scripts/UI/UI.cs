@@ -1,13 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public class UI : MonoBehaviour {
     public static UI instance;
 
     public CompletionScreen completionScreen;
     public MapScreen map;
+    public PauseScreen pauseScreen;
+    public ConfirmationScreen confirmationScreen;
 
-    public UIScreen currentScreen;
+    public UIScreen CurrentScreen {
+        get {
+            if (screenStack.Count == 0) {
+                return null;
+            }
+            return screenStack.Peek();
+        }
+    }
+
+    public Stack<UIScreen> screenStack = new Stack<UIScreen>();
 
     public UnityEngine.UI.Slider forceSlider;
 
@@ -18,21 +31,59 @@ public class UI : MonoBehaviour {
     void HideAllUIScreens() {
         completionScreen.Hide();
         map.Hide();
+        pauseScreen.Hide();
     }
 
     void Show(UIScreen screen) {
         HideAllUIScreens();
         screen.Show();
         TimeManager.paused = true;
-        currentScreen = screen;
+        screenStack.Clear();
+        screenStack.Push(screen);
+    }
+
+    void ShowModal(UIScreen screen) {
+        screen.Show();
+        TimeManager.paused = true;
+        screenStack.Push(screen);
+    }
+
+    void HideModal() {
+        CurrentScreen.Hide();
+        screenStack.Pop();
+        TimeManager.paused = screenStack.Count > 0;
     }
 
     public void CompletionScreen() {
         Show(completionScreen);
     }
 
+    public void PauseScreen() {
+        Show(pauseScreen);
+    }
+
     public void Map() {
         Show(map);
+    }
+
+    public void Confirm(Action action, string actionName) {
+        ShowModal(confirmationScreen);
+        confirmationScreen.Init(
+            actionName: actionName,
+            yes: () => {
+                HideModal();
+                action();
+            },
+            no: () => {
+                HideModal();
+            }
+        );
+    }
+
+    public void Game() {
+        HideAllUIScreens();
+        screenStack.Clear();
+        TimeManager.paused = false;
     }
 
     public void ShowForce(float force) {

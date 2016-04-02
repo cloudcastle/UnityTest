@@ -29,7 +29,7 @@ public class MapScreen : UIScreen {
         if (Cheats.on) {
             SetLevelList(GameManager.game.levels);
         } else {
-            SetLevelList(GameManager.game.AvailableLevelsInUnlockOrder());
+            SetLevelList(GameManager.game.AvailableLevelsInReverseUnlockOrder());
         }
     }
 

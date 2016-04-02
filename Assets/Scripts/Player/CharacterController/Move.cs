@@ -56,14 +56,13 @@ public class Move : MonoBehaviour
         changer(velocity, SetVelocityX, SetVelocityY, SetVelocityZ);
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
+        readonlyVelocity = velocity;
+        readonlyGrounded = controller.isGrounded;
         if (TimeManager.paused)
         {
             return;
         }
-        readonlyVelocity = velocity;
-        readonlyGrounded = controller.isGrounded;
 
         if (ground != null) {
             ChangeVelocity(ground.ChangeVelocity);

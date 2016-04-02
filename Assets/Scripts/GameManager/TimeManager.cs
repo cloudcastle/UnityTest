@@ -43,10 +43,6 @@ public class TimeManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel/Menu"))
-        {
-            SwitchPause();
-        }
         time = Time.time;
     }
 

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static Game game = new Game();
 
+    public Game readonlyGame;
+
     public static GameManager instance;
 
     public void Awake() {
@@ -23,19 +25,22 @@ public class GameManager : MonoBehaviour
         UI.instance.CompletionScreen();
     }
 
-    public void Replay() {
-        Application.LoadLevel(Application.loadedLevelName);
+    public void Pause() {
+        UI.instance.PauseScreen();
     }
 
-    public void PlayFirstUnlocked() {
-        Play(game.AvailableLevelsInUnlockOrder().First());
+    public void Resume() {
+        UI.instance.Game();
     }
 
-    public void PlayLastUnlocked() {
-        Play(game.AvailableLevelsInUnlockOrder().Last());
+    public void Restart() {
+        UI.instance.Confirm(() => {
+            Play(CurrentLevel());
+        }, "Restart");
     }
 
     public void Play(Level level) {
+        Debug.Log(string.Format("Play {0}", level));
         Application.LoadLevel(level.name);
     }
 
@@ -45,25 +50,26 @@ public class GameManager : MonoBehaviour
     }
 
     public void Map() {
+        UI.instance.Confirm(() => {
+            UI.instance.Map();
+        }, "Map");
+    }
+
+    public void MapNoConfirm() {
         UI.instance.Map();
     }
 
     void Update() {
-        if (Input.GetButtonDown("Map")) {
-            Map();
-        }
-        if (UI.instance.currentScreen == UI.instance.map) {
-            if (Input.GetButtonDown("Replay")) {
-                Replay();
+        readonlyGame = game;
+        if (UI.instance.CurrentScreen == null) {
+            if (Input.GetButtonDown("Pause")) {
+                Pause();
             }
-            if (Input.GetButtonDown("New Game")) {
-                NewGame();
+            if (Input.GetButtonDown("Map")) {
+                Map();
             }
-            if (Input.GetButtonDown("Play First Unlocked")) {
-                PlayFirstUnlocked();
-            }
-            if (Input.GetButtonDown("Play Last Unlocked")) {
-                PlayLastUnlocked();
+            if (Input.GetButtonDown("Restart")) {
+                Restart();
             }
         }
     }

@@ -5,10 +5,10 @@ using System;
 [Serializable]
 public class Level
 {
-    public readonly string name;
+    public string name;
 
     [NonSerialized]
-    public readonly List<Level> dependencies = new List<Level>();
+    public List<Level> dependencies = new List<Level>();
 
     public Level(string name, params Level[] depends) {
         this.name = name;
@@ -28,10 +28,14 @@ public class Level
     }
 
     public int UnlockOrder() {
-        return dependencies.ExtMin(level => CompletionOrder());
+        return dependencies.ExtMax(level => level.CompletionOrder());
     }
 
     public int GameOrder() {
         return GameManager.game.levels.IndexOf(this);
+    }
+
+    public override string ToString() {
+        return name;
     }
 }

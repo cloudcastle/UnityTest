@@ -95,4 +95,10 @@ public class Game
         result.Sort(new LevelComparerByUnlock());
         return result;
     }
+
+    public List<Level> AvailableLevelsInReverseUnlockOrder() {
+        var result = AvailableLevelsInUnlockOrder();
+        result.Reverse();
+        return result;
+    }
 }
