@@ -286,6 +286,7 @@ namespace Solver
                 Hold(),
                 Ascention(),
                 Launch(),
+                Temple()
             };
         }
     }
