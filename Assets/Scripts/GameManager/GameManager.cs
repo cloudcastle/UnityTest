@@ -5,14 +5,15 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public static Game game = new Game();
+    static InstanceData instanceData = new InstanceData();
 
-    public Game readonlyGame;
+    public static Game game = new Game();
 
     public static GameManager instance;
 
     public void Awake() {
         instance = this;
+        Load();
     }
 
     public Level CurrentLevel() {
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel() {
         var level = CurrentLevel();
         game.completedLevels.Add(level);
+        Save();
         UI.instance.CompletionScreen();
     }
 
@@ -67,8 +69,19 @@ public class GameManager : MonoBehaviour
         UI.instance.OptionsScreen();
     }
 
+    public void Save() {
+        FileManager.SaveToFile(game, instanceData.currentGame);
+    }
+
+    public void Load() {
+        game = FileManager.LoadFromFile<Game>(instanceData.currentGame);
+        if (game == null) {
+            Debug.Log("Game not detected. Creating new");
+            game = new Game();
+        }
+    }
+
     void Update() {
-        readonlyGame = game;
         if (UI.instance.CurrentScreen == null) {
             if (Input.GetButtonDown("Pause")) {
                 Pause();

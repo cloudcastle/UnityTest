@@ -7,7 +7,6 @@ public class Level
 {
     public string name;
 
-    [NonSerialized]
     public List<Level> dependencies = new List<Level>();
 
     public Level(string name, params Level[] depends) {

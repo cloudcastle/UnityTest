@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using System;
 public class LevelButton : MonoBehaviour {
+    [NonSerialized]
     Level level;
-    Text text;
+    Text text; 
 
     void Awake() {
         text = GetComponentInChildren<Text>();
