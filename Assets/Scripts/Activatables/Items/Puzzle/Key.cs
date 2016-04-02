@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Colored))]
@@ -34,6 +35,8 @@ public class Key : Item
 
     public override void Throw(Player thrower) {
         base.Throw(thrower);
-        keyColor.doors.ForEach(door => door.OpenFor(thrower, false));
+        if (!thrower.inventory.items.Any(item => item is Key && (item as Key).keyColor == this.keyColor)) {
+            keyColor.doors.ForEach(door => door.OpenFor(thrower, false));
+        }
     }
 }

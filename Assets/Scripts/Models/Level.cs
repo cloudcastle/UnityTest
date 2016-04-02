@@ -28,7 +28,7 @@ public class Level
     }
 
     public int UnlockOrder() {
-        return dependencies.Max(level => CompletionOrder());
+        return dependencies.ExtMin(level => CompletionOrder());
     }
 
     public int GameOrder() {

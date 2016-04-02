@@ -42,7 +42,8 @@ public class Game
         var rightMouseButton = new Level("Right mouse button", repick);
         var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton);
 
-        var blueDoor = new Level("Blue door", rightMouseButton);
+        var blueDoor = new Level("Blue door", qeMouseWheel);
+        var blueCabin = new Level("Blue cabin", qeMouseWheel);
 
      
         levels = new List<Level>() {
@@ -84,7 +85,8 @@ public class Game
             qeMouseWheel,
 
             // Key
-            blueDoor
+            blueDoor,
+            blueCabin,
         };
     }
 

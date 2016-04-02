@@ -21,11 +21,32 @@ public static class Extensions
         return path;
     }
 
+    public static int ExtMin<T>(this IEnumerable<T> collection, Func<T, int> criteria) {
+        if (collection.Count() == 0) {
+            return int.MaxValue;
+        }
+        return collection.Min(criteria);
+    }
+
+    public static int ExtMax<T>(this IEnumerable<T> collection, Func<T, int> criteria) {
+        if (collection.Count() == 0) {
+            return int.MinValue;
+        }
+        return collection.Max(criteria);
+    }
+
     public static float ExtMin<T>(this IEnumerable<T> collection, Func<T, float> criteria) {
         if (collection.Count() == 0) {
             return float.PositiveInfinity;
         }
         return collection.Min(criteria);
+    }
+
+    public static float ExtMax<T>(this IEnumerable<T> collection, Func<T, float> criteria) {
+        if (collection.Count() == 0) {
+            return float.NegativeInfinity;
+        }
+        return collection.Max(criteria);
     }
 
     public static string ExtToString<T>(this IEnumerable<T> collection, string delimiter = ", ") {
