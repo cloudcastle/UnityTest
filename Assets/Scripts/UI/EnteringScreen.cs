@@ -2,5 +2,5 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class CompletionScreen : UIScreen {
+public class EnteringScreen : UIScreen {
 }

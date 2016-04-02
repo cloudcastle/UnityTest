@@ -44,6 +44,10 @@ public class GameManager : MonoBehaviour
         Application.LoadLevel(level.name);
     }
 
+    public void PlayLastUnlocked() {
+        Play(game.AvailableLevelsInReverseUnlockOrder().First());
+    }
+
     public void NewGame() {
         game = new Game();
         Play(game.levels.First());

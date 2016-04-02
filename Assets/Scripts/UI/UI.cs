@@ -10,6 +10,7 @@ public class UI : MonoBehaviour {
     public MapScreen map;
     public PauseScreen pauseScreen;
     public ConfirmationScreen confirmationScreen;
+    public EnteringScreen enteringScreen;
 
     public UIScreen CurrentScreen {
         get {
@@ -56,6 +57,7 @@ public class UI : MonoBehaviour {
 
     public void CompletionScreen() {
         Show(completionScreen);
+        enteringScreen.Hide();
     }
 
     public void PauseScreen() {
@@ -64,6 +66,7 @@ public class UI : MonoBehaviour {
 
     public void Map() {
         Show(map);
+        enteringScreen.Hide();
     }
 
     public void Confirm(Action action, string actionName) {
