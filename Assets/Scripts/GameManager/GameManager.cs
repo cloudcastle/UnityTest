@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    static bool firstAwake = true;
+
     static InstanceData instanceData = new InstanceData();
 
     public static Game game = new Game();
@@ -14,6 +16,11 @@ public class GameManager : MonoBehaviour
     public void Awake() {
         instance = this;
         Load();
+
+        if (firstAwake) {
+            firstAwake = false;
+            Play(game.currentLevel);
+        }
     }
 
     public Level CurrentLevel() {
@@ -43,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     public void Play(Level level) {
         Debug.Log(string.Format("Play {0}", level));
+        game.currentLevel = level;
+        Save();
         Application.LoadLevel(level.name);
     }
 

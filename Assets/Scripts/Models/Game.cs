@@ -11,6 +11,8 @@ public class Game
 
     public Settings settings = new Settings();
 
+    public Level currentLevel;
+
     public Game() {
         var click = new Level("Click");
         var mouseMove = new Level("MouseMove", depends: click);
@@ -90,6 +92,8 @@ public class Game
             blueDoor,
             blueCabin,
         };
+
+        currentLevel = click;
     }
 
     public List<Level> AvailableLevelsInUnlockOrder() {
