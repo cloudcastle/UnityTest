@@ -35,9 +35,11 @@ public class Game
         var tower = new Level("Tower", depends: hold);
 
         var gap = new Level("Gap", shift, space);
+        var spring = new Level("Spring", gap);
 
         var sixBoxes = new Level("Six boxes", gap);
         var climb = new Level("Climb", gap);
+        var snake = new Level("Snake", spring);
 
         var pass = new Level("Pass", wasd);
         var fit = new Level("Fit", pass);
@@ -75,10 +77,12 @@ public class Game
             // Jump Intro
             shift,
             gap,
+            spring,
 
             // Jump
             sixBoxes,
             climb,
+            snake,
 
             // Key Intro
             pass,

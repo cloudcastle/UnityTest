@@ -7,7 +7,7 @@ using System;
 [RequireComponent(typeof(CharacterController))]
 public class Move : MonoBehaviour
 {
-    Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
     public Vector3Tracker velocityTracker;
 
     public Vector3 readonlyVelocity;

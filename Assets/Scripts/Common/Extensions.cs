@@ -80,4 +80,12 @@ public static class Extensions
         }
         return result;
     }
+
+    public static Vector3 Change(this Vector3 v, float x = float.NaN, float y = float.NaN, float z = float.NaN) {
+        return new Vector3(
+            float.IsNaN(x) ? v.x : x,
+            float.IsNaN(y) ? v.y : y,
+            float.IsNaN(z) ? v.z : z
+        );
+    }
 }
