@@ -11,6 +11,7 @@ public class UI : MonoBehaviour {
     public PauseScreen pauseScreen;
     public ConfirmationScreen confirmationScreen;
     public EnteringScreen enteringScreen;
+    public OptionsScreen optionsScreen;
 
     public UIScreen CurrentScreen {
         get {
@@ -33,6 +34,7 @@ public class UI : MonoBehaviour {
         completionScreen.Hide();
         map.Hide();
         pauseScreen.Hide();
+        optionsScreen.Hide();
     }
 
     void Show(UIScreen screen) {
@@ -49,7 +51,7 @@ public class UI : MonoBehaviour {
         screenStack.Push(screen);
     }
 
-    void HideModal() {
+    public void HideModal() {
         CurrentScreen.Hide();
         screenStack.Pop();
         TimeManager.paused = screenStack.Count > 0;
@@ -62,6 +64,10 @@ public class UI : MonoBehaviour {
 
     public void PauseScreen() {
         Show(pauseScreen);
+    }
+
+    public void OptionsScreen() {
+        ShowModal(optionsScreen);
     }
 
     public void Map() {

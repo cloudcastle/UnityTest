@@ -9,6 +9,8 @@ public class Game
 
     public List<Level> completedLevels = new List<Level>();
 
+    public Settings settings = new Settings();
+
     public Game() {
         var click = new Level("Click");
         var mouseMove = new Level("MouseMove", depends: click);

@@ -15,6 +15,6 @@ public class Rotate : MonoBehaviour
         {
             return;
         }
-        transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0, Space.World);
+        transform.Rotate(0, Input.GetAxis("Mouse X") * GameManager.game.settings.mouseSpeed * rotateSpeed, 0, Space.World);
     }
 }

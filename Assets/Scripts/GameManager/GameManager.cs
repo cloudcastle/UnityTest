@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
         UI.instance.Map();
     }
 
+    public void Options() {
+        UI.instance.OptionsScreen();
+    }
+
     void Update() {
         readonlyGame = game;
         if (UI.instance.CurrentScreen == null) {
