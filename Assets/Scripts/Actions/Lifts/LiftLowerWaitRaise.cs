@@ -8,6 +8,9 @@ public class LiftLowerWaitRaise : Effect
     public float speed = 1;
     public float pause = 1;
 
+    public bool differentDownSpeed = false;
+    public float downSpeed = 1;
+
     public float heightDelta = 0.05f;
 
     float currentHeight = 0;
@@ -32,7 +35,8 @@ public class LiftLowerWaitRaise : Effect
 
     void MovingDown()
     {
-        float delta = speed * TimeManager.GameFixedDeltaTime();
+        var downSpeed = differentDownSpeed ? this.downSpeed : speed;
+        float delta = downSpeed * TimeManager.GameFixedDeltaTime();
         bool ready = false;
         if (delta > actualHeight() - currentHeight) {
             ready = true;

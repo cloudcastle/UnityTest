@@ -23,6 +23,7 @@ public class Game
         var shift = new Level("Shift", depends: raise);
         var order = new Level("Order", depends: shift);
         var precaution = new Level("Precaution", depends: order);
+        var f = new Level("F", depends: raise);
 
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);
@@ -64,6 +65,7 @@ public class Game
             raise,
             order,
             precaution,
+            f,
 
             // Lift
             stairs,
