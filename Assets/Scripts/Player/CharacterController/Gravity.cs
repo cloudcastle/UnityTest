@@ -18,7 +18,7 @@ public class Gravity : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (TimeManager.paused) {
+        if (TimeManager.Paused) {
             return;
         }
         if (!characterController.isGrounded) {

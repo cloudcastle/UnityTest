@@ -33,7 +33,7 @@ public class ThrowAbility : MonoBehaviour
     }
 
     void Update() {
-        if (TimeManager.paused) {
+        if (TimeManager.Paused) {
             return;
         }
         if (player.inventory.selected == null) {
@@ -48,7 +48,7 @@ public class ThrowAbility : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (TimeManager.paused) {
+        if (TimeManager.Paused) {
             currentForce = 0;
             throwing = false;
             return;

@@ -39,7 +39,7 @@ public class ChangeScale : MonoBehaviour
 
     void Update()
     {
-        if (TimeManager.paused)
+        if (TimeManager.Paused)
         {
             return;
         }

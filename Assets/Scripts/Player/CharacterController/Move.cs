@@ -8,6 +8,7 @@ using System;
 public class Move : MonoBehaviour
 {
     public Vector3 velocity = Vector3.zero;
+    public Vector3 angularVelocity = Vector3.zero;
     public Vector3Tracker velocityTracker;
 
     public Vector3 readonlyVelocity;
@@ -59,7 +60,7 @@ public class Move : MonoBehaviour
     void FixedUpdate() {
         readonlyVelocity = velocity;
         readonlyGrounded = controller.isGrounded;
-        if (TimeManager.paused)
+        if (TimeManager.Paused)
         {
             return;
         }
@@ -75,6 +76,8 @@ public class Move : MonoBehaviour
         }
 
         controller.Move(currentScale() * TotalVelocity() * Time.fixedDeltaTime);
+
+        transform.Rotate(Time.fixedDeltaTime * angularVelocity, Space.World);
     }
 
     float currentScale() {

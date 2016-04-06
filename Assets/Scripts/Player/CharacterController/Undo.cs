@@ -20,18 +20,18 @@ public class Undo : MonoBehaviour
         instance = this;
     }
 
-    void Update() {
-        if (TimeManager.paused) {
+    void FixedUpdate() {
+        if (TimeManager.Paused) {
             return;
         }
         if (Input.GetButton("Undo")) {
-            time -= Time.deltaTime;
+            time -= Time.fixedDeltaTime;
             if (time < 0) {
                 time = 0;
             }
             onUndo();
         } else {
-            time += Time.deltaTime;
+            time += Time.fixedDeltaTime;
             onTrack();
         }
         totalSampleCount = 0;

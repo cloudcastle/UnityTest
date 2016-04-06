@@ -5,15 +5,15 @@ public class Head : MonoBehaviour
 {
     public float verticalRotateSpeed = 6.0F;
 
-    float angle;
-
     void Update()
     {
-        if (TimeManager.paused)
+        if (TimeManager.Paused)
         {
             return;
         }
+        var angle = transform.localEulerAngles.x;
         angle -= Input.GetAxis("Mouse Y") * GameManager.game.settings.mouseSpeed * verticalRotateSpeed;
+        angle = Extensions.NormalizeAngle(angle);
         angle = Mathf.Clamp(angle, -90, 90);
         transform.localRotation = Quaternion.Euler(angle, 0, 0);
     }

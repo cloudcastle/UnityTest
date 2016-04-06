@@ -88,4 +88,18 @@ public static class Extensions
             float.IsNaN(z) ? v.z : z
         );
     }
+
+    public static float NormalizeAngle(float angle) {
+        while (angle < -180) {
+            angle += 360;
+        }
+        while (angle > 180) {
+            angle -= 360;
+        }
+        return angle;
+    }
+
+    public static Vector3 NormalizeAngles(Vector3 angles) {
+        return new Vector3(NormalizeAngle(angles.x), NormalizeAngle(angles.y), NormalizeAngle(angles.z));
+    }
 }

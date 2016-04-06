@@ -7,7 +7,7 @@ using System;
 public class Timestop : MonoBehaviour
 {
     void Update() {
-        if (TimeManager.paused) {
+        if (TimeManager.Paused) {
             return;
         }
         if (Input.GetButtonDown("Timestop")) {

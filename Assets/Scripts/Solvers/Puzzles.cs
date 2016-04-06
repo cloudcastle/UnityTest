@@ -275,6 +275,32 @@ namespace Solver
             return result;
         }
 
+        public static Puzzle Tower() {
+            var result = new Puzzle("Tower");
+
+            var leftBank = new Location("left bank");
+            var rightBank = new Location("right bank");
+            var farPit = new Location("far pit");
+            var nearPit = new Location("near pit");
+            var tower = new Location("tower");
+            var lowTower = new Location("low tower");
+            var exit = new Location("exit").WithExit();
+
+            farPit.LiftTo(leftBank).CallFrom(nearPit);
+            farPit.DirectLiftTo(rightBank);
+            nearPit.LiftTo(leftBank).CallFrom(farPit);
+            nearPit.DirectLiftTo(rightBank);
+            leftBank.DirectLiftTo(tower);
+            rightBank.DirectLiftTo(tower);
+            tower.LiftTo(exit).CallFrom(lowTower);
+
+            tower.JumpTo(lowTower);
+            lowTower.JumpTo(farPit);
+            lowTower.JumpTo(nearPit);
+
+            return result;
+        }
+
         public static List<Puzzle> Game() {
             return new List<Puzzle>()
             {
@@ -286,7 +312,8 @@ namespace Solver
                 Hold(),
                 Ascention(),
                 Launch(),
-                Temple()
+                Temple(),
+                Tower()
             };
         }
     }

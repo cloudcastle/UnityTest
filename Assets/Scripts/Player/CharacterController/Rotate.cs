@@ -11,7 +11,7 @@ public class Rotate : MonoBehaviour
 
     void Update()
     {
-        if (TimeManager.paused)
+        if (TimeManager.Paused)
         {
             return;
         }

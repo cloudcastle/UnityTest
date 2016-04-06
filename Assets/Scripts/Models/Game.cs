@@ -23,7 +23,7 @@ public class Game
         var shift = new Level("Shift", depends: raise);
         var order = new Level("Order", depends: shift);
         var precaution = new Level("Precaution", depends: order);
-        var f = new Level("F", depends: raise);
+        var f = new Level("F", depends: shift);
 
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);
@@ -37,6 +37,7 @@ public class Game
 
         var gap = new Level("Gap", shift, space);
         var spring = new Level("Spring", gap);
+        var z = new Level("Z", gap);
 
         var sixBoxes = new Level("Six boxes", gap);
         var climb = new Level("Climb", gap);
@@ -81,6 +82,7 @@ public class Game
             shift,
             gap,
             spring,
+            z,
 
             // Jump
             sixBoxes,

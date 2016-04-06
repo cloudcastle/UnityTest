@@ -213,6 +213,8 @@ MonoBehaviour:
   height: 4
   speed: 8
   pause: 3
+  differentDownSpeed: 0
+  downSpeed: 1
   heightDelta: .0500000007
 --- !u!1 &124080244
 GameObject:
@@ -607,6 +609,12 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &238498845 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11471404, guid: b8029dcee39cc12488df9a88f46ba86f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1222621631}
+  m_Script: {fileID: 11500000, guid: cbb0875d06885ba4999bd04409a45193, type: 3}
 --- !u!1 &266525628
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,7 +642,7 @@ Transform:
   m_Children:
   - {fileID: 40808581}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!21 &281904485
 Material:
   serializedVersion: 6
@@ -1536,6 +1544,7 @@ GameObject:
   - 33: {fileID: 668319369}
   - 65: {fileID: 668319368}
   - 23: {fileID: 668319367}
+  - 114: {fileID: 668319370}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1598,6 +1607,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 668319365}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &668319370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 668319365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc9906152a517f43b16eccf1ce171bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  currentAngularVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &689233569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,12 +2623,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 488808, guid: b8029dcee39cc12488df9a88f46ba86f, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11414052, guid: b8029dcee39cc12488df9a88f46ba86f, type: 2}
-      propertyPath: inventoryCamera
+    - target: {fileID: 11461146, guid: b8029dcee39cc12488df9a88f46ba86f, type: 2}
+      propertyPath: move
       value: 
-      objectReference: {fileID: 1499224518}
+      objectReference: {fileID: 238498845}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b8029dcee39cc12488df9a88f46ba86f, type: 2}
   m_IsPrefabParent: 0
@@ -2927,6 +2949,7 @@ GameObject:
   - 65: {fileID: 1442125719}
   - 23: {fileID: 1442125718}
   - 114: {fileID: 1442125717}
+  - 114: {fileID: 1442125721}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3005,6 +3028,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1442125715}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1442125721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1442125715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc9906152a517f43b16eccf1ce171bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  currentAngularVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1458839301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,6 +3052,7 @@ GameObject:
   - 33: {fileID: 1458839305}
   - 65: {fileID: 1458839304}
   - 23: {fileID: 1458839303}
+  - 114: {fileID: 1458839306}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3078,6 +3115,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1458839301}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1458839306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1458839301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc9906152a517f43b16eccf1ce171bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentVelocity: {x: 0, y: 0, z: 0}
+  currentAngularVelocity: {x: 0, y: 0, z: 0}
 --- !u!21 &1483654883
 Material:
   serializedVersion: 6
@@ -3214,10 +3264,6 @@ Material:
         first:
           name: _Color
         second: {r: 1, g: 0, b: 0, a: 0}
---- !u!4 &1499224518 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 496642, guid: d0f0214cf048b8d4783fb0e7d3e91058, type: 2}
-  m_PrefabInternal: {fileID: 1912816901}
 --- !u!1 &1549512463
 GameObject:
   m_ObjectHideFlags: 0

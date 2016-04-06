@@ -40,21 +40,21 @@ public class UI : MonoBehaviour {
     void Show(UIScreen screen) {
         HideAllUIScreens();
         screen.Show();
-        TimeManager.paused = true;
+        TimeManager.Paused = true;
         screenStack.Clear();
         screenStack.Push(screen);
     }
 
     void ShowModal(UIScreen screen) {
         screen.Show();
-        TimeManager.paused = true;
+        TimeManager.Paused = true;
         screenStack.Push(screen);
     }
 
     public void HideModal() {
         CurrentScreen.Hide();
         screenStack.Pop();
-        TimeManager.paused = screenStack.Count > 0;
+        TimeManager.Paused = screenStack.Count > 0;
     }
 
     public void CompletionScreen() {
@@ -92,7 +92,7 @@ public class UI : MonoBehaviour {
     public void Game() {
         HideAllUIScreens();
         screenStack.Clear();
-        TimeManager.paused = false;
+        TimeManager.Paused = false;
     }
 
     public void ShowForce(float force) {

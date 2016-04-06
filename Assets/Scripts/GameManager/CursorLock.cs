@@ -6,7 +6,7 @@ public class CursorLock : MonoBehaviour
 {
     bool lockCursor {
         get {
-            return !TimeManager.paused;
+            return !TimeManager.Paused;
         }
     }
 

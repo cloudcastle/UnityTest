@@ -23,7 +23,7 @@ public class DynamicText : UIScreen
         for (int i = 0; i < 100; i++) {
             var next = result;
             next = next.Replace("#{lastUnlockedLevel}", GameManager.game.AvailableLevelsInUnlockOrder().Last().name);
-            next = next.Replace("#{currentLevel}", GameManager.instance.CurrentLevel().name);
+            next = next.Replace("#{currentLevel}", GameManager.instance.CurrentLevel() == null ? Application.loadedLevelName : GameManager.instance.CurrentLevel().name);
             if (next == result) {
                 break;
             }

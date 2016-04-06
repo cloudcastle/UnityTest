@@ -16,7 +16,7 @@ public class Rewind : MonoBehaviour
     }
 
     void Update() {
-        if (TimeManager.paused) {
+        if (TimeManager.Paused) {
             return;
         }
         Time.timeScale = (On() ? timeMultiplyer : 1);

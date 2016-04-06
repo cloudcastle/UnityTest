@@ -17,7 +17,7 @@ public class Eye : MonoBehaviour
 
     void Update()
     {
-        if (TimeManager.paused)
+        if (TimeManager.Paused)
         {
             return;
         }

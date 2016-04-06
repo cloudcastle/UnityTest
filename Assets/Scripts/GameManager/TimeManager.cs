@@ -4,18 +4,30 @@ using System.Collections;
 public class TimeManager : MonoBehaviour
 {
     public bool pauseOnStart;
-    public static bool paused = true;
+    static bool paused;
+    public static bool Paused {
+        get {
+            return paused;
+        }
+        set {
+            if (value) {
+                Pause();
+            } else {
+                Unpause();
+            }
+        }
+    }
     public static bool timestopped = false;
 
     public float time;
 
-    void Pause()
+    static void Pause()
     {
         paused = true;
         Time.timeScale = 0;
     }
 
-    void Unpause()
+    static void Unpause()
     {
         paused = false;
         Time.timeScale = 1;
@@ -29,9 +41,9 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    void SwitchPause()
+    static void SwitchPause()
     {
-        if (paused)
+        if (Paused)
         {
             Unpause();
         }
@@ -47,7 +59,7 @@ public class TimeManager : MonoBehaviour
     }
 
     void Awake() {
-        paused = pauseOnStart;
+        Paused = pauseOnStart;
         timestopped = false;
     }
 }

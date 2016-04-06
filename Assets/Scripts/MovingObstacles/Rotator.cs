@@ -5,8 +5,11 @@ public class Rotator : MonoBehaviour
 {
     public Vector3 rotationSpeed;
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Rotate(Time.deltaTime * rotationSpeed);
+        if (TimeManager.Paused) {
+            return;
+        }
+        transform.Rotate(TimeManager.GameFixedDeltaTime() * rotationSpeed);
     }
 }

@@ -13,7 +13,7 @@ public class CharacterControllerHitWatcher : MonoBehaviour
             return;
         }
         if (hit.gameObject.name != "Ground") {
-            Debug.Log("Hit: " + hit.gameObject);
+            //Debug.Log("Hit: " + hit.gameObject);
         }
     }
 }

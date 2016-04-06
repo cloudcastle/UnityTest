@@ -21,6 +21,7 @@ namespace Solver
                 lift = new Lift();
             }
             edgesFrom.Add(new Edge(this, target, lift));
+            lift.name = string.Format("{0} - {1}", this, target);
             if (jumpBack) {
                 target.edgesFrom.Add(new Edge(target, this));
             }
@@ -32,6 +33,7 @@ namespace Solver
                 lift = new Lift();
             }
             edgesFrom.Add(new Edge(this, target, lift));
+            lift.name = string.Format("jump lift {0} - {1}", this, target);
             if (back) {
                 target.edgesFrom.Add(new Edge(target, this, lift));
             }
@@ -41,6 +43,7 @@ namespace Solver
         public Lift DirectLiftTo(Location target) {
             Lift lift = new Lift().CallFrom(this);
             edgesFrom.Add(new Edge(this, target, lift));
+            lift.name = string.Format("{0} - {1}", this, target);
             target.edgesFrom.Add(new Edge(target, this));
             return lift;
         }
