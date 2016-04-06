@@ -77,6 +77,7 @@ public class Move : MonoBehaviour
 
         controller.Move(currentScale() * TotalVelocity() * Time.fixedDeltaTime);
 
+        angularVelocity.x = angularVelocity.z = 0;
         transform.Rotate(Time.fixedDeltaTime * angularVelocity, Space.World);
     }
 
