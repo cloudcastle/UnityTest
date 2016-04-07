@@ -21,7 +21,7 @@ public class TimeManager : MonoBehaviour
     }
     public static bool timestopped = false;
 
-    float gameTime;
+    public float gameTime;
 
     public static float GameTime {
         get { return instance.gameTime; }

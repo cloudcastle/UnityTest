@@ -53,6 +53,7 @@ public class Game
         var ride = new Level("Ride", space);
         var fly = new Level("Ride", ride);
         var phase = new Level("Ride", ride);
+        var malapropos = new Level("Malapropos", phase);
 
         // Controls
         var r = new Level("R", fall);
