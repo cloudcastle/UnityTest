@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TimeManager : MonoBehaviour
 {
+    public static TimeManager instance;
+
     public bool pauseOnStart;
     static bool paused;
     public static bool Paused {
@@ -19,7 +21,11 @@ public class TimeManager : MonoBehaviour
     }
     public static bool timestopped = false;
 
-    public float time;
+    float gameTime;
+
+    public static float GameTime {
+        get { return instance.gameTime; }
+    }
 
     public static float loosedFixedDeltaTime;
 
@@ -35,11 +41,13 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public static float GameFixedDeltaTime() {
-        if (timestopped) {
-            return 0;
-        } else {
-            return Time.fixedDeltaTime;
+    public static float GameFixedDeltaTime {
+        get {
+            if (timestopped) {
+                return 0;
+            } else {
+                return Time.fixedDeltaTime;
+            }
         }
     }
 
@@ -55,17 +63,18 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        time = Time.time;
+        gameTime += Time.fixedDeltaTime;
     }
 
     void Awake() {
+        instance = this;
         Paused = pauseOnStart;
         timestopped = false;
     }
 
-    void FixedUpdate() {
-
+    void Start() {
+        new FloatTracker((x) => gameTime = x, () => gameTime);
     }
 }

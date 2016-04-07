@@ -12,6 +12,7 @@ public class Level
     public Level(string name, params Level[] depends) {
         this.name = name;
         dependencies = depends.ToList();
+        Game.current.levels.Add(this);
     }
 
     public bool Unlocked() {

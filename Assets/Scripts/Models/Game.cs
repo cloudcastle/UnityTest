@@ -6,7 +6,9 @@ using UnityEngine;
 [Serializable]
 public class Game
 {
-    public readonly List<Level> levels;
+    public static Game current;
+
+    public readonly List<Level> levels = new List<Level>();
 
     public List<Level> completedLevels = new List<Level>();
 
@@ -15,6 +17,7 @@ public class Game
     public Level currentLevel;
 
     public Game() {
+        current = this;
         var click = new Level("Click");
         var mouseMove = new Level("MouseMove", depends: click);
         var wasd = new Level("WASD", depends: mouseMove);
@@ -39,8 +42,12 @@ public class Game
         var gap = new Level("Gap", shift, space);
         var spring = new Level("Spring", gap);
         var fall = new Level("Fall", wasd);
+
+        var ride = new Level("Ride", space);
+
         var r = new Level("R", fall);
-        var z = new Level("Z", r);
+        var z = new Level("Z", r, ride);
+
 
         var sixBoxes = new Level("Six boxes", gap);
         var climb = new Level("Climb", gap);
@@ -56,57 +63,6 @@ public class Game
         var blueDoor = new Level("Blue door", qeMouseWheel);
         var blueCabin = new Level("Blue cabin", qeMouseWheel);
         var pair = new Level("Pair", qeMouseWheel);
-
-     
-        levels = new List<Level>() {
-            // Intro
-            click,
-            mouseMove,
-            wasd,
-            space,
-
-            // Lift Intro
-            raise,
-            order,
-            precaution,
-            f,
-
-            // Lift
-            stairs,
-            twoPits,
-            hold,
-            ascention,
-            launch,
-            temple,
-            underground,
-            tower,
-
-            // Jump Intro
-            shift,
-            gap,
-            spring,
-            fall,
-            r,
-            z,
-
-            // Jump
-            sixBoxes,
-            climb,
-            snake,
-
-            // Key Intro
-            pass,
-            fit,
-            cleanHands,
-            repick,
-            rightMouseButton,
-            qeMouseWheel,
-
-            // Key
-            blueDoor,
-            blueCabin,
-            pair
-        };
 
         currentLevel = click;
 
