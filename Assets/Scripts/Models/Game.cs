@@ -32,7 +32,6 @@ public class Game
         var precaution = new Level("Precaution", depends: order);
         var f = new Level("F", depends: shift);
 
-
         // Lifts
         var stairs = new Level("Stairs", depends: precaution);
         var twoPits = new Level("Two pits", depends: precaution);
@@ -49,19 +48,21 @@ public class Game
         var spring = new Level("Spring", gap);
         var fall = new Level("Fall", wasd);
 
-        // Moving Surfaces
+        // Moving Surfaces Intro
         var ride = new Level("Ride", space);
-        var fly = new Level("Ride", ride);
-        var phase = new Level("Ride", ride);
-        var malapropos = new Level("Malapropos", phase);
 
         // Controls
         var r = new Level("R", fall);
         var z = new Level("Z", r, ride);
 
+        // Moving Surfaces
+        var fly = new Level("Fly", z);
+        var phase = new Level("Phase", z);
+        var malapropos = new Level("Malapropos", phase);
+
         // Jumps
-        var sixBoxes = new Level("Six boxes", gap);
-        var climb = new Level("Climb", gap);
+        var sixBoxes = new Level("Six boxes", gap, z);
+        var climb = new Level("Climb", gap, z);
         var snake = new Level("Snake", spring);
 
         // Keys intro
@@ -78,14 +79,7 @@ public class Game
         var pair = new Level("Pair", qeMouseWheel);
 
         currentLevel = click;
-
-        if (!CheckGameCorrectness()) {
-            Debug.LogError("Game is incorrect!");
-        }
-    }
-
-    private bool CheckGameCorrectness() {
-        return levels.All(level => level.dependencies.All(dependency => levels.Contains(dependency)));
+        current = null;
     }
 
     public List<Level> AvailableLevelsInUnlockOrder() {
