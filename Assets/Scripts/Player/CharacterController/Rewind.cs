@@ -10,9 +10,16 @@ public class Rewind : MonoBehaviour
 
     const float defaultFixedDeltaTime = 0.02f;
 
-
     public bool On() {
         return Input.GetButton("Rewind");
+    }
+
+    void Awake() {
+        RefreshDeltaTime();
+    }
+
+    void RefreshDeltaTime() {
+        TimeManager.loosedFixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
     }
 
     void Update() {
@@ -20,6 +27,7 @@ public class Rewind : MonoBehaviour
             return;
         }
         Time.timeScale = (On() ? timeMultiplyer : 1);
-        Time.fixedDeltaTime = defaultFixedDeltaTime / Time.timeScale;
+        //Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+        RefreshDeltaTime();
     }
 }

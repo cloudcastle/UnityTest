@@ -21,6 +21,8 @@ public class TimeManager : MonoBehaviour
 
     public float time;
 
+    public static float loosedFixedDeltaTime;
+
     static void Pause()
     {
         paused = true;
@@ -61,5 +63,9 @@ public class TimeManager : MonoBehaviour
     void Awake() {
         Paused = pauseOnStart;
         timestopped = false;
+    }
+
+    void FixedUpdate() {
+
     }
 }
