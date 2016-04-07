@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnityEngine;
 
 [Serializable]
 public class Game
@@ -37,7 +38,9 @@ public class Game
 
         var gap = new Level("Gap", shift, space);
         var spring = new Level("Spring", gap);
-        var z = new Level("Z", gap);
+        var fall = new Level("Fall", wasd);
+        var r = new Level("R", fall);
+        var z = new Level("Z", r);
 
         var sixBoxes = new Level("Six boxes", gap);
         var climb = new Level("Climb", gap);
@@ -82,6 +85,8 @@ public class Game
             shift,
             gap,
             spring,
+            fall,
+            r,
             z,
 
             // Jump
@@ -104,6 +109,14 @@ public class Game
         };
 
         currentLevel = click;
+
+        if (!CheckGameCorrectness()) {
+            Debug.LogError("Game is incorrect!");
+        }
+    }
+
+    private bool CheckGameCorrectness() {
+        return levels.All(level => level.dependencies.All(dependency => levels.Contains(dependency)));
     }
 
     public List<Level> AvailableLevelsInUnlockOrder() {

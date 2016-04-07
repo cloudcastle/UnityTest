@@ -28,6 +28,7 @@ public class Cheats : MonoBehaviour
         }
         if (on && Input.GetKeyDown(KeyCode.F2)) {
             GameManager.game = new Game();
+            GameManager.instance.PlayLastUnlocked();
         }
     }
 }
