@@ -23,6 +23,6 @@ public class Slider : MonoBehaviour {
     Vector3 PositionByTime(float time) {
         Vector3 center = (a.transform.position + z.transform.position) / 2;
         Vector3 radius = (a.transform.position - z.transform.position) / 2; 
-        return center + radius * Mathf.Sin((time + phase) / period * 2 * Mathf.PI);
+        return center + radius * Mathf.Cos((time + phase) / period * 2 * Mathf.PI);
     }
 }
