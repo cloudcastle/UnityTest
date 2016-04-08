@@ -25,10 +25,6 @@ public class ActivatorHighlight : MonoBehaviour
         return Player.current.activator.current == activatable;
     }
 
-    bool OutOfRange() {
-        return Player.current.activator.outOfRange == activatable;
-    }
-
     bool Ready() {
         return activatable.Ready();
     }
