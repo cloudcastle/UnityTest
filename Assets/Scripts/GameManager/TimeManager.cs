@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RSG;
 
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance;
+    public static PromiseTimer promiseTimer = new PromiseTimer();
 
     public bool pauseOnStart;
     static bool paused;
@@ -66,15 +68,22 @@ public class TimeManager : MonoBehaviour
     void FixedUpdate()
     {
         gameTime += Time.fixedDeltaTime;
+        promiseTimer.Update(Time.fixedDeltaTime);
     }
 
     void Awake() {
         instance = this;
         Paused = pauseOnStart;
         timestopped = false;
+
+        promiseTimer = new PromiseTimer();
     }
 
     void Start() {
         new FloatTracker((x) => gameTime = x, () => gameTime);
+    }
+
+    public static IPromise WaitFor(float time) {
+        return promiseTimer.WaitFor(time);
     }
 }

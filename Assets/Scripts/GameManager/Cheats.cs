@@ -26,9 +26,14 @@ public class Cheats : MonoBehaviour
         if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.F5)) {
             Enable(!on);
         }
-        if (on && Input.GetKeyDown(KeyCode.F2)) {
-            GameManager.game = new Game();
-            GameManager.instance.PlayLastUnlocked();
+        if (on) {
+            if (Input.GetKeyDown(KeyCode.F2)) {
+                GameManager.game = new Game();
+                GameManager.instance.PlayLastUnlocked();
+            }
+            if (Input.GetKeyDown(KeyCode.F10)) {
+                GameManager.instance.CompleteLevel();
+            }
         }
     }
 }

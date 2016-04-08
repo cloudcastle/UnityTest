@@ -15,6 +15,8 @@ public class ThrowAbility : MonoBehaviour
 
     public Player player;
 
+    public float throwDelay = 0.04f;
+
     public void UpdateForce() {
         UI.instance.ShowForce(currentForce / maxForce);
     }
@@ -22,14 +24,16 @@ public class ThrowAbility : MonoBehaviour
     public void Throw() {
         var target = player.inventory.selected;
         player.inventory.Throw(target);
-        target.transform.position = player.eye.transform.position + player.eye.transform.forward * initialDistance;
-        target.GetComponent<Rigidbody>().AddForce(currentForce * player.eye.transform.forward);
 
-        Debug.Log(String.Format("Thrown {0} at force {1}", target, currentForce));
+        TimeManager.WaitFor(throwDelay).Then(() => {
+            target.transform.position = player.eye.transform.position + player.eye.transform.forward * initialDistance;
+            target.GetComponent<Rigidbody>().AddForce(currentForce * player.eye.transform.forward);
 
-        currentForce = 0;
-        throwing = false;
-        UpdateForce();
+            Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position));
+            currentForce = 0;
+            throwing = false;
+            UpdateForce();
+        });
     }
 
     void Update() {
