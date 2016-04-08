@@ -12,13 +12,15 @@ public class Activator : MonoBehaviour
     public Activatable current;
     public float currentBiasAngle;
 
+    public float maxBiasAngle = 60f;
+
     const int MAX_SPHERE_CAST_RESULTS = 100;
     Collider[] sphereCastResults = new Collider[MAX_SPHERE_CAST_RESULTS];
     int activatableLayerMask;
     RaycastHit hit;
 
     void Awake() {
-         activatableLayerMask = LayerMask.NameToLayer("Ghost") | LayerMask.NameToLayer("Item");
+        activatableLayerMask = LayerMask.GetMask("Ghost", "Item");
     }
 
     void Reset() {
@@ -34,17 +36,20 @@ public class Activator : MonoBehaviour
     }
 
     private void LocateCurrentActivatable() {
-        int cnt = Physics.OverlapSphereNonAlloc(transform.position, maxDistance, sphereCastResults);
+        int cnt = Physics.OverlapSphereNonAlloc(transform.position, maxDistance, sphereCastResults, activatableLayerMask);
         if (cnt >= MAX_SPHERE_CAST_RESULTS) {
             Debug.LogError("MAX_SPHERE_CAST_RESULTS exceeded");
         }
         for (int i = 0; i < cnt; i++) {
             var radiusVector = sphereCastResults[i].transform.position - transform.position;
-            if (Vector3.Dot(radiusVector, transform.forward) > 0) {
+            var biasAngle =  Vector3.Angle(transform.forward, radiusVector);
+            if (biasAngle < maxBiasAngle) {
                 Physics.Raycast(transform.position, radiusVector, out hit);
                 if (hit.collider.gameObject == sphereCastResults[i].gameObject && hit.distance < maxDistance) {
                     var activatable = hit.collider.GetComponent<Activatable>();
-                    Check(activatable, Vector3.Angle(transform.forward, radiusVector));
+                    if (activatable != null) {
+                        Check(activatable, biasAngle);
+                    }
                 }
             }
         }
