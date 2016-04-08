@@ -41,6 +41,11 @@ public class ThrowAbility : MonoBehaviour
             return;
         }
         if (player.inventory.selected == null) {
+            if (throwing) {
+                currentForce = 0;
+                throwing = false;
+                UpdateForce();
+            }
             return;
         } 
         if (throwing && Input.GetButtonUp("Throw")) {

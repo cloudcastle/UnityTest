@@ -52,9 +52,14 @@ public class Inventory : MonoBehaviour
         onChanged();
     }
 
-    public void DropAll() {
+    void ThrowAt(Item item, Vector3 position) {
+        Throw(item);
+        item.transform.position = position;
+    }
+
+    public void DropAll(Vector3 position) {
         while (items.Count > 0) {
-            Throw(selected);
+            ThrowAt(selected, position);
         }
     }
 

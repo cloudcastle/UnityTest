@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public Activator activator;
     public Eye eye;
     public Inventory inventory;
+    public LastPositionKeeper lastPositionKeeper;
 
     void Awake()
     {
