@@ -6,6 +6,9 @@ public abstract class Activatable : MonoBehaviour
     public float maxDistance = 0;
     public bool useActivatorMaxDistance = true;
 
+    // biased activation only available withn activator max distance
+    public bool allowBiasedActivation = true;
+
     public virtual bool Ready() {
         return true;
     }

@@ -10,6 +10,9 @@ public class Activator : MonoBehaviour
     public Activatable current;
     public Activatable outOfRange;
 
+    const int MAX_SPHERE_CAST_RESULTS = 100;
+    Collider[] sphereCastResults = new Collider[MAX_SPHERE_CAST_RESULTS];
+
     public Cooldown stun = new Cooldown(0.2f);
 
     void Reset() {
@@ -25,6 +28,15 @@ public class Activator : MonoBehaviour
         }
     }
 
+    private void LocateCurrentActivatable() {
+        if (player.eye.underSight != null) {
+            var target = player.eye.underSight.GetComponent<Activatable>();
+            if (target != null) {
+                Check(target);
+            }
+        }
+    }
+
     void Update()
     {
         if (TimeManager.Paused)
@@ -35,12 +47,7 @@ public class Activator : MonoBehaviour
         if (stun.OnCooldown()) {
             return;
         }
-        if (player.eye.underSight != null) {
-            var target = player.eye.underSight.GetComponent<Activatable>();
-            if (target != null) {
-                Check(target);
-            }
-        }
+        LocateCurrentActivatable();
         if (Input.GetButtonDown("Activate")) {
             if (current != null) {
                 current.Activate(this);
