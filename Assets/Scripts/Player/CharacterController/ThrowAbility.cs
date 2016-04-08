@@ -43,7 +43,7 @@ public class ThrowAbility : MonoBehaviour
 
         TimeManager.WaitFor(throwDelay).Then(() => {
             PushItem(target, throwForce);
-            Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position));
+            Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
             Reset();
         });
         Reset();

@@ -102,4 +102,8 @@ public static class Extensions
     public static Vector3 NormalizeAngles(Vector3 angles) {
         return new Vector3(NormalizeAngle(angles.x), NormalizeAngle(angles.y), NormalizeAngle(angles.z));
     }
+
+    public static string ExtToString(this Vector3 v) {
+        return String.Format("({0:#.####}, {1:#.####}, {2:#.####})", v.x, v.y, v.z);
+    }
 }

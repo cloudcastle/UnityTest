@@ -55,6 +55,7 @@ public class Inventory : MonoBehaviour
     void ThrowAt(Item item, Vector3 position) {
         Throw(item);
         item.transform.position = position;
+        Debug.Log(String.Format("{0} thrown at {1}", item, position.ExtToString()));
     }
 
     public void DropAll(Vector3 position) {
