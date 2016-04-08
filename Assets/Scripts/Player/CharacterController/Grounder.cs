@@ -20,8 +20,8 @@ public class Grounder : MonoBehaviour
             return;
         }
         if (hit.normal.y > 0.7f) {
-            Vector3 normalVelocity = Vector3.Project(move.velocity, hit.normal);
-            Vector3 tangentialVelocity = Vector3.ProjectOnPlane(move.velocity, hit.normal);
+            Vector3 normalVelocity = Vector3.Project(move.velocity, Vector3.up);
+            Vector3 tangentialVelocity = Vector3.ProjectOnPlane(move.velocity, Vector3.up);
 
             var movingSurface = hit.gameObject.GetComponentInParent<MovingSurface>();
             if (movingSurface == null) {
@@ -40,6 +40,8 @@ public class Grounder : MonoBehaviour
                 Vector3 hitPointVelocity = movingSurface.currentVelocity + rotationVelocity;
 
                 tangentialVelocity = hitPointVelocity;
+
+                //Debug.Log("Final tangentialVelocity: " + tangentialVelocity);
             }
             
             move.velocity = normalVelocity + tangentialVelocity;
