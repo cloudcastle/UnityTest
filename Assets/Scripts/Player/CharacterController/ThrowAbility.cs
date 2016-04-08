@@ -21,19 +21,32 @@ public class ThrowAbility : MonoBehaviour
         UI.instance.ShowForce(currentForce / maxForce);
     }
 
+    void Reset() {
+        if (!throwing) {
+            return;
+        }
+        currentForce = 0;
+        throwing = false;
+        UpdateForce();
+    }
+
+    void PushItem(Item item, float force) {
+        item.transform.position = player.eye.transform.position + player.eye.transform.forward * initialDistance;
+        item.GetComponent<Rigidbody>().AddForce(force * player.eye.transform.forward);
+    }
+
     public void Throw() {
         var target = player.inventory.selected;
         player.inventory.Throw(target);
 
-        TimeManager.WaitFor(throwDelay).Then(() => {
-            target.transform.position = player.eye.transform.position + player.eye.transform.forward * initialDistance;
-            target.GetComponent<Rigidbody>().AddForce(currentForce * player.eye.transform.forward);
+        var throwForce = currentForce;
 
+        TimeManager.WaitFor(throwDelay).Then(() => {
+            PushItem(target, throwForce);
             Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position));
-            currentForce = 0;
-            throwing = false;
-            UpdateForce();
+            Reset();
         });
+        Reset();
     }
 
     void Update() {
@@ -41,11 +54,7 @@ public class ThrowAbility : MonoBehaviour
             return;
         }
         if (player.inventory.selected == null) {
-            if (throwing) {
-                currentForce = 0;
-                throwing = false;
-                UpdateForce();
-            }
+            Reset();
             return;
         } 
         if (throwing && Input.GetButtonUp("Throw")) {
@@ -58,8 +67,7 @@ public class ThrowAbility : MonoBehaviour
 
     void FixedUpdate() {
         if (TimeManager.Paused) {
-            currentForce = 0;
-            throwing = false;
+            Reset();
             return;
         }
         if (player.inventory.selected == null) {
