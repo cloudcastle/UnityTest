@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     }
 
     public Level CurrentLevel() {
-        return game.levels.FirstOrDefault(level => level.name == Application.loadedLevelName);
+        return game.levels.FirstOrDefault(level => level.name == SceneManager.GetActiveScene().name);
     }
 
     public void CompleteLevel() {
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(string.Format("Play {0}", level));
         game.currentLevel = level;
         Save();
-        Application.LoadLevel(level.name);
+        SceneManager.LoadScene(level.name);
     }
 
     public void PlayLastUnlocked() {

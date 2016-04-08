@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DynamicText : UIScreen
 {
@@ -23,7 +24,7 @@ public class DynamicText : UIScreen
         for (int i = 0; i < 100; i++) {
             var next = result;
             next = next.Replace("#{lastUnlockedLevel}", GameManager.game.AvailableLevelsInUnlockOrder().Last().name);
-            next = next.Replace("#{currentLevel}", GameManager.instance.CurrentLevel() == null ? Application.loadedLevelName : GameManager.instance.CurrentLevel().name);
+            next = next.Replace("#{currentLevel}", GameManager.instance.CurrentLevel() == null ? SceneManager.GetActiveScene().name : GameManager.instance.CurrentLevel().name);
             if (next == result) {
                 break;
             }
