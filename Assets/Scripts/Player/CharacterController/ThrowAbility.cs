@@ -38,10 +38,12 @@ public class ThrowAbility : MonoBehaviour
     public void Throw() {
         var target = player.inventory.selected;
         player.inventory.Throw(target);
+        target.gameObject.SetActive(false);
 
         var throwForce = currentForce;
 
         TimeManager.WaitFor(throwDelay).Then(() => {
+            target.gameObject.SetActive(true);
             PushItem(target, throwForce);
             Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
             Reset();
