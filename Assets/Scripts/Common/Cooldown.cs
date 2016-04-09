@@ -15,7 +15,7 @@ public class Cooldown
     }
 
     public bool Ready() {
-        return Time.time > ReadySince();
+        return TimeManager.GameTime > ReadySince();
     }
 
     public bool OnCooldown() {
@@ -23,7 +23,7 @@ public class Cooldown
     }
 
     public void StartCooldown() {
-        onCDfrom = Time.time;
+        onCDfrom = TimeManager.GameTime;
     }
 
     private float ReadySince() {

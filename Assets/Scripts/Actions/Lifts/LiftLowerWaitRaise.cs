@@ -36,7 +36,7 @@ public class LiftLowerWaitRaise : Effect
     void MovingDown()
     {
         var downSpeed = differentDownSpeed ? this.downSpeed : speed;
-        float delta = downSpeed * TimeManager.GameFixedDeltaTime;
+        float delta = downSpeed * TimeManager.StoppableFixedDeltaTime;
         bool ready = false;
         if (delta > actualHeight() - currentHeight) {
             ready = true;
@@ -53,7 +53,7 @@ public class LiftLowerWaitRaise : Effect
 
     void Waiting()
     {
-        waitingDuration -= TimeManager.GameFixedDeltaTime;
+        waitingDuration -= TimeManager.StoppableFixedDeltaTime;
         if (waitingDuration < 0)
         {
             state = MovingUp;
@@ -62,7 +62,7 @@ public class LiftLowerWaitRaise : Effect
 
     void MovingUp()
     {
-        float delta = Math.Min(currentHeight, speed * TimeManager.GameFixedDeltaTime);
+        float delta = Math.Min(currentHeight, speed * TimeManager.StoppableFixedDeltaTime);
         currentHeight -= delta;
         transform.Translate(Vector3.up * delta);
         if (Mathf.Abs(currentHeight - 0) < Mathf.Epsilon)

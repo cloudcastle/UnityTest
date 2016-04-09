@@ -10,8 +10,14 @@ public class TransformAnimator : MonoBehaviour
 
     public bool animating = false;
 
+    void Start() {
+        new ValueTracker<TimedValue<TransformState>>(v => previous = v, () => previous);
+        new ValueTracker<TimedValue<TransformState>>(v => target = v, () => target);
+        new BoolTracker(v => animating = v, () => animating);
+    }
+
     public float phase() {
-        return Mathf.Clamp((Time.time - previous.time) / (target.time - previous.time), 0,1);
+        return Mathf.Clamp((TimeManager.GameTime - previous.time) / (target.time - previous.time), 0, 1);
     }
 
     void FixedUpdate() {
@@ -25,7 +31,7 @@ public class TransformAnimator : MonoBehaviour
     }
 
     public void Animate(TimedValue<TransformState> target) {
-        this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localScale), Time.time);
+        this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localScale), TimeManager.GameTime);
         this.target = target;
         animating = true;
     }

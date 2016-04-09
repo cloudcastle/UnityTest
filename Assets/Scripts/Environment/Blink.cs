@@ -10,7 +10,7 @@ public class Blink : Highlight
     public float phase;
 
     protected virtual void Update() {
-        phase = (Time.time % period) / period;
+        phase = (Time.realtimeSinceStartup % period) / period;
         highlighted = phase < lightPart;
         Switch(highlighted);
     }

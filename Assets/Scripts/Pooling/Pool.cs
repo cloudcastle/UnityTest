@@ -45,6 +45,7 @@ public class Pool
 
     void ExpandPool() {
         GameObject instance = GameObject.Instantiate(sample);
+        instance.GetComponent<Poolable>().pool = this;
         pool.Add(instance);
     }
 }

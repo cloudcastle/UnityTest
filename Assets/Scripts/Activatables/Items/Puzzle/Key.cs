@@ -26,13 +26,11 @@ public class Key : Item
 
     public override void Pick(Player player) {
         base.Pick(player);
-        keyColor.doors.ForEach(door => door.OpenFor(player));
+        keyColor.Recalculate(player);
     }
 
     public override void Throw(Player thrower) {
         base.Throw(thrower);
-        if (!thrower.inventory.items.Any(item => item is Key && (item as Key).keyColor == this.keyColor)) {
-            keyColor.doors.ForEach(door => door.OpenFor(thrower, false));
-        }
+        keyColor.Recalculate(thrower);
     }
 }

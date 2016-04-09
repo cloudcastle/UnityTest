@@ -3,6 +3,8 @@ using System.Collections;
 
 public class OnLevelStart : AbstractTrigger
 {
+    public bool dropUndo = true;
+
     bool firstUpdate = true;
 
     void Update() {
@@ -11,5 +13,8 @@ public class OnLevelStart : AbstractTrigger
         }
         firstUpdate = false;
         effect.Run();
+        if (dropUndo) {
+            FindObjectOfType<Undo>().DropUndoData();
+        }
     }
 }

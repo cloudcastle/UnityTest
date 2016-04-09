@@ -15,11 +15,23 @@ public class InventorySlot : MonoBehaviour
 
     TransformAnimator transformAnimator;
 
+    public ItemTracker itemTracker;
+
     void Awake() {
         transformAnimator = GetComponent<TransformAnimator>();
     }
 
+    void Start() {
+        Debug.Log(string.Format("Start inventory slot {0}", GetInstanceID()));
+        itemTracker = new ItemTracker(setValue: (v) => item = v, getValue: () => item);
+        itemTracker.Init(null);
+    }
+
     public void Init(Inventory inventory, Item item) {
+        Debug.Log(string.Format("Init inventory slot {0}", GetInstanceID()));
+        if (this.inventory != inventory) {
+            inventory.onChanged += OnInventoryChanged;
+        }
         this.inventory = inventory;
         this.item = item;
         item.inventorySlot = this;
@@ -32,8 +44,6 @@ public class InventorySlot : MonoBehaviour
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = true;
         }
-
-        inventory.onChanged += OnInventoryChanged;
 
         transform.localPosition = TargetPosition();
         transform.localScale = TargetScale();
@@ -49,10 +59,12 @@ public class InventorySlot : MonoBehaviour
     }
 
     void OnInventoryChanged() {
-        if (inventory.items.Contains(item)) {
-            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), Time.time + animationDelay));
-        } else {
-            Free();
+        if (item != null) {
+            if (inventory.items.Contains(item)) {
+                transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), TimeManager.GameTime + animationDelay));
+            } else {
+                Free();
+            }
         }
     }
 
@@ -64,7 +76,8 @@ public class InventorySlot : MonoBehaviour
             item.GetComponent<Rigidbody>().isKinematic = false;
         }
 
-        inventory.onChanged -= OnInventoryChanged;
+        item = null;
+
         GetComponent<Poolable>().ReturnToPool();
     }
 }

@@ -11,6 +11,10 @@ GameObject:
   - 114: {fileID: 11446918}
   - 114: {fileID: 11407932}
   - 114: {fileID: 11402854}
+  - 114: {fileID: 11450122}
+  - 114: {fileID: 11405502}
+  - 114: {fileID: 11411738}
+  - 114: {fileID: 11415686}
   m_Layer: 0
   m_Name: Inventory Slot
   m_TagString: Untagged
@@ -41,6 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6432a4be78b70294da1556b0e306f24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animating: 0
+--- !u!114 &11405502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177ebb8af9a9b048ad5c05010947ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!114 &11407932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,6 +73,32 @@ MonoBehaviour:
   pool:
     sample: {fileID: 164770}
     pool: []
+--- !u!114 &11411738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ddaeb43b9639d479eea25b7723aad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 1
+  initialValue: 0
+--- !u!114 &11415686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e44b23037e04dd448e87d8ea784dede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!114 &11446918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,8 +110,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa244fe62768ce4a8d714ca34a11585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedZoomMultiplier: 1.5
+  baseZoom: 2
   inventory: {fileID: 0}
   item: {fileID: 0}
+  itemTracker:
+    sampleCount: 0
+--- !u!114 &11450122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f246f4c4d99dde447837a805769e9b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 1
+  initialValue: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

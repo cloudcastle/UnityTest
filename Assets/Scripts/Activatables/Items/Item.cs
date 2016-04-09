@@ -2,11 +2,17 @@
 
 public class Item : Activatable
 {
-    float ghostTimeAfterThrow = 0.5f;
+    const float ghostTimeAfterThrow = 0.5f;
 
     public InventorySlot inventorySlot = null;
     public Player thrower;
     public float thrownAt;
+
+    void Start() {
+        new ValueTracker<InventorySlot>(v => inventorySlot = v, () => inventorySlot);
+        new ValueTracker<Player>(v => thrower = v, () => thrower);
+        new FloatTracker(v => thrownAt = v, () => thrownAt);
+    }
 
     public override void Activate(Activator activator) {
         base.Activate(activator);
@@ -19,12 +25,12 @@ public class Item : Activatable
     public virtual void Throw(Player thrower) {
         Physics.IgnoreCollision(thrower.GetComponent<Collider>(), GetComponent<Collider>());
         this.thrower = thrower;
-        this.thrownAt = Time.time;
+        this.thrownAt = TimeManager.GameTime;
     }
 
     void FixedUpdate() {
         if (thrower != null) {
-            if (Time.time > thrownAt + ghostTimeAfterThrow) {
+            if (TimeManager.GameTime > thrownAt + ghostTimeAfterThrow) {
                 Physics.IgnoreCollision(thrower.GetComponent<Collider>(), GetComponent<Collider>(), false);
                 thrower = null;
             }

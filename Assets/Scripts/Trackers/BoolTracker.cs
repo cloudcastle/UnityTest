@@ -5,9 +5,9 @@ using System.Linq;
 using System;
 
 [Serializable]
-public class Vector3Tracker : ValueTracker<Vector3>
+public class BoolTracker : ValueTracker<bool>
 {
-    public Vector3Tracker(Action<Vector3> setValue, Func<Vector3> getValue)
+    public BoolTracker(Action<bool> setValue, Func<bool> getValue)
         : base(setValue, getValue) {
     }
 }

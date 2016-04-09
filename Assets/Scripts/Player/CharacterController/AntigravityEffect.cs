@@ -17,13 +17,13 @@ public class AntigravityEffect : MonoBehaviour
     public float antigravityUntil = float.NegativeInfinity;
 
     bool Expired() {
-        return antigravityUntil < Time.time;
+        return antigravityUntil < TimeManager.GameTime;
     }
 
     public void Affect(float speed) {
         if (this.speed <= speed || Expired()) {
             this.speed = speed;
-            antigravityUntil = Time.time + duration;
+            antigravityUntil = TimeManager.GameTime + duration;
         }
     }
 

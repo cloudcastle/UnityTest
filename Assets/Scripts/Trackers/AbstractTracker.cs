@@ -8,9 +8,15 @@ public abstract class AbstractTracker<T> : MonoBehaviour
 {
     public ValueTracker<T> tracker;
 
+    public bool useInitialValue = false;
+    public T initialValue;
+
     protected abstract ValueTracker<T> CreateTracker();
 
     void Start() {
         tracker = CreateTracker();
+        if (useInitialValue) {
+            tracker.Init(initialValue);
+        }
     }
 }

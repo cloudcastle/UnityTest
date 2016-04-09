@@ -7,6 +7,8 @@ public class TimeManager : MonoBehaviour
     public static TimeManager instance;
     public static PromiseTimer promiseTimer = new PromiseTimer();
 
+    public FloatTracker timeTracker;
+
     public bool pauseOnStart;
     static bool paused;
     public static bool Paused {
@@ -43,7 +45,7 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public static float GameFixedDeltaTime {
+    public static float StoppableFixedDeltaTime {
         get {
             if (timestopped) {
                 return 0;
@@ -80,7 +82,7 @@ public class TimeManager : MonoBehaviour
     }
 
     void Start() {
-        new FloatTracker((x) => gameTime = x, () => gameTime);
+        timeTracker = new FloatTracker((x) => gameTime = x, () => gameTime);
     }
 
     public static IPromise WaitFor(float time) {

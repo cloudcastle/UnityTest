@@ -15,7 +15,7 @@ public class ThrowAbility : MonoBehaviour
 
     public Player player;
 
-    public float throwDelay = 0.04f;
+    float throwDelay = 4f;
 
     public void UpdateForce() {
         UI.instance.ShowForce(currentForce / maxForce);

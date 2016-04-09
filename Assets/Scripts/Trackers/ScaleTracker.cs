@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class PositionTracker : AbstractTracker<Vector3>
+public class ScaleTracker : AbstractTracker<Vector3>
 {
     protected override ValueTracker<Vector3> CreateTracker() {
         return new Vector3Tracker(
-            (v) => transform.localPosition = v,
-            () => transform.localPosition
+            (v) => transform.localScale = v,
+            () => transform.localScale
         );
     }
 }

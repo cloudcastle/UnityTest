@@ -17,7 +17,7 @@ public class Slider : MonoBehaviour {
 	void FixedUpdate() {
         transform.position = PositionByTime(TimeManager.GameTime);
         if (predictor != null) {
-            predictor.Predict(PositionByTime(TimeManager.GameTime + TimeManager.GameFixedDeltaTime), transform.rotation.eulerAngles);
+            predictor.Predict(PositionByTime(TimeManager.GameTime + TimeManager.StoppableFixedDeltaTime), transform.rotation.eulerAngles);
         }
 	}
 

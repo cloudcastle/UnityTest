@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public GameObject line;
     public Player player;
 
-    Pool slotPool;
+    public Pool slotPool;
 
     public List<Item> items;
 
@@ -17,8 +17,25 @@ public class Inventory : MonoBehaviour
 
     public event Action onChanged = () => { };
 
+    public ItemListShallowTracker itemTracker;
+
     void Awake() {
         slotPool = new Pool(slotSample);
+    }
+
+    void Start() {
+        itemTracker = new ItemListShallowTracker(
+            setList: (v) => items = v,
+            getList: () => items
+        );
+        new ValueTracker<Item>(
+            setValue: (v) => selected = v,
+            getValue: () => selected
+        );
+        new ListShallowTracker<GameObject>(
+            setList: (v) => slotPool.pool = v,
+            getList: () => slotPool.pool
+        );
     }
 
     public void Pick(Item item) {

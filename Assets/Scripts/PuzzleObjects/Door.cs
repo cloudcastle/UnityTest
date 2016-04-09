@@ -14,8 +14,6 @@ public class Door : MonoBehaviour
 
     Colored colored;
 
-    public HashSet<Player> openedFor = new HashSet<Player>();
-
     void Awake() {
         colored = GetComponent<Colored>();
     }
@@ -27,17 +25,11 @@ public class Door : MonoBehaviour
     }
 
     public bool Opened(Player player) {
-        return openedFor.Contains(player);
+        return keyColor.openedFor.Contains(player);
     }
 
     public void OpenFor(Player player, bool open = true) {
-        Debug.Log(string.Format("Door {0} open for {1} : {2}", this, player, open));
         Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), open);
-        if (open) {
-            openedFor.Add(player);
-        } else {
-            openedFor.Remove(player);
-        }
     }
 
     void Update() {

@@ -13,6 +13,7 @@ public class Undo : MonoBehaviour
     public int totalSampleCount;
 
     public event Action onUndo = () => { };
+    public event Action onDrop = () => { };
     public event Action onTrack = () => { };
     public event Action onPushSampleCount = () => { };
     
@@ -32,9 +33,20 @@ public class Undo : MonoBehaviour
             onUndo();
         } else {
             time += Time.fixedDeltaTime;
-            onTrack();
+            Track();
         }
         totalSampleCount = 0;
         onPushSampleCount();
+    }
+
+    public void Track() {
+        onTrack();
+    }
+
+    /// <summary>
+    /// Make it "It's always been like this" for current state of game
+    /// </summary>
+    public void DropUndoData() {
+        onDrop();
     }
 }
