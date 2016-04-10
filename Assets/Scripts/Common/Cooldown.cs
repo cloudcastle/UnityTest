@@ -8,10 +8,11 @@ public class Cooldown
 {
     public float duration;
 
-    public float onCDfrom;
+    public float onCDfrom = float.NegativeInfinity;
 
     public Cooldown(float duration) {
         this.duration = duration;
+        new FloatTracker((v) => onCDfrom = v, () => onCDfrom);
     }
 
     public bool Ready() {

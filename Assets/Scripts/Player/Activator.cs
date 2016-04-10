@@ -5,7 +5,7 @@ public class Activator : MonoBehaviour
 {
     public float maxDistance = 2;
 
-    public Cooldown stun = new Cooldown(0.2f);
+    public Cooldown stun;
 
     public Player player;
     
@@ -21,6 +21,10 @@ public class Activator : MonoBehaviour
 
     void Awake() {
         activatableLayerMask = LayerMask.GetMask("Ghost", "Item");
+    }
+
+    void Start() {
+        stun = new Cooldown(0.2f);
     }
 
     void Reset() {

@@ -23,6 +23,11 @@ public class Key : Item
     }
 
     void Update() {
+        if (Extensions.Editor()) {
+            if (keyColor == null) {
+                keyColor = FindObjectOfType<KeyColor>();
+            }
+        }
         colored.color = keyColor.color;
     }
 }
