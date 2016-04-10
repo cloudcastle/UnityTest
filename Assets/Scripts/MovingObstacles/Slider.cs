@@ -23,7 +23,7 @@ public class Slider : MonoBehaviour {
 
     void Update() {
         if (Extensions.Editor()) {
-            transform.position = PositionByTime(FindObjectOfType<TimeManager>().gameTime); 
+            transform.position = PositionByTime(TimeManager.GameTime); 
         }
     }
 

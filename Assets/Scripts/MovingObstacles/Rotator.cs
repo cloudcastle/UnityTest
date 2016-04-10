@@ -25,7 +25,6 @@ public class Rotator : MonoBehaviour
     }
 
     void FixedUpdateByTime(float time) {
-
         transform.Rotate(time * rotationSpeed);
     }
 }

@@ -25,7 +25,8 @@ public class TimeManager : MonoBehaviour
     }
     public static bool timestopped = false;
 
-    public float gameTime;
+    [SerializeField]
+    float gameTime;
 
     public static float GameTime {
         get { return instance.gameTime; }
