@@ -8,7 +8,7 @@ public class Undo : MonoBehaviour
 {
     public static Undo instance;
 
-    public float time;
+    public float time { get; private set; }
 
     public int totalSampleCount;
 

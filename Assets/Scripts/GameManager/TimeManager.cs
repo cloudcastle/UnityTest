@@ -5,9 +5,9 @@ using RSG;
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance;
-    public static PromiseTimer promiseTimer = new PromiseTimer();
 
     public FloatTracker timeTracker;
+    public static IPromiseTimer promiseTimer;
 
     public bool pauseOnStart;
     static bool paused;
@@ -78,11 +78,11 @@ public class TimeManager : MonoBehaviour
         Paused = pauseOnStart;
         timestopped = false;
 
-        promiseTimer = new PromiseTimer();
     }
 
     void Start() {
         timeTracker = new FloatTracker((x) => gameTime = x, () => gameTime);
+        promiseTimer = new UndoablePromiseTimer(() => gameTime);
     }
 
     public static IPromise WaitFor(float time) {

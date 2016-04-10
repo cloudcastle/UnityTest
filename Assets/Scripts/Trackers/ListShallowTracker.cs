@@ -11,7 +11,7 @@ public class ListShallowTracker<T> : ValueTracker<List<T>>
         : base(
             setValue: (v) => setList(v.ShallowClone()),
             getValue: () => getList().ShallowClone(),
-            isActual: (v) => getList().SequenceEqual(v)
+            isActual: (v) => v == getList() || getList() != null && v != null && getList().SequenceEqual(v)
         ) {
     }
 }

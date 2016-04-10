@@ -108,6 +108,9 @@ public static class Extensions
     }
 
     public static List<T> ShallowClone<T>(this List<T> listToClone) {
+        if (listToClone == null) {
+            return null;
+        }
         return listToClone.Select(item => item).ToList();
     }
 }
