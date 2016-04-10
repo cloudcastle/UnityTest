@@ -30,7 +30,7 @@ public class ValueTracker<T>
         Undo.instance.onDrop += new Action(Drop);
     }
 
-    public void Init(T value) {
+    public void Init(T value = default(T)) {
         if (track.Count == 0) {
             track.Push(new TimedValue<T>(value, float.NegativeInfinity));
             sampleCount = track.Count;
@@ -66,6 +66,9 @@ public class ValueTracker<T>
     void PerformUndo() {
         while (track.Count > 1 && track.Peek().time > Undo.instance.time) {
             track.Pop();
+        }
+        if (track.Count == 0) {
+            Init();
         }
         setValue(track.Peek().value);
         sampleCount = track.Count;

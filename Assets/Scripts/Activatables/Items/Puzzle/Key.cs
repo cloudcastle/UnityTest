@@ -12,6 +12,8 @@ public class Key : Item
 
     void Awake() {
         colored = GetComponent<Colored>();
+        onPick += keyColor.Recalculate;
+        onLose += keyColor.Recalculate;
     }
 
     void Start() {
@@ -22,15 +24,5 @@ public class Key : Item
 
     void Update() {
         colored.color = keyColor.color;
-    }
-
-    public override void Pick(Player player) {
-        base.Pick(player);
-        keyColor.Recalculate(player);
-    }
-
-    public override void Throw(Player thrower) {
-        base.Throw(thrower);
-        keyColor.Recalculate(thrower);
     }
 }

@@ -22,13 +22,11 @@ public class InventorySlot : MonoBehaviour
     }
 
     void Start() {
-        Debug.Log(string.Format("Start inventory slot {0}", GetInstanceID()));
         itemTracker = new ItemTracker(setValue: (v) => item = v, getValue: () => item);
         itemTracker.Init(null);
     }
 
     public void Init(Inventory inventory, Item item) {
-        Debug.Log(string.Format("Init inventory slot {0}", GetInstanceID()));
         if (this.inventory != inventory) {
             inventory.onChanged += OnInventoryChanged;
         }
@@ -70,7 +68,6 @@ public class InventorySlot : MonoBehaviour
 
     public void Free() {
         item.transform.SetParent(null, worldPositionStays: false);
-        item.transform.position = inventory.player.transform.position;
 
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = false;

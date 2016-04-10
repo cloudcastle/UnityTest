@@ -42,7 +42,7 @@ public class Inventory : MonoBehaviour
         items.Add(item);
         selected = item;
 
-        item.Pick(player);
+        item.Picked(player);
 
         Debug.Log(string.Format("Pick {0}", item));
         GameObject slotObject = slotPool.Take();
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
         onChanged();
     }
 
-    public void Throw(Item item) {
+    public void Lose(Item item) {
         if (selected == item) {
             if (items.Count >= 2) {
                 ChangeSelected(1);
@@ -61,23 +61,24 @@ public class Inventory : MonoBehaviour
             }
         }
         items.Remove(item);
-        Debug.Log(string.Format("Throw {0}", item));
+        Debug.Log(string.Format("Lost {0}", item));
 
         item.inventorySlot.Free();
-        item.Throw(player);
+        item.Lost(player);
 
         onChanged();
     }
 
-    void ThrowAt(Item item, Vector3 position) {
-        Throw(item);
+    void DropAt(Item item, Vector3 position) {
+        Lose(item);
         item.transform.position = position;
+        item.GhostFor(player);
         Debug.Log(String.Format("{0} thrown at {1}", item, position.ExtToString()));
     }
 
     public void DropAll(Vector3 position) {
         while (items.Count > 0) {
-            ThrowAt(selected, position);
+            DropAt(selected, position);
         }
     }
 

@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
+using System;
 
 public class Item : Activatable
 {
     const float ghostTimeAfterThrow = 0.5f;
 
     public InventorySlot inventorySlot = null;
-    public Player thrower;
-    public float thrownAt;
+
+    public event Action<Player> onPick = (p) => { };
+    public event Action<Player> onLose = (p) => { };
 
     void Start() {
         new ValueTracker<InventorySlot>(v => inventorySlot = v, () => inventorySlot);
-        new ValueTracker<Player>(v => thrower = v, () => thrower);
-        new FloatTracker(v => thrownAt = v, () => thrownAt);
     }
 
     public override void Activate(Activator activator) {
@@ -19,21 +19,20 @@ public class Item : Activatable
         activator.player.inventory.Pick(this);
     }
 
-    public virtual void Pick(Player player) {
+    public void Picked(Player player) {
+        onPick(player);
     }
 
-    public virtual void Throw(Player thrower) {
-        Physics.IgnoreCollision(thrower.GetComponent<Collider>(), GetComponent<Collider>());
-        this.thrower = thrower;
-        this.thrownAt = TimeManager.GameTime;
+    public void Lost(Player player) {
+        onLose(player);
     }
 
-    void FixedUpdate() {
-        if (thrower != null) {
-            if (TimeManager.GameTime > thrownAt + ghostTimeAfterThrow) {
-                Physics.IgnoreCollision(thrower.GetComponent<Collider>(), GetComponent<Collider>(), false);
-                thrower = null;
-            }
-        }
+    public void GhostFor(Player player) {
+        Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
+        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        TimeManager.WaitFor(ghostTimeAfterThrow).Then(() => {
+            Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            Debug.Log(String.Format("Item {0} unghost for {1}", this, player));
+        });
     }
 }

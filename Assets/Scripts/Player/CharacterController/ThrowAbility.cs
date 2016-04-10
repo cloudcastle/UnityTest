@@ -15,7 +15,7 @@ public class ThrowAbility : MonoBehaviour
 
     public Player player;
 
-    float throwDelay = 4f;
+    float throwDelay = 0.04f;
 
     public void UpdateForce() {
         UI.instance.ShowForce(currentForce / maxForce);
@@ -37,7 +37,7 @@ public class ThrowAbility : MonoBehaviour
 
     public void Throw() {
         var target = player.inventory.selected;
-        player.inventory.Throw(target);
+        player.inventory.Lose(target);
         target.gameObject.SetActive(false);
 
         var throwForce = currentForce;
@@ -45,6 +45,7 @@ public class ThrowAbility : MonoBehaviour
         TimeManager.WaitFor(throwDelay).Then(() => {
             target.gameObject.SetActive(true);
             PushItem(target, throwForce);
+            target.GhostFor(player);
             Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
             Reset();
         });
