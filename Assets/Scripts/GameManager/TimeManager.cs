@@ -83,12 +83,12 @@ public class TimeManager : MonoBehaviour
         instance = this;
         Paused = pauseOnStart;
         timestopped = false;
-
     }
 
     void Start() {
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
         Undo.instance.onUndo += OnUndo;
+        gameTime = 0;
     }
 
     void OnUndo() {
