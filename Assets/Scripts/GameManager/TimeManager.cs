@@ -29,7 +29,13 @@ public class TimeManager : MonoBehaviour
     float gameTime;
 
     public static float GameTime {
-        get { return instance.gameTime; }
+        get {
+            if (!Extensions.Editor()) {
+                return instance.gameTime;
+            } else {
+                return FindObjectOfType<TimeManager>().gameTime;
+            }
+        }
     }
 
     public static float loosedFixedDeltaTime;
