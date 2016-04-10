@@ -46,6 +46,9 @@ public class Game
         var underground = new Level("Underground", depends: hold);
         var tower = new Level("Tower", depends: hold);
 
+        // Lifts Tricks
+        var rhythm = new Level("Rhythm", order, shift);
+
         // Jumps Intro
         var gap = new Level("Gap", shift, space);
         var spring = new Level("Spring", gap);
