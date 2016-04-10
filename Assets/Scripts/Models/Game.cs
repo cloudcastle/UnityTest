@@ -77,8 +77,10 @@ public class Game
 
         // Keys
         var blueDoor = new Level("Blue door", qeMouseWheel);
-        var blueCabin = new Level("Blue cabin", qeMouseWheel);
         var pair = new Level("Pair", qeMouseWheel);
+        var push = new Level("Push", qeMouseWheel);
+        var greenCabin = new Level("Green Cabin", qeMouseWheel);
+        var blueCabin = new Level("Blue cabin", greenCabin);
 
         currentLevel = click;
         current = null;
