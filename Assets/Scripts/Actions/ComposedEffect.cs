@@ -9,7 +9,8 @@ public class ComposedEffect : Effect
 {
     public List<Effect> effects;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         effects = this.GetComponentsInDirectChildren<Effect>();
     }
 

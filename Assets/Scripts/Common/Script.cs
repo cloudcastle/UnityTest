@@ -18,6 +18,9 @@ public class Script : MonoBehaviour, IPoolable
     public virtual void InitInternal() {
     }
 
+    public virtual void Awake() {
+    }
+
     public virtual void Start() {
         Init();
     }

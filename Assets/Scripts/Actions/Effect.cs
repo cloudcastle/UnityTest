@@ -2,7 +2,7 @@
 using System.Collections;
 using RSG;
 
-public abstract class Effect : MonoBehaviour
+public abstract class Effect : Script
 {
     public abstract IPromise Run();
 

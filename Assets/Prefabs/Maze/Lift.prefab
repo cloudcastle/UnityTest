@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6543332}
   - 23: {fileID: 2312918}
   - 114: {fileID: 11428954}
+  - 114: {fileID: 11449724}
   m_Layer: 0
   m_Name: Lift
   m_TagString: Untagged
@@ -49,8 +50,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -88,7 +91,22 @@ MonoBehaviour:
   height: 6
   speed: 8
   pause: 10
-  heightDelta: .0500000007
+  differentDownSpeed: 0
+  downSpeed: 1
+  heightDelta: 0.05
+--- !u!114 &11449724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177ebb8af9a9b048ad5c05010947ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

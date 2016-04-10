@@ -85,13 +85,25 @@ public class LiftLowerWaitRaise : Effect
         return state != Waiting && state != MovingDown;
     }
 
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         state = Idle;
+    }
+
+    public override void InitInternal() {
+        new FloatTracker(v => waitingDuration = v, () => waitingDuration);
+        new FloatTracker(v => currentHeight = v, () => currentHeight);
+        new ValueTracker<Action>(v => state = v, () => state);
     }
 
     void FixedUpdate()
     {
         state();
+    }
+
+    [ContextMenu("Attach to prefab")]
+    void AttachToPrefab() {
+        Debug.Log("Nope.");
     }
 }

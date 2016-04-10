@@ -10,17 +10,18 @@ public class Key : Item
 
     Colored colored;
 
-    void Awake() {
+    public override void Awake() {
         colored = GetComponent<Colored>();
         if (!Extensions.Editor()) {
+            base.Awake();
             onPick += keyColor.Recalculate;
             onLose += keyColor.Recalculate;
         }
     }
 
     public override void Start() {
-        base.Start();
         if (!Extensions.Editor()) {
+            base.Start();
             keyColor.keys.Add(this);
         }
     }
