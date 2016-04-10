@@ -102,6 +102,9 @@ public class InventorySlot : MonoBehaviour
     }
 
     public void Free() {
+        if (item == null) {
+            throw new Exception("Item is null in InventorySlot.Free!");
+        }
         item.transform.SetParent(null, worldPositionStays: false);
 
         if (item.GetComponent<Rigidbody>() != null) {

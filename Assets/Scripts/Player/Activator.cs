@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Activator : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class Activator : MonoBehaviour
             var biasAngle =  Vector3.Angle(transform.forward, radiusVector);
             if (biasAngle < maxBiasAngle) {
                 Physics.Raycast(transform.position, radiusVector, out hit);
+                if (hit.collider == null) {
+                    continue;
+                }
                 if (hit.collider.gameObject == sphereCastResults[i].gameObject && hit.distance < maxDistance) {
                     var activatable = hit.collider.GetComponent<Activatable>();
                     if (activatable != null) {
