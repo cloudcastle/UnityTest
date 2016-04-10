@@ -20,7 +20,6 @@ public class Colored : MonoBehaviour
                 material = meshRenderer.sharedMaterial;
             }
             if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color) {
-                Debug.Log(String.Format("Colored {0}: material update, color = {1}", this, color));
                 UpdateRendererMaterial();
             }
         }

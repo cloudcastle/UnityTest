@@ -48,5 +48,6 @@ public class Undo : MonoBehaviour
     /// </summary>
     public void DropUndoData() {
         onDrop();
+        Debug.Log("Drop Undo Data");
     }
 }

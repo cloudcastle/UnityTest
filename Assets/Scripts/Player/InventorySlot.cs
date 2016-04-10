@@ -28,8 +28,12 @@ public class InventorySlot : MonoBehaviour
 
     public void Init(Inventory inventory, Item item) {
         if (this.inventory != inventory) {
+            if (this.inventory != null) {
+                this.inventory.onChanged -= OnInventoryChanged;
+            }
             inventory.onChanged += OnInventoryChanged;
         }
+
         this.inventory = inventory;
         this.item = item;
         item.inventorySlot = this;

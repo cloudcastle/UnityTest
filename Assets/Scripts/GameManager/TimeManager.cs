@@ -95,4 +95,7 @@ public class TimeManager : MonoBehaviour
     public static IPromise WaitFor(float time) {
         return promiseTimer.WaitFor(time);
     }
+
+    void Update() {
+    }
 }
