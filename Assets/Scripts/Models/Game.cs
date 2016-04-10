@@ -25,6 +25,7 @@ public class Game
         var click = new Level("Click");
         var mouseMove = new Level("MouseMove", depends: click);
         var wasd = new Level("WASD", depends: mouseMove);
+        var escape = new Level("Escape", depends: wasd);
         var space = new Level("Space", depends: wasd);
 
         // Lifts Intro
