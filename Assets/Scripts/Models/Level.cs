@@ -13,10 +13,13 @@ public class Level
     public Level(string name, params Level[] depends) {
         this.name = name;
         dependencies = depends.ToList();
-        if (Game.current.levels.Any(level => level.name == name)) {
-            Debug.LogError(string.Format("Duplicate level name: {0}", name));
+        if (Game.current != null)
+        {
+            if (Game.current.levels.Any(level => level.name == name)) {
+                Debug.LogError(string.Format("Duplicate level name: {0}", name));
+            }
+            Game.current.levels.Add(this);
         }
-        Game.current.levels.Add(this);
     }
 
     public bool Unlocked() {

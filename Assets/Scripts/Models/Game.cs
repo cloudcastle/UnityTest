@@ -83,6 +83,7 @@ public class Game
         var greenCabin = new Level("Green Cabin", qeMouseWheel);
         var blueCabin = new Level("Blue cabin", greenCabin);
         var redCabin = new Level("Red cabin", greenCabin);
+        var stretch = new Level("Stretch", greenCabin);
 
         currentLevel = click;
         current = null;
