@@ -8,8 +8,8 @@ public class PositionTracker : AbstractTracker<Vector3>
 {
     protected override ValueTracker<Vector3> CreateTracker() {
         return new Vector3Tracker(
-            (v) => transform.position = v,
-            () => transform.position
+            (v) => transform.localPosition = v,
+            () => transform.localPosition
         );
     }
 }

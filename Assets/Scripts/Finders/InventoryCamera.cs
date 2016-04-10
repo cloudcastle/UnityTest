@@ -35,6 +35,6 @@ public class InventoryCamera : MonoBehaviour
     }
 
     void OnInventoryChanged() {
-        transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), Time.time + animationDelay));
+        transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), TimeManager.GameTime + animationDelay));
     }
 }

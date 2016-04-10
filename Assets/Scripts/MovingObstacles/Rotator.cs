@@ -14,18 +14,17 @@ public class Rotator : MonoBehaviour
             return;
         }
         if (quick) {
-            accumulatedTime += TimeManager.GameFixedDeltaTime;
+            accumulatedTime += TimeManager.StoppableFixedDeltaTime;
             if (accumulatedTime > TimeManager.loosedFixedDeltaTime - 1e-4) {
                 FixedUpdateByTime(accumulatedTime);
                 accumulatedTime = 0;
             }
         } else {
-            FixedUpdateByTime(TimeManager.GameFixedDeltaTime);
+            FixedUpdateByTime(TimeManager.StoppableFixedDeltaTime);
         }
     }
 
     void FixedUpdateByTime(float time) {
-
         transform.Rotate(time * rotationSpeed);
     }
 }

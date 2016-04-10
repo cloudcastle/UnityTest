@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using RSG;
+using System;
 
 [RequireComponent(typeof(TransformAnimator))]
 public class InventorySlot : MonoBehaviour
@@ -15,11 +17,52 @@ public class InventorySlot : MonoBehaviour
 
     TransformAnimator transformAnimator;
 
+    public ItemTracker itemTracker;
+
+    bool started = false;
+    event Action onStart = () => { };
+
     void Awake() {
         transformAnimator = GetComponent<TransformAnimator>();
     }
 
+    void Start() {
+        Debug.Log(string.Format("Inventory Slot start"));
+        itemTracker = new ItemTracker(setValue: (v) => item = v, getValue: () => item);
+        new ValueTracker<Inventory>(setValue: (v) => inventory = v, getValue: () => inventory);
+        itemTracker.Init(null);
+        onStart();
+        started = true;
+    }
+
+    public IPromise Ready() {
+        if (started) {
+            return Promise.Resolved();
+        }
+        var result = new Promise();
+        Debug.Log("new promise created");
+        onStart += result.Resolve;
+        return result;
+    }
+
+    void Subscribe(Inventory inventory) {
+        inventory.onChanged += OnInventoryChanged;
+        inventory.onSkipAnimation += OnSkipAnimation;
+    }
+
+    void Unsubscribe(Inventory inventory) {
+        this.inventory.onChanged -= OnInventoryChanged;
+        inventory.onSkipAnimation -= OnSkipAnimation;
+    }
+
     public void Init(Inventory inventory, Item item) {
+        if (this.inventory != inventory) {
+            if (this.inventory != null) {
+                Unsubscribe(this.inventory);
+            }
+            Subscribe(inventory);
+        }
+
         this.inventory = inventory;
         this.item = item;
         item.inventorySlot = this;
@@ -32,8 +75,6 @@ public class InventorySlot : MonoBehaviour
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = true;
         }
-
-        inventory.onChanged += OnInventoryChanged;
 
         transform.localPosition = TargetPosition();
         transform.localScale = TargetScale();
@@ -50,21 +91,34 @@ public class InventorySlot : MonoBehaviour
 
     void OnInventoryChanged() {
         if (inventory.items.Contains(item)) {
-            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), Time.time + animationDelay));
+            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), TimeManager.GameTime + animationDelay));
         } else {
             Free();
         }
     }
 
+    void OnSkipAnimation() {
+        transformAnimator.SkipAnimation();
+    }
+
     public void Free() {
+        if (item == null) {
+            throw new Exception("Item is null in InventorySlot.Free!");
+        }
         item.transform.SetParent(null, worldPositionStays: false);
-        item.transform.position = inventory.player.transform.position;
 
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = false;
         }
 
-        inventory.onChanged -= OnInventoryChanged;
+        Unsubscribe(inventory);
+        item = null;
+        inventory = null;
+
         GetComponent<Poolable>().ReturnToPool();
+    }
+
+    void Update() {
+        name = item == null ? "Empty slot" : String.Format("Slot ({0})", item.name);
     }
 }

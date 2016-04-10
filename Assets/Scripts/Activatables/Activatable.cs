@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Activatable : MonoBehaviour
+public abstract class Activatable : Script
 {
     public float maxDistance = 0;
     public bool useActivatorMaxDistance = true;

@@ -8,6 +8,6 @@ using System;
 public class FloatTracker : ValueTracker<float>
 {
     public FloatTracker(Action<float> setValue, Func<float> getValue)
-        : base(new FloatComparer(), setValue, getValue) {
+        : base(setValue, getValue) {
     }
 }

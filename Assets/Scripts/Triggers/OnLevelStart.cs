@@ -3,13 +3,9 @@ using System.Collections;
 
 public class OnLevelStart : AbstractTrigger
 {
-    bool firstUpdate = true;
+    public bool dropUndo = true;
 
-    void Update() {
-        if (!firstUpdate) {
-            return;
-        }
-        firstUpdate = false;
-        effect.Run();
+    void Start() {
+        effect.Run().Then(() => Undo.instance.DropUndoData());
     }
 }

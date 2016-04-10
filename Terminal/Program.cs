@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Solver;
 using System.IO;
+using RSG;
 
 namespace Terminal
 {
@@ -17,8 +18,10 @@ namespace Terminal
         }
 
         static void Work() {
-            PrintAllSolutions();
+            //PrintAllSolutions();
             //Console.WriteLine("HW");
+            PromisesTraining.RunThreeContinuousEffects();
+            
         }
 
         private static void Play() {

@@ -5,7 +5,8 @@ using RSG;
 public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance;
-    public static PromiseTimer promiseTimer = new PromiseTimer();
+
+    public static IPromiseTimer promiseTimer;
 
     public bool pauseOnStart;
     static bool paused;
@@ -23,10 +24,17 @@ public class TimeManager : MonoBehaviour
     }
     public static bool timestopped = false;
 
-    public float gameTime;
+    [SerializeField]
+    float gameTime;
 
     public static float GameTime {
-        get { return instance.gameTime; }
+        get {
+            if (!Extensions.Editor()) {
+                return instance.gameTime;
+            } else {
+                return FindObjectOfType<TimeManager>().gameTime;
+            }
+        }
     }
 
     public static float loosedFixedDeltaTime;
@@ -43,7 +51,7 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public static float GameFixedDeltaTime {
+    public static float StoppableFixedDeltaTime {
         get {
             if (timestopped) {
                 return 0;
@@ -75,15 +83,22 @@ public class TimeManager : MonoBehaviour
         instance = this;
         Paused = pauseOnStart;
         timestopped = false;
-
-        promiseTimer = new PromiseTimer();
     }
 
     void Start() {
-        new FloatTracker((x) => gameTime = x, () => gameTime);
+        promiseTimer = new UndoablePromiseTimer(() => gameTime);
+        Undo.instance.onUndo += OnUndo;
+        gameTime = 0;
+    }
+
+    void OnUndo() {
+        gameTime = Undo.instance.time;
     }
 
     public static IPromise WaitFor(float time) {
         return promiseTimer.WaitFor(time);
+    }
+
+    void Update() {
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 [Serializable]
 public class Pool
@@ -40,11 +41,13 @@ public class Pool
         GameObject instance = pool[pool.Count - 1];
         pool.RemoveAt(pool.Count - 1);
         Appear(instance);
+        instance.GetComponents<Script>().ToList().ForEach(script => script.Taken());
         return instance;
     }
 
     void ExpandPool() {
         GameObject instance = GameObject.Instantiate(sample);
+        instance.GetComponent<Poolable>().pool = this;
         pool.Add(instance);
     }
 }

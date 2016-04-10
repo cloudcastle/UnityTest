@@ -14,13 +14,12 @@ public class Colored : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();    
     }
 
-    void Update() {
+    public void Update() {
         if (Extensions.Editor()) {
             if (material == null) {
                 material = meshRenderer.sharedMaterial;
             }
             if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color) {
-                Debug.Log(String.Format("Colored {0}: material update", this));
                 UpdateRendererMaterial();
             }
         }
