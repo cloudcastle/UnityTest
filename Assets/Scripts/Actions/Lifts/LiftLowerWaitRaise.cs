@@ -2,6 +2,12 @@
 using System.Collections;
 using System;
 using RSG;
+using System.Collections.Generic;
+using System.Linq;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class LiftLowerWaitRaise : Effect
 {
@@ -102,8 +108,12 @@ public class LiftLowerWaitRaise : Effect
         state();
     }
 
-    [ContextMenu("Attach to prefab")]
-    void AttachToPrefab() {
-        Debug.Log("Nope.");
+    [ContextMenu("Tracker to All Lifts")]
+    void TrackersToAllLifts() {
+        FindObjectsOfType<LiftLowerWaitRaise>().ToList().ForEach(lift => {
+            if (lift.GetComponent<PositionTracker>() == null) {
+                lift.gameObject.AddComponent<PositionTracker>();
+            }
+        });
     }
 }
