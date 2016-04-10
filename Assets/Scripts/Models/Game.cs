@@ -48,6 +48,8 @@ public class Game
 
         // Lifts Tricks
         var rhythm = new Level("Rhythm", order, shift);
+        var secondBeat = new Level("Second Beat", rhythm);
+        var trio = new Level("Trio", secondBeat);
 
         // Jumps Intro
         var gap = new Level("Gap", shift, space);
