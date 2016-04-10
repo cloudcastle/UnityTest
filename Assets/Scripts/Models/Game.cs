@@ -87,6 +87,9 @@ public class Game
         var stretch = new Level("Stretch", greenCabin);
         var triple = new Level("Triple", greenCabin, redCabin, blueCabin);
 
+        // Keys Tricks
+        var walkthrough = new Level("Walkthrough", cleanHands);
+
         currentLevel = click;
         current = null;
     }
