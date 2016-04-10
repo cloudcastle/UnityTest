@@ -67,6 +67,7 @@ public class Game
         var sixBoxes = new Level("Six boxes", gap, z);
         var climb = new Level("Climb", gap, z);
         var snake = new Level("Snake", spring);
+        var string_ = new Level("String", r);
 
         // Keys intro
         var pass = new Level("Pass", wasd);
@@ -89,7 +90,7 @@ public class Game
 
         // Keys Tricks
         var walkthrough = new Level("Walkthrough", cleanHands);
-        var column = new Level("Column", walkthrough);
+        var column = new Level("Column", walkthrough, z);
 
         // Tricks
         var bars = new Level("Bars", wasd);
