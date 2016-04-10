@@ -84,6 +84,7 @@ public class Game
         var blueCabin = new Level("Blue cabin", greenCabin);
         var redCabin = new Level("Red cabin", greenCabin);
         var stretch = new Level("Stretch", greenCabin);
+        var triple = new Level("Triple", greenCabin, redCabin, blueCabin);
 
         currentLevel = click;
         current = null;
