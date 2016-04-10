@@ -96,6 +96,7 @@ public class Game
         // Keys Tricks
         var walkthrough = new Level("Walkthrough", cleanHands);
         var column = new Level("Column", walkthrough, z);
+        var bridge = new Level("Bridge", walkthrough, r);
 
         // Tricks
         var bars = new Level("Bars", wasd);
