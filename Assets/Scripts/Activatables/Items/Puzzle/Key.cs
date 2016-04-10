@@ -12,8 +12,10 @@ public class Key : Item
 
     void Awake() {
         colored = GetComponent<Colored>();
-        onPick += keyColor.Recalculate;
-        onLose += keyColor.Recalculate;
+        if (!Extensions.Editor()) {
+            onPick += keyColor.Recalculate;
+            onLose += keyColor.Recalculate;
+        }
     }
 
     void Start() {
