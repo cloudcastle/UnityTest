@@ -90,6 +90,9 @@ public class Game
         // Keys Tricks
         var walkthrough = new Level("Walkthrough", cleanHands);
 
+        // Tricks
+        var bars = new Level("Bars", wasd);
+
         currentLevel = click;
         current = null;
     }
