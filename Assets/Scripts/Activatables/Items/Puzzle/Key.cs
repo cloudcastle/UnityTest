@@ -25,9 +25,11 @@ public class Key : Item
     void Update() {
         if (Extensions.Editor()) {
             if (keyColor == null) {
+                Debug.Log("Key {0}: keyColor missing; set some", this);
                 keyColor = FindObjectOfType<KeyColor>();
             }
         }
         colored.color = keyColor.color;
+        colored.Update();
     }
 }
