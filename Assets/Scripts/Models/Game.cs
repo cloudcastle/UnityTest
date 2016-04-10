@@ -82,6 +82,7 @@ public class Game
         var push = new Level("Push", merge);
         var greenCabin = new Level("Green Cabin", qeMouseWheel);
         var blueCabin = new Level("Blue cabin", greenCabin);
+        var redCabin = new Level("Red cabin", greenCabin);
 
         currentLevel = click;
         current = null;
