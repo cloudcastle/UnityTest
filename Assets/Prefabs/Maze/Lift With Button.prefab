@@ -32,6 +32,7 @@ GameObject:
   - 65: {fileID: 6522614}
   - 23: {fileID: 2381526}
   - 114: {fileID: 11421006}
+  - 114: {fileID: 11401638}
   m_Layer: 0
   m_Name: Lift With Button
   m_TagString: Untagged
@@ -45,9 +46,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115168}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.49011626e-07}
-  m_LocalPosition: {x: -.5, y: -.333333343, z: 0}
-  m_LocalScale: {x: .049999997, y: .166666672, z: .125}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000014901163}
+  m_LocalPosition: {x: -0.5, y: -0.33333334, z: 0}
+  m_LocalScale: {x: 0.049999997, y: 0.16666667, z: 0.125}
   m_Children: []
   m_Father: {fileID: 447202}
   m_RootOrder: 0
@@ -82,8 +83,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -106,8 +109,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -138,6 +143,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11401638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177ebb8af9a9b048ad5c05010947ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!114 &11421006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -152,7 +170,9 @@ MonoBehaviour:
   height: 6
   speed: 8
   pause: 10
-  heightDelta: .0500000007
+  differentDownSpeed: 0
+  downSpeed: 1
+  heightDelta: 0.05
 --- !u!114 &11432880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,13 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightEmission: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  highlightEmission: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
-  on: 0
-  period: .25
-  lightPart: .5
-  highlighted: 0
-  phase: 0
+  notReadyEmission: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   lightPartOutOfRange: 0
 --- !u!114 &11454820
 MonoBehaviour:
@@ -185,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0
   useActivatorMaxDistance: 1
+  allowBiasedActivation: 1
   effects:
   - {fileID: 11421006}
 --- !u!135 &13565378
@@ -197,7 +214,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .5
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
