@@ -18,7 +18,8 @@ public class Key : Item
         }
     }
 
-    void Start() {
+    public override void Start() {
+        base.Start();
         if (!Extensions.Editor()) {
             keyColor.keys.Add(this);
         }
@@ -33,5 +34,9 @@ public class Key : Item
         }
         colored.color = keyColor.color;
         colored.Update();
+
+        //if (!Extensions.Editor()) {
+        //    gameObject.name = string.Format("{0} key{1}", keyColor.name, inventorySlot == null ? "" : " in " + inventorySlot.name);
+        //}
     }
 }

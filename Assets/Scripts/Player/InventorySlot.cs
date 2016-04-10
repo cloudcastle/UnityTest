@@ -117,4 +117,8 @@ public class InventorySlot : MonoBehaviour
 
         GetComponent<Poolable>().ReturnToPool();
     }
+
+    void Update() {
+        name = item == null ? "Empty slot" : String.Format("Slot ({0})", item.name);
+    }
 }

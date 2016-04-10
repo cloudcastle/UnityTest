@@ -10,7 +10,8 @@ public class Item : Activatable
     public event Action<Player> onPick = (p) => { };
     public event Action<Player> onLose = (p) => { };
 
-    void Start() {
+    public override void Start() {
+        base.Start();
         new ValueTracker<InventorySlot>(v => inventorySlot = v, () => inventorySlot);
     }
 
