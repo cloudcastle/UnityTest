@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using RSG;
+using System;
 
 [RequireComponent(typeof(TransformAnimator))]
 public class InventorySlot : MonoBehaviour
@@ -17,21 +19,48 @@ public class InventorySlot : MonoBehaviour
 
     public ItemTracker itemTracker;
 
+    bool started = false;
+    event Action onStart = () => { };
+
     void Awake() {
         transformAnimator = GetComponent<TransformAnimator>();
     }
 
     void Start() {
+        Debug.Log(string.Format("Inventory Slot start"));
         itemTracker = new ItemTracker(setValue: (v) => item = v, getValue: () => item);
+        new ValueTracker<Inventory>(setValue: (v) => inventory = v, getValue: () => inventory);
         itemTracker.Init(null);
+        onStart();
+        started = true;
+    }
+
+    public IPromise Ready() {
+        if (started) {
+            return Promise.Resolved();
+        }
+        var result = new Promise();
+        Debug.Log("new promise created");
+        onStart += result.Resolve;
+        return result;
+    }
+
+    void Subscribe(Inventory inventory) {
+        inventory.onChanged += OnInventoryChanged;
+        inventory.onSkipAnimation += OnSkipAnimation;
+    }
+
+    void Unsubscribe(Inventory inventory) {
+        this.inventory.onChanged -= OnInventoryChanged;
+        inventory.onSkipAnimation -= OnSkipAnimation;
     }
 
     public void Init(Inventory inventory, Item item) {
         if (this.inventory != inventory) {
             if (this.inventory != null) {
-                this.inventory.onChanged -= OnInventoryChanged;
+                Unsubscribe(this.inventory);
             }
-            inventory.onChanged += OnInventoryChanged;
+            Subscribe(inventory);
         }
 
         this.inventory = inventory;
@@ -61,13 +90,15 @@ public class InventorySlot : MonoBehaviour
     }
 
     void OnInventoryChanged() {
-        if (item != null) {
-            if (inventory.items.Contains(item)) {
-                transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), TimeManager.GameTime + animationDelay));
-            } else {
-                Free();
-            }
+        if (inventory.items.Contains(item)) {
+            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), TimeManager.GameTime + animationDelay));
+        } else {
+            Free();
         }
+    }
+
+    void OnSkipAnimation() {
+        transformAnimator.SkipAnimation();
     }
 
     public void Free() {
@@ -77,7 +108,9 @@ public class InventorySlot : MonoBehaviour
             item.GetComponent<Rigidbody>().isKinematic = false;
         }
 
+        Unsubscribe(inventory);
         item = null;
+        inventory = null;
 
         GetComponent<Poolable>().ReturnToPool();
     }

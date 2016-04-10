@@ -6,7 +6,6 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance;
 
-    public FloatTracker timeTracker;
     public static IPromiseTimer promiseTimer;
 
     public bool pauseOnStart;
@@ -88,8 +87,12 @@ public class TimeManager : MonoBehaviour
     }
 
     void Start() {
-        timeTracker = new FloatTracker((x) => gameTime = x, () => gameTime);
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
+        Undo.instance.onUndo += OnUndo;
+    }
+
+    void OnUndo() {
+        gameTime = Undo.instance.time;
     }
 
     public static IPromise WaitFor(float time) {

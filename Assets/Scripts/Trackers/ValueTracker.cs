@@ -7,6 +7,10 @@ using System;
 [Serializable]
 public class ValueTracker<T>
 {
+    string name;
+
+    static int cnt;
+
     public int sampleCount;
 
     [SerializeField]
@@ -28,6 +32,9 @@ public class ValueTracker<T>
         Undo.instance.onTrack += Track;
         Undo.instance.onPushSampleCount += PushSampleCount;
         Undo.instance.onDrop += new Action(Drop);
+        ++cnt;
+        name = String.Format("VT-{1}-{0}", cnt, typeof(T));
+        //Debug.Log(String.Format("Created valueTracker: {0}", name));
     }
 
     public void Init(T value = default(T)) {
@@ -47,18 +54,10 @@ public class ValueTracker<T>
     }
 
     void Track() {
-        //if (this is ItemTracker) {
-        //    Debug.Log("ItemTracker track: " + track.ExtToString());
-        //}
         if (track.Count > 0 && isActual(track.Peek().value)) {
-            //if (this is ItemTracker) {
-            //    Debug.Log("ItemTracker consider actual: " + (track.Count > 0 ? track.Peek().value : default(T)));
-            //}
             return;
-        }
-        //if (this is ItemTracker) {
-        //    Debug.Log("ItemTracker consider not actual: " + (track.Count > 0 ? track.Peek().value : default(T)));
-        //}
+        } 
+        //Debug.Log(String.Format("tracker {0} consider not actual: {1}", name, track.Count > 0 ? track.Peek().value : default(T)));
         track.Push(new TimedValue<T>(getValue(), Undo.instance.time));
         sampleCount = track.Count;
     }

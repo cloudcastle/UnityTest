@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TransformAnimator : MonoBehaviour
+public class TransformAnimator : Script
 {
     const float eps = 1e-5f;
 
@@ -10,7 +10,8 @@ public class TransformAnimator : MonoBehaviour
 
     public bool animating = false;
 
-    void Start() {
+    public override void InitInternal() {
+        Debug.Log("TransformAnimator.InitInternal");
         new ValueTracker<TimedValue<TransformState>>(v => previous = v, () => previous);
         new ValueTracker<TimedValue<TransformState>>(v => target = v, () => target);
         new BoolTracker(v => animating = v, () => animating);
@@ -34,5 +35,11 @@ public class TransformAnimator : MonoBehaviour
         this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localScale), TimeManager.GameTime);
         this.target = target;
         animating = true;
+    }
+
+    public void SkipAnimation() {
+        transform.localPosition = target.value.position;
+        transform.localScale = target.value.scale;
+        animating = false;
     }
 }

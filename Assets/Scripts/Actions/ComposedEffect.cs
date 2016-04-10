@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using RSG;
+using System;
 
 public class ComposedEffect : Effect
 {
@@ -11,8 +13,7 @@ public class ComposedEffect : Effect
         effects = this.GetComponentsInDirectChildren<Effect>();
     }
 
-    public override bool Run() {
-        effects.ForEach(effect => effect.Run());
-        return true;
+    public override IPromise Run() {
+        return Promise.Sequence(effects.Select(effect => (Func<IPromise>)(effect.Run)));
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using RSG;
 
 public class LiftLowerWaitRaise : Effect
 {
@@ -71,13 +72,13 @@ public class LiftLowerWaitRaise : Effect
         }
     }
 
-    public override bool Run()
+    public override IPromise Run()
     {
         if (!Ready()) {
-            return false;
+            return Promise.Resolved();
         }
         state = MovingDown;
-        return true;
+        return Promise.Resolved();
     }
 
     public override bool Ready() {

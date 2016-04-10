@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using RSG;
 
 public class Inventory : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Inventory : MonoBehaviour
     public Item selected;
 
     public event Action onChanged = () => { };
+    public event Action onSkipAnimation = () => { };
 
     public ItemListShallowTracker itemTracker;
 
@@ -36,9 +38,11 @@ public class Inventory : MonoBehaviour
             setList: (v) => slotPool.pool = v,
             getList: () => slotPool.pool
         );
+        new ValueTracker<Action>(v => onChanged = v, () => onChanged);
+        new ValueTracker<Action>(v => onSkipAnimation = v, () => onSkipAnimation);
     }
 
-    public void Pick(Item item) {
+    public IPromise Pick(Item item, bool animate = true) {
         items.Add(item);
         selected = item;
 
@@ -50,6 +54,11 @@ public class Inventory : MonoBehaviour
         slot.Init(this, item);
 
         onChanged();
+        if (animate == false) {
+            SkipAnimation();
+        }
+
+        return slot.Ready();
     }
 
     public void Lose(Item item) {
@@ -88,6 +97,10 @@ public class Inventory : MonoBehaviour
         }
         selected = items.CyclicNext(selected, delta);
         onChanged();
+    }
+
+    void SkipAnimation() {
+        onSkipAnimation();
     }
 
     void Update() {
