@@ -7,7 +7,7 @@ using System;
 [Serializable]
 public class ValueTracker<T>
 {
-    string name;
+    public string name;
 
     static int cnt;
 
