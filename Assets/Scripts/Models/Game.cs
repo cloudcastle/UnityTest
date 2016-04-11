@@ -93,6 +93,7 @@ public class Game
         var stretch = new Level("Stretch", greenCabin);
         var triple = new Level("Triple", greenCabin, redCabin, blueCabin);
         var keySequence = new Level("Key sequence", triple);
+        var keyChain = new Level("Key chain", triple);
 
         // Keys Tricks
         var walkthrough = new Level("Walkthrough", cleanHands);
