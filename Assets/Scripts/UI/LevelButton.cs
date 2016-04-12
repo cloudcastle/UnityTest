@@ -41,16 +41,24 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             comments.text = "";
         }
         levelName.color = GetColor();
-        comments.color = hidden;
         hotkey.enabled = level == GameManager.game.AvailableLevelsInReverseUnlockOrder().FirstOrDefault();
+        NotUnderPointer();
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
+        UnderPointer();
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        NotUnderPointer();
+    }
+
+    void UnderPointer() {
         comments.color = GetColor();
         comments.text = "Unlocked by: " + level.dependencies.ExtToString(format: "{0}");
     }
 
-    public void OnPointerExit(PointerEventData eventData) {
+    void NotUnderPointer() {
         if (hotkey.enabled) {
             comments.color = GetColor();
             comments.text = "[Space] to play";
