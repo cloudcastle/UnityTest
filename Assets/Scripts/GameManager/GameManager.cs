@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
             firstAwake = false;
 
             UpdateGameVersion();
+            Save();
 
             if (!Application.isEditor) {
                 Play(game.currentLevel);
@@ -37,9 +38,11 @@ public class GameManager : MonoBehaviour
 
     public void CompleteLevel() {
         var level = CurrentLevel();
-        game.completedLevels.Add(level);
+        if (!level.Completed()) {
+            game.completedLevels.Add(level);
+        }
         Save();
-        UI.instance.CompletionScreen();
+        UI.instance.Map();
     }
 
     public void Pause() {
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
         if (!game.levels.Contains(game.currentLevel)) {
             game.currentLevel = game.AvailableLevelsInUnlockOrder().First();
         }
+        game.completedLevels = game.completedLevels.Distinct().ToList();
     }
 
     void Update() {

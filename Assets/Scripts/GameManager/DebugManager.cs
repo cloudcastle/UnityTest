@@ -15,7 +15,7 @@ public class DebugManager : MonoBehaviour
     void Update() {
         levels = GameManager.game.levels.Select(level => level.name).ToList();
         availableLevels = GameManager.game.AvailableLevelsInUnlockOrder().Select(level => level.name).ToList();
-        completedLevels = GameManager.game.levels.Where(l => l.Completed()).Select(level => level.name).ToList();
+        completedLevels = GameManager.game.completedLevels.Select(level => level.name).ToList();
 
         levelsUnlockOrders = GameManager.game.levels.Select(level => String.Format("{0} unlocked at {1}", level, level.UnlockOrder())).ToList();
     }
