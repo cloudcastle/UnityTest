@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     public Text levelName;
@@ -12,6 +13,7 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     Level level;
     Image image;
     Button button;
+    Hotkey hotkey;
 
     Color completedColor = Color.green;
     Color unlockedColor = Color.white;
@@ -20,6 +22,7 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Awake() {
         image = GetComponentInChildren<Image>();
         button = GetComponent<Button>();
+        hotkey = GetComponent<Hotkey>();
         button.onClick.AddListener(() => {
             GameManager.instance.Play(level);
         });
@@ -39,13 +42,20 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
         levelName.color = GetColor();
         comments.color = hidden;
+        hotkey.enabled = level == GameManager.game.AvailableLevelsInReverseUnlockOrder().FirstOrDefault();
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
         comments.color = GetColor();
+        comments.text = "Unlocked by: " + level.dependencies.ExtToString(format: "{0}");
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        comments.color = hidden;
+        if (hotkey.enabled) {
+            comments.color = GetColor();
+            comments.text = "[Space] to play";
+        } else {
+            comments.color = hidden;
+        }
     }
 }
