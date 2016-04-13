@@ -44,7 +44,7 @@ public class LevelGraph : MonoBehaviour
             });
             levelEdges.ForEach(e => {
                 if (!levels.Find(l => l.name == e.to.levelName).dependencies.Any(d => d.name == e.from.levelName)) {
-                    Destroy(e.gameObject);
+                    DestroyImmediate(e.gameObject);
                 }
             });
         }

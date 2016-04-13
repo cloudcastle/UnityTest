@@ -122,7 +122,6 @@ public class Game
                 });
                 if (excessDependency != null) {
                     level.dependencies.Remove(excessDependency);
-                    Debug.LogFormat("Removed excess dependency {0} - {1}", excessDependency, level);
                     changed = true;
                 }
             });
