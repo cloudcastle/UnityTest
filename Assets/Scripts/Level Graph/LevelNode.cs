@@ -8,6 +8,7 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class LevelNode : MonoBehaviour
 {
+    public TextMesh textMesh;
     public string levelName;
     public bool visible = true;
     new MeshRenderer renderer;
@@ -19,6 +20,8 @@ public class LevelNode : MonoBehaviour
     void Update() {
         if (Extensions.Editor()) {
             gameObject.name = levelName;
+            textMesh.text = levelName;
+            textMesh.transform.localScale /= textMesh.GetComponent<Renderer>().bounds.extents.magnitude * 2;
             renderer.enabled = visible; 
         }
     }

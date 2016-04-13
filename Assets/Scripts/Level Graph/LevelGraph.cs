@@ -15,37 +15,33 @@ public class LevelGraph : MonoBehaviour
         if (Extensions.Editor()) {
             var levels = GameManager.game.levels;
             var levelNodes = FindObjectsOfType<LevelNode>().ToList();
-            var levelEdges = FindObjectsOfType<LevelEdge>().ToList();
+            FindObjectsOfType<LevelEdge>().ToList().ForEach(le => DestroyImmediate(le.gameObject));
+
             levels.ForEach(level => {
-                if (levelNodes.Any(n => n.levelName == level.name)) {
-                    return;
+                var position = unplacedNodes.position;
+                var node = levelNodes.FirstOrDefault(n => n.levelName == level.name);
+                if (node != null) {
+                    position = node.transform.position;
+                DestroyImmediate(node.gameObject);
                 }
                 var nodeObject = Instantiate(nodeSample) as GameObject;
-                var node = nodeObject.GetComponent<LevelNode>();
+                node = nodeObject.GetComponent<LevelNode>();
                 node.levelName = level.name;
-                levelNodes.Add(node);
-                node.transform.position = unplacedNodes.position;
+                node.transform.position = position;
                 node.transform.SetParent(nodes);
-            });
+            }); 
+            levelNodes = FindObjectsOfType<LevelNode>().ToList();
             levels.ForEach(level => {
                 var to = levelNodes.Find(n => n.levelName == level.name);
                 level.dependencies.ForEach(dependency => {
                     var from = levelNodes.Find(n => n.levelName == dependency.name);
-                    if (levelEdges.Any(e => e.from == from && e.to == to)) {
-                        return;
-                    }
+                    Debug.Log("from, to = " + from + to);
                     var edgeObject = Instantiate(edgeSample) as GameObject;
                     var edge = edgeObject.GetComponent<LevelEdge>();
                     edge.from = from;
                     edge.to = to;
-                    levelEdges.Add(edge);
                     edge.transform.SetParent(edges);
                 });
-            });
-            levelEdges.ForEach(e => {
-                if (!levels.Find(l => l.name == e.to.levelName).dependencies.Any(d => d.name == e.from.levelName)) {
-                    DestroyImmediate(e.gameObject);
-                }
             });
         }
     }
