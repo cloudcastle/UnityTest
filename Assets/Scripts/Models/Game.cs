@@ -106,6 +106,30 @@ public class Game
 
         currentLevel = click;
         current = null;
+
+        ClearDependencies();
+    }
+
+    private void ClearDependencies() {
+        while (true) {
+            bool changed = false;
+            levels.ForEach(level => {
+                var excessDependency = level.dependencies.FirstOrDefault(dependency => {
+                    var dependenciesExceptCurrent = level.dependencies.ShallowClone();
+                    dependenciesExceptCurrent.Remove(dependency);
+                    var transitiveDependencies = Algorithms.Reachable<Level>(level, l => l == level ? dependenciesExceptCurrent : l.dependencies);
+                    return transitiveDependencies.Contains(dependency);
+                });
+                if (excessDependency != null) {
+                    level.dependencies.Remove(excessDependency);
+                    Debug.LogFormat("Removed excess dependency {0} - {1}", excessDependency, level);
+                    changed = true;
+                }
+            });
+            if (!changed) {
+                break;
+            }
+        }
     }
 
     public List<Level> AvailableLevelsInUnlockOrder() {

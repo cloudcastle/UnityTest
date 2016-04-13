@@ -36,7 +36,14 @@ public class GameManager : MonoBehaviour
         return game.levels.FirstOrDefault(level => level.name == SceneManager.GetActiveScene().name);
     }
 
+    public bool OnLevel() {
+        return CurrentLevel() != null;
+    }
+
     public void CompleteLevel() {
+        if (!OnLevel()) {
+            return;
+        }
         var level = CurrentLevel();
         if (!level.Completed()) {
             game.completedLevels.Add(level);
@@ -46,7 +53,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void Pause() {
-        UI.instance.PauseScreen();
+        if (OnLevel()) {
+            UI.instance.PauseScreen();
+        }
     }
 
     public void Resume() {
@@ -54,9 +63,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void Restart() {
-        UI.instance.Confirm(() => {
-            Play(CurrentLevel());
-        }, "Restart");
+        if (CurrentLevel() != null) {
+            UI.instance.Confirm(() => {
+                Play(CurrentLevel());
+            }, "Restart");
+        }
     }
 
     public void Play(Level level) {

@@ -30,17 +30,6 @@ namespace Solver
             return state.position.isExit;
         }
 
-        public static void Dfs(Puzzle puzzle, HashSet<State> reachedStates, State start) {
-            if (reachedStates.Contains(start)) {
-                return;
-            }
-            reachedStates.Add(start);
-            List<State> nextStates = NextStates(puzzle, start);
-            nextStates.ForEach(nextState => {
-                Dfs(puzzle, reachedStates, nextState);
-            });
-        }
-
         public static void Bfs(Puzzle puzzle, HashSet<State> reachedStates, State start) {
             Queue<State> queue = new Queue<State>();
             queue.Enqueue(start);
