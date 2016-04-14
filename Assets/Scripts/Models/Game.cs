@@ -26,7 +26,8 @@ public class Game
         var mouseMove = new Level("MouseMove", depends: click);
         var wasd = new Level("WASD", depends: mouseMove);
         var escape = new Level("Escape", depends: wasd);
-        var space = new Level("Space", depends: wasd);
+        var fall = new Level("Fall", wasd);
+        var space = new Level("Space", depends: fall);
 
         // Moving Surfaces Intro
         var ride = new Level("Ride", space);
@@ -39,9 +40,9 @@ public class Game
         var precaution = new Level("Precaution", depends: order);
 
         // Lifts
-        var stairs = new Level("Stairs", depends: precaution);
-        var twoPits = new Level("Two pits", depends: precaution);
-        var hold = new Level("Hold", depends: precaution);
+        var stairs = new Level("Stairs", precaution, f);
+        var twoPits = new Level("Two pits", precaution, f);
+        var hold = new Level("Hold", precaution, f);
         // Lifts II
         var ascention = new Level("Ascention", depends: hold);
         var launch = new Level("Launch", depends: hold);
@@ -57,7 +58,6 @@ public class Game
         // Jumps Intro
         var gap = new Level("Gap", shift, space);
         var spring = new Level("Spring", gap);
-        var fall = new Level("Fall", wasd);
 
         // Controls
         var r = new Level("R", fall);
@@ -69,10 +69,10 @@ public class Game
         var malapropos = new Level("Malapropos", phase);
 
         // Jumps
-        var sixBoxes = new Level("Six boxes", gap, z);
-        var climb = new Level("Climb", gap, z);
-        var snake = new Level("Snake", spring);
         var string_ = new Level("String", r);
+        var climb = new Level("Climb", gap, z, string_);
+        var sixBoxes = new Level("Six boxes", climb);
+        var snake = new Level("Snake", spring, sixBoxes);
 
         // Keys intro
         var pass = new Level("Pass", wasd);
