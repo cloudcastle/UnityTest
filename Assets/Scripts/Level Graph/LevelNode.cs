@@ -29,6 +29,10 @@ public class LevelNode : MonoBehaviour
         this.level = GameManager.game.levels.First(l => l.name == levelName);
     }
 
+    void Start() {
+        this.level = GameManager.game.levels.First(l => l.name == levelName);
+    }
+
     public bool Hovered() {
         return CameraControl.instance.hovered == this;
     }
