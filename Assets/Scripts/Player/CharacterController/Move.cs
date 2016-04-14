@@ -79,6 +79,7 @@ public class Move : MonoBehaviour
 
         angularVelocity.x = angularVelocity.z = 0;
         transform.Rotate(Time.fixedDeltaTime * angularVelocity, Space.World);
+        angularVelocity.y /= 2;
     }
 
     float currentScale() {

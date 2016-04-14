@@ -31,7 +31,7 @@ public class DynamicTextManager : MonoBehaviour
         for (int i = 0; i < 100; i++) {
             var next = result;
 
-            next = next.Replace("#{lastUnlockedLevel}", GameManager.game.AvailableLevelsInUnlockOrder().Last().name);
+            next = next.Replace("#{lastUnlockedLevel}", GameManager.game.AvailableLevelsInUnlockOrder().Count == 0 ? "" : GameManager.game.AvailableLevelsInUnlockOrder().Last().name);
             next = next.Replace("#{currentLevel}", GameManager.instance.CurrentLevel() == null ? SceneManager.GetActiveScene().name : GameManager.instance.CurrentLevel().name);
             substitutions.ForEach(s => next = s.Use(next));
             if (next == result) {
