@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Linq;
 using System;
 using System.Collections;
@@ -69,10 +71,12 @@ public class LevelNode : MonoBehaviour
         textMesh.transform.localScale /= textMesh.GetComponent<Renderer>().bounds.extents.magnitude * 2;
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Select Children")]
     void UpdateLevelSet() {
         if (Extensions.Editor()) {
             Selection.objects = FindObjectsOfType<LevelEdge>().Where(e => e.from == this).Select(e => e.to.gameObject).ToArray();
         }
     }
+#endif
 }

@@ -8,6 +8,7 @@ public static class FileManager
 {
     public static T LoadFromFile<T>(string filename) where T : class {
         filename = Application.persistentDataPath + "/" + filename;
+        Debug.Log("Loading from: " + filename);
         T result = null;
         FileStream fs = null;
         try {

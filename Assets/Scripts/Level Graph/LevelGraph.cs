@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using System.Linq;
 using UnityEditor.SceneManagement;
+#endif
+using System.Linq;
 
 [ExecuteInEditMode]
 public class LevelGraph : MonoBehaviour
@@ -15,6 +17,7 @@ public class LevelGraph : MonoBehaviour
     [ContextMenu("Update level set")]
     void UpdateLevelSet() {
         if (Extensions.Editor()) {
+#if UNITY_EDITOR
             var levels = GameManager.game.levels;
             var levelNodes = FindObjectsOfType<LevelNode>().ToList();
             FindObjectsOfType<LevelEdge>().ToList().ForEach(le => DestroyImmediate(le.gameObject));
@@ -46,6 +49,7 @@ public class LevelGraph : MonoBehaviour
                 });
             });
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+#endif
         }
     }
 
