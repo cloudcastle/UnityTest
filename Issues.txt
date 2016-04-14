@@ -1,57 +1,92 @@
-UI
-  level map as level?
-  highlight object under straight sight different from object under biased sight
-  lifts timer interface
-  clock
-  level graph text meshes have glitches on some size
+HIGH PRIORITY
+
+[UI] clock
+[UI] check level graph
+[GAMEPLAY] Check ceiling on key levels
+[GAMEPLAY] First three levels looks like the same
+[GAMEPLAY] R -> QE Mouse Wheel dependency
+[GAMEPLAY] Green Cabin -> Pair dependency
+[GAMEPLAY] F <- explain timers
+[GAMEPLAY] Rhythm <- explain multiple lift calls, especially when button is ready again
+[BUG] F: timer does not stop
+
+NORMAL PRIORITY
+
+[UI] [FEATURE] lifts timer interface
+[UI] [BUG] level graph text meshes have glitches on some size
+[PHYSICS] bad physics for walking on items
+[PHYSICS] check clean hands to work being horizontal, due to difference between throw point and pick point of player
+[PHYSICS] [BUG] Bug with stopping fall on fall level
+[GRAPHICS] [BUG] bad shadows from transparent objects, especially on mac
+[GRAPHICS] Multiple semitransparent z-order bug - split big semitransparent surfaces
+[GRAPHICS] Items are semitransparent in inventory under exit button's light
+[GAMEPLAY] too big difficulty gap in lift and jump levels
+[GAMEPLAY] Need easy and fun levels
+[GAMEPLAY] Rare bug with wrong undo for keys
+[GAMEPLAY] Need more control over level graph
+[GAMEPLAY] Repaint ceiling to special ceiling material
+[FEATURE] make camera smooth
+[FEATURE] Multiple profiles
+[FEATURE] [PUZZLE ELEMENT] Switchers
+[FEATURE] [PUZZLE ELEMENT] Triggers
+[FEATURE] [PUZZLE ELEMENT] Twins
+[FEATURE] [PUZZLE ELEMENT] Portals
+[FEATURE] [PUZZLE ELEMENT] Time machine
+[FEATURE] [PUZZLE ELEMENT] Enemies
+[FEATURE] [PUZZLE ELEMENT] Item-to-creature converters
+[FEATURE] [LEVEL] T
+[FEATURE] [LEVEL] M (?)
+[FEATURE] [LEVEL] Throw key - more
+[FEATURE] [LEVEL] Lifts with different wait time
+[FEATURE] [LEVEL] Button launching multiple lifts - more
+[FEATURE] [LEVEL] Doors as bridges - more
+[FEATURE] [LEVEL] Lift restart when hit head
+[FEATURE] [LEVEL] Carousel to jump far
+[FEATURE] [LEVEL] Carousel to throw clear to rotating window
+[FEATURE] music
+[FEATURE] sounds
+[DEVELOPMENT] add auto-check for scenes in build list
+[DEVELOPMENT] search debug from ms visual studio
+[DEVELOPMENT] need prefabs for all common objects
+[DEVELOPMENT] level graph scene changes magically each run
+[PHYSICS] Ball is shaking when clamped to corner
+[GRAPHICS] Ball is lighted in inventory
+[GAMEPLAY] Columns between different types of walls for key levels?
+[PHYSICS] QE mouse wheel: can walk through wall to exit from 2nd floor
+[GAMEPLAY] No interest to level names
+[FEATURE] Mouse only controls
+[FEATURE] Minimap?
+[GAMEPLAY] No level to drop all balls to same place
+[GAMEPLAY] What to do with red ball on Snake level? remove it? add gravity?
+[GAMEPLAY] Rhythm - button box let jump to lift 1
+[FEATURE] [LEVEL] Ï-jumps
+[GAMEPLAY] R is boring
+[GAMEPLAY] more visible walls for R
+[GAMEPLAY] better F tutorial
+[GAMEPLAY] easier Fly
+[GAMEPLAY] easier Bridge?
+
+LOW PRIORITY
+
+[FEATURE] [UI] level map as level?
+[FEATURE] [UI] highlight object under straight sight different from object under biased sight
+[PHYSICS] On plain territory test level there is strange glitch with character physics on ground near closest and furthest corners of building
+[GRAPHICS] elliptic sun
+[GRAPHICS] need landscape or remove sun
+[GAMEPLAY] no reason for some transparent walls
+
+
+
+
+
+
+
   
-PHYSICS
-  bad physics for walking on items
-  check clean hands to work being horizontal, due to difference between throw point and pick point of player
-  On plain territory test level there is strange glitch with character physics on ground near closest and furthest corners of building
-  Bug with stopping fall on fall level
+
+
+
+
   
-GRAPHICS
-  bad shadows from transparent objects, especially on mac
-  elliptic sun
-  Multiple semitransparent z-order bug - split big semitransparent surfaces
-  Items are semitransparent in inventory under exit button's light
+
+
   
-GAMEPLAY
-  too big difficulty gap in lift and jump levels
-  Need easy and fun levels
-  Rare bug with wrong undo for keys
-  Need more control over level graph
-  Check ceiling on key levels
-  Repaint ceiling to special ceiling material
-  
-FEATURES
-  make camera smooth
-  Multiple profiles
-  Puzzle elements:
-    Switchers
-    Triggers
-    Twins
-    Portals
-    Time machine
-    Enemies
-    Item-to-creature converters
-  Need levels:
-    T
-    M (?)
-    Window
-    Throw key
-    Lifts with different wait time
-    Button launching multiple lifts - more
-    Doors as bridges
-    Lift restart when hit head
-    Carousel to jump far
-    Carousel to throw clear to rotating window
-  No music
-  No sounds
-  
-DEVELOPMENT
-  add auto-check for scenes in build list
-  search debug from ms visual studio
-  need prefabs for all common objects
-  level graph scene changes magically each run
