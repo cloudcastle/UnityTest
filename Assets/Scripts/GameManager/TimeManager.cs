@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using RSG;
+using System;
 
 public class TimeManager : MonoBehaviour
 {
@@ -76,6 +77,7 @@ public class TimeManager : MonoBehaviour
     void FixedUpdate()
     {
         gameTime += Time.fixedDeltaTime;
+        DynamicTextManager.instance.Invalidate();
         promiseTimer.Update(Time.fixedDeltaTime);
     }
 
@@ -89,6 +91,10 @@ public class TimeManager : MonoBehaviour
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
         Undo.instance.onUndo += OnUndo;
         gameTime = 0;
+        DynamicTextManager.instance.Substitute("#{gameTime}", () => {
+            var span = TimeSpan.FromSeconds(gameTime); //Or TimeSpan.FromSeconds(seconds); (see Jakob C´s answer)
+            return string.Format("{0}:{1:00}", (int)span.TotalMinutes, span.Seconds);
+        });
     }
 
     void OnUndo() {
