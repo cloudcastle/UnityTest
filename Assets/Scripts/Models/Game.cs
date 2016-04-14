@@ -28,12 +28,15 @@ public class Game
         var escape = new Level("Escape", depends: wasd);
         var space = new Level("Space", depends: wasd);
 
+        // Moving Surfaces Intro
+        var ride = new Level("Ride", space);
+        var f = new Level("F", depends: ride);
+
         // Lifts Intro
         var raise = new Level("Raise", depends: wasd);
         var shift = new Level("Shift", depends: raise);
         var order = new Level("Order", depends: shift);
         var precaution = new Level("Precaution", depends: order);
-        var f = new Level("F", depends: shift);
 
         // Lifts
         var stairs = new Level("Stairs", depends: precaution);
@@ -56,9 +59,6 @@ public class Game
         var spring = new Level("Spring", gap);
         var fall = new Level("Fall", wasd);
 
-        // Moving Surfaces Intro
-        var ride = new Level("Ride", space);
-
         // Controls
         var r = new Level("R", fall);
         var z = new Level("Z", r, ride);
@@ -80,18 +80,18 @@ public class Game
         var cleanHands = new Level("Clean hands", fit);
         var repick = new Level("Repick", cleanHands);
         var rightMouseButton = new Level("Right mouse button", repick);
-        var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton);
+        var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton, r);
 
         // Keys
-        var blueDoor = new Level("Blue door", qeMouseWheel);
-        var pair = new Level("Pair", qeMouseWheel);
-        var merge = new Level("Merge", qeMouseWheel);
-        var push = new Level("Push", merge);
         var greenCabin = new Level("Green Cabin", qeMouseWheel);
+        var blueDoor = new Level("Blue door", greenCabin);
+        var merge = new Level("Merge", greenCabin);
+        var push = new Level("Push", merge);
         var blueCabin = new Level("Blue cabin", greenCabin);
         var redCabin = new Level("Red cabin", greenCabin);
         var stretch = new Level("Stretch", greenCabin);
         var triple = new Level("Triple", greenCabin, redCabin, blueCabin);
+        var pair = new Level("Pair", triple);
         var keySequence = new Level("Key sequence", triple);
         var keyChain = new Level("Key chain", triple);
 
