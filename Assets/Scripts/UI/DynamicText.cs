@@ -3,8 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System;
 
-public class DynamicText : UIScreen
+public class DynamicText : MonoBehaviour
 {
     Text text;
     string format;
@@ -14,22 +16,12 @@ public class DynamicText : UIScreen
         format = text.text;
     }
 
-    void Start() {
-        text.text = BuildText();
-        Debug.Log("Builded text: " + text.text);
+    void UpdateText() {
+        text.text = DynamicTextManager.instance.BuildText(format);
     }
 
-    string BuildText() {
-        var result = format;
-        for (int i = 0; i < 100; i++) {
-            var next = result;
-            next = next.Replace("#{lastUnlockedLevel}", GameManager.game.AvailableLevelsInUnlockOrder().Last().name);
-            next = next.Replace("#{currentLevel}", GameManager.instance.CurrentLevel() == null ? SceneManager.GetActiveScene().name : GameManager.instance.CurrentLevel().name);
-            if (next == result) {
-                break;
-            }
-            result = next;
-        }
-        return result;
+    void Start() {
+        UpdateText();
+        DynamicTextManager.instance.onInvalidate += UpdateText;
     }
 }

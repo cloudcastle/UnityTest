@@ -7,18 +7,20 @@ public class Cheats : MonoBehaviour
 {
     public static bool on = false;
 
-    void Awake() {
+    void Start() {
         Enable(on);
     }
 
     void Enable(bool on) {
         Debug.Log(string.Format("Cheats {0}", on ? "on" : "off"));
         Cheats.on = on;
-        FindObjectOfType<Jetpack>().enabled = on;
 
-        var map = FindObjectOfType<MapScreen>();
-        if (map != null) {
-            map.UpdateLevelList();
+        if (GameManager.instance.OnLevel()) {
+            FindObjectOfType<Jetpack>().enabled = on;
+            var map = FindObjectOfType<MapScreen>();
+            if (map != null) {
+                map.UpdateLevelList();
+            }
         }
     }
 

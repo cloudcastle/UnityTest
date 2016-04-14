@@ -11,7 +11,6 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     
     [NonSerialized]
     Level level;
-    Image image;
     Button button;
     Hotkey hotkey;
 
@@ -20,7 +19,6 @@ public class LevelButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     Color hidden = new Color(0, 0, 0, 0);
 
     void Awake() {
-        image = GetComponentInChildren<Image>();
         button = GetComponent<Button>();
         hotkey = GetComponent<Hotkey>();
         button.onClick.AddListener(() => {

@@ -1377,6 +1377,7 @@ GameObject:
   - 114: {fileID: 11436280}
   - 114: {fileID: 11427698}
   - 114: {fileID: 11477694}
+  - 114: {fileID: 11437992}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3136,6 +3137,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &11437992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e4170f5662485458a95bd9bad3c8ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11438496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3943,12 +3955,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed269134fb3b05f488192b4fb67c5315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confirmationScreen: {fileID: 11466068}
+  optionsScreen: {fileID: 11476314}
   completionScreen: {fileID: 11494380}
   map: {fileID: 11438496}
   pauseScreen: {fileID: 11436710}
-  confirmationScreen: {fileID: 11466068}
   enteringScreen: {fileID: 11471360}
-  optionsScreen: {fileID: 11476314}
   forceSlider: {fileID: 11476486}
 --- !u!114 &11465116
 MonoBehaviour:

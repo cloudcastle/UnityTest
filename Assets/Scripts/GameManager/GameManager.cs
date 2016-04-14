@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public const string levelGraph = "Graph";
+
     static bool firstAwake = true;
 
     static InstanceData instanceData = new InstanceData();
@@ -36,27 +38,38 @@ public class GameManager : MonoBehaviour
         return game.levels.FirstOrDefault(level => level.name == SceneManager.GetActiveScene().name);
     }
 
+    public bool OnLevel() {
+        return CurrentLevel() != null;
+    }
+
     public void CompleteLevel() {
+        if (!OnLevel()) {
+            return;
+        }
         var level = CurrentLevel();
         if (!level.Completed()) {
             game.completedLevels.Add(level);
         }
         Save();
-        UI.instance.Map();
+        LevelUI.instance.Map();
     }
 
     public void Pause() {
-        UI.instance.PauseScreen();
+        if (OnLevel()) {
+            LevelUI.instance.PauseScreen();
+        }
     }
 
     public void Resume() {
-        UI.instance.Game();
+        LevelUI.instance.Game();
     }
 
     public void Restart() {
-        UI.instance.Confirm(() => {
-            Play(CurrentLevel());
-        }, "Restart");
+        if (CurrentLevel() != null) {
+            LevelUI.instance.Confirm(() => {
+                Play(CurrentLevel());
+            }, "Restart");
+        }
     }
 
     public void Play(Level level) {
@@ -76,17 +89,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void Map() {
-        UI.instance.Confirm(() => {
-            UI.instance.Map();
+        LevelUI.instance.Confirm(() => {
+            LevelUI.instance.Map();
         }, "Map");
     }
 
     public void MapNoConfirm() {
-        UI.instance.Map();
+        LevelUI.instance.Map();
     }
 
     public void Options() {
-        UI.instance.OptionsScreen();
+        LevelUI.instance.OptionsScreen();
     }
 
     public void Save() {

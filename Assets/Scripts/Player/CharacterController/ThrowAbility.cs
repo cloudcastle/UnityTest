@@ -18,7 +18,7 @@ public class ThrowAbility : MonoBehaviour
     float throwDelay = 0.04f;
 
     public void UpdateForce() {
-        UI.instance.ShowForce(currentForce / maxForce);
+        LevelUI.instance.ShowForce(currentForce / maxForce);
     }
 
     void Reset() {

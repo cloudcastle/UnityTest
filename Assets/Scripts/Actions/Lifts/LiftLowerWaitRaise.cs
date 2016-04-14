@@ -109,6 +109,7 @@ public class LiftLowerWaitRaise : Effect
         state();
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Tracker to All Lifts")]
     void TrackersToAllLifts() {
         FindObjectsOfType<LiftLowerWaitRaise>().ToList().ForEach(lift => {
@@ -118,4 +119,5 @@ public class LiftLowerWaitRaise : Effect
             }
         });
     }
+#endif
 }
