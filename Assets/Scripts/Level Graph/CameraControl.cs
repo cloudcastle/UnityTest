@@ -2,10 +2,19 @@
 
 public class CameraControl : MonoBehaviour
 {
+    public static CameraControl instance;
+
     float zoomSpeed = 1.1f;
     Vector3 draggingWorldPoint;
 
     new Camera camera;
+
+    RaycastHit hit;
+    public LevelNode hovered;
+
+    void Awake() {
+        instance = this;
+    }
 
     void OnEnable() {
         camera = GetComponent<Camera>();
@@ -31,6 +40,15 @@ public class CameraControl : MonoBehaviour
         if (Input.GetMouseButton(1)) {
             var mouseWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.Translate(draggingWorldPoint - mouseWorldPoint);
+        }
+
+        this.hovered = null;
+        Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);
+        if (hit.collider != null) {
+            var hoveredNode = hit.collider.GetComponent<LevelNode>();
+            if (hoveredNode != null) {
+                this.hovered = hoveredNode;
+            }
         }
     }
 }

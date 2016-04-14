@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Linq;
+using UnityEditor.SceneManagement;
 
 [ExecuteInEditMode]
 public class LevelGraph : MonoBehaviour
@@ -22,27 +24,28 @@ public class LevelGraph : MonoBehaviour
                 var node = levelNodes.FirstOrDefault(n => n.levelName == level.name);
                 if (node != null) {
                     position = node.transform.position;
-                DestroyImmediate(node.gameObject);
+                    DestroyImmediate(node.gameObject);
                 }
-                var nodeObject = Instantiate(nodeSample) as GameObject;
+                var nodeObject = PrefabUtility.InstantiatePrefab(nodeSample) as GameObject;
                 node = nodeObject.GetComponent<LevelNode>();
                 node.levelName = level.name;
                 node.transform.position = position;
                 node.transform.SetParent(nodes);
-            }); 
+            });
             levelNodes = FindObjectsOfType<LevelNode>().ToList();
             levels.ForEach(level => {
                 var to = levelNodes.Find(n => n.levelName == level.name);
                 level.dependencies.ForEach(dependency => {
                     var from = levelNodes.Find(n => n.levelName == dependency.name);
                     Debug.Log("from, to = " + from + to);
-                    var edgeObject = Instantiate(edgeSample) as GameObject;
+                    var edgeObject = PrefabUtility.InstantiatePrefab(edgeSample) as GameObject;
                     var edge = edgeObject.GetComponent<LevelEdge>();
                     edge.from = from;
                     edge.to = to;
                     edge.transform.SetParent(edges);
                 });
             });
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
     }
 
