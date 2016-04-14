@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public const string levelGraph = "Graph";
+
     static bool firstAwake = true;
 
     static InstanceData instanceData = new InstanceData();

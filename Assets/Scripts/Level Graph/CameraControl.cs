@@ -41,6 +41,11 @@ public class CameraControl : MonoBehaviour
             var mouseWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.Translate(draggingWorldPoint - mouseWorldPoint);
         }
+        if (Input.GetMouseButtonDown(0)) {
+            if (hovered != null) {
+                GameManager.instance.Play(hovered.level);
+            }
+        }
 
         this.hovered = null;
         Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);

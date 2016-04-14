@@ -71,8 +71,7 @@ public class UI : MonoBehaviour {
     }
 
     public void Map() {
-        Show(map);
-        enteringScreen.Hide();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.levelGraph);
     }
 
     public void Confirm(Action action, string actionName) {

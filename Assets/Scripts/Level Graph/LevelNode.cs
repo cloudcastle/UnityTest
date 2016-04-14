@@ -45,8 +45,8 @@ public class LevelNode : MonoBehaviour
         if (Extensions.Editor()) {
             gameObject.name = levelName;
             textMesh.text = levelName;
-            textMesh.transform.localScale /= textMesh.GetComponent<Renderer>().bounds.extents.magnitude * 2;
             renderer.enabled = visible;
+            UpdateTextMeshSize();
         } else {
             if (level.Completed()) {
                 SetEmission(completedEmission * EmissionMultiplier());
@@ -55,7 +55,14 @@ public class LevelNode : MonoBehaviour
             } else {
                 SetEmission(baseEmission * EmissionMultiplier());
             }
+
+            UpdateTextMeshSize();
         }
+    }
+
+    private void UpdateTextMeshSize() {
+        textMesh.fontSize = (int)(1000f / Camera.main.orthographicSize + 1);
+        textMesh.transform.localScale /= textMesh.GetComponent<Renderer>().bounds.extents.magnitude * 2;
     }
 
     [ContextMenu("Select Children")]
