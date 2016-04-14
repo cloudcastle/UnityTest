@@ -77,8 +77,11 @@ public class TimeManager : MonoBehaviour
     void FixedUpdate()
     {
         gameTime += Time.fixedDeltaTime;
-        DynamicTextManager.instance.Invalidate();
         promiseTimer.Update(Time.fixedDeltaTime);
+    }
+
+    void Update() {
+        DynamicTextManager.instance.Invalidate();
     }
 
     void Awake() {
@@ -103,8 +106,5 @@ public class TimeManager : MonoBehaviour
 
     public static IPromise WaitFor(float time) {
         return promiseTimer.WaitFor(time);
-    }
-
-    void Update() {
     }
 }
