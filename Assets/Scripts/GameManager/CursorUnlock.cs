@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CursorLock : MonoBehaviour
+public class CursorUnlock : MonoBehaviour
 {
     bool lockCursor {
         get {
-            return !TimeManager.Paused;
+            return false;
         }
     }
 
