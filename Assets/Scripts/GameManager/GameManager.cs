@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
             game.completedLevels.Add(level);
         }
         Save();
-        LevelUI.instance.Map();
+        LevelUI.instance.CompletionScreen();
     }
 
     public void Pause() {

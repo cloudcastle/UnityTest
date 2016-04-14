@@ -92,7 +92,7 @@ public class TimeManager : MonoBehaviour
         Undo.instance.onUndo += OnUndo;
         gameTime = 0;
         DynamicTextManager.instance.Substitute("#{gameTime}", () => {
-            var span = TimeSpan.FromSeconds(gameTime); //Or TimeSpan.FromSeconds(seconds); (see Jakob C´s answer)
+            var span = TimeSpan.FromSeconds(gameTime);
             return string.Format("{0}:{1:00}", (int)span.TotalMinutes, span.Seconds);
         });
     }
