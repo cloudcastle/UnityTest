@@ -6,12 +6,12 @@ using System.Collections.Generic;
 public class UI : MonoBehaviour {
     public static UI instance;
 
-    public CompletionScreen completionScreen;
-    public MapScreen map;
-    public PauseScreen pauseScreen;
     public ConfirmationScreen confirmationScreen;
-    public EnteringScreen enteringScreen;
     public OptionsScreen optionsScreen;
+
+    public virtual void Awake() {
+        instance = this;
+    }
 
     public UIScreen CurrentScreen {
         get {
@@ -24,20 +24,11 @@ public class UI : MonoBehaviour {
 
     public Stack<UIScreen> screenStack = new Stack<UIScreen>();
 
-    public UnityEngine.UI.Slider forceSlider;
-
-    void Awake() {
-        instance = this;
-    }
-
-    void HideAllUIScreens() {
-        completionScreen.Hide();
-        map.Hide();
-        pauseScreen.Hide();
+    protected virtual void HideAllUIScreens() {
         optionsScreen.Hide();
     }
 
-    void Show(UIScreen screen) {
+    protected void Show(UIScreen screen) {
         HideAllUIScreens();
         screen.Show();
         TimeManager.Paused = true;
@@ -45,7 +36,7 @@ public class UI : MonoBehaviour {
         screenStack.Push(screen);
     }
 
-    void ShowModal(UIScreen screen) {
+    protected void ShowModal(UIScreen screen) {
         screen.Show();
         TimeManager.Paused = true;
         screenStack.Push(screen);
@@ -57,21 +48,8 @@ public class UI : MonoBehaviour {
         TimeManager.Paused = screenStack.Count > 0;
     }
 
-    public void CompletionScreen() {
-        Show(completionScreen);
-        enteringScreen.Hide();
-    }
-
-    public void PauseScreen() {
-        Show(pauseScreen);
-    }
-
     public void OptionsScreen() {
         ShowModal(optionsScreen);
-    }
-
-    public void Map() {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.levelGraph);
     }
 
     public void Confirm(Action action, string actionName) {
@@ -86,20 +64,5 @@ public class UI : MonoBehaviour {
                 HideModal();
             }
         );
-    }
-
-    public void Game() {
-        HideAllUIScreens();
-        screenStack.Clear();
-        TimeManager.Paused = false;
-    }
-
-    public void ShowForce(float force) {
-        if (force > 0) {
-            forceSlider.gameObject.SetActive(true);
-            forceSlider.value = force;
-        } else {
-            forceSlider.gameObject.SetActive(false);
-        }
     }
 }

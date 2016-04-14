@@ -16,6 +16,22 @@ public class CameraControl : MonoBehaviour
         instance = this;
     }
 
+    void Start() {
+        DynamicTextManager.instance.Substitute("#{hoveredLevelName}", () => hovered == null ? "" : hovered.levelName);
+        DynamicTextManager.instance.Substitute("#{hoveredLevelStatus}", () => {
+            if (hovered == null) {
+                return "";
+            }
+            if (hovered.level.Completed()) {
+                return "completed";
+            }
+            if (hovered.level.Unlocked()) {
+                return "unlocked";
+            }
+            return "locked";
+        });
+    }
+
     void OnEnable() {
         camera = GetComponent<Camera>();
     }
@@ -34,19 +50,21 @@ public class CameraControl : MonoBehaviour
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0) {
             zoom(zoomSpeed);
         }
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) {
             draggingWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
         }
-        if (Input.GetMouseButton(1)) {
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2)) {
             var mouseWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
             transform.Translate(draggingWorldPoint - mouseWorldPoint);
         }
         if (Input.GetMouseButtonDown(0)) {
             if (hovered != null) {
-                GameManager.instance.Play(hovered.level);
+                if (hovered.level.Unlocked()) {
+                    GameManager.instance.Play(hovered.level);
+                }
             }
         }
-
+        var oldHovered = hovered;
         this.hovered = null;
         Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);
         if (hit.collider != null) {
@@ -54,6 +72,9 @@ public class CameraControl : MonoBehaviour
             if (hoveredNode != null) {
                 this.hovered = hoveredNode;
             }
+        }
+        if (oldHovered != hovered) {
+            DynamicTextManager.instance.Invalidate();
         }
     }
 }

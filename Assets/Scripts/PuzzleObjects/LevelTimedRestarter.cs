@@ -22,7 +22,7 @@ public class LevelTimedRestarter : MonoBehaviour
     }
 
     void Update() {
-        if (UI.instance.CurrentScreen == UI.instance.completionScreen) {
+        if (LevelUI.instance.CurrentScreen == LevelUI.instance.completionScreen) {
             gameObject.SetActive(false);
             return;
         }

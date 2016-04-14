@@ -51,22 +51,22 @@ public class GameManager : MonoBehaviour
             game.completedLevels.Add(level);
         }
         Save();
-        UI.instance.Map();
+        LevelUI.instance.Map();
     }
 
     public void Pause() {
         if (OnLevel()) {
-            UI.instance.PauseScreen();
+            LevelUI.instance.PauseScreen();
         }
     }
 
     public void Resume() {
-        UI.instance.Game();
+        LevelUI.instance.Game();
     }
 
     public void Restart() {
         if (CurrentLevel() != null) {
-            UI.instance.Confirm(() => {
+            LevelUI.instance.Confirm(() => {
                 Play(CurrentLevel());
             }, "Restart");
         }
@@ -89,17 +89,17 @@ public class GameManager : MonoBehaviour
     }
 
     public void Map() {
-        UI.instance.Confirm(() => {
-            UI.instance.Map();
+        LevelUI.instance.Confirm(() => {
+            LevelUI.instance.Map();
         }, "Map");
     }
 
     public void MapNoConfirm() {
-        UI.instance.Map();
+        LevelUI.instance.Map();
     }
 
     public void Options() {
-        UI.instance.OptionsScreen();
+        LevelUI.instance.OptionsScreen();
     }
 
     public void Save() {

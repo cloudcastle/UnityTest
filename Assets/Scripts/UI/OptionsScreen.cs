@@ -15,6 +15,6 @@ public class OptionsScreen : UIScreen {
         Debug.Log("Apply options");
         GameManager.game.settings.mouseSpeed = Mathf.Exp(slider.value);
         GameManager.instance.Save();
-        UI.instance.HideModal();
+        LevelUI.instance.HideModal();
     }
 }
