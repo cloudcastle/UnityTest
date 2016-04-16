@@ -5,7 +5,7 @@ public class MainCamera : MonoBehaviour
 {
     public static GameObject instance;
     public TransformAnimator animator;
-    float animationDelay = 0.5f;
+    float animationDelay = 0.25f;
 
     void Awake()
     {

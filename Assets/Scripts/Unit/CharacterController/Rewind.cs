@@ -27,6 +27,9 @@ public class Rewind : Ability
         if (TimeManager.Paused) {
             return;
         }
+        if (Controller != Player.instance) {
+            return;
+        }
         Time.timeScale = (On() ? timeMultiplyer : 1);
         //Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
         RefreshDeltaTime();
