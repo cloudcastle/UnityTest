@@ -105,7 +105,8 @@ public class Game
         var bars = new Level("Bars", wasd);
 
         // Twins Intro
-        //var you = new Level("You", wasd);
+        var you = new Level("You", pass);
+        var gift = new Level("Gift", you, walkthrough);
 
 
         currentLevel = click;

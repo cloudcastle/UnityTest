@@ -14,7 +14,7 @@ public class StopRolling : MonoBehaviour
     }
 
     void FixedUpdate() {
-        var extinction = Mathf.Pow(2, TimeManager.StoppableFixedDeltaTime);
+        //var extinction = Mathf.Pow(2, TimeManager.StoppableFixedDeltaTime);
         if (Input.GetKey(KeyCode.X)) {
             rigidBody.velocity /= 1.001f;
             rigidBody.angularVelocity /= 1.001f;

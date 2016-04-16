@@ -266,7 +266,9 @@ GameObject:
   - 114: {fileID: 11466032}
   - 114: {fileID: 11430998}
   - 114: {fileID: 11461146}
-  m_Layer: 0
+  - 114: {fileID: 11478582}
+  - 114: {fileID: 11411426}
+  m_Layer: 12
   m_Name: Player Main Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1274,7 +1276,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 45559e483d8db23458ac38676692ca57, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1379,6 +1381,21 @@ MonoBehaviour:
   highlightEmission: {r: 0.4, g: 0.4, b: 0.4, a: 1}
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
   on: 0
+--- !u!114 &11411426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ba556ba7a114b4b9c5df9a6b43a3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightEmission: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+  baseEmission: {r: 0, g: 0, b: 0, a: 1}
+  notReadyEmission: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  lightPartOutOfRange: 0.5
 --- !u!114 &11417168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1879,6 +1896,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
   verticalRotateSpeed: 6
+--- !u!114 &11478582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867a4395a7d135545856a5e9a8956652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 0
+  useActivatorMaxDistance: 1
+  allowBiasedActivation: 1
+  target: {fileID: 11499482}
 --- !u!114 &11479660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2144,6 +2176,7 @@ MonoBehaviour:
   eye: {fileID: 11456928}
   inventory: {fileID: 11434486}
   lastPositionKeeper: {fileID: 11419060}
+  head: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &11499754
 MonoBehaviour:

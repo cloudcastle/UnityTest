@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour
     public Eye eye;
     public Inventory inventory;
     public LastPositionKeeper lastPositionKeeper;
+    public Head head;
 
     public UnitController controller;
 
@@ -19,8 +20,12 @@ public class Unit : MonoBehaviour
         eye = GetComponentInChildren<Eye>();
         inventory = GetComponentInChildren<Inventory>();
         lastPositionKeeper = GetComponentInChildren<LastPositionKeeper>();
+        head = GetComponentInChildren<Head>();
 
         all.Add(this);
+    }
+
+    void Start() {
         if (controller == null) {
             controller = EmptyUnitController.instance;
         }

@@ -8,10 +8,16 @@ public abstract class UnitController : MonoBehaviour
     public event Action<Unit> onGainControl = (u) => { };
     public event Action<Unit> onLoseControl = (u) => { };
 
-    public void Control(Unit unit) {
+    public void GainControl(Unit unit) {
         unit.controller.onLoseControl(unit);
         unit.controller = this;
         this.onGainControl(unit);
+    }
+
+    public void LoseControl(Unit unit) {
+        unit.controller = EmptyUnitController.instance;
+        this.onLoseControl(unit);
+        unit.controller.onGainControl(unit);
     }
 
     public abstract bool Activate();

@@ -5,6 +5,6 @@ using System.Collections.Generic;
 public class StartUnit : Ability
 {
     void Start() {
-        Player.instance.Control(unit);
+        Player.instance.GainControl(unit);
     }
 }

@@ -6,15 +6,34 @@ public class Player : UnitController
 {
     public static Player instance;
 
+    public Transform mainCamera;
+
     public Unit current;
+
+    public Cooldown possessCooldown;
 
     void Awake() {
         instance = this;
+        mainCamera = Camera.main.transform;
         onGainControl += OnGainControl;
+    }
+
+    void Start() {
+         possessCooldown = new Cooldown(0.25f);
     }
 
     void OnGainControl(Unit unit) {
         current = unit;
+    }
+
+    public void Possess(Unit unit) {
+        if (possessCooldown.OnCooldown()) {
+            return;
+        }
+        possessCooldown.StartCooldown();
+        LoseControl(current);
+        GainControl(unit);
+        mainCamera.SetParent(unit.head.transform, worldPositionStays: false);
     }
 
     public override bool Activate() {

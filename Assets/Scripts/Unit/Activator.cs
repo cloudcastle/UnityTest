@@ -20,7 +20,7 @@ public class Activator : Ability
 
     public override void Awake() {
         base.Awake();
-        activatableLayerMask = LayerMask.GetMask("Ghost", "Item");
+        activatableLayerMask = LayerMask.GetMask("Ghost", "Item", "Activatable");
     }
 
     void Start() {
@@ -40,13 +40,32 @@ public class Activator : Ability
     }
 
     private void LocateCurrentActivatable() {
+        LocateDirectSightActivatable();
+        if (current != null) {
+            return;
+        }
+        LocateBiasedActivatable();
+    }
+
+    private void LocateDirectSightActivatable() {
+        if (unit.eye.underSight != null) {
+            var activatable = unit.eye.underSight.GetComponent<Activatable>();
+            if (activatable != null) {
+                if (unit.eye.distance < activatable.EffectiveMaxDistance(this)) {
+                    current = activatable;
+                }
+            }
+        }
+    }
+
+    private void LocateBiasedActivatable() {
         int cnt = Physics.OverlapSphereNonAlloc(transform.position, maxDistance, sphereCastResults, activatableLayerMask);
         if (cnt >= MAX_SPHERE_CAST_RESULTS) {
             Debug.LogError("MAX_SPHERE_CAST_RESULTS exceeded");
         }
         for (int i = 0; i < cnt; i++) {
             var radiusVector = sphereCastResults[i].transform.position - transform.position;
-            var biasAngle =  Vector3.Angle(transform.forward, radiusVector);
+            var biasAngle = Vector3.Angle(transform.forward, radiusVector);
             if (biasAngle < maxBiasAngle) {
                 Physics.Raycast(transform.position, radiusVector, out hit);
                 if (hit.collider == null) {

@@ -47,14 +47,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void CompleteLevel() {
-        if (!OnLevel()) {
-            return;
+        if (OnLevel()) {
+            var level = CurrentLevel();
+            if (!level.Completed()) {
+                game.completedLevels.Add(level);
+            }
+            Save();
         }
-        var level = CurrentLevel();
-        if (!level.Completed()) {
-            game.completedLevels.Add(level);
-        }
-        Save();
         LevelUI.instance.CompletionScreen();
     }
 
