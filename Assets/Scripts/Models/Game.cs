@@ -107,6 +107,7 @@ public class Game
         // Twins Intro
         var you = new Level("You", pass);
         var gift = new Level("Gift", you, walkthrough);
+        var giveALift = new Level("Give a lift", you, raise);
 
 
         currentLevel = click;
