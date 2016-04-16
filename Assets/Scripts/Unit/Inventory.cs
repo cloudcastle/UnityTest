@@ -10,6 +10,7 @@ public class Inventory : Ability
     public GameObject line;
 
     public Pool slotPool;
+    public Transform inventoryArea;
 
     public List<Item> items;
 
@@ -40,6 +41,9 @@ public class Inventory : Ability
         );
         new ValueTracker<Action>(v => onChanged = v, () => onChanged);
         new ValueTracker<Action>(v => onSkipAnimation = v, () => onSkipAnimation);
+
+        inventoryArea.transform.SetParent(Player.instance.inventoryAreas, worldPositionStays: false);
+        inventoryArea.transform.localPosition = new Vector3(0, 100 * Unit.all.IndexOf(unit), 0);
     }
 
     public IPromise Pick(Item item, bool animate = true) {

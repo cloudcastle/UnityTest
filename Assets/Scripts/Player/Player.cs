@@ -6,6 +6,8 @@ public class Player : UnitController
 {
     public static Player instance;
 
+    public Transform inventoryAreas;
+
     public Transform mainCamera;
 
     public Unit current;

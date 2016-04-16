@@ -1214,6 +1214,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &176024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 471494}
+  m_Layer: 0
+  m_Name: InventoryAreas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &178152
 GameObject:
   m_ObjectHideFlags: 1
@@ -1670,6 +1685,7 @@ Transform:
   - {fileID: 22433884}
   - {fileID: 411332}
   - {fileID: 460286}
+  - {fileID: 471494}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &460286
@@ -1684,6 +1700,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 459858}
   m_RootOrder: 5
+--- !u!4 &471494
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2000, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 459858}
+  m_RootOrder: 6
 --- !u!4 &474392
 Transform:
   m_ObjectHideFlags: 1
@@ -5272,6 +5300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5c44777e7e61c4eb4ba68efe2da48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryAreas: {fileID: 471494}
   mainCamera: {fileID: 0}
   current: {fileID: 0}
   possessCooldown:

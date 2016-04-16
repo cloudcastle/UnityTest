@@ -596,7 +596,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 429276}
+  m_Father: {fileID: 422648}
   m_RootOrder: 1
 --- !u!4 &422648
 Transform:
@@ -607,9 +607,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 444814}
+  - {fileID: 412362}
+  - {fileID: 488502}
   m_Father: {fileID: 429276}
-  m_RootOrder: 3
+  m_RootOrder: 0
 --- !u!4 &428662
 Transform:
   m_ObjectHideFlags: 1
@@ -629,12 +632,9 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2000, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 444814}
-  - {fileID: 412362}
-  - {fileID: 488502}
   - {fileID: 422648}
   m_Father: {fileID: 488808}
   m_RootOrder: 2
@@ -735,12 +735,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 451468}
   - {fileID: 430444}
-  m_Father: {fileID: 429276}
+  m_Father: {fileID: 422648}
   m_RootOrder: 0
 --- !u!4 &447780
 Transform:
@@ -934,7 +934,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 4, y: 2, z: 2}
   m_Children: []
-  m_Father: {fileID: 429276}
+  m_Father: {fileID: 422648}
   m_RootOrder: 2
 --- !u!4 &488808
 Transform:
@@ -1476,6 +1476,7 @@ MonoBehaviour:
   slotPool:
     sample: {fileID: 0}
     pool: []
+  inventoryArea: {fileID: 422648}
   items: []
   selected: {fileID: 0}
   itemTracker:
