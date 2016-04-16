@@ -573,6 +573,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &133952
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 407674}
+  - 114: {fileID: 11447564}
+  m_Layer: 0
+  m_Name: Yellow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &135738
 GameObject:
   m_ObjectHideFlags: 1
@@ -1553,6 +1569,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 411332}
   m_RootOrder: 2
+--- !u!4 &407674
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 411332}
+  m_RootOrder: 3
 --- !u!4 &410024
 Transform:
   m_ObjectHideFlags: 1
@@ -1578,6 +1606,7 @@ Transform:
   - {fileID: 424242}
   - {fileID: 474392}
   - {fileID: 407284}
+  - {fileID: 407674}
   m_Father: {fileID: 459858}
   m_RootOrder: 4
 --- !u!4 &424242
@@ -3378,6 +3407,20 @@ MonoBehaviour:
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+--- !u!114 &11447564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33fd535e524e304d9270de07df11d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 0, a: 0}
+  doors: []
+  keys: []
 --- !u!114 &11448178
 MonoBehaviour:
   m_ObjectHideFlags: 1
