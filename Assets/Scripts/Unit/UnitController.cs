@@ -9,7 +9,9 @@ public abstract class UnitController : MonoBehaviour
     public event Action<Unit> onLoseControl = (u) => { };
 
     public void GainControl(Unit unit) {
-        unit.controller.onLoseControl(unit);
+        if (unit.controller != null) {
+            unit.controller.onLoseControl(unit);
+        }
         unit.controller = this;
         this.onGainControl(unit);
     }

@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class StartUnit : Ability
+public class StartUnit : MonoBehaviour
 {
-    void Start() {
-        Player.instance.GainControl(unit);
-    }
+    public Unit unit;
 }

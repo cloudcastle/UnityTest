@@ -20,6 +20,13 @@ public class Player : UnitController
 
     void Start() {
          possessCooldown = new Cooldown(0.25f);
+         var startUnit = FindObjectOfType<StartUnit>();
+         if (startUnit != null) {
+             Debug.Log("startUnit.unit = " + startUnit.unit);
+             Possess(startUnit.unit);
+         } else {
+             Possess(FindObjectOfType<Unit>());
+         }
     }
 
     void OnGainControl(Unit unit) {
@@ -31,7 +38,9 @@ public class Player : UnitController
             return;
         }
         possessCooldown.StartCooldown();
-        LoseControl(current);
+        if (current != null) {
+            LoseControl(current);
+        }
         GainControl(unit);
         mainCamera.SetParent(unit.head.transform, worldPositionStays: false);
     }
