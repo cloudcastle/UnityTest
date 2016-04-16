@@ -29,6 +29,7 @@ public class Player : UnitController
          } else {
              Possess(FindObjectOfType<Unit>(), animate: false);
          }
+         new ValueTracker<Unit>(v => current = v, () => current);
     }
 
     void OnGainControl(Unit unit) {

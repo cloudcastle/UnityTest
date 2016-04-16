@@ -92,7 +92,7 @@ public class TimeManager : MonoBehaviour
 
     void Start() {
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
-        Undo.instance.onUndo += OnUndo;
+        UndoManager.instance.onUndo += OnUndo;
         gameTime = 0;
         DynamicTextManager.instance.Substitute("#{gameTime}", () => {
             var span = TimeSpan.FromSeconds(gameTime);
@@ -101,7 +101,7 @@ public class TimeManager : MonoBehaviour
     }
 
     void OnUndo() {
-        gameTime = Undo.instance.time;
+        gameTime = UndoManager.instance.time;
     }
 
     public static IPromise WaitFor(float time) {

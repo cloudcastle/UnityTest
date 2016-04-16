@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     public Inventory inventory;
     public LastPositionKeeper lastPositionKeeper;
     public Head head;
+    public Undo undo;
 
     public UnitController controller;
 
@@ -21,6 +22,7 @@ public class Unit : MonoBehaviour
         inventory = GetComponentInChildren<Inventory>();
         lastPositionKeeper = GetComponentInChildren<LastPositionKeeper>();
         head = GetComponentInChildren<Head>();
+        undo = GetComponentInChildren<Undo>();
 
         all.Add(this);
     }
@@ -29,5 +31,6 @@ public class Unit : MonoBehaviour
         if (controller == null) {
             controller = EmptyUnitController.instance;
         }
+        new ValueTracker<UnitController>(v => controller = v, () => controller);
     }
 }

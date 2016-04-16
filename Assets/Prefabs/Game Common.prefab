@@ -746,6 +746,7 @@ GameObject:
   - 114: {fileID: 11454312}
   - 114: {fileID: 11408184}
   - 114: {fileID: 11484372}
+  - 114: {fileID: 11407142}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1435,6 +1436,7 @@ GameObject:
   - 114: {fileID: 11437992}
   - 114: {fileID: 11496576}
   - 114: {fileID: 11450042}
+  - 114: {fileID: 11463404}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1958,6 +1960,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11407142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f246f4c4d99dde447837a805769e9b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {fileID: 0}
 --- !u!114 &11408184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4071,6 +4086,18 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+--- !u!114 &11463404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc75f42e1f5647e4880eeff0c0b73ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalSampleCount: 0
 --- !u!114 &11463476
 MonoBehaviour:
   m_ObjectHideFlags: 1
