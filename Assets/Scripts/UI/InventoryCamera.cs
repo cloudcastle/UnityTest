@@ -23,6 +23,7 @@ public class InventoryCamera : MonoBehaviour
         Player.instance.onGainControl += OnPossess;
         Player.instance.onLoseControl += OnPossess;
         camera.enabled = inventory.unit.controller == Player.instance;
+        new BoolTracker(v => camera.enabled = v, () => camera.enabled);
     }
 
     void OnPossess(Unit u) {
