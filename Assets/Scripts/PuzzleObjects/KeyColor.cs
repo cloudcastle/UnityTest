@@ -9,9 +9,9 @@ public class KeyColor : MonoBehaviour
     public List<Door> doors = new List<Door>();
     public List<Key> keys = new List<Key>();
 
-    public HashSet<Player> openedFor = new HashSet<Player>();
+    public HashSet<Unit> openedFor = new HashSet<Unit>();
 
-    void OpenFor(Player player, bool open = true) {
+    void OpenFor(Unit player, bool open = true) {
         if (openedFor.Contains(player) == open) {
             return;
         }
@@ -28,7 +28,7 @@ public class KeyColor : MonoBehaviour
         FindObjectOfType<Undo>().onUndo += OnUndo;
     }
 
-    public void Recalculate(Player player) {
+    public void Recalculate(Unit player) {
         if (player.inventory.items.Any(item => item is Key && (item as Key).keyColor == this)) {
             OpenFor(player, true);
         } else {
@@ -37,6 +37,6 @@ public class KeyColor : MonoBehaviour
     }
 
     public void OnUndo() {
-        Player.all.ForEach(Recalculate);
+        Unit.all.ForEach(Recalculate);
     }
 }

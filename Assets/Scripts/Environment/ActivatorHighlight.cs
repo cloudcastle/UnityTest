@@ -22,7 +22,7 @@ public class ActivatorHighlight : MonoBehaviour
     }
 
     bool UnderActivator() {
-        return Player.current.activator.current == activatable;
+        return Player.instance.current.activator.current == activatable;
     }
 
     bool Ready() {

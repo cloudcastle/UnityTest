@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System;
 using RSG;
 
-public class Inventory : MonoBehaviour
+public class Inventory : Ability
 {
     public GameObject slotSample;
     public GameObject line;
-    public Player player;
 
     public Pool slotPool;
 
@@ -21,7 +20,8 @@ public class Inventory : MonoBehaviour
 
     public ItemListShallowTracker itemTracker;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         slotPool = new Pool(slotSample);
     }
 
@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
         items.Add(item);
         selected = item;
 
-        item.Picked(player);
+        item.Picked(unit);
 
         Debug.Log(string.Format("Pick {0}", item));
         GameObject slotObject = slotPool.Take();
@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour
         Debug.Log(string.Format("Lost {0}", item));
 
         item.inventorySlot.Free();
-        item.Lost(player);
+        item.Lost(unit);
 
         onChanged();
     }
@@ -81,7 +81,7 @@ public class Inventory : MonoBehaviour
     void DropAt(Item item, Vector3 position) {
         Lose(item);
         item.transform.position = position;
-        item.GhostFor(player);
+        item.GhostFor(unit);
         Debug.Log(String.Format("{0} thrown at {1}", item, position.ExtToString()));
     }
 
@@ -104,17 +104,11 @@ public class Inventory : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetButtonDown("Next Item")) {
+        if (Controller.NextItem()) {
             ChangeSelected(1);
         }
-        if (Input.GetButtonDown("Previous Item")) {
+        if (Controller.PreviousItem()) {
             ChangeSelected(-1);
-        }
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0) {
-            ChangeSelected(-1);
-        }
-        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0) {
-            ChangeSelected(1);
         }
     }
 }

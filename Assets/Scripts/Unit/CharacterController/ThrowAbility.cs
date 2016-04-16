@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class ThrowAbility : MonoBehaviour
+public class ThrowAbility : Ability
 {
     public float maxForce = 1;
     public float fullChargeTime = 1;
@@ -12,8 +12,6 @@ public class ThrowAbility : MonoBehaviour
 
     public float initialDistance = 0.5f;
     public bool throwing = false;
-
-    public Player player;
 
     float throwDelay = 0.04f;
 
@@ -31,13 +29,13 @@ public class ThrowAbility : MonoBehaviour
     }
 
     void PushItem(Item item, float force) {
-        item.transform.position = player.eye.transform.position + player.eye.transform.forward * initialDistance;
-        item.GetComponent<Rigidbody>().AddForce(force * player.eye.transform.forward);
+        item.transform.position = unit.eye.transform.position + unit.eye.transform.forward * initialDistance;
+        item.GetComponent<Rigidbody>().AddForce(force * unit.eye.transform.forward);
     }
 
     public void Throw() {
-        var target = player.inventory.selected;
-        player.inventory.Lose(target);
+        var target = unit.inventory.selected;
+        unit.inventory.Lose(target);
         target.gameObject.SetActive(false);
 
         var throwForce = currentForce;
@@ -45,7 +43,7 @@ public class ThrowAbility : MonoBehaviour
         TimeManager.WaitFor(throwDelay).Then(() => {
             target.gameObject.SetActive(true);
             PushItem(target, throwForce);
-            target.GhostFor(player);
+            target.GhostFor(unit);
             Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
             Reset();
         });
@@ -56,14 +54,14 @@ public class ThrowAbility : MonoBehaviour
         if (TimeManager.Paused) {
             return;
         }
-        if (player.inventory.selected == null) {
+        if (unit.inventory.selected == null) {
             Reset();
             return;
         } 
-        if (throwing && Input.GetButtonUp("Throw")) {
+        if (throwing && Controller.Throw()) {
             Throw();
         }
-        if (Input.GetButtonDown("Throw")) {
+        if (Controller.PrepareThrow()) {
             throwing = true;
         }
     }
@@ -73,7 +71,7 @@ public class ThrowAbility : MonoBehaviour
             Reset();
             return;
         }
-        if (player.inventory.selected == null) {
+        if (unit.inventory.selected == null) {
             return;
         }
         if (throwing) {

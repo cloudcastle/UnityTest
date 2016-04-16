@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(CharacterController))]
-public class Rotate : MonoBehaviour
+public class Rotate : Ability
 {
     public float rotateSpeed = 6.0F;
 
@@ -15,6 +15,6 @@ public class Rotate : MonoBehaviour
         {
             return;
         }
-        transform.Rotate(0, Input.GetAxis("Mouse X") * GameManager.game.settings.mouseSpeed * rotateSpeed, 0, Space.World);
+        transform.Rotate(0, unit.controller.Mouse().x * GameManager.game.settings.mouseSpeed * rotateSpeed, 0, Space.World);
     }
 }

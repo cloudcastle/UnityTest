@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MoveWithRigidBody : MonoBehaviour
+public class MoveWithRigidBody : Ability
 {
     public float speed = 6.0F;
     public float rotateSpeed = 6.0F;
@@ -17,14 +17,14 @@ public class MoveWithRigidBody : MonoBehaviour
         {
             return;
         }
-        transform.Rotate(0, Input.GetAxis("Mouse X") * rotateSpeed, 0, Space.World);
+        transform.Rotate(0, Controller.Mouse().x * rotateSpeed, 0, Space.World);
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded)
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            moveDirection = new Vector3(Controller.Move().x, 0, Controller.Move().y);
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
-            if (Input.GetButton("Jump"))
+            if (Controller.Jump())
             {
                 moveDirection.y = jumpSpeed;
             }

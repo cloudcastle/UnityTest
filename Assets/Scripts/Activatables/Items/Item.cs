@@ -7,8 +7,8 @@ public class Item : Activatable
 
     public InventorySlot inventorySlot = null;
 
-    public event Action<Player> onPick = (p) => { };
-    public event Action<Player> onLose = (p) => { };
+    public event Action<Unit> onPick = (p) => { };
+    public event Action<Unit> onLose = (p) => { };
 
     public override void Start() {
         base.Start();
@@ -17,18 +17,18 @@ public class Item : Activatable
 
     public override void Activate(Activator activator) {
         base.Activate(activator);
-        activator.player.inventory.Pick(this);
+        activator.unit.inventory.Pick(this);
     }
 
-    public void Picked(Player player) {
+    public void Picked(Unit player) {
         onPick(player);
     }
 
-    public void Lost(Player player) {
+    public void Lost(Unit player) {
         onLose(player);
     }
 
-    public void GhostFor(Player player) {
+    public void GhostFor(Unit player) {
         Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
         Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
         TimeManager.WaitFor(ghostTimeAfterThrow).Then(() => {

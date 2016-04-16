@@ -5,19 +5,20 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(Walk))]
-public class Run : MonoBehaviour
+public class Run : Ability
 {
     public float walkSpeed = 6;
     public float runSpeed = 18;
 
     Walk walk;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         walk = GetComponent<Walk>();
     }
 
     public bool Running() {
-        return Input.GetButton("Run");
+        return Controller.Run();
     }
 
     void Update() {

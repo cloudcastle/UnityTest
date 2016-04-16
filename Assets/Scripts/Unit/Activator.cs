@@ -2,14 +2,12 @@
 using System.Collections;
 using System;
 
-public class Activator : MonoBehaviour
+public class Activator : Ability
 {
     public float maxDistance = 2;
 
     public Cooldown stun;
 
-    public Player player;
-    
     public Activatable current;
     public float currentBiasAngle;
 
@@ -20,7 +18,8 @@ public class Activator : MonoBehaviour
     int activatableLayerMask;
     RaycastHit hit;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         activatableLayerMask = LayerMask.GetMask("Ghost", "Item");
     }
 
@@ -74,7 +73,7 @@ public class Activator : MonoBehaviour
             return;
         }
         LocateCurrentActivatable();
-        if (Input.GetButtonDown("Activate")) {
+        if (unit.controller.Activate()) {
             if (current != null) {
                 current.Activate(this);
             }

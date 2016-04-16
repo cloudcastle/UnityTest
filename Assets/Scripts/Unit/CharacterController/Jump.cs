@@ -6,7 +6,7 @@ using System;
 
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(CharacterController))]
-public class Jump : MonoBehaviour
+public class Jump : Ability
 {
     public float jumpSpeed = 8;
 
@@ -14,12 +14,13 @@ public class Jump : MonoBehaviour
 
     CharacterController characterController;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         characterController = GetComponent<CharacterController>();
     }
 
     void Update() {
-        if (characterController.isGrounded && Input.GetButtonDown("Jump")) {
+        if (characterController.isGrounded && unit.controller.Jump()) {
             jumpScheduled = true;
         }
     }

@@ -6,7 +6,7 @@ using System;
 
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(CharacterController))]
-public class Jetpack : MonoBehaviour
+public class Jetpack : Ability
 {
     public float acceleration = 22;
     public float ignitionTime = 1;
@@ -15,13 +15,14 @@ public class Jetpack : MonoBehaviour
     CharacterController characterController;
     Move move;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         characterController = GetComponent<CharacterController>();
         move = GetComponent<Move>();
     }
 
     void FixedUpdate() {
-        if (Input.GetButton("Jump")) {
+        if (unit.controller.Jetpack()) {
             ignitionTimePassed += Time.fixedDeltaTime;
             if (ignitionTimePassed > ignitionTime) {
                 move.Accelerate(acceleration * Vector3.up * Time.fixedDeltaTime);

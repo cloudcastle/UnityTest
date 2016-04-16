@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class Timestop : MonoBehaviour
+public class Timestop : Ability
 {
     void Update() {
         if (TimeManager.Paused) {
             return;
         }
-        if (Input.GetButtonDown("Timestop")) {
+        if (unit.controller.ToggleTimestop()) {
             TimeManager.timestopped ^= true;
         }
     }

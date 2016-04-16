@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class Rewind : MonoBehaviour
+public class Rewind : Ability
 {
     public float timeMultiplyer = 8;
 
     const float defaultFixedDeltaTime = 0.02f;
 
     public bool On() {
-        return Input.GetButton("Rewind");
+        return Controller.Rewind();
     }
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         RefreshDeltaTime();
     }
 

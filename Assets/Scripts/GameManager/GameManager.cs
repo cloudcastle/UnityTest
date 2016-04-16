@@ -42,6 +42,10 @@ public class GameManager : MonoBehaviour
         return CurrentLevel() != null;
     }
 
+    public bool OnMap() {
+        return SceneManager.GetActiveScene().name == levelGraph;
+    }
+
     public void CompleteLevel() {
         if (!OnLevel()) {
             return;
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void Pause() {
-        if (OnLevel()) {
+        if (!OnMap()) {
             LevelUI.instance.PauseScreen();
         }
     }

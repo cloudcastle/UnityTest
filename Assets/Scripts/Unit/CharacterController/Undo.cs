@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class Undo : MonoBehaviour
+public class Undo : Ability
 {
     public static Undo instance;
 
@@ -17,7 +17,8 @@ public class Undo : MonoBehaviour
     public event Action onTrack = () => { };
     public event Action onPushSampleCount = () => { };
     
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         instance = this;
     }
 
@@ -25,7 +26,7 @@ public class Undo : MonoBehaviour
         if (TimeManager.Paused) {
             return;
         }
-        if (Input.GetButton("Undo")) {
+        if (Controller.Undo()) {
             time -= Time.fixedDeltaTime;
             if (time < 0) {
                 time = 0;

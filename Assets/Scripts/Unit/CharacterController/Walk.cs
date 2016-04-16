@@ -5,15 +5,16 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(Move))]
-public class Walk : MonoBehaviour
+public class Walk : Ability
 {
     public float speed = 6;
 
     public float currentSpeed;
 
-    void Awake() {
+    public override void Awake() {
+        base.Awake();
         GetComponent<Move>().additionalVelocities.Add(() => {
-            var move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            var move = new Vector3(Controller.Move().x, 0, Controller.Move().y);
             move = transform.TransformDirection(move);
             if (move.magnitude > 1) {
                 move.Normalize();

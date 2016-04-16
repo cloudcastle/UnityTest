@@ -7,7 +7,7 @@ public class Jumper : MonoBehaviour
     public float velocity = 15f;
 
     void OnTriggerStay(Collider other) {
-        if (other.gameObject.GetComponent<Player>() != null) {
+        if (other.gameObject.GetComponent<Unit>() != null) {
             var move = other.gameObject.GetComponent<Move>();
             if (move.velocity.y < minVelocityCap) {
                 move.velocity = move.velocity.Change(y: velocity);

@@ -11,7 +11,6 @@ public class TransformAnimator : Script
     public bool animating = false;
 
     public override void InitInternal() {
-        Debug.Log("TransformAnimator.InitInternal");
         new ValueTracker<TimedValue<TransformState>>(v => previous = v, () => previous);
         new ValueTracker<TimedValue<TransformState>>(v => target = v, () => target);
         new BoolTracker(v => animating = v, () => animating);

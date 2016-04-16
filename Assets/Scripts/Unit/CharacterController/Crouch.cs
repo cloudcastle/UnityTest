@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
-public class Crouch : MonoBehaviour
+public class Crouch : Ability
 {
     public float crouchSpeed = 4.0F;
     public float uncrouchSpeed = 4.0F;
@@ -15,8 +15,10 @@ public class Crouch : MonoBehaviour
 
     ChangeScale changeScale;
 
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         characterController = GetComponent<CharacterController>();
         baseHeight = characterController.height;
 
@@ -29,7 +31,7 @@ public class Crouch : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButton("Crouch"))
+        if (unit.controller.Crouch())
         {
             currentHeightMultiplier = Mathf.Max(currentHeightMultiplier - crouchSpeed * Time.deltaTime, minHeightMultiplier);
         }

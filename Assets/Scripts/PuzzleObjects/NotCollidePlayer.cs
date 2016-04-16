@@ -8,7 +8,7 @@ public class NotCollidePlayer : MonoBehaviour
     Collider me;
 
     void Start() {
-        player = Player.current.GetComponent<Collider>();
+        player = Player.instance.current.GetComponent<Collider>();
         me = GetComponent<Collider>();
     }
 

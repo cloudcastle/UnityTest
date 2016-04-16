@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Head : MonoBehaviour
+public class Head : Ability
 {
     public float verticalRotateSpeed = 6.0F;
 
@@ -12,7 +12,7 @@ public class Head : MonoBehaviour
             return;
         }
         var angle = transform.localEulerAngles.x;
-        angle -= Input.GetAxis("Mouse Y") * GameManager.game.settings.mouseSpeed * verticalRotateSpeed;
+        angle -= Controller.Mouse().y * GameManager.game.settings.mouseSpeed * verticalRotateSpeed;
         angle = Extensions.NormalizeAngle(angle);
         angle = Mathf.Clamp(angle, -90, 90);
         transform.localRotation = Quaternion.Euler(angle, 0, 0);

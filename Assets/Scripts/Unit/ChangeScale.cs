@@ -4,7 +4,7 @@ using System;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(Move))]
-public class ChangeScale : MonoBehaviour
+public class ChangeScale : Ability
 {
     public float scaleSpeed = 1;
     public Transform scalableBody;
@@ -21,8 +21,9 @@ public class ChangeScale : MonoBehaviour
 
     Crouch crouch;
 
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         characterController = GetComponent<CharacterController>();
         baseStepOffset = characterController.stepOffset;
         baseRadius = characterController.radius;
@@ -43,7 +44,7 @@ public class ChangeScale : MonoBehaviour
         {
             return;
         }
-        currentScale *= Mathf.Pow(2, Input.GetAxis("Scale") * Time.deltaTime * scaleSpeed);
+        currentScale *= Mathf.Pow(2, unit.controller.Scale() * Time.deltaTime * scaleSpeed);
         currentScale = Mathf.Clamp(currentScale, minScale, maxScale);
 
         scalableBody.localScale = Vector3.one * currentScale;
