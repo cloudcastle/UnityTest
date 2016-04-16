@@ -8,7 +8,7 @@ public class Player : UnitController
 
     public Transform inventoryAreas;
 
-    public Transform mainCamera;
+    public MainCamera mainCamera;
 
     public Unit current;
 
@@ -16,7 +16,7 @@ public class Player : UnitController
 
     void Awake() {
         instance = this;
-        mainCamera = Camera.main.transform;
+        mainCamera = FindObjectOfType<MainCamera>();
         onGainControl += OnGainControl;
     }
 
@@ -25,9 +25,9 @@ public class Player : UnitController
          var startUnit = FindObjectOfType<StartUnit>();
          if (startUnit != null) {
              Debug.Log("startUnit.unit = " + startUnit.unit);
-             Possess(startUnit.unit);
+             Possess(startUnit.unit, animate: false);
          } else {
-             Possess(FindObjectOfType<Unit>());
+             Possess(FindObjectOfType<Unit>(), animate: false);
          }
     }
 
@@ -35,7 +35,7 @@ public class Player : UnitController
         current = unit;
     }
 
-    public void Possess(Unit unit) {
+    public void Possess(Unit unit, bool animate = true) {
         if (possessCooldown.OnCooldown()) {
             return;
         }
@@ -44,7 +44,11 @@ public class Player : UnitController
             LoseControl(current);
         }
         GainControl(unit);
-        mainCamera.SetParent(unit.head.transform, worldPositionStays: false);
+        if (animate) {
+            mainCamera.MoveTo(unit.head.transform);
+        } else {
+            mainCamera.MoveToInstant(unit.head.transform);
+        }
     }
 
     public override bool Activate() {

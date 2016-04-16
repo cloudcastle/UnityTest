@@ -113,4 +113,13 @@ public static class Extensions
         }
         return listToClone.Select(item => item).ToList();
     }
+
+    public static string Path(this Transform transform) {
+        string path = transform.name;
+        while (transform.parent != null) {
+            transform = transform.parent;
+            path = transform.name + "/" + path;
+        }
+        return path;
+    }
 }

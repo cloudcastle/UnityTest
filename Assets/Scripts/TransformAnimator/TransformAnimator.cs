@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RSG;
 
 public class TransformAnimator : Script
 {
@@ -9,6 +10,7 @@ public class TransformAnimator : Script
     public TimedValue<TransformState> target;
 
     public bool animating = false;
+    public UndoablePromise finishAnimation = null;
 
     public override void InitInternal() {
         new ValueTracker<TimedValue<TransformState>>(v => previous = v, () => previous);
@@ -22,23 +24,34 @@ public class TransformAnimator : Script
 
     void FixedUpdate() {
         if (animating) {
-            transform.localPosition = Vector3.Lerp(previous.value.position, target.value.position, phase());
-            transform.localScale = Vector3.Lerp(previous.value.scale, target.value.scale, phase());
             if (phase() > 1 - eps) {
-                animating = false;
+                ToAnimationEnd();
+            } else {
+                Debug.Log(transform.Path());
+                transform.localPosition = Vector3.Lerp(previous.value.position, target.value.position, phase());
+                transform.localRotation = Quaternion.Lerp(previous.value.rotation, target.value.rotation, phase());
+                transform.localScale = Vector3.Lerp(previous.value.scale, target.value.scale, phase());
             }
         }
     }
 
-    public void Animate(TimedValue<TransformState> target) {
-        this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localScale), TimeManager.GameTime);
+    public IPromise Animate(TimedValue<TransformState> target) {
+        this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localRotation, transform.localScale), TimeManager.GameTime);
         this.target = target;
+        finishAnimation = new UndoablePromise();
         animating = true;
+        return finishAnimation;
+    }
+
+    void ToAnimationEnd() {
+        transform.localPosition = target.value.position;
+        transform.localRotation = target.value.rotation;
+        transform.localScale = target.value.scale;
+        animating = false;
+        finishAnimation.Resolve();
     }
 
     public void SkipAnimation() {
-        transform.localPosition = target.value.position;
-        transform.localScale = target.value.scale;
-        animating = false;
+        ToAnimationEnd();
     }
 }

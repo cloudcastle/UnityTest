@@ -91,7 +91,7 @@ public class InventorySlot : MonoBehaviour
 
     void OnInventoryChanged() {
         if (inventory.items.Contains(item)) {
-            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), TargetScale()), TimeManager.GameTime + animationDelay));
+            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), scale: TargetScale()), TimeManager.GameTime + animationDelay));
         } else {
             Free();
         }

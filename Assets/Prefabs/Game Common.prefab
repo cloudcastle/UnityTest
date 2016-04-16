@@ -743,6 +743,9 @@ GameObject:
   - 124: {fileID: 12464664}
   - 81: {fileID: 8193684}
   - 114: {fileID: 11463476}
+  - 114: {fileID: 11454312}
+  - 114: {fileID: 11408184}
+  - 114: {fileID: 11484372}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1955,6 +1958,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11408184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177ebb8af9a9b048ad5c05010947ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!114 &11410378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3731,6 +3747,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: Map
+--- !u!114 &11454312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f5d24d4b2099ee488d541b1cc9aa8bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!114 &11454628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4053,6 +4082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11aa10e8e33d0645be036ffafff7efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!114 &11463566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4837,6 +4867,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Intro
+--- !u!114 &11484372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6432a4be78b70294da1556b0e306f24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animating: 0
 --- !u!114 &11485122
 MonoBehaviour:
   m_ObjectHideFlags: 1
