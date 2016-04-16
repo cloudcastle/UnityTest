@@ -110,6 +110,9 @@ public class Game
         var giveALift = new Level("Give a lift", you, raise);
         var bat = new Level("Bat", you, space);
 
+        // Twins
+        var place = new Level("Place", gift);
+
 
         currentLevel = click;
         current = null;
