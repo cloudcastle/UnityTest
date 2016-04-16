@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class StartUnit : MonoBehaviour
+public class StartUnit : Ability
 {
     void Start() {
-        Player.instance.Control(GetComponent<Unit>());
+        Player.instance.Control(unit);
     }
 }

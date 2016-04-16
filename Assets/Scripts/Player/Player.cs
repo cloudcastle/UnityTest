@@ -11,7 +11,6 @@ public class Player : UnitController
     void Awake() {
         instance = this;
         onGainControl += OnGainControl;
-        Control(FindObjectOfType<StartUnit>().GetComponent<Unit>());
     }
 
     void OnGainControl(Unit unit) {

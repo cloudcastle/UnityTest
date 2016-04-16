@@ -15,6 +15,11 @@ public class Unit : MonoBehaviour
 
     void Awake()
     {
+        activator = GetComponentInChildren<Activator>();
+        eye = GetComponentInChildren<Eye>();
+        inventory = GetComponentInChildren<Inventory>();
+        lastPositionKeeper = GetComponentInChildren<LastPositionKeeper>();
+
         all.Add(this);
         if (controller == null) {
             controller = EmptyUnitController.instance;
