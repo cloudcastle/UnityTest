@@ -9,7 +9,8 @@ public class StopRolling : MonoBehaviour
 {
     Rigidbody rigidBody;
     public float readonlyAngularDrag;
-    public float minAngularDrag;
+    public float minAngularDrag = 1;
+    public float extinctionSpeed = 0.5f;
 
     void Awake() {
         rigidBody = GetComponent<Rigidbody>();
@@ -20,7 +21,7 @@ public class StopRolling : MonoBehaviour
     }
 
     float Extinction() {
-        return Mathf.Pow(2, TimeManager.StoppableFixedDeltaTime);
+        return Mathf.Pow(2, TimeManager.StoppableFixedDeltaTime * extinctionSpeed);
     }
 
     void FixedUpdate() {
