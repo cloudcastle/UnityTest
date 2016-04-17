@@ -10,6 +10,9 @@ public class Level
 
     public List<Level> dependencies = new List<Level>();
 
+    [NonSerialized]
+    public HashSet<Level> transitiveDependencies;
+
     public Level(string name, params Level[] depends) {
         this.name = name;
         dependencies = depends.ToList();
@@ -40,6 +43,20 @@ public class Level
 
     public int GameOrder() {
         return GameManager.game.levels.IndexOf(this);
+    }
+
+    public void PrecalculateTransitiveDependencies() {
+        dependencies.ForEach(l => l.PrecalculateTransitiveDependencies());
+        transitiveDependencies = new HashSet<Level>();
+        dependencies.ForEach(l => {
+            l.transitiveDependencies.ToList().ForEach(d => transitiveDependencies.Add(d));
+            transitiveDependencies.Add(l);
+        });
+    }
+
+    public bool Depends(Level level) {
+        PrecalculateTransitiveDependencies();
+        return transitiveDependencies.Contains(level);
     }
 
     public override string ToString() {

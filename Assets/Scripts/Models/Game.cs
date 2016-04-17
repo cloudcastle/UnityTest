@@ -25,21 +25,30 @@ public class Game
         var click = new Level("Click");
         var mouseMove = new Level("MouseMove", depends: click);
         var wasd = new Level("WASD", depends: mouseMove);
-        var escape = new Level("Escape", depends: wasd);
         var fall = new Level("Fall", wasd);
         var space = new Level("Space", depends: fall);
-
-        // Moving Surfaces Intro
-        var ride = new Level("Ride", space);
-        var f = new Level("F", depends: ride);
 
         // Lifts Intro
         var raise = new Level("Raise", depends: wasd);
         var shift = new Level("Shift", depends: raise);
+
+        // Jumps Intro Part 1
+        var gap = new Level("Gap", shift, space);
+        var spring = new Level("Spring", gap);
+
+        // Moving Surfaces Intro
+        var ride = new Level("Ride", spring);
+        var f = new Level("F", depends: ride);
+
+        // Controls
+        var z = new Level("Z", fall, ride);
+
+        // Jumps Intro Part 2
+        var string_ = new Level("String", z);
+
+        // Lifts       
         var order = new Level("Order", depends: shift);
         var precaution = new Level("Precaution", depends: order);
-
-        // Lifts
         var stairs = new Level("Stairs", precaution, f);
         var twoPits = new Level("Two pits", precaution, f);
         var hold = new Level("Hold", precaution, f);
@@ -55,21 +64,14 @@ public class Game
         var secondBeat = new Level("Second Beat", rhythm);
         var trio = new Level("Trio", secondBeat);
 
-        // Jumps Intro
-        var gap = new Level("Gap", shift, space);
-        var spring = new Level("Spring", gap);
 
-        // Controls
-        var r = new Level("R", fall);
-        var z = new Level("Z", r, ride);
 
         // Moving Surfaces
-        var fly = new Level("Fly", z);
-        var phase = new Level("Phase", z);
+        var fly = new Level("Fly", string_);
+        var phase = new Level("Phase", string_);
         var malapropos = new Level("Malapropos", phase);
 
         // Jumps
-        var string_ = new Level("String", r);
         var climb = new Level("Climb", gap, z, string_);
         var sixBoxes = new Level("Six boxes", climb);
         var snake = new Level("Snake", spring, sixBoxes);
@@ -80,7 +82,7 @@ public class Game
         var cleanHands = new Level("Clean hands", fit);
         var repick = new Level("Repick", cleanHands);
         var rightMouseButton = new Level("Right mouse button", repick);
-        var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton, r);
+        var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton, string_);
 
         // Keys
         var greenCabin = new Level("Green Cabin", qeMouseWheel);
@@ -98,26 +100,27 @@ public class Game
         // Keys Tricks
         var walkthrough = new Level("Walkthrough", cleanHands);
         var column = new Level("Column", walkthrough, z);
-        var bridge = new Level("Bridge", string_, r, pass);
+        var bridge = new Level("Bridge", string_, z, qeMouseWheel);
         var pool = new Level("Pool", bridge);
         var tool = new Level("Tool", column);
         var intersection = new Level("Intersection", tool);
         var accuracy = new Level("Accuracy", string_, tool);
 
         // Tricks
-        var bars = new Level("Bars", wasd);
+        var bars = new Level("Bars", string_);
+        var escape = new Level("Escape", z, bars);
 
         // Twins Intro
         var you = new Level("You", pass);
         var gift = new Level("Gift", you, walkthrough);
         var giveALift = new Level("Give a lift", you, raise);
-        var bat = new Level("Bat", you, space);
+        var bat = new Level("Bat", you, gap);
 
         // Twins
         var place = new Level("Place", gift);
         var fat = new Level("Fat", place);
-        var pisa = new Level("Pisa", r, bat, string_);
-        var deal = new Level("Deal", fat, string_);
+        var pisa = new Level("Pisa", z, bat, string_);
+        var deal = new Level("Deal", fat, bridge);
 
 
         currentLevel = click;

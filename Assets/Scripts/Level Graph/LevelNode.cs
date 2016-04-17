@@ -28,7 +28,11 @@ public class LevelNode : MonoBehaviour
 
     void OnEnable() {
         this.renderer = GetComponent<MeshRenderer>();
-        this.level = GameManager.game.levels.First(l => l.name == levelName);
+        Selection.selectionChanged += OnSelectionChanged;
+    }
+
+    void OnDisable() {
+        Selection.selectionChanged -= OnSelectionChanged;
     }
 
     void Start() {
@@ -44,11 +48,32 @@ public class LevelNode : MonoBehaviour
     }
 
     public void SetEmission(Color emission) {
-        renderer.material.SetColor("_EmissionColor", emission);
+        if (Extensions.Editor()) {
+            renderer.material.SetColor("_EmissionColor", emission);
+        } else {
+            renderer.material.SetColor("_EmissionColor", emission);
+        }
+    }
+
+    void OnSelectionChanged() {
+        this.level = GameManager.game.levels.First(l => l.name == levelName);
+        GameManager.game.levels.ForEach(l => l.transitiveDependencies = null);
+        Level selectedLevel = null;
+        if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<LevelNode>() != null) {
+            selectedLevel = Selection.activeGameObject.GetComponent<LevelNode>().level;
+        }
+        if (selectedLevel != null && selectedLevel.Depends(level)) {
+            SetEmission(completedEmission);
+        } else if (selectedLevel == level) {
+            SetEmission(unlockedEmission);
+        } else {
+            SetEmission(baseEmission);
+        }
     }
 
     void Update() {
         if (Extensions.Editor()) {
+            this.level = GameManager.game.levels.First(l => l.name == levelName);
             gameObject.name = levelName;
             textMesh.text = levelName;
             renderer.enabled = visible;
