@@ -102,6 +102,7 @@ public class Game
         var pool = new Level("Pool", bridge);
         var tool = new Level("Tool", column);
         var intersection = new Level("Intersection", tool);
+        var accuracy = new Level("Accuracy", string_, tool);
 
         // Tricks
         var bars = new Level("Bars", wasd);
