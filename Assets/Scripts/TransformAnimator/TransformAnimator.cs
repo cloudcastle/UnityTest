@@ -27,7 +27,6 @@ public class TransformAnimator : Script
             if (phase() > 1 - eps) {
                 ToAnimationEnd();
             } else {
-                Debug.Log(transform.Path());
                 transform.localPosition = Vector3.Lerp(previous.value.position, target.value.position, phase());
                 transform.localRotation = Quaternion.Lerp(previous.value.rotation, target.value.rotation, phase());
                 transform.localScale = Vector3.Lerp(previous.value.scale, target.value.scale, phase());

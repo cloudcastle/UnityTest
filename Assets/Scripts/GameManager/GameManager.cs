@@ -72,6 +72,12 @@ public class GameManager : MonoBehaviour
             LevelUI.instance.Confirm(() => {
                 Play(CurrentLevel());
             }, "Restart");
+        } else {
+            if (!OnMap()) {
+                LevelUI.instance.Confirm(() => {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }, "Restart"); 
+            }
         }
     }
 

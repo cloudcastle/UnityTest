@@ -104,7 +104,7 @@ public static class Extensions
     }
 
     public static string ExtToString(this Vector3 v) {
-        return String.Format("({0:#.####}, {1:#.####}, {2:#.####})", v.x, v.y, v.z);
+        return String.Format("({0:0.####}, {1:0.####}, {2:0.####})", v.x, v.y, v.z);
     }
 
     public static List<T> ShallowClone<T>(this List<T> listToClone) {
