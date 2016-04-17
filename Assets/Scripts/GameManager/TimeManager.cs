@@ -9,6 +9,8 @@ public class TimeManager : MonoBehaviour
 
     public static IPromiseTimer promiseTimer;
 
+    Substitution timeSubstitution;
+
     public bool pauseOnStart;
     static bool paused;
     public static bool Paused {
@@ -80,10 +82,6 @@ public class TimeManager : MonoBehaviour
         promiseTimer.Update(Time.fixedDeltaTime);
     }
 
-    void Update() {
-        DynamicTextManager.instance.Invalidate();
-    }
-
     void Awake() {
         instance = this;
         Paused = pauseOnStart;
@@ -94,10 +92,14 @@ public class TimeManager : MonoBehaviour
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
         UndoManager.instance.onUndo += OnUndo;
         gameTime = 0;
-        DynamicTextManager.instance.Substitute("#{gameTime}", () => {
+        timeSubstitution = DynamicTextManager.instance.Substitute("#{gameTime}", () => {
             var span = TimeSpan.FromSeconds(gameTime);
             return string.Format("{0}:{1:00}", (int)span.TotalMinutes, span.Seconds);
         });
+    }
+
+    void Update() {
+        timeSubstitution.Recalculate();
     }
 
     void OnUndo() {

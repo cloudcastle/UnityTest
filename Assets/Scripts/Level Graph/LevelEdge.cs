@@ -28,7 +28,11 @@ public class LevelEdge : MonoBehaviour
     }
 
     public void SetEmission(Color emission) {
-        renderers.ToList().ForEach(r => r.material.SetColor("_EmissionColor", emission));
+        renderers.ToList().ForEach(r => {
+            if (r.material.GetColor("_EmissionColor") != emission) {
+                r.material.SetColor("_EmissionColor", emission);
+            }
+        });
     }
 
     void Update() {

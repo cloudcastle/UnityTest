@@ -12,7 +12,8 @@ public class DebugManager : MonoBehaviour
 
     public List<string> levelsUnlockOrders;
 
-    void Update() {
+    [ContextMenu("Recalculate debug output data")]
+    void RecalculateDebugOutputData() {
         levels = GameManager.game.levels.Select(level => level.name).ToList();
         availableLevels = GameManager.game.AvailableLevelsInUnlockOrder().Select(level => level.name).ToList();
         completedLevels = GameManager.game.completedLevels.Select(level => level.name).ToList();

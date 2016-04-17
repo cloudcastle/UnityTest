@@ -17,9 +17,11 @@ public class DynamicTextManager : MonoBehaviour
 
     public event Action onInvalidate = () => { };
 
-    public void Substitute(string marker, Func<string> value) {
-        substitutions.Add(new Substitution(marker, value));
+    public Substitution Substitute(string marker, Func<string> value) {
+        var substitution = new Substitution(marker, value);
+        substitutions.Add(substitution);
         Invalidate();
+        return substitution;
     }
 
     void Awake() {
