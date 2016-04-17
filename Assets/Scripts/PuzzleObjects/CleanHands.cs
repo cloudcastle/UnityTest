@@ -9,7 +9,7 @@ public class CleanHands : MonoBehaviour
     float safetyDistance = 0.1f;
 
     void OnTriggerStay(Collider other) {
-        var player = other.GetComponent<Player>();
+        var player = other.GetComponent<Unit>();
         if (player != null) {
             Vector3 localPlayerPosition = transform.InverseTransformPoint(player.transform.position);
             Vector3 previousLocalPlayerPosition = transform.InverseTransformPoint(player.lastPositionKeeper.lastPosition);

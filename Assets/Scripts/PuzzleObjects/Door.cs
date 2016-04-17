@@ -24,11 +24,11 @@ public class Door : MonoBehaviour
         }
     }
 
-    public bool Opened(Player player) {
+    public bool Opened(Unit player) {
         return keyColor.openedFor.Contains(player);
     }
 
-    public void OpenFor(Player player, bool open = true) {
+    public void OpenFor(Unit player, bool open = true) {
         Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), open);
     }
 
@@ -42,7 +42,7 @@ public class Door : MonoBehaviour
             }
             colored.color = closed;
         } else {
-            GetComponent<MeshRenderer>().material.ChangeAlpha(Opened(Player.current) ? openedAlpha : closedAlpha);
+            GetComponent<MeshRenderer>().material.ChangeAlpha(Opened(Player.instance.current) ? openedAlpha : closedAlpha);
         }
     }
 }

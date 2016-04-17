@@ -42,20 +42,23 @@ public class GameManager : MonoBehaviour
         return CurrentLevel() != null;
     }
 
+    public bool OnMap() {
+        return SceneManager.GetActiveScene().name == levelGraph;
+    }
+
     public void CompleteLevel() {
-        if (!OnLevel()) {
-            return;
+        if (OnLevel()) {
+            var level = CurrentLevel();
+            if (!level.Completed()) {
+                game.completedLevels.Add(level);
+            }
+            Save();
         }
-        var level = CurrentLevel();
-        if (!level.Completed()) {
-            game.completedLevels.Add(level);
-        }
-        Save();
         LevelUI.instance.CompletionScreen();
     }
 
     public void Pause() {
-        if (OnLevel()) {
+        if (!OnMap()) {
             LevelUI.instance.PauseScreen();
         }
     }

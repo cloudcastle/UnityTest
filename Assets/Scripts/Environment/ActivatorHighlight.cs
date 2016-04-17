@@ -17,12 +17,12 @@ public class ActivatorHighlight : MonoBehaviour
     Activatable activatable;
 
     void Awake() {
-        activatable = GetComponent<Activatable>();
-        meshRenderer = GetComponent<MeshRenderer>();
+        activatable = GetComponentInChildren<Activatable>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
     bool UnderActivator() {
-        return Player.current.activator.current == activatable;
+        return Player.instance.current.activator.current == activatable;
     }
 
     bool Ready() {

@@ -40,7 +40,6 @@ public class LevelGraph : MonoBehaviour
                 var to = levelNodes.Find(n => n.levelName == level.name);
                 level.dependencies.ForEach(dependency => {
                     var from = levelNodes.Find(n => n.levelName == dependency.name);
-                    Debug.Log("from, to = " + from + to);
                     var edgeObject = PrefabUtility.InstantiatePrefab(edgeSample) as GameObject;
                     var edge = edgeObject.GetComponent<LevelEdge>();
                     edge.from = from;

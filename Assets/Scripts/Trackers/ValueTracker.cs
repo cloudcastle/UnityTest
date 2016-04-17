@@ -28,10 +28,10 @@ public class ValueTracker<T>
         this.setValue = setValue;
         this.getValue = getValue;
         this.isActual = isActual;
-        Undo.instance.onUndo += PerformUndo;
-        Undo.instance.onTrack += Track;
-        Undo.instance.onPushSampleCount += PushSampleCount;
-        Undo.instance.onDrop += new Action(Drop);
+        UndoManager.instance.onUndo += PerformUndo;
+        UndoManager.instance.onTrack += Track;
+        UndoManager.instance.onPushSampleCount += PushSampleCount;
+        UndoManager.instance.onDrop += new Action(Drop);
         ++cnt;
         name = String.Format("VT-{1}-{0}", cnt, typeof(T));
         //Debug.Log(String.Format("Created valueTracker: {0}", name));
@@ -58,12 +58,12 @@ public class ValueTracker<T>
             return;
         } 
         //Debug.Log(String.Format("tracker {0} consider not actual: {1}", name, track.Count > 0 ? track.Peek().value : default(T)));
-        track.Push(new TimedValue<T>(getValue(), Undo.instance.time));
+        track.Push(new TimedValue<T>(getValue(), UndoManager.instance.time));
         sampleCount = track.Count;
     }
 
     void PerformUndo() {
-        while (track.Count > 1 && track.Peek().time > Undo.instance.time) {
+        while (track.Count > 1 && track.Peek().time > UndoManager.instance.time) {
             track.Pop();
         }
         if (track.Count == 0) {
@@ -74,6 +74,6 @@ public class ValueTracker<T>
     }
 
     void PushSampleCount() {
-        Undo.instance.totalSampleCount += sampleCount;
+        UndoManager.instance.totalSampleCount += sampleCount;
     }
 }

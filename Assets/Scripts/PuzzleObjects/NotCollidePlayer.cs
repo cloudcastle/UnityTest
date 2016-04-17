@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class NotCollidePlayer : MonoBehaviour
 {
-    Collider player;
+    Collider unit;
     Collider me;
 
     void Start() {
-        player = Player.current.GetComponent<Collider>();
+        unit = FindObjectOfType<Unit>().GetComponent<Collider>();
         me = GetComponent<Collider>();
     }
 
     void FixedUpdate() {
-        Physics.IgnoreCollision(me, player);
+        Physics.IgnoreCollision(me, unit);
     }
 }

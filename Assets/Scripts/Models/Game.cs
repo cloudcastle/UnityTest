@@ -100,9 +100,21 @@ public class Game
         var column = new Level("Column", walkthrough, z);
         var bridge = new Level("Bridge", string_, r, pass);
         var pool = new Level("Pool", bridge);
+        var tool = new Level("Tool", column);
 
         // Tricks
         var bars = new Level("Bars", wasd);
+
+        // Twins Intro
+        var you = new Level("You", pass);
+        var gift = new Level("Gift", you, walkthrough);
+        var giveALift = new Level("Give a lift", you, raise);
+        var bat = new Level("Bat", you, space);
+
+        // Twins
+        var place = new Level("Place", gift);
+        var pisa = new Level("Pisa", r, bat);
+
 
         currentLevel = click;
         current = null;
