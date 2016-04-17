@@ -115,7 +115,9 @@ public class Game
 
         // Twins
         var place = new Level("Place", gift);
-        var pisa = new Level("Pisa", r, bat);
+        var fat = new Level("Fat", place);
+        var pisa = new Level("Pisa", r, bat, string_);
+        var deal = new Level("Deal", fat, string_);
 
 
         currentLevel = click;
