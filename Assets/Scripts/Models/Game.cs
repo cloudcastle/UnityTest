@@ -100,6 +100,7 @@ public class Game
         var column = new Level("Column", walkthrough, z);
         var bridge = new Level("Bridge", string_, r, pass);
         var pool = new Level("Pool", bridge);
+        var tool = new Level("Tool", column);
 
         // Tricks
         var bars = new Level("Bars", wasd);
