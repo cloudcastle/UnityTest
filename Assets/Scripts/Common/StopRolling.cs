@@ -32,7 +32,6 @@ public class StopRolling : MonoBehaviour
     }
 
     void OnCollisionStay(Collision collision) {
-        var extinction = Mathf.Pow(2, TimeManager.StoppableFixedDeltaTime);
         ContactPoint contact = collision.contacts.First();
         if (contact.normal.y > 0.99 && contact.otherCollider is MeshCollider) {
             rigidBody.angularDrag *= Extinction();

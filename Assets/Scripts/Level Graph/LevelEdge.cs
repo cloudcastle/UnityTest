@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 [ExecuteInEditMode]
 public class LevelEdge : MonoBehaviour
@@ -12,10 +13,10 @@ public class LevelEdge : MonoBehaviour
 
     public LevelNode from;
     public LevelNode to;
-    new MeshRenderer renderer;
+    MeshRenderer[] renderers;
 
     void OnEnable() {
-        renderer = GetComponentInChildren<MeshRenderer>();
+        renderers = GetComponentsInChildren<MeshRenderer>();
     }
 
     public bool Hovered() {
@@ -27,7 +28,7 @@ public class LevelEdge : MonoBehaviour
     }
 
     public void SetEmission(Color emission) {
-        renderer.material.SetColor("_EmissionColor", emission);
+        renderers.ToList().ForEach(r => r.material.SetColor("_EmissionColor", emission));
     }
 
     void Update() {
@@ -37,7 +38,7 @@ public class LevelEdge : MonoBehaviour
                 transform.LookAt(to.transform);
                 transform.localScale = new Vector3(1, 1, (from.transform.position - to.transform.position).magnitude);
                 gameObject.name = string.Format("{0} - {1}", from.name, to.name);
-                renderer.enabled = from.visible && to.visible;
+                renderers.ToList().ForEach(r => r.enabled = from.visible && to.visible);
             }
         } else {
             if (from.level.Completed()) {
