@@ -37,6 +37,8 @@ public class StopRolling : MonoBehaviour
         if (contact.normal.y > 0.99 && contact.otherCollider is MeshCollider) {
             rigidBody.angularDrag *= Extinction();
             rigidBody.angularDrag *= Extinction();
-        } 
+        } else {
+            rigidBody.angularDrag = minAngularDrag;
+        }
     }
 }
