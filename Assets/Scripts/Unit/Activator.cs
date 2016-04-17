@@ -59,21 +59,21 @@ public class Activator : Ability
     }
 
     private void LocateBiasedActivatable() {
-        int cnt = Physics.OverlapSphereNonAlloc(transform.position, maxDistance, sphereCastResults, activatableLayerMask);
+        int cnt = Physics.OverlapSphereNonAlloc(transform.position, 10000f, sphereCastResults, activatableLayerMask);
         if (cnt >= MAX_SPHERE_CAST_RESULTS) {
             Debug.LogError("MAX_SPHERE_CAST_RESULTS exceeded");
         }
         for (int i = 0; i < cnt; i++) {
-            var radiusVector = sphereCastResults[i].transform.position - transform.position;
+            var activatable = sphereCastResults[i].GetComponent<Activatable>();
+            if (activatable == null) {
+                continue;
+            }
+            var radiusVector = activatable.transform.position - transform.position;
             var biasAngle = Vector3.Angle(transform.forward, radiusVector);
-            if (biasAngle < maxBiasAngle) {
+            if (biasAngle < activatable.EffectiveMaxBiasAngle(this)) {
                 Physics.Raycast(transform.position, radiusVector, out hit);
-                if (hit.collider == null) {
-                    continue;
-                }
-                if (hit.collider.gameObject == sphereCastResults[i].gameObject && hit.distance < maxDistance) {
-                    var activatable = hit.collider.GetComponent<Activatable>();
-                    if (activatable != null) {
+                if (hit.collider.gameObject == sphereCastResults[i].gameObject) {
+                    if (activatable != null && hit.distance < activatable.EffectiveMaxDistance(this)) {
                         Check(activatable, biasAngle);
                     }
                 }

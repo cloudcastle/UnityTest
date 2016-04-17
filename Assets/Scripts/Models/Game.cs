@@ -121,6 +121,7 @@ public class Game
         var fat = new Level("Fat", place);
         var pisa = new Level("Pisa", z, bat, string_);
         var deal = new Level("Deal", fat, bridge);
+        var catch_ = new Level("Catch", deal);
 
 
         currentLevel = click;

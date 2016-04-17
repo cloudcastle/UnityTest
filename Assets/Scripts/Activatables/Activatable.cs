@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public abstract class Activatable : Script
 {
     public float maxDistance = 0;
+    public float maxBiasAngle = 60;
     public bool useActivatorMaxDistance = true;
 
     // biased activation only available withn activator max distance
@@ -22,5 +23,12 @@ public abstract class Activatable : Script
             return activator.maxDistance;
         }
         return maxDistance;
+    }
+
+    public float EffectiveMaxBiasAngle(Activator activator) {
+        if (useActivatorMaxDistance) {
+            return activator.maxBiasAngle;
+        }
+        return maxBiasAngle;
     }
 }

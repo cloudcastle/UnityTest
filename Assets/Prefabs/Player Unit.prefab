@@ -942,8 +942,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154292}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 1, z: -5}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
+  m_LocalPosition: {x: -0, y: 21, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491080}
@@ -1371,6 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   inventorySlot: {fileID: 0}
@@ -1431,6 +1432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   inventorySlot: {fileID: 0}
@@ -1547,6 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   inventorySlot: {fileID: 0}
@@ -1605,6 +1608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   inventorySlot: {fileID: 0}
@@ -1673,7 +1677,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
-  totalSampleCount: 0
 --- !u!114 &11465190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1855,6 +1858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 5
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   target: {fileID: 11499482}
@@ -2039,6 +2043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   inventorySlot: {fileID: 0}
@@ -2101,6 +2106,7 @@ MonoBehaviour:
   inventory: {fileID: 11434486}
   lastPositionKeeper: {fileID: 11419060}
   head: {fileID: 0}
+  undo: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &11499754
 MonoBehaviour:

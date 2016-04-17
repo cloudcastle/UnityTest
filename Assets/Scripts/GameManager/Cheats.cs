@@ -15,8 +15,8 @@ public class Cheats : MonoBehaviour
         Debug.Log(string.Format("Cheats {0}", on ? "on" : "off"));
         Cheats.on = on;
 
-        if (GameManager.instance.OnLevel()) {
-            FindObjectOfType<Jetpack>().enabled = on;
+        if (!GameManager.instance.OnMap()) {
+            FindObjectsOfType<Jetpack>().ToList().ForEach(j => j.enabled = on);
             var map = FindObjectOfType<MapScreen>();
             if (map != null) {
                 map.UpdateLevelList();
