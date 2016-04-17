@@ -112,6 +112,7 @@ public class Game
 
         // Twins
         var place = new Level("Place", gift);
+        var pisa = new Level("Pisa", r, bat);
 
 
         currentLevel = click;
