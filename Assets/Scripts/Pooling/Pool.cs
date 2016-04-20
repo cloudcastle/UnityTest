@@ -7,11 +7,17 @@ using System.Linq;
 [Serializable]
 public class Pool
 {
+    static int lastID = 0;
+    public string name;
+
     public GameObject sample;
+    int lastInstanceID = 0;
 
     public List<GameObject> pool = new List<GameObject>();
 
     public Pool(GameObject sample) {
+        ++lastID;
+        name = "Pool #" + lastID.ToString();
         this.sample = sample;
         Poolable poolable = sample.GetComponent<Poolable>();
         if (poolable == null) {
@@ -47,7 +53,13 @@ public class Pool
 
     void ExpandPool() {
         GameObject instance = GameObject.Instantiate(sample);
+        lastInstanceID++;
+        instance.name = sample.name + " #" + lastInstanceID;
         instance.GetComponent<Poolable>().pool = this;
         pool.Add(instance);
+    }
+
+    public override string ToString() {
+        return name;
     }
 }

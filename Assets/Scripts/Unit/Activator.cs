@@ -20,7 +20,7 @@ public class Activator : Ability
 
     public override void Awake() {
         base.Awake();
-        activatableLayerMask = LayerMask.GetMask("Ghost", "Item", "Activatable");
+        activatableLayerMask = LayerMask.GetMask("Ghost", "Item", "Activatable", "Unit");
     }
 
     void Start() {

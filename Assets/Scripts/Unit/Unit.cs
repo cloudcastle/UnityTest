@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour
     public LastPositionKeeper lastPositionKeeper;
     public Head head;
     public Undo undo;
+    public CharacterController characterController;
 
     public UnitController controller;
 
@@ -23,6 +24,7 @@ public class Unit : MonoBehaviour
         lastPositionKeeper = GetComponentInChildren<LastPositionKeeper>();
         head = GetComponentInChildren<Head>();
         undo = GetComponentInChildren<Undo>();
+        characterController = GetComponentInChildren<CharacterController>();
 
         all.Add(this);
     }

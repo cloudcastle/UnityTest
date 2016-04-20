@@ -20,4 +20,22 @@ public class Algorithms
         Dfs(result, start, getNextStates);
         return result;
     }
+
+    public static void Bfs<StateType>(
+        HashSet<StateType> reachedStates, 
+        StateType start, 
+        Func<StateType, IEnumerable<StateType>> getNextStates
+    ) {
+        Queue<StateType> queue = new Queue<StateType>();
+        queue.Enqueue(start);
+        reachedStates.Add(start);
+        while (queue.Count > 0) {
+            getNextStates(queue.Dequeue()).ToList().ForEach(nextState => {
+                if (!reachedStates.Contains(nextState)) {
+                    reachedStates.Add(nextState);
+                    queue.Enqueue(nextState);
+                }
+            });
+        }
+    }
 }

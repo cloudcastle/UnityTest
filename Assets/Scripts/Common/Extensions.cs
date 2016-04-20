@@ -122,4 +122,10 @@ public static class Extensions
         }
         return path;
     }
+
+    public static void Reset(this Transform transform) {
+        transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
+        transform.localRotation = Quaternion.identity;
+    }
 }
