@@ -20,6 +20,7 @@ public class SpaceGraph : MonoBehaviour
     public List<NodeInstance> nodes = new List<NodeInstance>();
     public List<LinkScript> links = new List<LinkScript>();
 
+    int overlapCount;
     Collider[] overlapResults = new Collider[MAX_RESULTS_COUNT];
 
     void Awake() {
@@ -64,6 +65,17 @@ public class SpaceGraph : MonoBehaviour
         Bfs();
     }
 
+    void OverlapNode(NodeInstance newNode) {
+        overlapCount = Physics.OverlapBoxNonAlloc(
+            newNode.transform.TransformPoint(newNode.bounds.center),
+            0.99f * newNode.bounds.size / 2,
+            overlapResults,
+            newNode.transform.rotation,
+            nodeMask,
+            QueryTriggerInteraction.Collide
+        );
+    }
+
     void Bfs() {
         nodes.ForEach(node => {
             if (node != current) {
@@ -90,14 +102,7 @@ public class SpaceGraph : MonoBehaviour
                 var newNode = link.to.node.Instantiate(link.transform);
                 //Debug.LogFormat("linking from {0} by {1} to {2}", v, link, newNode);
                 newNode.transform.SetParent(world, worldPositionStays: true);
-                int overlapCount = Physics.OverlapBoxNonAlloc(
-                    newNode.transform.TransformPoint(newNode.bounds.center),
-                    0.99f * newNode.bounds.size / 2,
-                    overlapResults,
-                    newNode.transform.rotation,
-                    nodeMask,
-                    QueryTriggerInteraction.Collide
-                );
+                OverlapNode(newNode);
                 if (overlapCount > 1) {
                     //Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
                     newNode.ReturnToPool();
