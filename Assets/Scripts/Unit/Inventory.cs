@@ -21,12 +21,9 @@ public class Inventory : Ability
 
     public ItemListShallowTracker itemTracker;
 
-    public override void Awake() {
-        base.Awake();
-        slotPool = Pool.CreatePool(slotSample);
-    }
-
     void Start() {
+        slotPool = Pool.CreatePool(slotSample);
+
         itemTracker = new ItemListShallowTracker(
             setList: (v) => items = v,
             getList: () => items
