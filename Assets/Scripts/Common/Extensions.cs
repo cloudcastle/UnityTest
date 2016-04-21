@@ -128,4 +128,12 @@ public static class Extensions
         transform.localScale = Vector3.one;
         transform.localRotation = Quaternion.identity;
     }
+
+    public static bool CloseTo(this Transform a, Transform b) {
+        return a.position == b.position && a.rotation == b.rotation && a.lossyScale == b.lossyScale;
+    }
+
+    public static string ExtToString(this Transform t) {
+        return String.Format("{{position = {0}, rotation = {1}, lossyScale = {2}}}", t.position.ExtToString(), t.rotation, t.lossyScale.ExtToString());
+    }
 }

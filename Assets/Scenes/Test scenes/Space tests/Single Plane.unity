@@ -124,8 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65276c538f30cdb4f9985dbc9d8bd160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  link: {fileID: 0}
   to: {fileID: 1904708725}
-  backLink: {fileID: 0}
+  backLink: {fileID: 1696288391}
 --- !u!4 &360450671 stripped
 Transform:
   m_PrefabParentObject: {fileID: 451926, guid: de06e64d601a2f14ba13d3e7991d74ab, type: 2}
@@ -248,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: {fileID: 1904708725}
   unit: {fileID: 670274971}
+  schema: {fileID: 1498792429}
   world: {fileID: 716506270}
   nodes: []
   links: []
@@ -332,8 +334,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65276c538f30cdb4f9985dbc9d8bd160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  link: {fileID: 0}
   to: {fileID: 1904708725}
-  backLink: {fileID: 0}
+  backLink: {fileID: 2048002912}
 --- !u!1 &1498792428
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,8 +432,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65276c538f30cdb4f9985dbc9d8bd160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  link: {fileID: 0}
   to: {fileID: 1904708725}
-  backLink: {fileID: 0}
+  backLink: {fileID: 31198228}
 --- !u!1 &1904708724
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,18 +462,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9352b83c612ccb4698a119ff97f34c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appeared: 0
   pool:
     name: 
     sample: {fileID: 0}
     pool: []
-  node:
-    name: 
-    pool:
-      name: 
-      sample: {fileID: 0}
-      pool: []
+  node: {fileID: 0}
   bounds: {fileID: 2063257052}
-  links: []
   distance: 0
 --- !u!4 &1904708726
 Transform:
@@ -570,8 +569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65276c538f30cdb4f9985dbc9d8bd160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  link: {fileID: 0}
   to: {fileID: 1904708725}
-  backLink: {fileID: 0}
+  backLink: {fileID: 1426992490}
 --- !u!1 &2063257050
 GameObject:
   m_ObjectHideFlags: 0

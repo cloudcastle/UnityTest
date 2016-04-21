@@ -21,7 +21,7 @@ public class MapScreen : UIScreen {
         }
         inited = true;
 
-        levelButtonsPool = new Pool(levelButtonSample);
+        levelButtonsPool = Pool.CreatePool(levelButtonSample);
     }
 
     void SetLevelList(List<Level> levels) {

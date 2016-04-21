@@ -9,20 +9,51 @@ public class NodeInstance : Poolable
 
     public BoxCollider bounds;
 
-    public List<LinkScript> links;
+    public Dictionary<Link, LinkScript> links;
 
     public int distance;
 
+    bool valid = true;
+
     public void CreateNode() {
-        node = new Node(this);
-        gameObject.SetActive(false);
+        var nodeObject = GameObject.Instantiate(SampleManager.instance.spaceNode);
+        node = nodeObject.GetComponent<Node>();
+        node.name = name;
+        node.pool = Pool.CreatePool(gameObject);
+        node.transform.SetParent(transform.parent);
+        transform.SetParent(node.transform);
     }
 
     public void Bfs(int distance = 0) {
     }
 
-    public void Init() {
-        links = GetComponentsInChildren<LinkScript>().ToList();
-        CreateNode();
+    public void InitLinks() {
+        links = new Dictionary<Link, LinkScript>();
+        GetComponentsInChildren<LinkScript>().ToList().ForEach(link => {
+            links[link.link] = link;
+        });
+    }
+
+    public void SetLinks() {
+        node.links = node.GetComponentsInChildren<Link>().ToList();
+    }
+
+    public void Off() {
+        valid = false;
+        bounds.enabled = false;
+    }
+
+    public void On() {
+        valid = true;
+        bounds.enabled = true;
+    }
+
+    public bool IsOn() {
+        return valid;
+    }
+
+    public void Disconnect() {
+        links.Values.ToList().ForEach(link => link.Disconnect());
+        
     }
 }

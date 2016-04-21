@@ -23,7 +23,7 @@ public class Inventory : Ability
 
     public override void Awake() {
         base.Awake();
-        slotPool = new Pool(slotSample);
+        slotPool = Pool.CreatePool(slotSample);
     }
 
     void Start() {
@@ -35,7 +35,7 @@ public class Inventory : Ability
             setValue: (v) => selected = v,
             getValue: () => selected
         );
-        new ListShallowTracker<GameObject>(
+        new ListShallowTracker<Poolable>(
             setList: (v) => slotPool.pool = v,
             getList: () => slotPool.pool
         );

@@ -4,38 +4,39 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-[Serializable]
-public class Pool
+public class Pool : MonoBehaviour
 {
-    static int lastID = 0;
-    public string name;
-
     public GameObject sample;
     int lastInstanceID = 0;
 
-    public List<GameObject> pool = new List<GameObject>();
+    public List<Poolable> pool = new List<Poolable>(); 
 
-    public Pool(GameObject sample) {
-        ++lastID;
-        name = "Pool #" + lastID.ToString();
-        this.sample = sample;
+    public static Pool CreatePool(GameObject sample) {
+        var newPoolObject = new GameObject();
+        newPoolObject.transform.SetParent(PoolManager.instance.transform);
+        var newPool = newPoolObject.AddComponent<Pool>();
+        newPool.name = sample.name;
+        newPool.sample = sample;
         Poolable poolable = sample.GetComponent<Poolable>();
         if (poolable == null) {
             poolable = sample.AddComponent<Poolable>();
         }
-        poolable.pool = this;
+        poolable.pool = newPool;
+        return newPool;
     }
 
-    void Disappear(GameObject instance) {
-        instance.transform.SetParent(PoolManager.instance.transform, worldPositionStays: false);
-        instance.SetActive(false);
+    void Disappear(Poolable instance) {
+        instance.appeared = false;
+        instance.transform.SetParent(transform, worldPositionStays: false);
+        instance.gameObject.SetActive(false);
     }
 
-    void Appear(GameObject instance) {
-        instance.SetActive(true);
+    void Appear(Poolable instance) {
+        instance.appeared = true;
+        instance.gameObject.SetActive(true);
     }
 
-    public void Return(GameObject instance) {
+    public void Return(Poolable instance) {
         Disappear(instance);
         pool.Add(instance);
     }
@@ -44,19 +45,20 @@ public class Pool
         if (pool.Count == 0) {
             ExpandPool();
         }
-        GameObject instance = pool[pool.Count - 1];
+        Poolable instance = pool[pool.Count - 1];
         pool.RemoveAt(pool.Count - 1);
         Appear(instance);
         instance.GetComponents<Script>().ToList().ForEach(script => script.Taken());
-        return instance;
+        return instance.gameObject;
     }
 
     void ExpandPool() {
         GameObject instance = GameObject.Instantiate(sample);
         lastInstanceID++;
         instance.name = sample.name + " #" + lastInstanceID;
-        instance.GetComponent<Poolable>().pool = this;
-        pool.Add(instance);
+        var poolable = instance.GetComponent<Poolable>();
+        poolable.pool = this;
+        pool.Add(poolable);
     }
 
     public override string ToString() {
