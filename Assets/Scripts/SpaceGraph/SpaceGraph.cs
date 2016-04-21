@@ -220,7 +220,11 @@ public class SpaceGraph : MonoBehaviour
             DestroyImmediate(testObject.gameObject);
             return result;
         });
-        Debug.LogFormat("Backlink set: {0} {1} - {2} {3}", from.name, link.name, to.name, link.backLink.name);
+        if (link.backLink == null) {
+            Debug.LogError(string.Format("No backlink detected: {0} {1}", from.name, link.name));
+        } else {
+            Debug.LogFormat("Backlink set: {0} {1} - {2} {3}", from.name, link.name, to.name, link.backLink.name);
+        }
     }
 
     [ContextMenu("Set Back Links")]
