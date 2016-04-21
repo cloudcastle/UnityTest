@@ -203,4 +203,29 @@ public class SpaceGraph : MonoBehaviour
             }
         });
     }
+
+    void LocateBackLink(LinkScript link) {
+        NodeInstance from = link.GetComponentInParent<NodeInstance>();
+        NodeInstance to = link.to;
+        link.backLink = to.GetComponentsInChildren<LinkScript>().ToList().FirstOrDefault(other => {
+            if (other.to != from) {
+                return false;
+            }
+            var testObject = new GameObject("TestObject").transform;
+            testObject.SetParent(to.transform, worldPositionStays: false);
+            other.transform.SetParent(testObject);
+            testObject.SetParent(link.transform, worldPositionStays: false);
+            var result = other.transform.CloseTo(from.transform);
+            other.transform.SetParent(to.transform, worldPositionStays: false);
+            DestroyImmediate(testObject.gameObject);
+            return result;
+        });
+        Debug.LogFormat("Backlink set: {0} {1} - {2} {3}", from.name, link.name, to.name, link.backLink.name);
+    }
+
+    [ContextMenu("Set Back Links")]
+    void SetBackLinks() {
+        FindObjectsOfType<LinkScript>().ToList().ForEach(LocateBackLink);
+        //transform.tr
+    }
 }
