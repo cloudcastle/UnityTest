@@ -38,7 +38,6 @@ public class Game
 
         // Moving Surfaces Intro
         var ride = new Level("Ride", spring);
-        var f = new Level("F", depends: ride);
 
         // Controls
         var z = new Level("Z", fall, ride);
@@ -46,8 +45,11 @@ public class Game
         // Jumps Intro Part 2
         var string_ = new Level("String", z);
 
+        // Moving Surfaces Intro 2
+        var f = new Level("F", string_);
+
         // Lifts       
-        var order = new Level("Order", depends: shift);
+        var order = new Level("Order", depends: f);
         var precaution = new Level("Precaution", depends: order);
         var stairs = new Level("Stairs", precaution, f);
         var twoPits = new Level("Two pits", precaution, f);
@@ -97,13 +99,17 @@ public class Game
         var keyChain = new Level("Key chain", triple);
 
         // Keys Tricks
-        var walkthrough = new Level("Walkthrough", cleanHands);
+        var walkthrough = new Level("Walkthrough", qeMouseWheel);
         var column = new Level("Column", walkthrough, z);
         var bridge = new Level("Bridge", string_, z, qeMouseWheel);
+        var stand = new Level("Stand", bridge);
+        var grab = new Level("Grab", bridge);
+        var forgotten = new Level("Forgotten", stand, grab);
+        var floor = new Level("Floor", grab);
         var pool = new Level("Pool", bridge);
         var tool = new Level("Tool", column);
         var intersection = new Level("Intersection", tool);
-        var accuracy = new Level("Accuracy", string_, tool);
+        var accuracy = new Level("Accuracy", stand, tool);
 
         // Tricks
         var bars = new Level("Bars", string_);
@@ -113,15 +119,16 @@ public class Game
         var you = new Level("You", pass);
         var gift = new Level("Gift", you, walkthrough);
         var giveALift = new Level("Give a lift", you, raise);
-        var bat = new Level("Bat", you, gap);
+        var bat = new Level("Bat", giveALift, gap);
 
         // Twins
-        var place = new Level("Place", gift);
-        var fat = new Level("Fat", place);
-        var pisa = new Level("Pisa", z, bat, string_);
-        var deal = new Level("Deal", fat, bridge);
+        var together = new Level("Together", bat);
+        var fat = new Level("Fat", together);
+        var place = new Level("Place", fat);
+        var pisa = new Level("Pisa", z, place, string_);
+        var deal = new Level("Deal", place, accuracy);
         var catch_ = new Level("Catch", deal);
-        var coveredHill = new Level("Covered Hill", bat, gift/*, pickBallOnJumpFromIt*//*, accuratelyThrowBall*/);
+        var coveredHill = new Level("Covered Hill", place/*, pickBallOnJumpFromIt*//*, accuratelyThrowBall*/);
 
         currentLevel = click;
         current = null;

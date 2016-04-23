@@ -18,6 +18,7 @@ public class LevelGraph : MonoBehaviour
     void UpdateLevelSet() {
         if (Extensions.Editor()) {
 #if UNITY_EDITOR
+            GameManager.game = new Game();
             var levels = GameManager.game.levels;
             var levelNodes = FindObjectsOfType<LevelNode>().ToList();
             FindObjectsOfType<LevelEdge>().ToList().ForEach(le => DestroyImmediate(le.gameObject));
