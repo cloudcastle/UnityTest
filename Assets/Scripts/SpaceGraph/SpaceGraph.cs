@@ -255,6 +255,7 @@ public class SpaceGraph : MonoBehaviour
                 Debug.LogFormat(string.Format("No backlink detected: {0} {1}", from.name, link.name));
                 var backlinkObject = new GameObject(GenerateLinkName(link.to, from) + " (backlink)");
                 var backlink = backlinkObject.AddComponent<LinkScript>();
+                backlink.to = from;
                 backlinkObject.transform.SetParent(from.transform);
                 backlinkObject.transform.Reset();
                 backlinkObject.transform.SetParent(link.transform, worldPositionStays: true);
