@@ -27,6 +27,7 @@ public class Player : UnitController
              Debug.Log("startUnit.unit = " + startUnit.unit);
              Possess(startUnit.unit, animate: false);
          } else {
+             Debug.Log("Possess Some Unit");
              Possess(FindObjectOfType<Unit>(), animate: false);
          }
          new ValueTracker<Unit>(v => current = v, () => current);

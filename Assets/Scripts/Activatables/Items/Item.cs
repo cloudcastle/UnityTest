@@ -20,6 +20,13 @@ public class Item : Activatable
         activator.unit.inventory.Pick(this);
     }
 
+    public override ActivatableStatus Status() {
+        if (Player.instance.current.inventory.pickStun.OnCooldown()) {
+            return ActivatableStatus.Inactive;
+        }
+        return ActivatableStatus.Activatable;
+    }
+
     public void Picked(Unit player) {
         onPick(player);
     }

@@ -19,10 +19,14 @@ public class Inventory : Ability
     public event Action onChanged = () => { };
     public event Action onSkipAnimation = () => { };
 
+    public Cooldown pickStun;
+
     public ItemListShallowTracker itemTracker;
 
     void Start() {
         slotPool = Pool.CreatePool(slotSample);
+
+        pickStun = new Cooldown(0.05f);
 
         itemTracker = new ItemListShallowTracker(
             setList: (v) => items = v,
@@ -44,6 +48,10 @@ public class Inventory : Ability
     }
 
     public IPromise Pick(Item item, bool animate = true) {
+        if (pickStun.OnCooldown()) {
+            Debug.Log("Pick on cooldown");
+            return Promise.Resolved();
+        }
         items.Add(item);
         selected = item;
 

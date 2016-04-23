@@ -25,7 +25,7 @@ public class CleanHands : MonoBehaviour
                     }
                 }
                 player.inventory.DropAll(transform.TransformPoint(dropLocalPosition));
-                player.activator.stun.StartCooldown();
+                player.inventory.pickStun.StartCooldown();
             }
         }
     }

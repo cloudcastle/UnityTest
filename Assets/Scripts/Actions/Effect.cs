@@ -6,7 +6,7 @@ public abstract class Effect : Script
 {
     public abstract IPromise Run();
 
-    public virtual bool Ready() {
-        return transform;
+    public virtual ActivatableStatus Status() {
+        return ActivatableStatus.Activatable;
     }
 }

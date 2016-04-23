@@ -25,14 +25,10 @@ public class ActivatorHighlight : MonoBehaviour
         return Player.instance.current.activator.current == activatable;
     }
 
-    bool Ready() {
-        return activatable.Ready();
-    }
-
     protected void Update() {
-        if (!Ready()) {
+        if (activatable.Status() == ActivatableStatus.Activated) {
             SetEmission(notReadyEmission);
-        } else if (UnderActivator()) {
+        } else if (activatable.Status() == ActivatableStatus.Activatable && UnderActivator()) {
             SetEmission(highlightEmission);
         } else {
             SetEmission(baseEmission);

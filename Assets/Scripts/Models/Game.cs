@@ -64,12 +64,11 @@ public class Game
         var secondBeat = new Level("Second Beat", rhythm);
         var trio = new Level("Trio", secondBeat);
 
-
-
         // Moving Surfaces
         var fly = new Level("Fly", string_);
         var phase = new Level("Phase", string_);
         var malapropos = new Level("Malapropos", phase);
+        var interception = new Level("Interception", fly, raise);
 
         // Jumps
         var climb = new Level("Climb", gap, z, string_);
@@ -122,7 +121,7 @@ public class Game
         var pisa = new Level("Pisa", z, bat, string_);
         var deal = new Level("Deal", fat, bridge);
         var catch_ = new Level("Catch", deal);
-
+        var coveredHill = new Level("Covered Hill", bat, gift/*, pickBallOnJumpFromIt*//*, accuratelyThrowBall*/);
 
         currentLevel = click;
         current = null;

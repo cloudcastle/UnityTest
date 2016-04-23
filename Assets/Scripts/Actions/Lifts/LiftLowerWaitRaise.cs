@@ -88,8 +88,12 @@ public class LiftLowerWaitRaise : Effect
         return Promise.Resolved();
     }
 
-    public override bool Ready() {
+    bool Ready() {
         return state != Waiting && state != MovingDown;
+    }
+
+    public override ActivatableStatus Status() {
+        return Ready() ? ActivatableStatus.Activatable : ActivatableStatus.Activated;
     }
 
     public override void Awake()

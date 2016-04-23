@@ -12,7 +12,13 @@ public class EffectButton : Activatable
         effects.ForEach((effect) => effect.Run());
     }
 
-    public override bool Ready() {
-        return effects.Any(effect => effect.Ready());
+    public override ActivatableStatus Status() {
+        if (effects.Any(effect => effect.Status() == ActivatableStatus.Activatable)) {
+            return ActivatableStatus.Activatable;
+        };
+        if (effects.Any(effect => effect.Status() == ActivatableStatus.Activated)) {
+            return ActivatableStatus.Activated;
+        };
+        return ActivatableStatus.Inactive;
     }
 }
