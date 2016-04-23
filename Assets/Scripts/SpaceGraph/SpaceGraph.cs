@@ -231,7 +231,7 @@ public class SpaceGraph : MonoBehaviour
         });
     }
 
-    void LocateBackLink(LinkScript link) {
+    void LocateBackLink(LinkScript link, bool allowCreate = false) {
         NodeInstance from = link.GetComponentInParent<NodeInstance>();
         NodeInstance to = link.to;
         link.backLink = to.GetComponentsInChildren<LinkScript>().ToList().FirstOrDefault(other => {
@@ -239,16 +239,32 @@ public class SpaceGraph : MonoBehaviour
                 return false;
             }
             var testObject = new GameObject("TestObject").transform;
+            var otherParent = other.transform.parent;
             testObject.SetParent(to.transform, worldPositionStays: false);
-            other.transform.SetParent(testObject);
+            other.transform.SetParent(testObject, worldPositionStays: true);
             testObject.SetParent(link.transform, worldPositionStays: false);
             var result = other.transform.CloseTo(from.transform);
-            other.transform.SetParent(to.transform, worldPositionStays: false);
-            DestroyImmediate(testObject.gameObject);
+            other.transform.SetParent(otherParent, worldPositionStays: false);
+            DestroyImmediate(testObject.gameObject); 
             return result;
         });
         if (link.backLink == null) {
-            Debug.LogError(string.Format("No backlink detected: {0} {1}", from.name, link.name));
+            if (!allowCreate) {
+                Debug.LogError(string.Format("No backlink detected: {0} {1}", from.name, link.name));
+            } else {
+                Debug.LogFormat(string.Format("No backlink detected: {0} {1}", from.name, link.name));
+                var backlinkObject = new GameObject(GenerateLinkName(link.to, from) + " (backlink)");
+                var backlink = backlinkObject.AddComponent<LinkScript>();
+                backlinkObject.transform.SetParent(from.transform);
+                backlinkObject.transform.Reset();
+                backlinkObject.transform.SetParent(link.transform, worldPositionStays: true);
+                var linkFolder = LinkFolder(link.to);
+                backlinkObject.transform.SetParent(linkFolder, worldPositionStays: false);
+                link.backLink = backlink;
+                Debug.LogFormat("Backlink created: {0} {1} - {2} {3}", from.name, link.name, to.name, link.backLink.name);
+                backlink.backLink = link;
+                Debug.LogFormat("Backlink set: {0} {1} - {2} {3}", to.name, link.backLink.name, from.name, link.name);
+            }
         } else {
             Debug.LogFormat("Backlink set: {0} {1} - {2} {3}", from.name, link.name, to.name, link.backLink.name);
         }
@@ -257,13 +273,19 @@ public class SpaceGraph : MonoBehaviour
 #if UNITY_EDITOR
     [ContextMenu("Set Back Links")]
     void SetBackLinks() {
-        FindObjectsOfType<LinkScript>().ToList().ForEach(LocateBackLink);
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => LocateBackLink(link));
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    }
+
+    [ContextMenu("Create Back Links")]
+    void CreateBackLinks() {
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => LocateBackLink(link, allowCreate: true));
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
 
     [ContextMenu("Destroy All Links")]
     void DestroyAllLinks() {
-        FindObjectsOfType<LinkScript>().ToList().ForEach(link => DestroyImmediate(link));
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => DestroyImmediate(link.gameObject));
     }
 
     [ContextMenu("Set Close Links")]
@@ -287,6 +309,9 @@ public class SpaceGraph : MonoBehaviour
                     }
                 }
             }
+        });
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
+            Debug.LogFormat(link.transform.Path());
         });
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
@@ -315,14 +340,19 @@ public class SpaceGraph : MonoBehaviour
         return string.Join(" ", linkName.ToArray());
     }
 
-    private void CreateLink(NodeInstance node, NodeInstance other) {
-        Debug.LogFormat("CreateLink from {0} to {1}", node, other);
+    Transform LinkFolder(NodeInstance node) {
         var linksFolder = node.transform.Find("Links");
         if (linksFolder == null) {
             linksFolder = new GameObject("Links").transform;
             linksFolder.SetParent(node.transform);
+            linksFolder.transform.Reset();
         }
+        return linksFolder;
+    }
 
+    private void CreateLink(NodeInstance node, NodeInstance other) {
+        Debug.LogFormat("CreateLink from {0} to {1}", node, other);
+        var linksFolder = LinkFolder(node);
         var link = new GameObject(GenerateLinkName(node, other));
         link.transform.SetParent(other.transform);
         link.transform.Reset();
