@@ -87,7 +87,7 @@ public class SpaceGraph : MonoBehaviour
     }
 
     private void SwitchNode(NodeInstance node) {
-        Debug.Log("Switch node to " + node.GetInstanceID());
+        Debug.Log("Switch node to " + node);
         current = node;
         Bfs();
     }
@@ -289,6 +289,26 @@ public class SpaceGraph : MonoBehaviour
         FindObjectsOfType<LinkScript>().ToList().ForEach(link => DestroyImmediate(link.gameObject));
     }
 
+    [ContextMenu("Destroy Trivial Links")]
+    void DestroyTrivialLinks() {
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
+            if (AcceptableEditor(link.to, link)) {
+                DestroyImmediate(link.gameObject);
+            } else {
+                Debug.LogFormat("Link considered non-trivial and not destroyed: {0}", link.transform.Path());
+            }
+        });
+    }
+
+    [ContextMenu("Rename All Nodes")]
+    void RenameAllNodes() {
+        int cnt = 0;
+        FindObjectsOfType<NodeInstance>().ToList().ForEach(node => {
+            ++cnt;
+            node.name = "Node " + cnt;
+        });
+    }
+
     [ContextMenu("Set Close Links")]
     void SetCloseLinks() {
         InitSearching();
@@ -301,7 +321,7 @@ public class SpaceGraph : MonoBehaviour
             for (int i = 0; i < overlapCount; i++) {
                 var overlap = overlapResults[i];
                 var other = overlap.GetComponentInParent<NodeInstance>();
-                if (other != null && other != node) {
+                if (other != null && other != node && (other.transform.position - node.transform.position).magnitude < 10.1f) {
                     var oldLink = oldLinks.FirstOrDefault(link => link.to == other && AcceptableEditor(other, link));
                     if (oldLink == null) {
                         CreateLink(node, other);
@@ -364,6 +384,7 @@ public class SpaceGraph : MonoBehaviour
 
     [ContextMenu("Normalize")]
     void Normalize() {
+        DestroyTrivialLinks();
         SetCloseLinks();
         SetBackLinks();
     }
