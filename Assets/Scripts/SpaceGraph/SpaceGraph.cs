@@ -57,7 +57,9 @@ public class SpaceGraph : MonoBehaviour
         if (current == null) {
             return;
         }
-        current = current.node.Instantiate(world);
+        current = current.node.Instantiate(current.node.transform);
+        current.transform.Reset();
+        current.transform.SetParent(world, worldPositionStays: true);
         Bfs();
     }
 
@@ -70,7 +72,7 @@ public class SpaceGraph : MonoBehaviour
             nodeMask,
             QueryTriggerInteraction.Collide
         );
-        if (overlapCount >= 1) {
+        if (overlapCount == 1) {
             var nodeInstance = overlapResults[0].GetComponentInParent<NodeInstance>();
             if (nodeInstance != null) {
                 return nodeInstance;
@@ -106,11 +108,20 @@ public class SpaceGraph : MonoBehaviour
     }
 
     void OverlapNode(NodeInstance newNode, float reduction = 0.99f) {
+        //Debug.LogFormat(
+        //    "Physics.OverlapBoxNonAlloc({0}, {1}, {2}, {3}, {4}, {5})",
+        //    newNode.bounds.transform.TransformPoint(newNode.bounds.center),
+        //    reduction * newNode.bounds.size / 2,
+        //    overlapResults,
+        //    newNode.bounds.transform.rotation,
+        //    nodeMask,
+        //    QueryTriggerInteraction.Collide
+        //);
         overlapCount = Physics.OverlapBoxNonAlloc(
-            newNode.transform.TransformPoint(newNode.bounds.center),
+            newNode.bounds.transform.TransformPoint(newNode.bounds.center),
             reduction * newNode.bounds.size / 2,
             overlapResults,
-            newNode.transform.rotation,
+            newNode.bounds.transform.rotation,
             nodeMask,
             QueryTriggerInteraction.Collide
         );
@@ -184,10 +195,19 @@ public class SpaceGraph : MonoBehaviour
 
         while (queue.Count > 0) {
             var v = queue.Dequeue();
+            //if (v.name == "Node 8 (4) #2") {
+            //    Debug.LogFormat("Here we are");
+            //}
             if (TooFar(v)) {
+                //if (v.name == "Node 8 (4) #2") {
+                //    Debug.LogFormat("too far");
+                //}
                 continue;
             }
             v.links.Values.ToList().ForEach(link => {
+                //if (v.name == "Node 8 (4) #2") {
+                //    Debug.LogFormat("working with link: {0}", link.transform.Path());
+                //}
                 if (cnt >= MAX_NODES) {
                     Debug.LogWarning("cnt >= MAX_NODES");
                     return;
@@ -195,12 +215,17 @@ public class SpaceGraph : MonoBehaviour
 
                 var node = GetNode(link);
                 if (node.IsOn()) {
+                    //if (v.name == "Node 8 (4) #2") {
+                    //    Debug.LogFormat("node is on: {0}", node.transform.Path());
+                    //}
                     return;
                 }
 
-                OverlapNode(node);
+                OverlapNode(node, reduction: 0.1f);
                 if (overlapCount > 0) {
-                    //Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
+                    //if (v.name == "Node 8 (4) #2") {
+                    //    Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
+                    //}
                     node.Disconnect();
                     node.ReturnToPool();
                     var overlappedNode = overlapResults[0].GetComponentInParent<NodeInstance>();
@@ -209,6 +234,9 @@ public class SpaceGraph : MonoBehaviour
                         overlappedNode.links[link.link.backLink].to = v;
                     }
                 } else {
+                    //if (v.name == "Node 8 (4) #2") {
+                    //    Debug.LogFormat("created new node: {0}", node.transform.Path());
+                    //}
                     //Debug.LogFormat("new node fixed: {0}", node);
                     node.On();
                     node.distance = v.distance + 1;

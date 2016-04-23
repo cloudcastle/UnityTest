@@ -20,7 +20,9 @@ public class NodeInstance : Poolable
         node = nodeObject.GetComponent<Node>();
         node.name = name;
         node.pool = Pool.CreatePool(gameObject);
-        node.transform.SetParent(transform.parent);
+        node.transform.SetParent(transform);
+        node.transform.Reset();
+        node.transform.SetParent(transform.parent, worldPositionStays: true);
         transform.SetParent(node.transform);
     }
 
