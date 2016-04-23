@@ -50,7 +50,7 @@ public static class Extensions
     }
 
     public static string ExtToString<T>(this IEnumerable<T> collection, string delimiter = ", ", string format = "[{0}]") {
-        return String.Format(format, String.Join(delimiter, collection.Select(obj => obj.ToString()).ToArray()));
+        return String.Format(format, String.Join(delimiter, collection.Select(obj => obj != null ? obj.ToString() : "null").ToArray()));
     }
 
     public static T CyclicNext<T>(this List<T> list, T obj, int delta = 1) {

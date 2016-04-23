@@ -7,7 +7,7 @@ public class LinkScript : MonoBehaviour
 {
     public Link link;
 
-    public Node node {
+    public Node Node {
         get {
             return link.to;
         }

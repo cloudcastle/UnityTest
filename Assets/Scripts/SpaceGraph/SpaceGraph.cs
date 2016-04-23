@@ -27,8 +27,17 @@ public class SpaceGraph : MonoBehaviour
     int overlapCount;
     Collider[] overlapResults = new Collider[MAX_RESULTS_COUNT];
 
-    void Awake() {
+    void InitSearching() {
         nodeMask = LayerMask.GetMask("Node");
+        overlapResults = new Collider[MAX_RESULTS_COUNT];
+    }
+
+    void Awake() {
+        InitSearching();
+        if (current == null) {
+            current = FindClosestNode();
+            Debug.LogFormat("Current was null. Changed to closest node: {0}", current);
+        }
         Init();
     }
 
@@ -50,10 +59,10 @@ public class SpaceGraph : MonoBehaviour
         Bfs();
     }
 
-    void FixedUpdate() {
+    NodeInstance FindClosestNode() {
         int overlapCount = Physics.OverlapBoxNonAlloc(
             unit.characterController.bounds.center,
-            unit.characterController.bounds.size / 2, 
+            unit.characterController.bounds.size / 2,
             overlapResults,
             unit.transform.rotation,
             nodeMask,
@@ -62,9 +71,17 @@ public class SpaceGraph : MonoBehaviour
         if (overlapCount >= 1) {
             var nodeInstance = overlapResults[0].GetComponentInParent<NodeInstance>();
             if (nodeInstance != null) {
-                if (nodeInstance.distance >= 2) {
-                    SwitchNode(nodeInstance);
-                }
+                return nodeInstance;
+            }
+        }
+        return null;
+    }
+
+    void FixedUpdate() {
+        var nodeInstance = FindClosestNode();
+        if (nodeInstance != null) {
+            if (nodeInstance.distance >= 2) {
+                SwitchNode(nodeInstance);
             }
         }
     }
@@ -86,10 +103,10 @@ public class SpaceGraph : MonoBehaviour
         );
     }
 
-    void OverlapNode(NodeInstance newNode) {
+    void OverlapNode(NodeInstance newNode, float reduction = 0.99f) {
         overlapCount = Physics.OverlapBoxNonAlloc(
             newNode.transform.TransformPoint(newNode.bounds.center),
-            0.99f * newNode.bounds.size / 2,
+            reduction * newNode.bounds.size / 2,
             overlapResults,
             newNode.transform.rotation,
             nodeMask,
@@ -109,7 +126,11 @@ public class SpaceGraph : MonoBehaviour
     }
 
     bool Acceptable(NodeInstance node, LinkScript link) {
-        return node.node == link.node && node.transform.CloseTo(link.transform);
+        return node.node == link.Node && node.transform.CloseTo(link.transform);
+    }
+
+    bool AcceptableEditor(NodeInstance node, LinkScript link) {
+        return node == link.to && node.transform.CloseTo(link.transform);
     }
 
     NodeInstance FindNodeByPlace(LinkScript link) {
@@ -238,6 +259,82 @@ public class SpaceGraph : MonoBehaviour
     void SetBackLinks() {
         FindObjectsOfType<LinkScript>().ToList().ForEach(LocateBackLink);
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    }
+
+    [ContextMenu("Destroy All Links")]
+    void DestroyAllLinks() {
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => DestroyImmediate(link));
+    }
+
+    [ContextMenu("Set Close Links")]
+    void SetCloseLinks() {
+        InitSearching();
+
+        FindObjectsOfType<NodeInstance>().ToList().ForEach(node => {
+
+            var oldLinks = node.transform.GetComponentsInChildren<LinkScript>();
+
+            OverlapNode(node, reduction: 1.1f);
+            for (int i = 0; i < overlapCount; i++) {
+                var overlap = overlapResults[i];
+                var other = overlap.GetComponentInParent<NodeInstance>();
+                if (other != null && other != node) {
+                    var oldLink = oldLinks.FirstOrDefault(link => link.to == other && AcceptableEditor(other, link));
+                    if (oldLink == null) {
+                        CreateLink(node, other);
+                    } else {
+                        Debug.LogFormat("Old link found: {0}", oldLink);
+                    }
+                }
+            }
+        });
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+    }
+
+    string GenerateLinkName(NodeInstance node, NodeInstance other) {
+        var linkName = new List<string>();
+        var delta = other.transform.position - node.transform.position;
+        if (delta.x > 0.1) {
+            linkName.Add("Right");
+        }
+        if (delta.x < -0.1) {
+            linkName.Add("Left");
+        }
+        if (delta.y > 0.1) {
+            linkName.Add("Up");
+        }
+        if (delta.y < -0.1) {
+            linkName.Add("Down");
+        }
+        if (delta.z > 0.1) {
+            linkName.Add("Far");
+        }
+        if (delta.z < -0.1) {
+            linkName.Add("Near");
+        }
+        return string.Join(" ", linkName.ToArray());
+    }
+
+    private void CreateLink(NodeInstance node, NodeInstance other) {
+        Debug.LogFormat("CreateLink from {0} to {1}", node, other);
+        var linksFolder = node.transform.Find("Links");
+        if (linksFolder == null) {
+            linksFolder = new GameObject("Links").transform;
+            linksFolder.SetParent(node.transform);
+        }
+
+        var link = new GameObject(GenerateLinkName(node, other));
+        link.transform.SetParent(other.transform);
+        link.transform.Reset();
+        link.transform.SetParent(linksFolder, worldPositionStays: true);
+        var linkScript = link.AddComponent<LinkScript>();
+        linkScript.to = other;
+    }
+
+    [ContextMenu("Normalize")]
+    void Normalize() {
+        SetCloseLinks();
+        SetBackLinks();
     }
 #endif
 
