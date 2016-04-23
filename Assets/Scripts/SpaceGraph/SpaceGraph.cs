@@ -12,6 +12,8 @@ public class SpaceGraph : MonoBehaviour
     const int distanceLimit = 10;
     const int MAX_NODES = 1000;
 
+    const int maxAllowedNodeDistance = 0;
+
     public NodeInstance current;
 
     public Unit unit;
@@ -80,7 +82,7 @@ public class SpaceGraph : MonoBehaviour
     void FixedUpdate() {
         var nodeInstance = FindClosestNode();
         if (nodeInstance != null) {
-            if (nodeInstance.distance >= 2) {
+            if (nodeInstance.distance > maxAllowedNodeDistance) {
                 SwitchNode(nodeInstance);
             }
         }
