@@ -148,7 +148,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -240,7 +240,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -493,7 +494,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -650,6 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -854,7 +856,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -978,6 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -1159,13 +1162,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -1199,6 +1195,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -1214,6 +1217,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -1222,16 +1229,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -1248,6 +1247,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -1389,7 +1392,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1702,13 +1705,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -1742,6 +1738,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -1757,6 +1760,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -1765,16 +1772,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -1791,6 +1790,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -1838,13 +1841,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -1878,6 +1874,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -1893,6 +1896,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -1901,16 +1908,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -1927,6 +1926,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -1981,6 +1984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -2111,7 +2115,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2256,7 +2260,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2351,6 +2355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -2457,13 +2462,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -2497,6 +2495,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -2512,6 +2517,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -2520,16 +2529,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -2546,6 +2547,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -2661,13 +2666,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -2701,6 +2699,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -2716,6 +2721,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -2724,16 +2733,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -2750,6 +2751,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -2957,6 +2962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -3063,13 +3069,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -3103,6 +3102,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -3118,6 +3124,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -3126,16 +3136,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -3152,6 +3154,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -3222,7 +3228,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -3863,13 +3869,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -3903,6 +3902,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -3918,6 +3924,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -3926,16 +3936,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -3952,6 +3954,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -4003,7 +4009,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -4116,13 +4122,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
@@ -4156,6 +4155,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -4171,6 +4177,10 @@ Material:
         second: 0.5
       data:
         first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
           name: _ZWrite
         second: 1
       data:
@@ -4179,16 +4189,8 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
-        second: 1
-      data:
-        first:
           name: _BumpScale
         second: 1
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
       data:
         first:
           name: _OcclusionStrength
@@ -4205,6 +4207,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
     m_Colors:
       data:
         first:
@@ -4259,6 +4265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:
@@ -4388,7 +4395,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
