@@ -120,11 +120,12 @@ public class Game
         var gift = new Level("Gift", you, walkthrough);
         var giveALift = new Level("Give a lift", you, raise);
         var bat = new Level("Bat", giveALift, gap);
-
-        // Twins
         var together = new Level("Together", bat);
         var fat = new Level("Fat", together);
         var place = new Level("Place", fat);
+
+        // Twins
+        var traverse = new Level("Traverse", place);
         var pisa = new Level("Pisa", z, place, string_);
         var deal = new Level("Deal", place, accuracy);
         var catch_ = new Level("Catch", deal);
