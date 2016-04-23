@@ -14,9 +14,9 @@ public class NeverSleep : MonoBehaviour
         rigidBody.sleepThreshold = 0;
     }
 
-    void FixedUpdate() {
-        if (rigidBody.IsSleeping()) {
-            Debug.Log("Sleeping");
-        }
-    }
+    //void FixedUpdate() {
+    //    if (rigidBody.IsSleeping()) {
+    //        Debug.Log("Sleeping");
+    //    }
+    //}
 }
