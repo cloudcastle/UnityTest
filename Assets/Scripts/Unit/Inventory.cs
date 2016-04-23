@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using RSG;
+using System.Linq;
 
 public class Inventory : Ability
 {
@@ -94,9 +95,9 @@ public class Inventory : Ability
         Debug.Log(String.Format("{0} thrown at {1}", item, position.ExtToString()));
     }
 
-    public void DropAll(Vector3 position) {
-        while (items.Count > 0) {
-            DropAt(selected, position);
+    public void DropAll(Vector3 position, Func<Item, bool> predicate) {
+        while (items.Count(predicate) > 0) {
+            DropAt(items.First(predicate), position);
         }
     }
 

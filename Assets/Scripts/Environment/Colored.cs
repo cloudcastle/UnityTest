@@ -6,6 +6,8 @@ using System;
 public class Colored : MonoBehaviour
 {
     public Color color;
+    public Color emissionColor;
+    public bool setEmissionColor = false;
     public Material material;
 
     MeshRenderer meshRenderer;
@@ -29,6 +31,9 @@ public class Colored : MonoBehaviour
     void UpdateRendererMaterial() {
         var tempMaterial = new Material(material);
         tempMaterial.color = color;
+        if (setEmissionColor) {
+            tempMaterial.SetColor("_EmissionColor", emissionColor);
+        }
         meshRenderer.sharedMaterial = tempMaterial;
     }
 }

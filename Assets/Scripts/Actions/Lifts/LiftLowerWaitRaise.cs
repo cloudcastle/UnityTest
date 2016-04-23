@@ -65,6 +65,7 @@ public class LiftLowerWaitRaise : Effect
         if (waitingDuration < 0)
         {
             state = MovingUp;
+            FindObjectsOfType<Rigidbody>().ToList().ForEach(rb => rb.WakeUp());
         }
     }
 

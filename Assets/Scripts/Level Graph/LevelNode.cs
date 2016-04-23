@@ -28,12 +28,16 @@ public class LevelNode : MonoBehaviour
 
     void OnEnable() {
         this.renderer = GetComponent<MeshRenderer>();
+#if UNITY_EDITOR
         Selection.selectionChanged += OnSelectionChanged;
+#endif
     }
 
+#if UNITY_EDITOR
     void OnDisable() {
         Selection.selectionChanged -= OnSelectionChanged;
     }
+#endif
 
     void Start() {
         this.level = GameManager.game.levels.First(l => l.name == levelName);
@@ -55,6 +59,7 @@ public class LevelNode : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     void OnSelectionChanged() {
         this.level = GameManager.game.levels.First(l => l.name == levelName);
         GameManager.game.levels.ForEach(l => l.transitiveDependencies = null);
@@ -70,6 +75,7 @@ public class LevelNode : MonoBehaviour
             SetEmission(baseEmission);
         }
     }
+#endif
 
     void Update() {
         if (Extensions.Editor()) {

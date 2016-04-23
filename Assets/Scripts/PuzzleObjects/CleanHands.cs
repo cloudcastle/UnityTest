@@ -4,9 +4,23 @@ using System.Collections.Generic;
 
 // local Y should be the axis normal to clean hands field
 
+[ExecuteInEditMode]
 public class CleanHands : MonoBehaviour
 {
+    // null means all items are banned
+    public KeyColor bannedColor = null;
+    
+    public List<Colored> colored;
+
     float safetyDistance = 0.1f;
+
+    bool Drop(Item item) {
+        if (bannedColor == null) {
+            return true;
+        }
+        var key = item as Key;
+        return key != null && key.keyColor == bannedColor;
+    }
 
     void OnTriggerStay(Collider other) {
         var player = other.GetComponent<Unit>();
@@ -24,8 +38,24 @@ public class CleanHands : MonoBehaviour
                         dropLocalPosition.y = -safetyDistance;
                     }
                 }
-                player.inventory.DropAll(transform.TransformPoint(dropLocalPosition));
+                player.inventory.DropAll(transform.TransformPoint(dropLocalPosition), Drop);
                 player.inventory.pickStun.StartCooldown();
+            }
+        }
+    }
+
+    void Update() {
+        if (Extensions.Editor()) {
+            if (bannedColor != null) {
+                Color color = bannedColor.color;
+                color.a = 0.25f;
+                Color emissionColor = (bannedColor.color + Color.white) / 2 / 2;
+                colored.ForEach(c => {
+                    c.color = color;
+                    c.emissionColor = emissionColor;
+                    c.setEmissionColor = true;
+                    c.Update();
+                });
             }
         }
     }

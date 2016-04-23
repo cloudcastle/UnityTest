@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 public class SpaceGraph : MonoBehaviour
 {
@@ -40,6 +43,9 @@ public class SpaceGraph : MonoBehaviour
     }
 
     void Start() {
+        if (current == null) {
+            return;
+        }
         current = current.node.Instantiate(world);
         Bfs();
     }
@@ -227,9 +233,12 @@ public class SpaceGraph : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Set Back Links")]
     void SetBackLinks() {
         FindObjectsOfType<LinkScript>().ToList().ForEach(LocateBackLink);
-        //transform.tr
+        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
     }
+#endif
+
 }
