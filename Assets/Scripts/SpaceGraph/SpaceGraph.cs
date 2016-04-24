@@ -9,7 +9,7 @@ using UnityEditor.SceneManagement;
 public class SpaceGraph : MonoBehaviour
 {
     const int MAX_RESULTS_COUNT = 10;
-    const int distanceLimit = 10;
+    const int distanceLimit = 14;
     const int MAX_NODES = 1000;
 
     const int maxAllowedNodeDistance = 0;
@@ -28,6 +28,8 @@ public class SpaceGraph : MonoBehaviour
 
     int overlapCount;
     Collider[] overlapResults = new Collider[MAX_RESULTS_COUNT];
+
+    int bfsNodeCount;
 
     void InitSearching() {
         nodeMask = LayerMask.GetMask("Node");
@@ -182,17 +184,67 @@ public class SpaceGraph : MonoBehaviour
         return node.distance == distanceLimit;
     }
 
-    void Bfs() {
-        List<NodeInstance> oldNodes = nodes.ShallowClone();
+    Queue<NodeInstance> InitBfs() {
         nodes.ForEach(node => node.Off());
         nodes.Clear();
-        nodes.Add(current); 
+        nodes.Add(current);
         current.On();
         Queue<NodeInstance> queue = new Queue<NodeInstance>();
         queue.Enqueue(current);
         current.distance = 0;
-        int cnt = 1;
+        bfsNodeCount = 1;
+        return queue;
+    }
 
+    void CancelNode(NodeInstance node) {
+        node.Disconnect();
+        node.ReturnToPool();
+    }
+
+    void FollowLink(Queue<NodeInstance> queue, NodeInstance from, LinkScript link) {             
+        //if (v.name == "Node 8 (4) #2") {
+        //    Debug.LogFormat("working with link: {0}", link.transform.Path());
+        //}
+        if (bfsNodeCount >= MAX_NODES) {
+            Debug.LogWarning("cnt >= MAX_NODES");
+            return;
+        }
+
+        var node = GetNode(link);
+        if (node.IsOn()) {
+            //if (v.name == "Node 8 (4) #2") {
+            //    Debug.LogFormat("node is on: {0}", node.transform.Path());
+            //}
+            return;
+        }
+
+        OverlapNode(node, reduction: 0.1f);
+        if (overlapCount > 0) {
+            //if (v.name == "Node 8 (4) #2") {
+            //    Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
+            //}
+            CancelNode(node);
+            var overlappedNode = overlapResults[0].GetComponentInParent<NodeInstance>();
+            if (Acceptable(overlappedNode, link)) {
+                link.to = overlappedNode;
+                overlappedNode.links[link.link.backLink].to = from;
+            }
+        } else {
+            //if (v.name == "Node 8 (4) #2") {
+            //    Debug.LogFormat("created new node: {0}", node.transform.Path());
+            //}
+            //Debug.LogFormat("new node fixed: {0}", node);
+            node.On();
+            node.distance = from.distance + 1;
+            link.to = node;
+            node.links[link.link.backLink].to = from;
+            nodes.Add(node);
+            queue.Enqueue(node);
+            bfsNodeCount++;
+        }
+    }
+
+    void BfsRunQueue(Queue<NodeInstance> queue) {
         while (queue.Count > 0) {
             var v = queue.Dequeue();
             //if (v.name == "Node 8 (4) #2") {
@@ -205,53 +257,20 @@ public class SpaceGraph : MonoBehaviour
                 continue;
             }
             v.links.Values.ToList().ForEach(link => {
-                //if (v.name == "Node 8 (4) #2") {
-                //    Debug.LogFormat("working with link: {0}", link.transform.Path());
-                //}
-                if (cnt >= MAX_NODES) {
-                    Debug.LogWarning("cnt >= MAX_NODES");
-                    return;
-                }
-
-                var node = GetNode(link);
-                if (node.IsOn()) {
-                    //if (v.name == "Node 8 (4) #2") {
-                    //    Debug.LogFormat("node is on: {0}", node.transform.Path());
-                    //}
-                    return;
-                }
-
-                OverlapNode(node, reduction: 0.1f);
-                if (overlapCount > 0) {
-                    //if (v.name == "Node 8 (4) #2") {
-                    //    Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
-                    //}
-                    node.Disconnect();
-                    node.ReturnToPool();
-                    var overlappedNode = overlapResults[0].GetComponentInParent<NodeInstance>();
-                    if (Acceptable(overlappedNode, link)) {
-                        link.to = overlappedNode;
-                        overlappedNode.links[link.link.backLink].to = v;
-                    }
-                } else {
-                    //if (v.name == "Node 8 (4) #2") {
-                    //    Debug.LogFormat("created new node: {0}", node.transform.Path());
-                    //}
-                    //Debug.LogFormat("new node fixed: {0}", node);
-                    node.On();
-                    node.distance = v.distance + 1;
-                    link.to = node;
-                    node.links[link.link.backLink].to = v;
-                    nodes.Add(node);
-                    queue.Enqueue(node);
-                    cnt++;
-                }
+                FollowLink(queue, v, link);
             });
-            if (cnt >= MAX_NODES) {
+            if (bfsNodeCount >= MAX_NODES) {
                 Debug.LogWarning("cnt >= MAX_NODES");
                 return;
             }
         }
+    }
+
+    void Bfs() {
+        List<NodeInstance> oldNodes = nodes.ShallowClone();
+        var queue = InitBfs();
+
+        BfsRunQueue(queue);
 
         oldNodes.ForEach(node => {
             if (!node.IsOn() && node.appeared) {
