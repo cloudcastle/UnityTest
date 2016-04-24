@@ -42,7 +42,7 @@ public class InventorySlot : MonoBehaviour
         var result = new Promise();
         Debug.Log("new promise created");
         onStart += result.Resolve;
-        return result;
+        return result.WithName(string.Format("Inventory slot ready: {0}", name));
     }
 
     void Subscribe(Inventory inventory) {

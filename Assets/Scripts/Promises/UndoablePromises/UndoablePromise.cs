@@ -13,11 +13,6 @@ namespace RSG
     public class UndoablePromise : IPromise, IPendingPromise, IPromiseInfo
     {
         /// <summary>
-        /// Set to true to enable tracking of promises.
-        /// </summary>
-        public static bool EnablePromiseTracking = false;
-
-        /// <summary>
         /// Event raised for unhandled errors.
         /// For this to work you have to complete your promises with a call to Done().
         /// </summary>
@@ -93,8 +88,9 @@ namespace RSG
 
 
         public UndoablePromise() {
+            this.Id = ++Promise.nextPromiseId;
             this.CurState = PromiseState.Pending;
-            if (EnablePromiseTracking) {
+            if (Promise.EnablePromiseTracking) {
                 pendingPromises.Add(this);
             }
 
@@ -102,8 +98,9 @@ namespace RSG
         }
 
         public UndoablePromise(Action<Action, Action<Exception>> resolver) {
+            this.Id = ++Promise.nextPromiseId;
             this.CurState = PromiseState.Pending;
-            if (EnablePromiseTracking) {
+            if (Promise.EnablePromiseTracking) {
                 pendingPromises.Add(this);
             }
 
@@ -231,7 +228,7 @@ namespace RSG
             rejectionException = ex;
             CurState = PromiseState.Rejected;
 
-            if (EnablePromiseTracking) {
+            if (Promise.EnablePromiseTracking) {
                 pendingPromises.Remove(this);
             }
 
@@ -249,7 +246,7 @@ namespace RSG
 
             CurState = PromiseState.Resolved;
 
-            if (EnablePromiseTracking) {
+            if (Promise.EnablePromiseTracking) {
                 pendingPromises.Remove(this);
             }
 

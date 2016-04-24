@@ -39,7 +39,7 @@ public class TransformAnimator : Script
         this.target = target;
         finishAnimation = new UndoablePromise();
         animating = true;
-        return finishAnimation;
+        return finishAnimation.WithName(string.Format("Animate {0}", name));
     }
 
     void ToAnimationEnd() {
