@@ -11,13 +11,7 @@ public class Node : MonoBehaviour
 
     public List<Link> links;
 
-    public NodeInstance Instantiate(Transform parent) {
-        GameObject instance = pool.Take();
-        instance.transform.SetParent(parent);
-        instance.transform.Reset();
-        var nodeInstance = instance.GetComponent<NodeInstance>();
-        nodeInstance.InitLinks();
-        nodeInstance.Off();
-        return nodeInstance;
+    public NodeInstance NewNodeInstance() {
+        return pool.Take().GetComponent<NodeInstance>();
     }
 }

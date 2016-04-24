@@ -9,7 +9,9 @@ public class Pool : MonoBehaviour
     public GameObject sample;
     int lastInstanceID = 0;
 
-    public List<Poolable> pool = new List<Poolable>(); 
+    public List<Poolable> pool = new List<Poolable>();
+
+    public List<Poolable> lightPool = new List<Poolable>();
 
     public static Pool CreatePool(GameObject sample) {
         var newPoolObject = new GameObject();
@@ -26,29 +28,51 @@ public class Pool : MonoBehaviour
     }
 
     void Disappear(Poolable instance) {
-        instance.appeared = false;
-        instance.transform.SetParent(transform, worldPositionStays: false);
         instance.gameObject.SetActive(false);
+        instance.transform.SetParent(transform, worldPositionStays: false);
     }
 
     void Appear(Poolable instance) {
-        instance.appeared = true;
         instance.gameObject.SetActive(true);
     }
 
     public void Return(Poolable instance) {
+        if (instance.gameObject == sample) {
+            Debug.LogError("Sample returning to pool!");
+        }
+        instance.exists = false;
         Disappear(instance);
         pool.Add(instance);
     }
 
+    public void ReturnLight(Poolable instance) {
+        instance.exists = false;
+        lightPool.Add(instance);
+    }
+
+    public void Stabilize() {
+        lightPool.ForEach(p => {
+            Disappear(p);
+            pool.Add(p);
+        });
+        lightPool.Clear();
+    }
+
     public GameObject Take() {
-        if (pool.Count == 0) {
-            ExpandPool();
+        Poolable instance;
+        if (lightPool.Count == 0) {
+            if (pool.Count == 0) {
+                ExpandPool();
+            }
+            instance = pool[pool.Count - 1];
+            pool.RemoveAt(pool.Count - 1);
+            Appear(instance);
+        } else {
+            instance = lightPool[lightPool.Count - 1];
+            lightPool.RemoveAt(lightPool.Count - 1);
         }
-        Poolable instance = pool[pool.Count - 1];
-        pool.RemoveAt(pool.Count - 1);
-        Appear(instance);
         instance.GetComponents<Script>().ToList().ForEach(script => script.Taken());
+        instance.exists = true;
         return instance.gameObject;
     }
 
@@ -57,7 +81,9 @@ public class Pool : MonoBehaviour
         lastInstanceID++;
         instance.name = sample.name + " #" + lastInstanceID;
         var poolable = instance.GetComponent<Poolable>();
+        poolable.Instantiated();
         poolable.pool = this;
+        poolable.exists = false;
         pool.Add(poolable);
     }
 

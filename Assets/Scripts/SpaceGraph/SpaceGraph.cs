@@ -8,7 +8,6 @@ using UnityEditor.SceneManagement;
 
 public class SpaceGraph : MonoBehaviour
 {
-    const int MAX_RESULTS_COUNT = 10;
     const int distanceLimit = 14;
     const int MAX_NODES = 1000;
 
@@ -18,28 +17,17 @@ public class SpaceGraph : MonoBehaviour
 
     public Unit unit;
 
-    int nodeMask;
-
     public Transform schema;
     public Transform world;
 
     public List<NodeInstance> nodes = new List<NodeInstance>();
     public List<LinkScript> links = new List<LinkScript>();
 
-    int overlapCount;
-    Collider[] overlapResults = new Collider[MAX_RESULTS_COUNT];
-
     int bfsNodeCount;
 
-    void InitSearching() {
-        nodeMask = LayerMask.GetMask("Node");
-        overlapResults = new Collider[MAX_RESULTS_COUNT];
-    }
-
     void Awake() {
-        InitSearching();
         if (current == null) {
-            current = FindClosestNode();
+            current = Overlapper.FindClosestNode(unit);
             Debug.LogFormat("Current was null. Changed to closest node: {0}", current);
         }
         Init();
@@ -48,6 +36,7 @@ public class SpaceGraph : MonoBehaviour
     void Init() {
         nodes = GetComponentsInChildren<NodeInstance>().ToList();
         links = GetComponentsInChildren<LinkScript>().ToList();
+        nodes.ForEach(node => node.On());
         nodes.ForEach(node => node.CreateNode());
         links.ForEach(link => link.CreateLink());
         links.ForEach(link => link.SetBackLink());
@@ -59,32 +48,20 @@ public class SpaceGraph : MonoBehaviour
         if (current == null) {
             return;
         }
-        current = current.node.Instantiate(current.node.transform);
+        current = current.node.NewNodeInstance();
+        current.transform.SetParent(current.node.transform);
         current.transform.Reset();
         current.transform.SetParent(world, worldPositionStays: true);
+        nodes.Clear();
         Bfs();
-    }
 
-    NodeInstance FindClosestNode() {
-        int overlapCount = Physics.OverlapBoxNonAlloc(
-            unit.characterController.bounds.center,
-            unit.characterController.bounds.size / 2,
-            overlapResults,
-            unit.transform.rotation,
-            nodeMask,
-            QueryTriggerInteraction.Collide
-        );
-        if (overlapCount == 1) {
-            var nodeInstance = overlapResults[0].GetComponentInParent<NodeInstance>();
-            if (nodeInstance != null) {
-                return nodeInstance;
-            }
-        }
-        return null;
+        FindObjectsOfType<NodeInstance>().Where(ni => ni.links == null).ToList().ForEach(ni => {
+            Debug.LogFormat("links == null for {0}", ni);
+        });
     }
 
     void FixedUpdate() {
-        var nodeInstance = FindClosestNode();
+        var nodeInstance = Overlapper.FindClosestNode(unit);
         if (nodeInstance != null) {
             if (nodeInstance.distance > maxAllowedNodeDistance) {
                 SwitchNode(nodeInstance);
@@ -93,70 +70,15 @@ public class SpaceGraph : MonoBehaviour
     }
 
     private void SwitchNode(NodeInstance node) {
-        Debug.Log("Switch node to " + node);
         current = node;
         Bfs();
     }
 
-    void OverlapNodeAsIfWithTransform(NodeInstance newNode, Transform transform) {
-        overlapCount = Physics.OverlapBoxNonAlloc(
-            newNode.transform.TransformPoint(newNode.bounds.center),
-            0.99f * newNode.bounds.size / 2,
-            overlapResults,
-            newNode.transform.rotation,
-            nodeMask,
-            QueryTriggerInteraction.Collide
-        );
-    }
-
-    void OverlapNode(NodeInstance newNode, float reduction = 0.99f) {
-        //Debug.LogFormat(
-        //    "Physics.OverlapBoxNonAlloc({0}, {1}, {2}, {3}, {4}, {5})",
-        //    newNode.bounds.transform.TransformPoint(newNode.bounds.center),
-        //    reduction * newNode.bounds.size / 2,
-        //    overlapResults,
-        //    newNode.bounds.transform.rotation,
-        //    nodeMask,
-        //    QueryTriggerInteraction.Collide
-        //);
-        overlapCount = Physics.OverlapBoxNonAlloc(
-            newNode.bounds.transform.TransformPoint(newNode.bounds.center),
-            reduction * newNode.bounds.size / 2,
-            overlapResults,
-            newNode.bounds.transform.rotation,
-            nodeMask,
-            QueryTriggerInteraction.Collide
-        );
-    }
-
-    void OverlapPoint(Vector3 point) {
-        overlapCount = Physics.OverlapBoxNonAlloc(
-            point,
-            0.01f * Vector3.one,
-            overlapResults,
-            Quaternion.identity,
-            nodeMask,
-            QueryTriggerInteraction.Collide
-        );
-    }
-
     bool Acceptable(NodeInstance node, LinkScript link) {
-        return node.node == link.Node && node.transform.CloseTo(link.transform);
-    }
-
-    bool AcceptableEditor(NodeInstance node, LinkScript link) {
-        return node == link.to && node.transform.CloseTo(link.transform);
-    }
-
-    NodeInstance FindNodeByPlace(LinkScript link) {
-        OverlapPoint(link.transform.position);
-        if (overlapCount > 0) {
-            var node = overlapResults[0].GetComponentInParent<NodeInstance>();
-            if (Acceptable(node, link)) {
-                return node;
-            }
-        }
-        return null;
+        var a = node.transform;
+        var b = link.transform;
+        var closeTranform = a.position == b.position && a.rotation == b.rotation && a.lossyScale == b.lossyScale;
+        return node.node == link.Node && closeTranform;
     }
 
     NodeInstance FindOldNode(LinkScript link) {
@@ -164,21 +86,13 @@ public class SpaceGraph : MonoBehaviour
     }
 
     NodeInstance CreateNewNode(LinkScript link) {
-        var newNode = link.link.to.Instantiate(link.transform);
+        var newNode = link.link.to.NewNodeInstance();
+        newNode.transform.SetParent(link.transform);
+        newNode.transform.Reset();
         //Debug.LogFormat("linking from {0} by {1} to {2}", v, link, newNode);
         newNode.transform.SetParent(world, worldPositionStays: true);
         return newNode;
     }
-
-    NodeInstance GetNode(LinkScript link) {
-        var oldNode = FindOldNode(link);
-        if (oldNode != null) {
-            return oldNode;
-        } else {
-            return CreateNewNode(link);
-        }
-    }
-
 
     bool TooFar(NodeInstance node) {
         return node.distance == distanceLimit;
@@ -197,8 +111,14 @@ public class SpaceGraph : MonoBehaviour
     }
 
     void CancelNode(NodeInstance node) {
-        node.Disconnect();
-        node.ReturnToPool();
+    }
+
+    void HandleOverlap(NodeInstance from, NodeInstance overlap, LinkScript link) {
+        var overlappedNode = overlap;
+        if (Acceptable(overlappedNode, link)) {
+            link.to = overlappedNode;
+            overlappedNode.links[link.link.backLink].to = from;
+        }
     }
 
     void FollowLink(Queue<NodeInstance> queue, NodeInstance from, LinkScript link) {             
@@ -210,25 +130,34 @@ public class SpaceGraph : MonoBehaviour
             return;
         }
 
-        var node = GetNode(link);
-        if (node.IsOn()) {
-            //if (v.name == "Node 8 (4) #2") {
-            //    Debug.LogFormat("node is on: {0}", node.transform.Path());
-            //}
+        var overlapNode = Overlapper.OverlapPoint(link.transform.position);
+        if (overlapNode != null) {
+            HandleOverlap(from, overlapNode, link);
             return;
         }
 
-        OverlapNode(node, reduction: 0.1f);
-        if (overlapCount > 0) {
+        NodeInstance node = null;
+        var oldNode = FindOldNode(link);
+        if (oldNode != null) {
+            if (oldNode.IsOn()) {
+                return;
+            } else {
+                node = oldNode;
+            }
+        } else {
+            node = CreateNewNode(link);
+            node.Off();
+        }
+
+
+        overlapNode = Overlapper.OverlapNode(node, reduction: 0.1f);
+        if (overlapNode != null) {
             //if (v.name == "Node 8 (4) #2") {
             //    Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
             //}
-            CancelNode(node);
-            var overlappedNode = overlapResults[0].GetComponentInParent<NodeInstance>();
-            if (Acceptable(overlappedNode, link)) {
-                link.to = overlappedNode;
-                overlappedNode.links[link.link.backLink].to = from;
-            }
+            node.Disconnect();
+            node.ReturnToPoolLight();
+            HandleOverlap(from, overlapNode, link);
         } else {
             //if (v.name == "Node 8 (4) #2") {
             //    Debug.LogFormat("created new node: {0}", node.transform.Path());
@@ -237,7 +166,10 @@ public class SpaceGraph : MonoBehaviour
             node.On();
             node.distance = from.distance + 1;
             link.to = node;
-            node.links[link.link.backLink].to = from;
+            var nodeLinks = node.links;
+            var backLinkSignature = link.link.backLink;
+            var backLink = nodeLinks[backLinkSignature];
+            backLink.to = from;
             nodes.Add(node);
             queue.Enqueue(node);
             bfsNodeCount++;
@@ -256,7 +188,7 @@ public class SpaceGraph : MonoBehaviour
                 //}
                 continue;
             }
-            v.links.Values.ToList().ForEach(link => {
+            v.linksList.ForEach(link => {
                 FollowLink(queue, v, link);
             });
             if (bfsNodeCount >= MAX_NODES) {
@@ -267,17 +199,25 @@ public class SpaceGraph : MonoBehaviour
     }
 
     void Bfs() {
-        List<NodeInstance> oldNodes = nodes.ShallowClone();
+        var oldNodes = nodes.ShallowClone();
+
         var queue = InitBfs();
 
         BfsRunQueue(queue);
 
-        oldNodes.ForEach(node => {
-            if (!node.IsOn() && node.appeared) {
-                node.Disconnect();
-                node.ReturnToPool();
+        oldNodes.ForEach(n => {
+            if (!n.IsOn()) { // maybe do this only when n.exists()?
+                n.Disconnect();
+                n.ReturnToPool();
             }
         });
+
+        FindObjectsOfType<Pool>().ToList().ForEach(pool => pool.Stabilize());
+    }
+
+#if UNITY_EDITOR
+    bool AcceptableEditor(NodeInstance node, LinkScript link) {
+        return node == link.to && node.transform.CloseTo(link.transform);
     }
 
     void LocateBackLink(LinkScript link, bool allowCreate = false) {
@@ -320,7 +260,6 @@ public class SpaceGraph : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
     [ContextMenu("Set Back Links")]
     void SetBackLinks() {
         FindObjectsOfType<LinkScript>().ToList().ForEach(link => LocateBackLink(link));
@@ -360,25 +299,22 @@ public class SpaceGraph : MonoBehaviour
 
     [ContextMenu("Set Close Links")]
     void SetCloseLinks() {
-        InitSearching();
-
         FindObjectsOfType<NodeInstance>().ToList().ForEach(node => {
 
             var oldLinks = node.transform.GetComponentsInChildren<LinkScript>();
 
-            OverlapNode(node, reduction: 1.1f);
-            for (int i = 0; i < overlapCount; i++) {
-                var overlap = overlapResults[i];
-                var other = overlap.GetComponentInParent<NodeInstance>();
-                if (other != null && other != node && (other.transform.position - node.transform.position).magnitude < 10.1f) {
-                    var oldLink = oldLinks.FirstOrDefault(link => link.to == other && AcceptableEditor(other, link));
+            var overlappedNodes = Overlapper.AllOverlapNodes(node, reduction: 1.1f);
+
+            overlappedNodes.ForEach(overlapNode => {
+                if (overlapNode != node && (overlapNode.transform.position - node.transform.position).magnitude < 10.1f) {
+                    var oldLink = oldLinks.FirstOrDefault(link => link.to == overlapNode && AcceptableEditor(overlapNode, link));
                     if (oldLink == null) {
-                        CreateLink(node, other);
+                        CreateLink(node, overlapNode);
                     } else {
                         Debug.LogFormat("Old link found: {0}", oldLink);
                     }
                 }
-            }
+            });
         });
         FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
             Debug.LogFormat(link.transform.Path());
