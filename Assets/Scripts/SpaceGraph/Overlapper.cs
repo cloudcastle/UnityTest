@@ -39,13 +39,20 @@ public static class Overlapper
 
     public static NodeInstance OverlapNode(NodeInstance newNode, float reduction = 0.99f) {
         InitSearching();
-
+        CheckOverlapNode(newNode, reduction);
         return FirstOnNode();
     }
 
     static NodeInstance FirstOnNode() {
         for (int i = 0; i < overlapCount; i++) {
+            if (!overlapResults[i].gameObject.activeInHierarchy) {
+                continue;
+            }
             var node = overlapResults[i].GetComponentInParent<NodeInstance>();
+            if (node == null) {
+                Debug.LogFormat("overlap without node: {0}", overlapResults[i].transform.Path());
+                Debug.LogFormat("active: {0}", overlapResults[i].gameObject.activeInHierarchy);
+            }
             if (node.IsOn()) {
                 return node;
             }
@@ -85,6 +92,7 @@ public static class Overlapper
         if (inited) {
             return;
         }
+        Debug.LogFormat("Init searching");
         inited = true;
         nodeMask = LayerMask.GetMask("Node");
         overlapResults = new Collider[MAX_RESULTS_COUNT];

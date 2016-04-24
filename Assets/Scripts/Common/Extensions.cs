@@ -129,11 +129,15 @@ public static class Extensions
         transform.localRotation = Quaternion.identity;
     }
 
-    public static bool CloseTo(this Transform a, Transform b) {
-        return a.position == b.position && a.rotation == b.rotation && a.lossyScale == b.lossyScale;
+    public static bool Close(Transform a, Transform b) {
+        return Close(a.position, b.position) && Close(a.up, b.up) && Close(a.forward, b.forward) && Close(a.lossyScale, b.lossyScale);
     }
 
     public static string ExtToString(this Transform t) {
         return String.Format("{{position = {0}, rotation = {1}, lossyScale = {2}}}", t.position.ExtToString(), t.rotation, t.lossyScale.ExtToString());
+    }
+
+    public static bool Close(Vector3 a, Vector3 b) {
+        return Vector3.SqrMagnitude(a - b) < 0.01f;
     }
 }

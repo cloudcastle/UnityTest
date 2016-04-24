@@ -35,5 +35,10 @@ public class DebugManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) {
             Debug.LogFormat("Pending promises: {0}", Promise.GetPendingPromises().ExtToString());
         }
+        if (Input.GetKeyDown(KeyCode.F11)) {
+            FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
+                link.AssertAcceptable();
+            });
+        }
     }
 }

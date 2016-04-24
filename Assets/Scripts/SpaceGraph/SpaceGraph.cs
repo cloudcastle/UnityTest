@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 
 public class SpaceGraph : MonoBehaviour
 {
-    const int distanceLimit = 14;
+    const int distanceLimit = 10;
     const int MAX_NODES = 1000;
 
     const int maxAllowedNodeDistance = 0;
@@ -41,6 +41,7 @@ public class SpaceGraph : MonoBehaviour
         links.ForEach(link => link.CreateLink());
         links.ForEach(link => link.SetBackLink());
         nodes.ForEach(node => node.SetLinks());
+        nodes.ForEach(node => node.Off());
         schema.gameObject.SetActive(false);
     }
 
@@ -49,6 +50,7 @@ public class SpaceGraph : MonoBehaviour
             return;
         }
         current = current.node.NewNodeInstance();
+        current.On();
         current.transform.SetParent(current.node.transform);
         current.transform.Reset();
         current.transform.SetParent(world, worldPositionStays: true);
@@ -71,25 +73,26 @@ public class SpaceGraph : MonoBehaviour
 
     private void SwitchNode(NodeInstance node) {
         current = node;
+        //Debug.LogFormat("current = {0}", node);
         Bfs();
+
+        FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
+            if (link.to != null) {
+                link.AssertAcceptable();
+            }
+        });
     }
 
-    bool Acceptable(NodeInstance node, LinkScript link) {
-        var a = node.transform;
-        var b = link.transform;
-        var closeTranform = a.position == b.position && a.rotation == b.rotation && a.lossyScale == b.lossyScale;
+    public static bool Acceptable(NodeInstance node, LinkScript link) {
+        var closeTranform = Extensions.Close(node.transform, link.transform);
         return node.node == link.Node && closeTranform;
-    }
-
-    NodeInstance FindOldNode(LinkScript link) {
-        return link.to;
     }
 
     NodeInstance CreateNewNode(LinkScript link) {
         var newNode = link.link.to.NewNodeInstance();
+        //Debug.LogFormat("New node created for {0}: {1}", link.transform.Path(), newNode);
         newNode.transform.SetParent(link.transform);
         newNode.transform.Reset();
-        //Debug.LogFormat("linking from {0} by {1} to {2}", v, link, newNode);
         newNode.transform.SetParent(world, worldPositionStays: true);
         return newNode;
     }
@@ -121,48 +124,60 @@ public class SpaceGraph : MonoBehaviour
         }
     }
 
-    void FollowLink(Queue<NodeInstance> queue, NodeInstance from, LinkScript link) {             
-        //if (v.name == "Node 8 (4) #2") {
-        //    Debug.LogFormat("working with link: {0}", link.transform.Path());
-        //}
+    void FollowLink(Queue<NodeInstance> queue, NodeInstance from, LinkScript link) {
+        var debug = false;
+        //debug = from.name == "Node 8 (4) #2" && link.name == "Up";
+        if (debug) {
+            Debug.LogFormat("debug link: {0}", link.transform.Path());
+        }
+
         if (bfsNodeCount >= MAX_NODES) {
             Debug.LogWarning("cnt >= MAX_NODES");
             return;
         }
 
-        var overlapNode = Overlapper.OverlapPoint(link.transform.position);
-        if (overlapNode != null) {
-            HandleOverlap(from, overlapNode, link);
-            return;
-        }
+        NodeInstance overlapNode = null;
+        //overlapNode = Overlapper.OverlapPoint(link.transform.position);
+        //if (overlapNode != null) {
+        //    HandleOverlap(from, overlapNode, link);
+        //    if (debug) {
+        //        Debug.LogFormat("link {0}: overlapped by point with node {1}", link.transform.Path(), overlapNode);
+        //    }
+        //    return;
+        //}
 
         NodeInstance node = null;
-        var oldNode = FindOldNode(link);
+        var oldNode = link.to;
+        bool oldNodeUsed = false;
+
         if (oldNode != null) {
             if (oldNode.IsOn()) {
+                if (debug) {
+                    Debug.LogFormat("link {0}: oldNode is on", link.transform.Path());
+                }
+                link.AssertAcceptable();
                 return;
             } else {
                 node = oldNode;
+                oldNodeUsed = true;
             }
         } else {
             node = CreateNewNode(link);
             node.Off();
         }
 
-
-        overlapNode = Overlapper.OverlapNode(node, reduction: 0.1f);
+        overlapNode = Overlapper.OverlapNode(node, reduction: 0.99f);
         if (overlapNode != null) {
-            //if (v.name == "Node 8 (4) #2") {
-            //    Debug.LogFormat("overlap: {0}", overlapResults[0].transform.Path());
-            //}
+            if (debug) {
+                Debug.LogFormat("link {0}: overlapped with node: {1}", link.transform.Path(), overlapNode);
+            }
             node.Disconnect();
-            node.ReturnToPoolLight();
+            node.ReturnToPool();
             HandleOverlap(from, overlapNode, link);
         } else {
-            //if (v.name == "Node 8 (4) #2") {
-            //    Debug.LogFormat("created new node: {0}", node.transform.Path());
-            //}
-            //Debug.LogFormat("new node fixed: {0}", node);
+            if (debug) {
+                Debug.LogFormat("link {0}: set new node: {1}", link.transform.Path(), node);
+            }
             node.On();
             node.distance = from.distance + 1;
             link.to = node;
@@ -170,6 +185,10 @@ public class SpaceGraph : MonoBehaviour
             var backLinkSignature = link.link.backLink;
             var backLink = nodeLinks[backLinkSignature];
             backLink.to = from;
+            if (!link.AssertAcceptable()) {
+                Debug.LogFormat("oldnode = {0}", oldNodeUsed);
+            }
+            backLink.AssertAcceptable();
             nodes.Add(node);
             queue.Enqueue(node);
             bfsNodeCount++;
@@ -179,13 +198,7 @@ public class SpaceGraph : MonoBehaviour
     void BfsRunQueue(Queue<NodeInstance> queue) {
         while (queue.Count > 0) {
             var v = queue.Dequeue();
-            //if (v.name == "Node 8 (4) #2") {
-            //    Debug.LogFormat("Here we are");
-            //}
             if (TooFar(v)) {
-                //if (v.name == "Node 8 (4) #2") {
-                //    Debug.LogFormat("too far");
-                //}
                 continue;
             }
             v.linksList.ForEach(link => {
@@ -206,7 +219,7 @@ public class SpaceGraph : MonoBehaviour
         BfsRunQueue(queue);
 
         oldNodes.ForEach(n => {
-            if (!n.IsOn()) { // maybe do this only when n.exists()?
+            if (!n.IsOn() && n.exists) { 
                 n.Disconnect();
                 n.ReturnToPool();
             }
@@ -217,7 +230,7 @@ public class SpaceGraph : MonoBehaviour
 
 #if UNITY_EDITOR
     bool AcceptableEditor(NodeInstance node, LinkScript link) {
-        return node == link.to && node.transform.CloseTo(link.transform);
+        return node == link.to && Extensions.Close(node.transform, link.transform);
     }
 
     void LocateBackLink(LinkScript link, bool allowCreate = false) {
@@ -232,7 +245,7 @@ public class SpaceGraph : MonoBehaviour
             testObject.SetParent(to.transform, worldPositionStays: false);
             other.transform.SetParent(testObject, worldPositionStays: true);
             testObject.SetParent(link.transform, worldPositionStays: false);
-            var result = other.transform.CloseTo(from.transform);
+            var result = Extensions.Close(other.transform, from.transform);
             other.transform.SetParent(otherParent, worldPositionStays: false);
             DestroyImmediate(testObject.gameObject); 
             return result;

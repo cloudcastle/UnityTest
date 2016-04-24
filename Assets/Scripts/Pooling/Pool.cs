@@ -40,12 +40,18 @@ public class Pool : MonoBehaviour
         if (instance.gameObject == sample) {
             Debug.LogError("Sample returning to pool!");
         }
+        if (!instance.exists) {
+            throw new Exception("Returning the non-existent object to pool!");
+        }
         instance.exists = false;
         Disappear(instance);
         pool.Add(instance);
     }
 
     public void ReturnLight(Poolable instance) {
+        if (!instance.exists) {
+            throw new Exception("Returning the non-existent object to pool!");
+        }
         instance.exists = false;
         lightPool.Add(instance);
     }

@@ -36,4 +36,13 @@ public class LinkScript : MonoBehaviour
             to = null;
         }
     }
+
+    public bool AssertAcceptable() {
+        var acceptable = SpaceGraph.Acceptable(to, this);
+        if (!acceptable) {
+            Debug.LogError(string.Format("link.to is not acceptable: {0} for {1}", to, transform.Path()));
+            UnityEditor.EditorApplication.isPaused = true;
+        }
+        return acceptable;
+    }
 }
