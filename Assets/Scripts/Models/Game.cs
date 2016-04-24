@@ -127,9 +127,9 @@ public class Game
         // Twins
         var traverse = new Level("Traverse", place);
         var pisa = new Level("Pisa", z, place, string_);
-        var deal = new Level("Deal", place, accuracy);
+        var deal = new Level("Deal", place, column);
         var catch_ = new Level("Catch", deal);
-        var coveredHill = new Level("Covered Hill", place/*, pickBallOnJumpFromIt*//*, accuratelyThrowBall*/);
+        var coveredHill = new Level("Covered Hill", forgotten, deal);
 
         currentLevel = click;
         current = null;
