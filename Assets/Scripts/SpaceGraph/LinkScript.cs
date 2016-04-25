@@ -38,6 +38,9 @@ public class LinkScript : MonoBehaviour
     }
 
     public bool AssertAcceptable() {
+        if (!DebugManager.debug) {
+            return true;
+        }
         var acceptable = SpaceGraph.Acceptable(to, this);
         if (!acceptable) {
             Debug.LogError(string.Format("link.to is not acceptable: {0} for {1}", to, transform.Path()));

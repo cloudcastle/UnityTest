@@ -7,6 +7,8 @@ using RSG;
 
 public class DebugManager : MonoBehaviour
 {
+    public static bool debug = false;
+
     public List<string> levels;
     public List<string> availableLevels;
     public List<string> completedLevels;
