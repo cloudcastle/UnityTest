@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 
 public class SpaceGraph : MonoBehaviour
 {
-    const int distanceLimit = 10;
+    const int distanceLimit = 14;
     const int MAX_NODES = 1000;
 
     const int maxAllowedNodeDistance = 0;
@@ -137,14 +137,14 @@ public class SpaceGraph : MonoBehaviour
         }
 
         NodeInstance overlapNode = null;
-        //overlapNode = Overlapper.OverlapPoint(link.transform.position);
-        //if (overlapNode != null) {
-        //    HandleOverlap(from, overlapNode, link);
-        //    if (debug) {
-        //        Debug.LogFormat("link {0}: overlapped by point with node {1}", link.transform.Path(), overlapNode);
-        //    }
-        //    return;
-        //}
+        overlapNode = Overlapper.OverlapPoint(link.transform.position);
+        if (overlapNode != null) {
+            HandleOverlap(from, overlapNode, link);
+            if (debug) {
+                Debug.LogFormat("link {0}: overlapped by point with node {1}", link.transform.Path(), overlapNode);
+            }
+            return;
+        }
 
         NodeInstance node = null;
         var oldNode = link.to;
@@ -172,7 +172,7 @@ public class SpaceGraph : MonoBehaviour
                 Debug.LogFormat("link {0}: overlapped with node: {1}", link.transform.Path(), overlapNode);
             }
             node.Disconnect();
-            node.ReturnToPool();
+            node.ReturnToPoolLight();
             HandleOverlap(from, overlapNode, link);
         } else {
             if (debug) {
