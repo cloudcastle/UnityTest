@@ -140,4 +140,15 @@ public static class Extensions
     public static bool Close(Vector3 a, Vector3 b) {
         return Vector3.SqrMagnitude(a - b) < 0.01f;
     }
+
+    public static void ForEach<T>(this IEnumerable<T> source, Action<T> action) {
+        foreach (T element in source) {
+            action(element);
+        }
+    }
+
+    public static void IgnoreCollision(Collider a, Collider b, bool ignore = true) {
+        Physics.IgnoreCollision(a, b, ignore);
+        Debug.LogFormat("IgnoreCollision({0}, {1}, {2})", a.transform.Path(), b.transform.Path(), ignore);
+    }
 }

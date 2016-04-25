@@ -29,7 +29,7 @@ public class Door : MonoBehaviour
     }
 
     public void OpenFor(Unit player, bool open = true) {
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), open);
+        Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), open);
     }
 
     void Update() {

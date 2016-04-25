@@ -73,7 +73,9 @@ public partial class SpaceGraph : MonoBehaviour
 
     private void SwitchNode(NodeInstance node) {
         current = node;
-        //Debug.LogFormat("current = {0}", node);
+        if (DebugManager.debug) {
+            Debug.LogFormat("current = {0}", node);
+        }
         Bfs();
 
         FindObjectsOfType<LinkScript>().ToList().ForEach(link => {

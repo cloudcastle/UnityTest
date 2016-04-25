@@ -37,9 +37,9 @@ public class Item : Activatable
 
     public void GhostFor(Unit player) {
         Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
-        Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
         TimeManager.WaitFor(ghostTimeAfterThrow).Then(() => {
-            Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), false);
             Debug.Log(String.Format("Item {0} unghost for {1}", this, player));
         });
     }

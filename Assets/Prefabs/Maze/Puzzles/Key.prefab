@@ -21,7 +21,6 @@ GameObject:
   - 114: {fileID: 11417714}
   - 114: {fileID: 11446472}
   - 114: {fileID: 11446060}
-  - 114: {fileID: 11439334}
   m_Layer: 10
   m_Name: Key
   m_TagString: Untagged
@@ -36,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0.25, z: 5}
+  m_LocalPosition: {x: 5, y: 0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,7 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4442c8113ae1654c9d5805aaac9b91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 0}
+  color: {r: 0, g: 0, b: 1, a: 0}
+  emissionColor: {r: 0, g: 0, b: 0, a: 0}
+  setEmissionColor: 0
   material: {fileID: 2100000, guid: f24faa9857590ee4ca0231eb0bd82412, type: 2}
 --- !u!114 &11431314
 MonoBehaviour:
@@ -132,17 +133,6 @@ MonoBehaviour:
   allowBiasedActivation: 1
   inventorySlot: {fileID: 0}
   keyColor: {fileID: 0}
---- !u!114 &11439334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca53601254c5b4f4a8bfc622928e6506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11442864
 MonoBehaviour:
   m_ObjectHideFlags: 1

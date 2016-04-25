@@ -13,6 +13,6 @@ public class NotCollidePlayer : MonoBehaviour
     }
 
     void FixedUpdate() {
-        Physics.IgnoreCollision(me, unit);
+        Extensions.IgnoreCollision(me, unit);
     }
 }

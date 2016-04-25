@@ -30,6 +30,8 @@ public class InventorySlot : MonoBehaviour
         Debug.Log(string.Format("Inventory Slot start"));
         itemTracker = new ItemTracker(setValue: (v) => item = v, getValue: () => item);
         new ValueTracker<Inventory>(setValue: (v) => inventory = v, getValue: () => inventory);
+        var poolable = GetComponent<Poolable>();
+        new BoolTracker(v => poolable.exists = v, () => poolable.exists);
         itemTracker.Init(null);
         onStart();
         started = true;
