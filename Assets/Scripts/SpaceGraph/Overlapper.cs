@@ -101,10 +101,10 @@ public static class Overlapper
     public static NodeInstance FindClosestNode(Unit unit) {
         InitSearching();
         overlapCount = Physics.OverlapBoxNonAlloc(
-            unit.characterController.bounds.center,
-            unit.characterController.bounds.size / 2,
+            unit.eye.transform.position,
+            Vector3.zero,
             overlapResults,
-            unit.transform.rotation,
+            Quaternion.identity,
             nodeMask,
             QueryTriggerInteraction.Collide
         );
