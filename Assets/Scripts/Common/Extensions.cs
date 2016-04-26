@@ -133,8 +133,44 @@ public static class Extensions
         return String.Format("{{position = {0}, rotation = {1}, lossyScale = {2}}}", t.position.ExtToString(), t.rotation, t.lossyScale.ExtToString());
     }
 
+    static Matrix4x4 x;
+    static Matrix4x4 y;
+
+
+    static bool CloseMatrix(Transform a, Transform b) {
+        x = a.localToWorldMatrix;
+        y = b.localToWorldMatrix;
+        for (int i = 0; i < 16; i++) {
+            if (Mathf.Abs(x[i] - y[i]) > 0.01f) {
+                return false;
+            }
+        }
+        return true;
+        //return a.localToWorldMatrix == b.localToWorldMatrix;
+    }
+
+    static bool CloseFourVectors(Transform a, Transform b) {
+        return ClosePosition(a, b) && CloseUp(a, b) && CloseForward(a, b) && CloseScale(a, b);
+    }
+
     public static bool Close(Transform a, Transform b) {
-        return Close(a.position, b.position) && Close(a.up, b.up) && Close(a.forward, b.forward) && Close(a.lossyScale, b.lossyScale);
+        return CloseFourVectors(a, b);
+    }
+
+    public static bool ClosePosition(Transform a, Transform b) {
+        return Close(a.position, b.position);
+    }
+
+    public static bool CloseUp(Transform a, Transform b) {
+        return Close(a.up, b.up);
+    }
+
+    public static bool CloseForward(Transform a, Transform b) {
+        return Close(a.forward, b.forward);
+    }
+
+    public static bool CloseScale(Transform a, Transform b) {
+        return Close(a.lossyScale, b.lossyScale);
     }
 
     public static bool Close(Vector3 a, Vector3 b) {

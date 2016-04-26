@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     public Inventory inventory;
     public LastPositionKeeper lastPositionKeeper;
     public Head head;
+    public CameraPlace cameraPlace;
     public Undo undo;
     public CharacterController characterController;
 
@@ -23,6 +24,7 @@ public class Unit : MonoBehaviour
         inventory = GetComponentInChildren<Inventory>();
         lastPositionKeeper = GetComponentInChildren<LastPositionKeeper>();
         head = GetComponentInChildren<Head>();
+        cameraPlace = GetComponentInChildren<CameraPlace>();
         undo = GetComponentInChildren<Undo>();
         characterController = GetComponentInChildren<CharacterController>();
 

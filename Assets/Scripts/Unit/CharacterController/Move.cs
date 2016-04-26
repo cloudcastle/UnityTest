@@ -82,6 +82,12 @@ public class Move : MonoBehaviour
         angularVelocity.y /= 2;
     }
 
+    Vector3 previousPosition;
+    void Update() {
+        Debug.LogFormat("delta position = {0}", (Camera.main.transform.position - previousPosition).ExtToString());
+        previousPosition = Camera.main.transform.position;
+    }
+
     float currentScale() {
         return (changeScale == null) ? 1 : changeScale.currentScale;
     }

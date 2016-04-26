@@ -47,9 +47,9 @@ public class Player : UnitController
         }
         GainControl(unit);
         if (animate) {
-            mainCamera.MoveTo(unit.head.transform);
+            mainCamera.MoveTo(unit.cameraPlace.transform);
         } else {
-            mainCamera.MoveToInstant(unit.head.transform);
+            mainCamera.MoveToInstant(unit.cameraPlace.transform);
         }
     }
 

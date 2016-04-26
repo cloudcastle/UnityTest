@@ -243,6 +243,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &171788
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 475750}
+  - 114: {fileID: 11440854}
+  m_Layer: 0
+  m_Name: CameraPlace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &177572
 GameObject:
   m_ObjectHideFlags: 1
@@ -589,6 +605,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 477438}
   m_RootOrder: 0
+--- !u!4 &475750
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 477438}
+  m_RootOrder: 2
 --- !u!4 &477438
 Transform:
   m_ObjectHideFlags: 1
@@ -601,6 +629,7 @@ Transform:
   m_Children:
   - {fileID: 474494}
   - {fileID: 444136}
+  - {fileID: 475750}
   m_Father: {fileID: 491080}
   m_RootOrder: 0
 --- !u!4 &477846
@@ -646,8 +675,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154292}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 11, z: -5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491080}
@@ -935,6 +964,19 @@ MonoBehaviour:
   itemTracker:
     name: 
     sampleCount: 0
+--- !u!114 &11440854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 133511785f0330842a702be264b4c7ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 0}
+  verticalRotateSpeed: 6
 --- !u!114 &11442784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1245,6 +1287,7 @@ MonoBehaviour:
   inventory: {fileID: 11434486}
   lastPositionKeeper: {fileID: 11419060}
   head: {fileID: 0}
+  cameraPlace: {fileID: 0}
   undo: {fileID: 0}
   characterController: {fileID: 0}
   controller: {fileID: 0}
