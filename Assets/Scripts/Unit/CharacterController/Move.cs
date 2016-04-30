@@ -84,7 +84,6 @@ public class Move : MonoBehaviour
 
     Vector3 previousPosition;
     void Update() {
-        Debug.LogFormat("delta position = {0}", (Camera.main.transform.position - previousPosition).ExtToString());
         previousPosition = Camera.main.transform.position;
     }
 
