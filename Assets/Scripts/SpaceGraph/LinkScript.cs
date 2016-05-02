@@ -36,7 +36,8 @@ public class LinkScript : MonoBehaviour
             to = null;
         }
     }
-
+    
+#if UNITY_EDITOR
     public bool AssertAcceptable() {
         if (!DebugManager.debug) {
             return true;
@@ -48,4 +49,5 @@ public class LinkScript : MonoBehaviour
         }
         return acceptable;
     }
+#endif
 }

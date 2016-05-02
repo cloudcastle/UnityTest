@@ -78,11 +78,13 @@ public partial class SpaceGraph : MonoBehaviour
         }
         Bfs();
 
+#if UNITY_EDITOR
         FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
             if (link.to != null) {
                 link.AssertAcceptable();
             }
         });
+#endif
     }
 
     public static bool Acceptable(NodeInstance node, LinkScript link) {
@@ -157,7 +159,7 @@ public partial class SpaceGraph : MonoBehaviour
                 if (debug) {
                     Debug.LogFormat("link {0}: oldNode is on", link.transform.Path());
                 }
-                link.AssertAcceptable();
+                //link.AssertAcceptable();
                 return;
             } else {
                 node = oldNode;
@@ -187,10 +189,10 @@ public partial class SpaceGraph : MonoBehaviour
             var backLinkSignature = link.link.backLink;
             var backLink = nodeLinks[backLinkSignature];
             backLink.to = from;
-            if (!link.AssertAcceptable()) {
-                Debug.LogFormat("oldnode = {0}", oldNodeUsed);
-            }
-            backLink.AssertAcceptable();
+            //if (!link.AssertAcceptable()) {
+            //    Debug.LogFormat("oldnode = {0}", oldNodeUsed);
+            //}
+            //backLink.AssertAcceptable();
             nodes.Add(node);
             queue.Enqueue(node);
             bfsNodeCount++;

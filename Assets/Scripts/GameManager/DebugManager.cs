@@ -8,6 +8,7 @@ using RSG;
 public class DebugManager : MonoBehaviour
 {
     public static bool debug = false;
+#if UNITY_EDITOR
 
     public List<string> levels;
     public List<string> availableLevels;
@@ -43,4 +44,5 @@ public class DebugManager : MonoBehaviour
             });
         }
     }
+#endif
 }
