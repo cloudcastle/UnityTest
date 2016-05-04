@@ -28,21 +28,17 @@ public class Portal : MonoBehaviour
     }
 
     void OnTriggerStay(Collider other) {
-        //Vector3 localPosition = transform.InverseTransformPoint(other.transform.position);
-        //Vector3 previousLocalPlayerPosition = transform.InverseTransformPoint(player.lastPositionKeeper.lastPosition);
-        //if (Mathf.Sign(localPlayerPosition.y) != Mathf.Sign(previousLocalPlayerPosition.y) || Mathf.Abs(localPlayerPosition.y) < safetyDistance) {
-        //    var dropLocalPosition = previousLocalPlayerPosition;
-        //    if (previousLocalPlayerPosition.y > 0) {
-        //        if (dropLocalPosition.y < safetyDistance) {
-        //            dropLocalPosition.y = safetyDistance;
-        //        }
-        //    } else {
-        //        if (Mathf.Abs(dropLocalPosition.y) < safetyDistance) {
-        //            dropLocalPosition.y = -safetyDistance;
-        //        }
-        //    }
-        //    player.inventory.DropAll(transform.TransformPoint(dropLocalPosition), Drop);
-        //    player.inventory.pickStun.StartCooldown();
+        var obj = other.gameObject;
+        var keeper = other.GetComponentInChildren<LastPositionKeeper>();
+        if (keeper != null) {
+            Vector3 localObjectPosition = transform.InverseTransformPoint(keeper.transform.position);
+            Vector3 previousLocalObjectPosition = transform.InverseTransformPoint(keeper.lastPosition);
+            if (Mathf.Sign(localObjectPosition.z) != Mathf.Sign(previousLocalObjectPosition.z)) {
+                obj.transform.SetParent(front.transform, worldPositionStays: true);
+                obj.transform.SetParent(this.other.back, worldPositionStays: false);
+                obj.transform.SetParent(null, worldPositionStays: true);
+            }
+        }
     }
 
     void OnWillRenderObject() {

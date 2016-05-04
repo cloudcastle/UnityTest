@@ -16,22 +16,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &127756
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 473826}
-  - 65: {fileID: 6503704}
-  m_Layer: 0
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &156638
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 472100}
   - 114: {fileID: 11481662}
+  - 65: {fileID: 6538538}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -118,22 +103,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422368}
-  - {fileID: 473826}
   - {fileID: 498880}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!4 &473826
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127756}
-  m_LocalRotation: {x: 0.5000001, y: 0.5, z: 0.5, w: 0.49999994}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 472100}
-  m_RootOrder: 1
 --- !u!4 &498880
 Transform:
   m_ObjectHideFlags: 1
@@ -145,7 +117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472100}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!20 &2033212
 Camera:
   m_ObjectHideFlags: 1
@@ -225,17 +197,17 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6503704
+--- !u!65 &6538538
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127756}
+  m_GameObject: {fileID: 156638}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Size: {x: 10, y: 10, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11427122
 MonoBehaviour:
@@ -249,7 +221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portal: {fileID: 11481662}
-  portalTexture: {fileID: 8400000, guid: 316eec6a15948744d9818ce661c8a8de, type: 2}
 --- !u!114 &11481662
 MonoBehaviour:
   m_ObjectHideFlags: 1
