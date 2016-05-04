@@ -21,4 +21,8 @@ public class MainCamera : MonoBehaviour
     public void MoveToInstant(Transform t) {
         transform.SetParent(t.transform, worldPositionStays: false);
     }
+
+    void OnPreRender() {
+        FindObjectsOfType<PortalSurface>().ForEach(ps => ps.SetDepth(0));
+    }
 }

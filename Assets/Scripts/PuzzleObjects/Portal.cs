@@ -12,12 +12,12 @@ public class Portal : MonoBehaviour
     public List<Camera> cameras;
 
     void Awake() {
-        var renderer = GetComponentInChildren<Renderer>();
-        camera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
-        renderer.material.SetTexture("_MainTex", camera.targetTexture);
 
         for (int i = 0; i <= PortalSurface.maxDepth; i++) {
             var newCamera = Instantiate(camera);
+            newCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
+            newCamera.targetTexture.name = string.Format("Texture {0} depth {1}", name, i);
+            newCamera.name = string.Format("Camera {0} depth {1}", name, i);
             newCamera.enabled = false;
             cameras.Add(newCamera);
         }

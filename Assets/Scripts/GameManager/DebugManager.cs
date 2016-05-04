@@ -8,6 +8,9 @@ using RSG;
 public class DebugManager : MonoBehaviour
 {
     public static bool debug = false;
+    static bool debugOneFrame = false;
+    static bool oldDebug = false;
+
 #if UNITY_EDITOR
 
     public List<string> levels;
@@ -35,6 +38,11 @@ public class DebugManager : MonoBehaviour
     }
 
     void Update() {
+        if (debugOneFrame) {
+            debugOneFrame = false;
+            debug = oldDebug;
+        }
+
         if (Input.GetKeyDown(KeyCode.P)) {
             Debug.LogFormat("Pending promises: {0}", Promise.GetPendingPromises().ExtToString());
         }
@@ -42,6 +50,9 @@ public class DebugManager : MonoBehaviour
             FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
                 link.AssertAcceptable();
             });
+            oldDebug = debug;
+            debug = true;
+            debugOneFrame = true;
         }
     }
 #endif
