@@ -42,7 +42,7 @@ public class PortalSurface : MonoBehaviour
             camera.transform.Reset();
             camera.transform.SetParent(portal.front.transform, worldPositionStays: true);
             camera.transform.SetParent(portal.other.back, worldPositionStays: false);
-            FindObjectsOfType<PortalSurface>().ForEach(ps => ps.SetDepth(depth));
+            SearchManager.instance.portalSurfaces.ForEach(ps => ps.SetDepth(depth));
             depth += 1;
             camera.Render();
             depth -= 1;

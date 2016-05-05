@@ -597,9 +597,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 438368}
-  - 114: {fileID: 11435148}
+  - 114: {fileID: 11469450}
   m_Layer: 0
-  m_Name: EditManager
+  m_Name: SearchManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,6 +973,22 @@ GameObject:
   - 114: {fileID: 11484220}
   m_Layer: 5
   m_Name: Level name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &157172
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 457720}
+  - 114: {fileID: 11401468}
+  m_Layer: 0
+  m_Name: EditManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1705,6 +1721,7 @@ Transform:
   m_Children:
   - {fileID: 488374}
   - {fileID: 443796}
+  - {fileID: 457720}
   - {fileID: 438368}
   m_Father: {fileID: 459858}
   m_RootOrder: 0
@@ -1719,7 +1736,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 425750}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &443796
 Transform:
   m_ObjectHideFlags: 1
@@ -1732,6 +1749,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 425750}
   m_RootOrder: 1
+--- !u!4 &457720
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 425750}
+  m_RootOrder: 2
 --- !u!4 &459858
 Transform:
   m_ObjectHideFlags: 1
@@ -1894,6 +1923,18 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
+--- !u!114 &11401468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e7be9e55809d6b428780de9f3b3995a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  on: 0
 --- !u!114 &11402454
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2653,7 +2694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6210dfec7572fb4eb272e7003bdb594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appeared: 0
+  exists: 0
   pool: {fileID: 0}
 --- !u!114 &11422054
 MonoBehaviour:
@@ -3322,18 +3363,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &11435148
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 134812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e7be9e55809d6b428780de9f3b3995a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  on: 0
 --- !u!114 &11435286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4392,6 +4421,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11469450
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2324674811c4f7a46881ac855598ad17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalSurfaces: []
 --- !u!114 &11470638
 MonoBehaviour:
   m_ObjectHideFlags: 1

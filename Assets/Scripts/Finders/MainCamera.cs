@@ -24,6 +24,6 @@ public class MainCamera : MonoBehaviour
     }
 
     void OnPreRender() {
-        FindObjectsOfType<PortalSurface>().ForEach(ps => ps.SetDepth(0));
+        SearchManager.instance.portalSurfaces.ForEach(ps => ps.SetDepth(0));
     }
 }
