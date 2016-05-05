@@ -8,13 +8,10 @@ public class PortalSurface : MonoBehaviour
     public static int depth = 0;
     public const int maxDepth = 2;
 
-    new Renderer renderer;
+    public new Renderer renderer;
+    public Renderer offsetRenderer;
 
     public static List<PortalSurface> all = new List<PortalSurface>();
-
-    void Awake() {
-        renderer = GetComponentInChildren<Renderer>();
-    }
 
     public static List<PortalSurface> surfacesWithChangedTexture = new List<PortalSurface>();
 
@@ -26,7 +23,7 @@ public class PortalSurface : MonoBehaviour
     }
 
     public void SetDepth(int depth) {
-        renderer.material.mainTexture = portal.GetCamera(depth).targetTexture;
+        offsetRenderer.material.mainTexture = renderer.material.mainTexture = portal.GetCamera(depth).targetTexture;
         if (DebugManager.debug) {
             Debug.LogFormat("renderer {0} texture set to {1}", renderer.transform.Path(), portal.GetCamera(depth).targetTexture);
         }

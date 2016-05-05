@@ -11,6 +11,7 @@ public class MainCamera : MonoBehaviour
     {
         instance = gameObject;
         animator = GetComponent<TransformAnimator>();
+        GetComponent<Camera>().layerCullSpherical = true;
     }
 
     public void MoveTo(Transform t) {
