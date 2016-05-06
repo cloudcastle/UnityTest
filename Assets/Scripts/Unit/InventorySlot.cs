@@ -27,7 +27,6 @@ public class InventorySlot : MonoBehaviour
     }
 
     void Start() {
-        Debug.Log(string.Format("Inventory Slot start"));
         itemTracker = new ItemTracker(setValue: (v) => item = v, getValue: () => item);
         new ValueTracker<Inventory>(setValue: (v) => inventory = v, getValue: () => inventory);
         var poolable = GetComponent<Poolable>();
@@ -42,7 +41,6 @@ public class InventorySlot : MonoBehaviour
             return Promise.Resolved();
         }
         var result = new Promise();
-        Debug.Log("new promise created");
         onStart += result.Resolve;
         return result.WithName(string.Format("Inventory slot ready: {0}", name));
     }

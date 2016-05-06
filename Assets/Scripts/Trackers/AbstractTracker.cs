@@ -19,7 +19,6 @@ public abstract class AbstractTracker<T> : Script
         }
         tracker = CreateTracker();
         if (useInitialValue) {
-            Debug.Log("Initial value used: " + this);
             tracker.Init(initialValue);
         }
     }

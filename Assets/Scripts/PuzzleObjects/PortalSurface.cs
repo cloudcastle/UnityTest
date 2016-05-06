@@ -29,6 +29,7 @@ public class PortalSurface : MonoBehaviour
         }
     }
 
+
     void OnWillRenderObject() {
         if (Camera.current == Camera.main) {
             depth = 0;
@@ -45,6 +46,7 @@ public class PortalSurface : MonoBehaviour
             SearchManager.instance.portalSurfaces.ForEach(ps => ps.SetDepth(depth));
             depth += 1;
             camera.Render();
+            DebugManager.cnt++;
             depth -= 1;
         }
     }

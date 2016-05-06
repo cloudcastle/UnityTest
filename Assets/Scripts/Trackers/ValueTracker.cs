@@ -41,9 +41,6 @@ public class ValueTracker<T>
         if (track.Count == 0) {
             track.Push(new TimedValue<T>(value, float.NegativeInfinity));
             sampleCount = track.Count;
-            if (this is ItemTracker) {
-                Debug.Log("ItemTracker track init: " + track.ExtToString());
-            }
         }
     }
 

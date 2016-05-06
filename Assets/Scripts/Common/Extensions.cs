@@ -185,6 +185,8 @@ public static class Extensions
 
     public static void IgnoreCollision(Collider a, Collider b, bool ignore = true) {
         Physics.IgnoreCollision(a, b, ignore);
-        Debug.LogFormat("IgnoreCollision({0}, {1}, {2})", a.transform.Path(), b.transform.Path(), ignore);
+#if UNITY_EDITOR
+        DebugManager.instance.ignoredCollisions[a][b] = ignore;
+#endif
     }
 }

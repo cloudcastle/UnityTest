@@ -58,7 +58,9 @@ public class Inventory : Ability
 
         item.Picked(unit);
 
-        Debug.Log(string.Format("Pick {0}", item));
+        if (DebugManager.debug) {
+            Debug.Log(string.Format("Pick {0}", item));
+        }
         GameObject slotObject = slotPool.Take();
         InventorySlot slot = slotObject.GetComponent<InventorySlot>();
         slot.Init(this, item);
@@ -80,7 +82,9 @@ public class Inventory : Ability
             }
         }
         items.Remove(item);
-        Debug.Log(string.Format("Lost {0}", item));
+        if (DebugManager.debug) {
+            Debug.Log(string.Format("Lost {0}", item));
+        }
 
         item.inventorySlot.Free();
         item.Lost(unit);
@@ -92,7 +96,9 @@ public class Inventory : Ability
         Lose(item);
         item.transform.position = position;
         item.GhostFor(unit);
-        Debug.Log(String.Format("{0} thrown at {1}", item, position.ExtToString()));
+        if (DebugManager.debug) {
+            Debug.Log(String.Format("{0} thrown at {1}", item, position.ExtToString()));
+        }
     }
 
     public void DropAll(Vector3 position, Func<Item, bool> predicate) {

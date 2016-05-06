@@ -22,7 +22,9 @@ public abstract class Activatable : Script
     }
 
     public virtual void Activate(Activator activator) {
-        Debug.Log(string.Format("Activated: {0}", this));
+        if (DebugManager.debug) {
+            Debug.Log(string.Format("Activated: {0}", this));
+        }
     }
 
     public float EffectiveMaxDistance(Activator activator) {

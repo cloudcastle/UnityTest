@@ -7,11 +7,26 @@ using RSG;
 
 public class DebugManager : MonoBehaviour
 {
+    public static DebugManager instance;
+
     public static bool debug = false;
     static bool debugOneFrame = false;
     static bool oldDebug = false;
 
+    public static int cnt = 0;
+
+    void Awake() {
+        instance = this;
+
 #if UNITY_EDITOR
+        Promise.EnablePromiseTracking = true;
+        Promise.UnhandledException += Promise_UnhandledException;
+#endif
+    }
+
+#if UNITY_EDITOR
+
+    public Map<Collider, Map<Collider, bool>> ignoredCollisions = new Map<Collider, Map<Collider, bool>>(() => new Map<Collider, bool>(() => false));
 
     public List<string> levels;
     public List<string> availableLevels;
@@ -21,11 +36,6 @@ public class DebugManager : MonoBehaviour
 
     private void Promise_UnhandledException(object sender, ExceptionEventArgs e) {
         Debug.LogError(String.Format("An unhandled promises exception occured: {0}", e.Exception));
-    }
-
-    void Awake() {
-        Promise.EnablePromiseTracking = true;
-        Promise.UnhandledException += Promise_UnhandledException;
     }
 
     [ContextMenu("Recalculate debug output data")]
@@ -39,12 +49,20 @@ public class DebugManager : MonoBehaviour
 
     void Update() {
         if (debugOneFrame) {
+            Debug.LogFormat("cnt = {0}", DebugManager.cnt);
             debugOneFrame = false;
             debug = oldDebug;
         }
 
         if (Input.GetKeyDown(KeyCode.P)) {
             Debug.LogFormat("Pending promises: {0}", Promise.GetPendingPromises().ExtToString());
+            ignoredCollisions.ForEach(kv => {
+                kv.Value.ForEach(kv2 => {
+                    if (kv2.Value) {
+                        Debug.LogFormat("Ignored collision: {0}, {1}", kv.Key.transform.Path(), kv2.Key.transform.Path());
+                    }
+                });
+            });
         }
         if (Input.GetKeyDown(KeyCode.F11)) {
             FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
@@ -54,6 +72,11 @@ public class DebugManager : MonoBehaviour
             debug = true;
             debugOneFrame = true;
         }
+        if (Input.GetKeyDown(KeyCode.F10)) {
+            debug ^= true;
+            Debug.LogFormat("Debug: {0}", debug);
+        }
+        DebugManager.cnt = 0;
     }
 #endif
 }

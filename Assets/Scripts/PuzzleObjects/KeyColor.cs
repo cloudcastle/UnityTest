@@ -16,7 +16,9 @@ public class KeyColor : MonoBehaviour
             return;
         }
         doors.ForEach(door => door.OpenFor(player, open));
-        Debug.Log(string.Format("Color {0} open for {1} : {2}", this, player, open));
+        if (DebugManager.debug) {
+            Debug.Log(string.Format("Color {0} open for {1} : {2}", this, player, open));
+        }
         if (open) {
             openedFor.Add(player);
         } else {

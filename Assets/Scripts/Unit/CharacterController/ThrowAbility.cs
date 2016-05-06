@@ -44,7 +44,9 @@ public class ThrowAbility : Ability
             target.gameObject.SetActive(true);
             PushItem(target, throwForce);
             target.GhostFor(unit);
-            Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
+            if (DebugManager.debug) {
+                Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
+            }
             Reset();
         });
         Reset();

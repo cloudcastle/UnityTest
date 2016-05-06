@@ -152,7 +152,6 @@ public partial class SpaceGraph : MonoBehaviour
 
         NodeInstance node = null;
         var oldNode = link.to;
-        bool oldNodeUsed = false;
 
         if (oldNode != null) {
             if (oldNode.IsOn()) {
@@ -163,7 +162,6 @@ public partial class SpaceGraph : MonoBehaviour
                 return;
             } else {
                 node = oldNode;
-                oldNodeUsed = true;
             }
         } else {
             node = CreateNewNode(link);

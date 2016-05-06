@@ -36,11 +36,15 @@ public class Item : Activatable
     }
 
     public void GhostFor(Unit player) {
-        Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
+        if (DebugManager.debug) {
+            Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
+        }
         Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
         TimeManager.WaitFor(ghostTimeAfterThrow).Then(() => {
             Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), false);
-            Debug.Log(String.Format("Item {0} unghost for {1}", this, player));
+            if (DebugManager.debug) {
+                Debug.Log(String.Format("Item {0} unghost for {1}", this, player));
+            }
         });
     }
 }
