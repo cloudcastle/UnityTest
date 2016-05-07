@@ -6,7 +6,7 @@ public class PortalSurface : MonoBehaviour
     public Portal portal;
 
     public static int depth = 0;
-    public const int maxDepth = 2;
+    public const int maxDepth = 1;
 
     public new Renderer renderer;
     public Renderer offsetRenderer;
@@ -24,9 +24,9 @@ public class PortalSurface : MonoBehaviour
 
     public void SetDepth(int depth) {
         offsetRenderer.material.mainTexture = renderer.material.mainTexture = portal.GetCamera(depth).targetTexture;
-        if (DebugManager.debug) {
-            Debug.LogFormat("renderer {0} texture set to {1}", renderer.transform.Path(), portal.GetCamera(depth).targetTexture);
-        }
+        //if (DebugManager.debug) {
+        //    Debug.LogFormat("renderer {0} texture set to {1}", renderer.transform.Path(), portal.GetCamera(depth).targetTexture);
+        //}
     }
 
 
