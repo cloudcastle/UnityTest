@@ -11,9 +11,15 @@ public class PortalSurface : MonoBehaviour
     public new Renderer renderer;
     public Renderer offsetRenderer;
 
+    public RenderNode renderNode;
+
     public static List<PortalSurface> all = new List<PortalSurface>();
 
     public static List<PortalSurface> surfacesWithChangedTexture = new List<PortalSurface>();
+
+    void Awake() {
+        renderNode = GetComponent<RenderNode>();
+    }
 
     public static void RestoreTexturesToDepth(int depth) {
         surfacesWithChangedTexture.ForEach(ps => {

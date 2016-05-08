@@ -189,4 +189,15 @@ public static class Extensions
         DebugManager.instance.ignoredCollisions[a][b] = ignore;
 #endif
     }
+
+    public static List<T> GetComponentsInMyChildren<T>(this MonoBehaviour mb) where T : MonoBehaviour {
+        List<T> res = new List<T>();
+        foreach (Transform c in mb.transform) {
+            T component = c.GetComponent<T>();
+            if (component != null) {
+                res.Add(component);
+            }
+        }
+        return res;
+    }
 }

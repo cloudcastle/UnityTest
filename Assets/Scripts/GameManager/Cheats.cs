@@ -33,7 +33,7 @@ public class Cheats : MonoBehaviour
                 GameManager.game = new Game();
                 GameManager.instance.PlayLastUnlocked();
             }
-            if (Input.GetKeyDown(KeyCode.F10)) {
+            if (Input.GetKeyDown(KeyCode.F12)) {
                 GameManager.instance.CompleteLevel();
             }
         }

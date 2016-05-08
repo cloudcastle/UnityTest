@@ -17,7 +17,7 @@ public class EditManager : MonoBehaviour
     }
 
     void Update() {
-        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.F12)) {
+        if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.F9)) {
             Enable(!on);
         }
     }
