@@ -30,6 +30,9 @@ public class ThrowAbility : Ability
 
     void PushItem(Item item, float force) {
         item.transform.position = unit.eye.transform.position + unit.eye.transform.forward * initialDistance;
+        if (item.GetComponent<LastPositionKeeper>() != null) {
+            item.GetComponent<LastPositionKeeper>().Reset();
+        }
         item.GetComponent<Rigidbody>().AddForce(force * unit.eye.transform.forward);
     }
 

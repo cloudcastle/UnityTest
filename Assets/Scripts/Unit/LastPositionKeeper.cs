@@ -8,4 +8,8 @@ public class LastPositionKeeper : MonoBehaviour
     void FixedUpdate() {
         lastPosition = transform.position;
     }
+
+    public void Reset() {
+        lastPosition = transform.position;
+    }
 }

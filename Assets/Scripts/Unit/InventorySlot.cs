@@ -74,6 +74,9 @@ public class InventorySlot : MonoBehaviour
 
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = true;
+        } 
+        if (item.GetComponent<LastPositionKeeper>() != null) {
+            item.GetComponent<LastPositionKeeper>().Reset();
         }
 
         transform.localPosition = TargetPosition();
@@ -109,6 +112,9 @@ public class InventorySlot : MonoBehaviour
 
         if (item.GetComponent<Rigidbody>() != null) {
             item.GetComponent<Rigidbody>().isKinematic = false;
+        }
+        if (item.GetComponent<LastPositionKeeper>() != null) {
+            item.GetComponent<LastPositionKeeper>().Reset();
         }
 
         Unsubscribe(inventory);
