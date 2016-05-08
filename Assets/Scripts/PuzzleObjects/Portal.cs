@@ -46,7 +46,7 @@ public class Portal : MonoBehaviour
     }
 
     public static bool Raycast(Ray ray, out RaycastHit hit) {
-        bool result = Physics.Raycast(ray, out hit, float.PositiveInfinity, layerMask: ~0, queryTriggerInteraction: QueryTriggerInteraction.Collide);
+        bool result = Physics.Raycast(ray, out hit);
         if (hit.collider == null) {
             return result;
         }
