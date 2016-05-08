@@ -111,6 +111,9 @@ public class Game
         var intersection = new Level("Intersection", tool);
         var accuracy = new Level("Accuracy", stand, tool);
 
+        // Keys Anticolors
+        var ban = new Level("Ban", qeMouseWheel);
+
         // Tricks
         var bars = new Level("Bars", string_);
         var escape = new Level("Escape", z, bars);
@@ -130,6 +133,9 @@ public class Game
         var deal = new Level("Deal", place, column);
         var catch_ = new Level("Catch", deal);
         var coveredHill = new Level("Covered Hill", forgotten, deal);
+
+        // Mixed
+        var delivery = new Level("Delivery", qeMouseWheel);
 
         currentLevel = click;
         current = null;
