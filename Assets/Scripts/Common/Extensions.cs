@@ -183,11 +183,17 @@ public static class Extensions
         }
     }
 
-    public static void IgnoreCollision(Collider a, Collider b, bool ignore = true) {
+    static void IgnoreCollision(Collider a, Collider b, bool ignore = true) {
         Physics.IgnoreCollision(a, b, ignore);
-#if UNITY_EDITOR
         DebugManager.instance.ignoredCollisions[a][b] = ignore;
-#endif
+    }
+
+    public static void IgnoreCollision(Component a, Component b, bool ignore = true) {
+        a.GetComponents<Collider>().ForEach(c1 => {
+            b.GetComponents<Collider>().ForEach(c2 => {
+                IgnoreCollision(c1, c2, ignore);
+            });
+        });
     }
 
     public static List<T> GetComponentsInMyChildren<T>(this MonoBehaviour mb) where T : MonoBehaviour {

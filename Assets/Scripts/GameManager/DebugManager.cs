@@ -9,9 +9,9 @@ public class DebugManager : MonoBehaviour
 {
     public static DebugManager instance;
 
+    public Map<Collider, Map<Collider, bool>> ignoredCollisions = new Map<Collider, Map<Collider, bool>>(() => new Map<Collider, bool>(() => false));
+
     public static bool debug = false;
-    static bool debugOneFrame = false;
-    static bool oldDebug = false;
 
     public static int cnt = 0;
 
@@ -25,9 +25,8 @@ public class DebugManager : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-
-    public Map<Collider, Map<Collider, bool>> ignoredCollisions = new Map<Collider, Map<Collider, bool>>(() => new Map<Collider, bool>(() => false));
-
+    static bool debugOneFrame = false;
+    static bool oldDebug = false;
     public List<string> levels;
     public List<string> availableLevels;
     public List<string> completedLevels;

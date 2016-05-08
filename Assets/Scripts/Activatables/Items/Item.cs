@@ -39,9 +39,9 @@ public class Item : Activatable
         if (DebugManager.debug) {
             Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
         }
-        Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>());
+        Extensions.IgnoreCollision(player, this);
         TimeManager.WaitFor(ghostTimeAfterThrow).Then(() => {
-            Extensions.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), false);
+            Extensions.IgnoreCollision(player, this, false);
             if (DebugManager.debug) {
                 Debug.Log(String.Format("Item {0} unghost for {1}", this, player));
             }
