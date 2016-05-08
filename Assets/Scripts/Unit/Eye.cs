@@ -11,6 +11,7 @@ public class Eye : MonoBehaviour
     void SetUnderSight(GameObject go, float distance) {
         if (go != underSight) {
             underSight = go;
+            //Debug.LogFormat("Under sight: {0}", go != null ? go.transform.Path() : "None");
         }
         this.distance = distance;
     }
@@ -21,7 +22,7 @@ public class Eye : MonoBehaviour
         {
             return;
         }
-        bool b = Physics.Raycast(new Ray(transform.position, transform.TransformDirection(Vector3.forward)), out hit);
+        bool b = Portal.Raycast(new Ray(transform.position, transform.TransformDirection(Vector3.forward)), out hit);
         if (b) {
             SetUnderSight(hit.collider.gameObject, hit.distance);
         } else {

@@ -44,4 +44,20 @@ public class Portal : MonoBehaviour
     void OnWillRenderObject() {
         Debug.LogFormat("OnWillRenderObject");
     }
+
+    public static bool Raycast(Ray ray, out RaycastHit hit) {
+        bool result = Physics.Raycast(ray, out hit);
+        if (hit.collider == null) {
+            return result;
+        }
+        var portalSurface = hit.collider.GetComponent<PortalSurface>();
+        if (portalSurface == null) {
+            return result;
+        }
+        var front = portalSurface.transform;
+        var back = portalSurface.portal.other.back;
+        var newOrigin = back.TransformPoint(front.InverseTransformPoint(ray.origin));
+        var newDirection = back.TransformDirection(front.InverseTransformDirection(ray.direction));
+        return Raycast(new Ray(newOrigin, newDirection), out hit);
+    }
 }
