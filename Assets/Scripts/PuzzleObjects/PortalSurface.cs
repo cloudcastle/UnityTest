@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PortalSurface : MonoBehaviour
 {
     public Portal portal;
 
     public static int depth = 0;
-    public const int maxDepth = 2;
+    public const int maxDepth = 5;
 
     public new Renderer renderer;
     public Renderer offsetRenderer;
 
-    public RenderNode renderNode;
+    public PortalNode portalNode;
+
+    public static PortalNode renderingPortalNode = null;
 
     public static List<PortalSurface> all = new List<PortalSurface>();
 
     public static List<PortalSurface> surfacesWithChangedTexture = new List<PortalSurface>();
 
     void Awake() {
-        renderNode = GetComponent<RenderNode>();
+        portalNode = GetComponent<PortalNode>();
     }
 
     public static void RestoreTexturesToDepth(int depth) {
@@ -35,25 +38,33 @@ public class PortalSurface : MonoBehaviour
         //}
     }
 
-
     void OnWillRenderObject() {
         if (Camera.current == Camera.main) {
             depth = 0;
+            renderingPortalNode = null;
         }
         if (Camera.current != Camera.main && depth == 0) { // some camera not main and not rendered recursively, i.e. editor camera
             return;
         }
-        if (depth < maxDepth) {
+        PortalNode child = null;
+        if (renderingPortalNode == null) {
+            child = this.portalNode;
+        } else {
+            child = renderingPortalNode.children.FirstOrDefault(pn => pn.surface == this);
+        }
+        if (depth < maxDepth && child != null) {
             var camera = portal.GetCamera(depth);
             camera.transform.SetParent(Camera.current.transform);
             camera.transform.Reset();
             camera.transform.SetParent(portal.front.transform, worldPositionStays: true);
             camera.transform.SetParent(portal.other.back, worldPositionStays: false);
-            SearchManager.instance.portalSurfaces.ForEach(ps => ps.SetDepth(depth));
             depth += 1;
+            PortalNode parent = renderingPortalNode;
+            renderingPortalNode = child;
             camera.Render();
             DebugManager.cnt++;
             depth -= 1;
+            renderingPortalNode = parent;
         }
     }
 }

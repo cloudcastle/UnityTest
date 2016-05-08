@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 // local Y should be the axis normal to field
 public class Portal : MonoBehaviour
@@ -45,7 +46,7 @@ public class Portal : MonoBehaviour
         Debug.LogFormat("OnWillRenderObject");
     }
 
-    public static bool Raycast(Ray ray, out RaycastHit hit) {
+    public static bool Raycast(Ray ray, out RaycastHit hit, Action<PortalSurface> onTeleported = null) {
         bool result = Physics.Raycast(ray, out hit);
         if (hit.collider == null) {
             return result;
@@ -54,10 +55,14 @@ public class Portal : MonoBehaviour
         if (portalSurface == null) {
             return result;
         }
+        if (onTeleported != null) {
+            Debug.LogFormat("Teleported sight by {0}", portalSurface.portal);
+            onTeleported(portalSurface);
+        }
         var front = portalSurface.transform;
         var back = portalSurface.portal.other.back;
         var newOrigin = back.TransformPoint(front.InverseTransformPoint(ray.origin));
         var newDirection = back.TransformDirection(front.InverseTransformDirection(ray.direction));
-        return Raycast(new Ray(newOrigin, newDirection), out hit);
+        return Raycast(new Ray(newOrigin, newDirection), out hit, onTeleported);
     }
 }
