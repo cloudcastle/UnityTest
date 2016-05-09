@@ -3,16 +3,30 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+using System.Runtime.Serialization;
 
 public static class FileManager
 {
+    static BinaryFormatter GetFormatter() {
+        var bf = new BinaryFormatter();
+
+        SurrogateSelector ss = new SurrogateSelector();
+
+        ss.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+        ss.AddSurrogate(typeof(Ray), new StreamingContext(StreamingContextStates.All), new RaySerializationSurrogate());
+
+        bf.SurrogateSelector = ss;
+
+        return bf;
+    }
+
     public static T LoadFromFile<T>(string filename) where T : class {
         filename = Application.persistentDataPath + "/" + filename;
         Debug.Log("Loading from: " + filename);
         T result = null;
         FileStream fs = null;
         try {
-            var bf = new BinaryFormatter();
+            var bf = GetFormatter();
             fs = new FileStream(filename, FileMode.Open);
             result = bf.Deserialize(fs) as T;
         } catch (Exception e) {
@@ -26,9 +40,11 @@ public static class FileManager
 
     public static void SaveToFile<T>(T data, string filename) {
         filename = Application.persistentDataPath + "/" + filename;
+        Debug.Log("Saving to: " + filename);
         FileStream fs = null;
         try {
-            var bf = new BinaryFormatter();
+            var bf = GetFormatter();
+
             fs = new FileStream(filename, FileMode.Create);
             bf.Serialize(fs, data);
         } catch (Exception e) {
