@@ -20,7 +20,7 @@ namespace Terminal
         static void Work() {
             //PrintAllSolutions();
             //Console.WriteLine("HW");
-            PromisesTraining.RunThreeContinuousEffects();
+            MatricesTraining.Run();
             
         }
 

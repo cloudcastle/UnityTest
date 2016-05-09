@@ -77,5 +77,12 @@ public class DebugManager : MonoBehaviour
         }
         DebugManager.cnt = 0;
     }
+
+    [ContextMenu("Experiment")]
+    void Experiment() {
+        var go1 = new GameObject();
+        go1.transform.position = new Vector3(-2, 5.5f, 0.25f);
+        Debug.LogFormat("Transform is: {0}, localToWorldMatrix is:\n{1}", go1.transform.ExtToString(), go1.transform.localToWorldMatrix);
+    }
 #endif
 }

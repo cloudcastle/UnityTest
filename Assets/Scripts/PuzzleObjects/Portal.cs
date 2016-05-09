@@ -12,8 +12,10 @@ public class Portal : MonoBehaviour
     new public Camera camera;
     public List<Camera> cameras;
 
-    void Awake() {
+    static List<Matrix4x4> allPortalMatrices = new List<Matrix4x4>();
+    public static bool allPortalMatricesValid = false;
 
+    void Awake() {
         for (int i = 0; i <= PortalSurface.maxDepth; i++) {
             var newCamera = Instantiate(camera);
             newCamera.targetTexture = new RenderTexture(Screen.width, Screen.height, 24);
@@ -58,10 +60,27 @@ public class Portal : MonoBehaviour
         if (onTeleported != null) {
             onTeleported(portalSurface);
         }
-        var front = portalSurface.transform;
-        var back = portalSurface.portal.other.back;
-        var newOrigin = back.TransformPoint(front.InverseTransformPoint(ray.origin));
-        var newDirection = back.TransformDirection(front.InverseTransformDirection(ray.direction));
-        return Raycast(new Ray(newOrigin, newDirection), out hit, onTeleported);
+        return Raycast(portalSurface.portal.TeleportRay(ray), out hit, onTeleported);
+    }
+
+    public Vector3 TeleportPoint(Vector3 point) {
+        return other.back.TransformPoint(front.transform.InverseTransformPoint(point));
+    }
+
+    public Vector3 TeleportDirection(Vector3 direction) {
+        return other.back.TransformDirection(front.transform.InverseTransformDirection(direction));
+    }
+
+    public Matrix4x4 TeleportMatrix() {
+        return other.back.localToWorldMatrix * front.transform.worldToLocalMatrix;
+    }
+
+    public Ray TeleportRay(Ray ray) {
+        return new Ray(TeleportPoint(ray.origin), TeleportDirection(ray.direction));
+    }
+
+    static void PrecalculateAllPortalMatrices() {
+        allPortalMatrices = new List<Matrix4x4>();
+        //FindObjectOfType<PortalSurface>().transform.ma
     }
 }
