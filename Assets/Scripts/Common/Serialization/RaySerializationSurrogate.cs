@@ -12,7 +12,7 @@ sealed class RaySerializationSurrogate : ISerializationSurrogate
     public System.Object SetObjectData(System.Object obj, SerializationInfo info, StreamingContext context, ISurrogateSelector selector) {
         Ray ray = (Ray)obj;
         ray.origin = (Vector3)info.GetValue("origin", typeof(Vector3));
-        ray.direction = (Vector3)info.GetValue("origin", typeof(Vector3));
+        ray.direction = (Vector3)info.GetValue("direction", typeof(Vector3));
         obj = ray;
         return obj;
     }

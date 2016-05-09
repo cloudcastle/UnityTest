@@ -20,10 +20,6 @@ public class PortalSurface : MonoBehaviour
 
     public static List<PortalSurface> surfacesWithChangedTexture = new List<PortalSurface>();
 
-    void Awake() {
-        portalNode = GetComponent<PortalNode>();
-    }
-
     public static void RestoreTexturesToDepth(int depth) {
         surfacesWithChangedTexture.ForEach(ps => {
             ps.renderer.material.mainTexture = ps.portal.GetCamera(depth).targetTexture;

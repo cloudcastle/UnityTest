@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 
 public class EditManager : MonoBehaviour
 {
@@ -26,7 +28,6 @@ public class EditManager : MonoBehaviour
     void PortalRay(Ray ray) {
         PortalNode portalNode = null;
         Portal.Raycast(ray, out hit, portalSurface => {
-            Debug.LogFormat("Teleported by {0}", portalSurface.transform.Path());
             if (portalNode == null) {
                 portalNode = portalSurface.portalNode;
             } else {
@@ -38,6 +39,9 @@ public class EditManager : MonoBehaviour
                     child.surface = portalSurface;
                     portalNode.children.Add(child);
                     Debug.LogFormat("Created new portal node: {0}", child.transform.Path());
+                    if (!EditorApplication.isPlaying) {
+                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+                    }
                 }
                 portalNode = child;
             }
@@ -51,7 +55,6 @@ public class EditManager : MonoBehaviour
         if (on) {
             if (Input.GetMouseButtonDown(0)) {
                 var player = Player.instance.current;
-                Debug.LogFormat("Raycast through portals by {0}", player);
                 var eye = player.eye.transform;
                 Ray ray = new Ray(eye.position, eye.TransformDirection(Vector3.forward));
                 sequence.rays.Add(ray);
@@ -70,7 +73,23 @@ public class EditManager : MonoBehaviour
         EditSequence sequence = FileManager.LoadFromFile<EditSequence>(editSequenceFile);
         Debug.LogFormat("Number of rays: {0}", sequence.rays.Count);
         sequence.rays.ForEach(ray => {
-            Debug.LogFormat("Ray {0} {1}", ray.origin.ExtToString(), ray.direction.ExtToString());
+            PortalRay(ray);
+        });
+    }
+
+    [ContextMenu("Remove duplicate portal nodes")]
+    void RemoveDuplicateNodes() {
+        FindObjectsOfType<PortalNode>().ForEach(pn => {
+            var uniqueChildren = new List<PortalNode>();
+            pn.children.ForEach(child => {
+                if (uniqueChildren.All(uc => uc.surface != child.surface)) {
+                    uniqueChildren.Add(child);
+                }
+            });
+            pn.children.Where(c => !uniqueChildren.Contains(c)).ForEach(c => {
+                DestroyImmediate(c.gameObject);
+                EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            });
         });
     }
 }

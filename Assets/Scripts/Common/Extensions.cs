@@ -132,6 +132,10 @@ public static class Extensions
     public static string ExtToString(this Transform t) {
         return String.Format("{{position = {0}, rotation = {1}, lossyScale = {2}}}", t.position.ExtToString(), t.rotation, t.lossyScale.ExtToString());
     }
+    
+    public static string ExtToString(this Ray ray) {
+        return String.Format("{{origin = {0}, direction = {1}}}", ray.origin.ExtToString(), ray.direction.ExtToString());
+    }
 
     static Matrix4x4 x;
     static Matrix4x4 y;

@@ -56,7 +56,6 @@ public class Portal : MonoBehaviour
             return result;
         }
         if (onTeleported != null) {
-            Debug.LogFormat("Teleported sight by {0}", portalSurface.portal);
             onTeleported(portalSurface);
         }
         var front = portalSurface.transform;
