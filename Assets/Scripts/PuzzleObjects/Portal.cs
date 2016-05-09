@@ -37,6 +37,11 @@ public class Portal : MonoBehaviour
             Vector3 localObjectPosition = transform.InverseTransformPoint(keeper.transform.position);
             Vector3 previousLocalObjectPosition = transform.InverseTransformPoint(keeper.lastPosition);
             if (Mathf.Sign(localObjectPosition.z) != Mathf.Sign(previousLocalObjectPosition.z)) {
+                var rigidbody = obj.GetComponent<Rigidbody>();
+                if (rigidbody != null) {
+                    rigidbody.velocity = TeleportDirection(rigidbody.velocity);
+                    rigidbody.angularVelocity = TeleportDirection(rigidbody.angularVelocity);
+                }
                 obj.transform.SetParent(front.transform, worldPositionStays: true);
                 obj.transform.SetParent(this.other.back, worldPositionStays: false);
                 obj.transform.SetParent(null, worldPositionStays: true);
