@@ -919,47 +919,6 @@ Transform:
   - {fileID: 1279643656}
   m_Father: {fileID: 792460146}
   m_RootOrder: 0
---- !u!1 &175457108
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 175457109}
-  - 114: {fileID: 175457110}
-  m_Layer: 0
-  m_Name: Portal 5A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &175457109
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175457108}
-  m_LocalRotation: {x: -8.642951e-15, y: 1.4210853e-14, z: 5.329071e-15, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1186502970}
-  m_RootOrder: 0
---- !u!114 &175457110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 175457108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 705186175}
-  children: []
 --- !u!1 &179981337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,47 +1025,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 188237516}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &194834640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 194834641}
-  - 114: {fileID: 194834642}
-  m_Layer: 0
-  m_Name: Portal 5A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &194834641
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 194834640}
-  m_LocalRotation: {x: -8.642951e-15, y: 1.4210853e-14, z: 5.329071e-15, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1262252629}
-  m_RootOrder: 0
---- !u!114 &194834642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 194834640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 705186175}
-  children: []
 --- !u!1 &196192950
 GameObject:
   m_ObjectHideFlags: 0
@@ -3402,6 +3320,47 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 484168, guid: 6d79d7789dbbf064893faf11bc47166b, type: 2}
   m_PrefabInternal: {fileID: 533107343}
+--- !u!1 &533956253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 533956254}
+  - 114: {fileID: 533956255}
+  m_Layer: 0
+  m_Name: Portal 5A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &533956254
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533956253}
+  m_LocalRotation: {x: -8.642951e-15, y: 1.4210853e-14, z: 5.329071e-15, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1719178823}
+  m_RootOrder: 0
+--- !u!114 &533956255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 533956253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 705186175}
+  children: []
 --- !u!1 &534772540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4155,7 +4114,8 @@ Transform:
   m_LocalRotation: {x: 0.00000014500466, y: -0.7071068, z: 0.7071068, w: -0.000000055597667}
   m_LocalPosition: {x: 0.0000048876204, y: -15.000001, z: 5.0000024}
   m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
-  m_Children: []
+  m_Children:
+  - {fileID: 722015461}
   m_Father: {fileID: 94716144}
   m_RootOrder: 2
 --- !u!114 &639809563
@@ -4170,7 +4130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surface: {fileID: 340718755}
-  children: []
+  children:
+  - {fileID: 722015462}
 --- !u!1 &661537818
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,6 +4673,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1189927395}
   m_RootOrder: 1
+--- !u!1 &722015460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 722015461}
+  - 114: {fileID: 722015462}
+  m_Layer: 0
+  m_Name: Portal 5A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &722015461
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 722015460}
+  m_LocalRotation: {x: -8.642951e-15, y: 1.4210853e-14, z: 5.329071e-15, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 639809562}
+  m_RootOrder: 0
+--- !u!114 &722015462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 722015460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 705186175}
+  children: []
 --- !u!1 &733405338
 GameObject:
   m_ObjectHideFlags: 0
@@ -5805,47 +5807,6 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 422368, guid: 4396a810424d3a54c98dcdfe81f3054e, type: 2}
   m_PrefabInternal: {fileID: 1057290797}
---- !u!1 &891852012
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 891852013}
-  - 114: {fileID: 891852014}
-  m_Layer: 0
-  m_Name: Portal 2A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &891852013
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 891852012}
-  m_LocalRotation: {x: -0.49999994, y: -0.5, z: 0.50000006, w: 0.5}
-  m_LocalPosition: {x: 9.999998, y: 35.000004, z: 4.9999948}
-  m_LocalScale: {x: 1, y: 0.9999999, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 340718753}
-  m_RootOrder: 5
---- !u!114 &891852014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 891852012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 1684349856}
-  children: []
 --- !u!1 &914291668
 GameObject:
   m_ObjectHideFlags: 0
@@ -6257,6 +6218,142 @@ MonoBehaviour:
   link: {fileID: 0}
   to: {fileID: 1060035127}
   backLink: {fileID: 1317474879}
+--- !u!21 &968697210
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ColorSphere
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BumpMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _OcclusionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _EmissionMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailMask
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailAlbedoMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _MetallicGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _SrcBlend
+        second: 1
+      data:
+        first:
+          name: _DstBlend
+        second: 0
+      data:
+        first:
+          name: _Cutoff
+        second: 0.5
+      data:
+        first:
+          name: _Parallax
+        second: 0.02
+      data:
+        first:
+          name: _ZWrite
+        second: 1
+      data:
+        first:
+          name: _Glossiness
+        second: 0.5
+      data:
+        first:
+          name: _BumpScale
+        second: 1
+      data:
+        first:
+          name: _OcclusionStrength
+        second: 1
+      data:
+        first:
+          name: _DetailNormalMapScale
+        second: 1
+      data:
+        first:
+          name: _UVSec
+        second: 0
+      data:
+        first:
+          name: _Mode
+        second: 0
+      data:
+        first:
+          name: _Metallic
+        second: 1
+    m_Colors:
+      data:
+        first:
+          name: _EmissionColor
+        second: {r: 0.008, g: 0.008, b: 0.008, a: 1}
+      data:
+        first:
+          name: _Color
+        second: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &983453251
 GameObject:
   m_ObjectHideFlags: 0
@@ -7629,47 +7726,6 @@ Transform:
   - {fileID: 1390086530}
   m_Father: {fileID: 1340789883}
   m_RootOrder: 0
---- !u!1 &1158996187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1158996188}
-  - 114: {fileID: 1158996189}
-  m_Layer: 0
-  m_Name: Portal 2A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1158996188
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1158996187}
-  m_LocalRotation: {x: -0.49999994, y: -0.5, z: 0.50000006, w: 0.5}
-  m_LocalPosition: {x: 9.999998, y: 35.000004, z: 4.9999948}
-  m_LocalScale: {x: 1, y: 0.9999999, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 340718753}
-  m_RootOrder: 6
---- !u!114 &1158996189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1158996187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 1684349856}
-  children: []
 --- !u!1 &1164462866
 GameObject:
   m_ObjectHideFlags: 0
@@ -7808,49 +7864,6 @@ Transform:
   - {fileID: 1351266865}
   m_Father: {fileID: 1516251037}
   m_RootOrder: 6
---- !u!1 &1186502969
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1186502970}
-  - 114: {fileID: 1186502971}
-  m_Layer: 0
-  m_Name: Portal 1B
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1186502970
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1186502969}
-  m_LocalRotation: {x: 0.00000014500466, y: -0.7071068, z: 0.7071068, w: -0.000000055597667}
-  m_LocalPosition: {x: 20.000008, y: -24.999998, z: 5.000001}
-  m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
-  m_Children:
-  - {fileID: 175457109}
-  m_Father: {fileID: 156206258}
-  m_RootOrder: 3
---- !u!114 &1186502971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1186502969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 381421965}
-  children:
-  - {fileID: 175457110}
 --- !u!1 &1186946563
 GameObject:
   m_ObjectHideFlags: 0
@@ -8125,7 +8138,7 @@ Prefab:
     - target: {fileID: 2340734, guid: f6536c429d383ef498f8e37cf7f4a274, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1675100791}
+      objectReference: {fileID: 968697210}
     - target: {fileID: 11431314, guid: f6536c429d383ef498f8e37cf7f4a274, type: 2}
       propertyPath: keyColor
       value: 
@@ -8283,49 +8296,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 223383744}
   m_RootOrder: 1
---- !u!1 &1262252628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1262252629}
-  - 114: {fileID: 1262252630}
-  m_Layer: 0
-  m_Name: Portal 1A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1262252629
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1262252628}
-  m_LocalRotation: {x: 0.00000014500466, y: -0.7071068, z: 0.7071068, w: -0.000000055597667}
-  m_LocalPosition: {x: 0.0000048876204, y: -15.000001, z: 5.0000024}
-  m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
-  m_Children:
-  - {fileID: 194834641}
-  m_Father: {fileID: 94716144}
-  m_RootOrder: 4
---- !u!114 &1262252630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1262252628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 340718755}
-  children:
-  - {fileID: 194834642}
 --- !u!1 &1264330596
 GameObject:
   m_ObjectHideFlags: 0
@@ -10048,47 +10018,6 @@ Transform:
   - {fileID: 946435391}
   m_Father: {fileID: 1279643656}
   m_RootOrder: 0
---- !u!1 &1510290737
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1510290738}
-  - 114: {fileID: 1510290739}
-  m_Layer: 0
-  m_Name: Portal 2A
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1510290738
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1510290737}
-  m_LocalRotation: {x: -0.49999994, y: -0.5, z: 0.50000006, w: 0.5}
-  m_LocalPosition: {x: 9.999998, y: 35.000004, z: 4.9999948}
-  m_LocalScale: {x: 1, y: 0.9999999, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 340718753}
-  m_RootOrder: 4
---- !u!114 &1510290739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1510290737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 1684349856}
-  children: []
 --- !u!1 &1516251036
 GameObject:
   m_ObjectHideFlags: 0
@@ -11227,142 +11156,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 431756, guid: ec79283db87e0e241be897ea647e1e61, type: 2}
   m_PrefabInternal: {fileID: 1667408408}
---- !u!21 &1675100791
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: ColorSphere
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION
-  m_LightmapFlags: 1
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _BumpMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _DetailNormalMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ParallaxMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _OcclusionMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _EmissionMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _DetailMask
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _DetailAlbedoMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _MetallicGlossMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats:
-      data:
-        first:
-          name: _SrcBlend
-        second: 1
-      data:
-        first:
-          name: _DstBlend
-        second: 0
-      data:
-        first:
-          name: _Cutoff
-        second: 0.5
-      data:
-        first:
-          name: _Parallax
-        second: 0.02
-      data:
-        first:
-          name: _ZWrite
-        second: 1
-      data:
-        first:
-          name: _Glossiness
-        second: 0.5
-      data:
-        first:
-          name: _BumpScale
-        second: 1
-      data:
-        first:
-          name: _OcclusionStrength
-        second: 1
-      data:
-        first:
-          name: _DetailNormalMapScale
-        second: 1
-      data:
-        first:
-          name: _UVSec
-        second: 0
-      data:
-        first:
-          name: _Mode
-        second: 0
-      data:
-        first:
-          name: _Metallic
-        second: 1
-    m_Colors:
-      data:
-        first:
-          name: _EmissionColor
-        second: {r: 0.008, g: 0.008, b: 0.008, a: 1}
-      data:
-        first:
-          name: _Color
-        second: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &1683260567
 GameObject:
   m_ObjectHideFlags: 0
@@ -11520,7 +11313,8 @@ Transform:
   m_LocalRotation: {x: 0.00000014500466, y: -0.7071068, z: 0.7071068, w: -0.000000055597667}
   m_LocalPosition: {x: 20.000008, y: -24.999998, z: 5.000001}
   m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
-  m_Children: []
+  m_Children:
+  - {fileID: 533956254}
   m_Father: {fileID: 156206258}
   m_RootOrder: 2
 --- !u!114 &1719178824
@@ -11535,7 +11329,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surface: {fileID: 381421965}
-  children: []
+  children:
+  - {fileID: 533956255}
 --- !u!1 &1727011721
 GameObject:
   m_ObjectHideFlags: 0
@@ -12101,6 +11896,47 @@ MonoBehaviour:
   link: {fileID: 0}
   to: {fileID: 797323397}
   backLink: {fileID: 1026159676}
+--- !u!1 &1798268482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1798268483}
+  - 114: {fileID: 1798268484}
+  m_Layer: 0
+  m_Name: Portal 5A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1798268483
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798268482}
+  m_LocalRotation: {x: 0.00000014500466, y: -0.7071068, z: 0.7071068, w: -0.000000055597667}
+  m_LocalPosition: {x: 20.000008, y: -24.999998, z: 5.000001}
+  m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
+  m_Children: []
+  m_Father: {fileID: 156206258}
+  m_RootOrder: 3
+--- !u!114 &1798268484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798268482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 705186175}
+  children: []
 --- !u!1 &1799802665
 GameObject:
   m_ObjectHideFlags: 0
