@@ -22,6 +22,7 @@ GameObject:
   - 114: {fileID: 11446472}
   - 114: {fileID: 11446060}
   - 114: {fileID: 11474920}
+  - 114: {fileID: 11410680}
   m_Layer: 10
   m_Name: Key
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.25, z: 0}
+  m_LocalPosition: {x: -37.5, y: 4.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,6 +90,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &11410680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e074a1012528948bc11addacb697bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11417714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4442c8113ae1654c9d5805aaac9b91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 1, a: 0}
+  color: {r: 1, g: 0, b: 0, a: 0}
   emissionColor: {r: 0, g: 0, b: 0, a: 0}
   setEmissionColor: 0
   material: {fileID: 2100000, guid: f24faa9857590ee4ca0231eb0bd82412, type: 2}
