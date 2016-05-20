@@ -85,7 +85,11 @@ public class Portal : MonoBehaviour
     }
 
     static void PrecalculateAllPortalMatrices() {
-        allPortalMatrices = new List<Matrix4x4>();
-        //FindObjectOfType<PortalSurface>().transform.ma
+        //allPortalMatrices = new List<Matrix4x4>();
+
+        //FindObjectsOfType<PortalSurface>().ForEach(ps => {
+        //    PortalNode node = ps.portalNode;
+        //    Matrix4x4 mx = node.
+        //});
     }
 }

@@ -82,7 +82,29 @@ public class DebugManager : MonoBehaviour
     void Experiment() {
         var go1 = new GameObject();
         go1.transform.position = new Vector3(-2, 5.5f, 0.25f);
+        go1.transform.rotation = new Quaternion(72, 0.18f, 3.13f, -24.9f);
         Debug.LogFormat("Transform is: {0}, localToWorldMatrix is:\n{1}", go1.transform.ExtToString(), go1.transform.localToWorldMatrix);
+
+        //Vector3 point = new Vector3(-11, 17.17f, -32.009f);
+        //Debug.LogFormat("Transformed by method: {0}", go1.transform.TransformPoint(point));
+        //Debug.LogFormat("Transformed by matrix: {0}", go1.transform.localToWorldMatrix.MultiplyPoint3x4(point));
+
+        Portal firstPortal = FindObjectsOfType<Portal>().First(p => p.name == "Portal 3B");
+        Portal secondPortal = FindObjectsOfType<Portal>().First(p => p.name == "Portal 5A");
+        Vector3 position0 = go1.transform.position;
+        Vector3 position1 = secondPortal.TeleportPoint(firstPortal.TeleportPoint(position0));
+        Vector3 position2 = (secondPortal.TeleportMatrix() * firstPortal.TeleportMatrix()).MultiplyPoint3x4(position0);
+        Debug.LogFormat("Position1: {0}", position1);
+        Debug.LogFormat("Position2: {0}", position2);
+
+        Vector3 direction0 = go1.transform.forward;
+        Debug.LogFormat("Direction0: {0}", direction0);
+        Vector3 direction1 = secondPortal.TeleportDirection(firstPortal.TeleportDirection(direction0));
+        Vector3 direction2 = (secondPortal.TeleportMatrix() * firstPortal.TeleportMatrix()).MultiplyVector(direction0);
+        Debug.LogFormat("Direction1: {0}", direction1);
+        Debug.LogFormat("Direction2: {0}", direction2);
+
+        DestroyImmediate(go1);
     }
 #endif
 }
