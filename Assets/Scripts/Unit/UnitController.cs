@@ -35,6 +35,8 @@ public abstract class UnitController : MonoBehaviour
 
     public abstract bool Rewind();
 
+    public abstract bool Slowmo();
+
     public abstract bool Run();
 
     public abstract bool PrepareThrow();

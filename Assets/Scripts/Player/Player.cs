@@ -93,6 +93,10 @@ public class Player : UnitController
         return Input.GetButtonDown("Previous Item") || Input.GetAxisRaw("Mouse ScrollWheel") > 0;
     }
 
+    public override bool Slowmo() {
+        return Input.GetButton("Slowmo");
+    }
+
     public override bool Rewind() {
         return Input.GetButton("Rewind");
     }

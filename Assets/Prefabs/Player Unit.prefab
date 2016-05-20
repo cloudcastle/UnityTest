@@ -155,6 +155,7 @@ GameObject:
   - 114: {fileID: 11478582}
   - 114: {fileID: 11411426}
   - 136: {fileID: 13674440}
+  - 114: {fileID: 11415284}
   m_Layer: 14
   m_Name: Player Unit
   m_TagString: Untagged
@@ -677,8 +678,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154292}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 10}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: -8, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491080}
@@ -873,6 +874,19 @@ MonoBehaviour:
   baseEmission: {r: 0, g: 0, b: 0, a: 1}
   notReadyEmission: {r: 0.7, g: 0.7, b: 0.7, a: 1}
   lightPartOutOfRange: 0.5
+--- !u!114 &11415284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 154292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a2a17e78e6187468599e6f3e4289c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 0}
+  timeMultiplyer: 0.1
 --- !u!114 &11417168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1166,7 +1180,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154292}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 896419f1eb271b44c974362c3e0473cf, type: 3}
   m_Name: 

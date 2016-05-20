@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public class Rewind : Ability
+public class Slowmo : Ability
 {
-    public float timeMultiplyer = 8;
+    public float timeMultiplyer = 0.1f;
 
     const float defaultFixedDeltaTime = 0.02f;
 
     public bool On() {
-        return Controller.Rewind() && !Controller.Slowmo();
+        return Controller.Slowmo() && !Controller.Rewind();
     }
 
     public override void Awake() {
@@ -30,11 +30,11 @@ public class Rewind : Ability
         if (Controller != Player.instance) {
             return;
         }
-        if (Controller.Slowmo()) {
+        if (Controller.Rewind()) {
             return;
         }
         Time.timeScale = (On() ? timeMultiplyer : 1);
-        Time.fixedDeltaTime = defaultFixedDeltaTime;
-        RefreshDeltaTime();
+        Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+        //RefreshDeltaTime();
     }
 }
