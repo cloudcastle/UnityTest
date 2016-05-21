@@ -143,6 +143,9 @@ public class Game
         var doubleDive = new Level("Double dive", fat);
         var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
 
+        // Buttons intro
+        var open = new Level("Open", wasd);
+
         currentLevel = click;
         current = null;
 
