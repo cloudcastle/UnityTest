@@ -137,6 +137,10 @@ public class Game
         // Mixed
         var delivery = new Level("Delivery", qeMouseWheel);
 
+        // Slowmo
+        var doubleDive = new Level("Double dive", fat);
+        var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
+
         currentLevel = click;
         current = null;
 

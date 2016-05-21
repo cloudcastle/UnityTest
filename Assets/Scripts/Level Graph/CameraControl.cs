@@ -59,7 +59,7 @@ public class CameraControl : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)) {
             if (hovered != null) {
-                if (hovered.level.Unlocked()) {
+                if (hovered.level.Unlocked() || Cheats.on) {
                     GameManager.instance.Play(hovered.level);
                 }
             }
