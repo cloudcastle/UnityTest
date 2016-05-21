@@ -14,6 +14,8 @@ public class Unit : MonoBehaviour
     public CameraPlace cameraPlace;
     public Undo undo;
     public CharacterController characterController;
+    public Rewind rewind;
+    public Slowmo slowmo;
 
     public UnitController controller;
 
@@ -27,6 +29,8 @@ public class Unit : MonoBehaviour
         cameraPlace = GetComponentInChildren<CameraPlace>();
         undo = GetComponentInChildren<Undo>();
         characterController = GetComponentInChildren<CharacterController>();
+        rewind = GetComponentInChildren<Rewind>();
+        slowmo = GetComponentInChildren<Slowmo>();
 
         all.Add(this);
     }

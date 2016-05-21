@@ -71,6 +71,7 @@ public class Game
         var phase = new Level("Phase", string_);
         var malapropos = new Level("Malapropos", phase);
         var meetInTheMiddle = new Level("Meet in the middle", fly, raise);
+        var t = new Level("T", ride, z);
 
         // Jumps
         var climb = new Level("Climb", gap, z, string_);

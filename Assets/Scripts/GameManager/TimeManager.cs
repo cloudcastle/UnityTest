@@ -11,6 +11,8 @@ public class TimeManager : MonoBehaviour
 
     Substitution timeSubstitution;
 
+    public float readonlyTimeScale;
+
     public bool pauseOnStart;
     static bool paused;
     public static bool Paused {
@@ -53,6 +55,29 @@ public class TimeManager : MonoBehaviour
     }
 
     public static float loosedFixedDeltaTime;
+    const float defaultFixedDeltaTime = 0.02f;
+
+    static void UpdateTimeScale() {
+        float timeScale = 1;
+        if (Player.instance != null) {
+            if (Player.instance.Rewind()) {
+                timeScale *= Player.instance.current.rewind.timeMultiplyer;
+            }
+            if (Player.instance.Slowmo()) {
+                timeScale *= Player.instance.current.slowmo.timeMultiplyer;
+            }
+            if (Player.instance.current.transform.position.y < -1000f && !Player.instance.Undo()) {
+                timeScale = 0;
+            }
+        }
+        if (paused) {
+            timeScale = 0;
+        }
+        Time.timeScale = timeScale;
+        instance.readonlyTimeScale = timeScale;
+        loosedFixedDeltaTime = defaultFixedDeltaTime * Mathf.Clamp(Time.timeScale, 1, float.PositiveInfinity);
+        Time.fixedDeltaTime = defaultFixedDeltaTime * Mathf.Clamp(Time.timeScale, 0.01f, 1);
+    }
 
     static void Pause()
     {
@@ -95,6 +120,7 @@ public class TimeManager : MonoBehaviour
     }
 
     void FixedUpdate() {
+        UpdateTimeScale();
         if (TimeManager.Paused) {
             return;
         }
@@ -107,6 +133,9 @@ public class TimeManager : MonoBehaviour
             }
             onUndo();
         } else {
+            if (Player.instance.current.transform.position.y < -1000) {
+                Time.timeScale = 0;
+            }
             Track();
             gameTime += Time.fixedDeltaTime;
             stoppableGameTime += StoppableFixedDeltaTime;
@@ -134,6 +163,7 @@ public class TimeManager : MonoBehaviour
     }
 
     void Update() {
+        UpdateTimeScale();
         timeSubstitution.Recalculate();
     }
 
