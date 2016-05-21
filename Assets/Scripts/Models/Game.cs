@@ -70,7 +70,7 @@ public class Game
         var fly = new Level("Fly", string_);
         var phase = new Level("Phase", string_);
         var malapropos = new Level("Malapropos", phase);
-        var interception = new Level("Interception", fly, raise);
+        var meetInTheMiddle = new Level("Meet in the middle", fly, raise);
 
         // Jumps
         var climb = new Level("Climb", gap, z, string_);
@@ -109,6 +109,7 @@ public class Game
         var pool = new Level("Pool", bridge);
         var tool = new Level("Tool", column);
         var intersection = new Level("Intersection", tool);
+        var interception = new Level("Interception", intersection/*timestop*/);
         var accuracy = new Level("Accuracy", stand, tool);
 
         // Keys Anticolors
