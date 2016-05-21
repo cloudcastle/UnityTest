@@ -64,7 +64,7 @@ public class Move : MonoBehaviour
         {
             return;
         }
-        if (UndoManager.instance.Undoing()) {
+        if (TimeManager.instance.Undoing()) {
             return;
         }
 

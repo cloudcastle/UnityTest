@@ -11,7 +11,7 @@ public class Measurer : MovingSurface {
     }
 
     void Start() {
-        UndoManager.instance.onUndo += OnUndo;
+        TimeManager.instance.onUndo += OnUndo;
     }
 
     void OnUndo() {

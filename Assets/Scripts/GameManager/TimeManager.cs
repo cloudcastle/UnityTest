@@ -27,8 +27,7 @@ public class TimeManager : MonoBehaviour
     }
     public static bool timestopped = false;
 
-    [SerializeField]
-    float gameTime;
+    public float gameTime;
 
     [SerializeField]
     float stoppableGameTime;
@@ -96,12 +95,25 @@ public class TimeManager : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (UndoManager.instance.Undoing()) {
+        if (TimeManager.Paused) {
             return;
         }
         promiseTimer.Update(-100500);
-        gameTime += Time.fixedDeltaTime;
-        stoppableGameTime += StoppableFixedDeltaTime;
+
+        if (Undoing()) {
+            gameTime -= Time.fixedDeltaTime;
+            if (gameTime < 0) {
+                gameTime = 0;
+            }
+            onUndo();
+        } else {
+            gameTime += Time.fixedDeltaTime;
+            stoppableGameTime += StoppableFixedDeltaTime;
+            Track();
+        }
+
+        totalSampleCount = 0;
+        onPushSampleCount();
     }
 
     void Awake() {
@@ -112,7 +124,6 @@ public class TimeManager : MonoBehaviour
 
     void Start() {
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
-        UndoManager.instance.onUndo += OnUndo;
         gameTime = 0;
         timeSubstitution = DynamicTextManager.instance.Substitute("#{gameTime}", () => {
             var span = TimeSpan.FromSeconds(stoppableGameTime);
@@ -126,11 +137,30 @@ public class TimeManager : MonoBehaviour
         timeSubstitution.Recalculate();
     }
 
-    void OnUndo() {
-        gameTime = UndoManager.instance.time;
-    }
-
     public static IPromise WaitFor(float time) {
         return promiseTimer.WaitFor(time);
+    }
+
+    public int totalSampleCount;
+
+    public event Action onUndo = () => { };
+    public event Action onDrop = () => { };
+    public event Action onTrack = () => { };
+    public event Action onPushSampleCount = () => { };
+
+    public bool Undoing() {
+        return Player.instance.current.undo != null && Player.instance.current.undo.Undoing();
+    }
+
+    public void Track() {
+        onTrack();
+    }
+
+    /// <summary>
+    /// Make it "It's always been like this" for current state of game
+    /// </summary>
+    public void DropUndoData() {
+        onDrop();
+        Debug.Log("Drop Undo Data");
     }
 }

@@ -17,7 +17,7 @@ public class Grounder : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (UndoManager.instance.Undoing()) {
+        if (TimeManager.instance.Undoing()) {
             return;
         }
         if (lastHit != null) {

@@ -27,7 +27,7 @@ public class KeyColor : MonoBehaviour
     }
 
     void Start() {
-        UndoManager.instance.onUndo += OnUndo;
+        TimeManager.instance.onUndo += OnUndo;
     }
 
     public void Recalculate(Unit player) {
