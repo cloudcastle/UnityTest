@@ -107,9 +107,9 @@ public class TimeManager : MonoBehaviour
             }
             onUndo();
         } else {
+            Track();
             gameTime += Time.fixedDeltaTime;
             stoppableGameTime += StoppableFixedDeltaTime;
-            Track();
         }
 
         totalSampleCount = 0;
