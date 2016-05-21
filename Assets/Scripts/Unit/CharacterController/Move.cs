@@ -64,6 +64,9 @@ public class Move : MonoBehaviour
         {
             return;
         }
+        if (UndoManager.instance.Undoing()) {
+            return;
+        }
 
         if (ground != null) {
             ChangeVelocity(ground.ChangeVelocity);

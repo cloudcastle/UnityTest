@@ -14,16 +14,16 @@ public class Slider : MonoBehaviour {
         predictor = GetComponent<Predictor>();
     }
 
-	void FixedUpdate() {
-        transform.position = PositionByTime(TimeManager.GameTime);
+    void FixedUpdate() {
+        transform.position = PositionByTime(TimeManager.StoppableGameTime);
         if (predictor != null) {
-            predictor.Predict(PositionByTime(TimeManager.GameTime + TimeManager.StoppableFixedDeltaTime), transform.rotation.eulerAngles);
+            predictor.Predict(PositionByTime(TimeManager.StoppableGameTime + TimeManager.StoppableFixedDeltaTime), transform.rotation.eulerAngles);
         }
 	}
 
     void Update() {
         if (Extensions.Editor()) {
-            transform.position = PositionByTime(TimeManager.GameTime); 
+            transform.position = PositionByTime(TimeManager.StoppableGameTime); 
         }
     }
 

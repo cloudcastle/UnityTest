@@ -21,7 +21,7 @@ public class UndoManager : MonoBehaviour
         instance = this;
     }
 
-    bool Undoing() {
+    public bool Undoing() {
         return Player.instance.current.undo != null && Player.instance.current.undo.Undoing();
     }
 

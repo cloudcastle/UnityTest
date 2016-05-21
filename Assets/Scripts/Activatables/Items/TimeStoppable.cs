@@ -13,6 +13,12 @@ public class TimeStoppable : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
     }
 
+    void Start() {
+        new BoolTracker(v => timeStopped = v, () => timeStopped);
+        new Vector3Tracker(v => savedVelocity = v, () => savedVelocity);
+        new Vector3Tracker(v => savedAngularVelocity = v, () => savedAngularVelocity);
+    }
+
     void FixedUpdate() {
         if (!timeStopped && TimeManager.timestopped) {
             savedVelocity = rigidBody.velocity;

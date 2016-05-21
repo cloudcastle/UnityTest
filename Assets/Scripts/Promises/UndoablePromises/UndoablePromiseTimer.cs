@@ -55,10 +55,7 @@ namespace RSG
             return promise;
         }
 
-        /// <summary>
-        /// Update all pending promises. Must be called for the promises to progress and resolve at all.
-        /// </summary>
-        public void Update(float deltaTime) {
+        public void Update(float deltaTime /* this value is ignored! */) {
             int i = 0;
             while (i < waiting.Count) {
                 var wait = waiting[i];

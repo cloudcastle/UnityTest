@@ -7,6 +7,7 @@ public class Predictor : MovingSurface {
         if (TimeManager.StoppableFixedDeltaTime < 1e-4) {
             currentVelocity = Vector3.zero;
             currentAngularVelocity = Vector3.zero;
+            return;
         }
         currentVelocity = (position - transform.position) / TimeManager.StoppableFixedDeltaTime;
         currentAngularVelocity = (rotation - transform.rotation.eulerAngles) / TimeManager.StoppableFixedDeltaTime;

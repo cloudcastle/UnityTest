@@ -6,9 +6,24 @@ using System.Collections;
 public class Grounder : MonoBehaviour
 {
     Move move;
+    ControllerColliderHit lastHit;
 
     void Awake() {
         move = GetComponent<Move>();
+    }
+
+    void Start() {
+        new ValueTracker<ControllerColliderHit>(v => lastHit = v, () => lastHit);
+    }
+
+    void FixedUpdate() {
+        if (UndoManager.instance.Undoing()) {
+            return;
+        }
+        if (lastHit != null) {
+            ApplyHit(lastHit);
+        }
+        lastHit = null;
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
@@ -19,6 +34,10 @@ public class Grounder : MonoBehaviour
         if (TimeManager.Paused) {
             return;
         }
+        lastHit = hit;
+    }
+
+    void ApplyHit(ControllerColliderHit hit) {
         if (hit.normal.y > 0.7f) {
             Vector3 normalVelocity = Vector3.Project(move.velocity, Vector3.up);
             Vector3 tangentialVelocity = Vector3.ProjectOnPlane(move.velocity, Vector3.up);

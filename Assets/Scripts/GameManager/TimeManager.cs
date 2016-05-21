@@ -30,10 +30,23 @@ public class TimeManager : MonoBehaviour
     [SerializeField]
     float gameTime;
 
+    [SerializeField]
+    float stoppableGameTime;
+
     public static float GameTime {
         get {
             if (!Extensions.Editor()) {
                 return instance.gameTime;
+            } else {
+                return FindObjectOfType<TimeManager>().gameTime;
+            }
+        }
+    }
+
+    public static float StoppableGameTime {
+        get {
+            if (!Extensions.Editor()) {
+                return instance.stoppableGameTime;
             } else {
                 return FindObjectOfType<TimeManager>().gameTime;
             }
@@ -64,6 +77,12 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    public static float FixedDeltaTime {
+        get {
+            return Time.fixedDeltaTime;
+        }
+    }
+
     static void SwitchPause()
     {
         if (Paused)
@@ -76,10 +95,13 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
+        if (UndoManager.instance.Undoing()) {
+            return;
+        }
+        promiseTimer.Update(-100500);
         gameTime += Time.fixedDeltaTime;
-        promiseTimer.Update(Time.fixedDeltaTime);
+        stoppableGameTime += StoppableFixedDeltaTime;
     }
 
     void Awake() {
@@ -93,9 +115,11 @@ public class TimeManager : MonoBehaviour
         UndoManager.instance.onUndo += OnUndo;
         gameTime = 0;
         timeSubstitution = DynamicTextManager.instance.Substitute("#{gameTime}", () => {
-            var span = TimeSpan.FromSeconds(gameTime);
+            var span = TimeSpan.FromSeconds(stoppableGameTime);
             return string.Format("{0}:{1:00}", (int)span.TotalMinutes, span.Seconds);
         });
+        new BoolTracker(v => timestopped = v, () => timestopped);
+        new ValueTracker<float>(v => stoppableGameTime = gameTime + v, () => stoppableGameTime - gameTime);
     }
 
     void Update() {
