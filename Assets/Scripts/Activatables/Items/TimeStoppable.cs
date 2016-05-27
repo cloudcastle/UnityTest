@@ -14,7 +14,10 @@ public class TimeStoppable : MonoBehaviour
     }
 
     void Start() {
-        new BoolTracker(v => timeStopped = v, () => timeStopped);
+        new BoolTracker(v => {
+            timeStopped = v;
+            rigidBody.useGravity = !v;
+        }, () => timeStopped);
         new Vector3Tracker(v => savedVelocity = v, () => savedVelocity);
         new Vector3Tracker(v => savedAngularVelocity = v, () => savedAngularVelocity);
     }
