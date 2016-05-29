@@ -32,7 +32,11 @@ public class Portal : MonoBehaviour
 
     void OnTriggerStay(Collider other) {
         var obj = other.gameObject;
-        var keeper = other.GetComponentInChildren<LastPositionKeeper>();
+        Check(obj);
+    }
+
+    public void Check(GameObject obj) {
+        var keeper = obj.GetComponentInChildren<LastPositionKeeper>();
         if (keeper != null) {
             Vector3 localObjectPosition = transform.InverseTransformPoint(keeper.transform.position);
             Vector3 previousLocalObjectPosition = transform.InverseTransformPoint(keeper.lastPosition);
@@ -45,6 +49,7 @@ public class Portal : MonoBehaviour
                 obj.transform.SetParent(front.transform, worldPositionStays: true);
                 obj.transform.SetParent(this.other.back, worldPositionStays: false);
                 obj.transform.SetParent(null, worldPositionStays: true);
+                //Debug.LogFormat("Teleported {0} to {1}", obj.Path(), obj.transform.position);
             }
         }
     }

@@ -7,6 +7,8 @@ using System;
 [RequireComponent(typeof(CharacterController))]
 public class Move : MonoBehaviour
 {
+    const float MAX_SPEED = 100f;
+
     public Vector3 velocity = Vector3.zero;
     public Vector3 angularVelocity = Vector3.zero;
     public Vector3Tracker velocityTracker;
@@ -83,6 +85,7 @@ public class Move : MonoBehaviour
         angularVelocity.x = angularVelocity.z = 0;
         transform.Rotate(Time.fixedDeltaTime * angularVelocity, Space.World);
         angularVelocity.y /= 2;
+        velocity.y = Mathf.Clamp(velocity.y, -MAX_SPEED, MAX_SPEED);
     }
 
     Vector3 previousPosition;

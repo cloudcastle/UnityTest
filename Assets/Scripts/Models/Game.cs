@@ -159,7 +159,8 @@ public class Game
         // Portals
         var edge = new Level("Edge", fit);
         var serve = new Level("Serve", edge, tool);
-        var flip = new Level("Flip", serve, splitSecond);
+        var flip = new Level("Flip", serve, splitSecond, gift);
+        var collect = new Level("Collect", flip);
 
         currentLevel = click;
         current = null;

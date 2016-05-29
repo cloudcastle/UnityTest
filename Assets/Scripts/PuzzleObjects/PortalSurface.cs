@@ -7,7 +7,7 @@ public class PortalSurface : MonoBehaviour
     public Portal portal;
 
     public static int depth = 0;
-    public const int maxDepth = 5;
+    public const int maxDepth = 10;
 
     public new Renderer renderer;
     public Renderer offsetRenderer;
