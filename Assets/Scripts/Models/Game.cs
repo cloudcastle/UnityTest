@@ -38,28 +38,26 @@ public class Game
 
         // Moving Surfaces Intro
         var ride = new Level("Ride", spring);
+        var f = new Level("F", ride);
 
         // Controls
-        var z = new Level("Z", fall, ride);
+        var z = new Level("Z", fall, f);
 
         // Jumps Intro Part 2
         var string_ = new Level("String", z);
 
-        // Moving Surfaces Intro 2
-        var f = new Level("F", string_);
-
         // Lifts       
-        var order = new Level("Order", depends: f);
-        var precaution = new Level("Precaution", depends: order);
+        var order = new Level("Order", string_);
+        var precaution = new Level("Precaution", order);
         var stairs = new Level("Stairs", precaution, f);
         var twoPits = new Level("Two pits", precaution, f);
         var hold = new Level("Hold", precaution, f);
         // Lifts II
-        var ascention = new Level("Ascention", depends: hold);
-        var launch = new Level("Launch", depends: hold);
-        var temple = new Level("Temple", depends: hold);
-        var underground = new Level("Underground", depends: hold);
-        var tower = new Level("Tower", depends: hold);
+        var ascention = new Level("Ascention", hold);
+        var launch = new Level("Launch", hold);
+        var temple = new Level("Temple", hold);
+        var underground = new Level("Underground", hold);
+        var tower = new Level("Tower", hold);
 
         // Lifts Tricks
         var rhythm = new Level("Rhythm", order, shift);
@@ -113,6 +111,7 @@ public class Game
         var intersection = new Level("Intersection", tool);
         var interception = new Level("Interception", intersection/*timestop*/);
         var accuracy = new Level("Accuracy", stand, tool);
+        var v = new Level("V", reach);
 
         // Keys Anticolors
         var ban = new Level("Ban", qeMouseWheel);
@@ -126,9 +125,9 @@ public class Game
         var gift = new Level("Gift", you, walkthrough);
         var giveALift = new Level("Give a lift", you, raise);
         var bat = new Level("Bat", giveALift, gap);
-        var together = new Level("Together", bat);
+        var together = new Level("Together", bat, z);
         var fat = new Level("Fat", together);
-        var place = new Level("Place", fat);
+        var place = new Level("Place", fat, gift);
 
         // Twins
         var traverse = new Level("Traverse", place);
