@@ -116,6 +116,7 @@ public class Game
 
         // Keys Anticolors
         var ban = new Level("Ban", qeMouseWheel);
+        var dorBlue = new Level("Dor Blue", ban, blueDoor);
 
         // Tricks
         var bars = new Level("Bars", string_);
