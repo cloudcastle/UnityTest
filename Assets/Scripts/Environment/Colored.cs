@@ -13,7 +13,8 @@ public class Colored : MonoBehaviour
     MeshRenderer meshRenderer;
 
     void OnEnable() {
-        meshRenderer = GetComponent<MeshRenderer>();    
+        meshRenderer = GetComponent<MeshRenderer>();
+        Update();
     }
 
     public void Update() {

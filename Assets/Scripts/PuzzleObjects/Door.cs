@@ -41,6 +41,7 @@ public class Door : MonoBehaviour
                 closed.a = closedAlpha;
             }
             colored.color = closed;
+            colored.Update();
         } else {
             GetComponent<MeshRenderer>().material.ChangeAlpha(Opened(Player.instance.current) ? openedAlpha : closedAlpha);
         }
