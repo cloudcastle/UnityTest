@@ -35,7 +35,7 @@ public class EditManager : MonoBehaviour
                 portalNode = portalSurface.portalNode;
             } else {
                 var child = portalNode.children.FirstOrDefault(pn => pn.surface == portalSurface);
-                if (child == null) {
+                if (child == null) {    
                     var childObject = new GameObject(portalSurface.portal.name);
                     childObject.transform.SetParent(portalNode.transform);
                     child = childObject.AddComponent<PortalNode>();

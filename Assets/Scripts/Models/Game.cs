@@ -104,7 +104,8 @@ public class Game
         var column = new Level("Column", walkthrough, z);
         var bridge = new Level("Bridge", string_, z, qeMouseWheel);
         var stand = new Level("Stand", bridge);
-        var grab = new Level("Grab", bridge);
+        var reach = new Level("Reach", bridge);
+        var grab = new Level("Grab", reach);
         var forgotten = new Level("Forgotten", stand, grab);
         var floor = new Level("Floor", grab);
         var pool = new Level("Pool", bridge);
@@ -145,6 +146,12 @@ public class Game
 
         // Buttons intro
         var open = new Level("Open", wasd);
+
+        // Jumps tricks
+        var workaround = new Level("Workaround", open);
+
+        // Twins tricks
+        var apart = new Level("Apart", fat);
 
         currentLevel = click;
         current = null;
