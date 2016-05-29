@@ -45,6 +45,7 @@ public class Game
 
         // Jumps Intro Part 2
         var string_ = new Level("String", z);
+        var cornerCase = new Level("Corner case", string_);
 
         // Lifts       
         var order = new Level("Order", string_);
