@@ -16,6 +16,10 @@ public class Grounder : MonoBehaviour
         new ValueTracker<ControllerColliderHit>(v => lastHit = v, () => lastHit);
     }
 
+    public void ResetGroundHit() {
+        lastHit = null;
+    }
+
     void FixedUpdate() {
         if (TimeManager.instance.Undoing()) {
             return;
@@ -33,7 +37,7 @@ public class Grounder : MonoBehaviour
         }
         if (TimeManager.Paused) {
             return;
-        }
+        } 
         lastHit = hit;
     }
 
