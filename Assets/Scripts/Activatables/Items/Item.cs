@@ -40,7 +40,7 @@ public class Item : Activatable
             Debug.Log(String.Format("Item {0} ghost for {1}", this, player));
         }
         Extensions.IgnoreCollision(player, this);
-        TimeManager.WaitFor(ghostTimeAfterThrow).Then(() => {
+        TimeManager.WaitForStoppable(ghostTimeAfterThrow).Then(() => {
             Extensions.IgnoreCollision(player, this, false);
             if (DebugManager.debug) {
                 Debug.Log(String.Format("Item {0} unghost for {1}", this, player));

@@ -8,6 +8,7 @@ public class TimeManager : MonoBehaviour
     public static TimeManager instance;
 
     public static IPromiseTimer promiseTimer;
+    public static IPromiseTimer stoppablePromiseTimer;
 
     Substitution timeSubstitution;
 
@@ -125,6 +126,7 @@ public class TimeManager : MonoBehaviour
             return;
         }
         promiseTimer.Update(-100500);
+        stoppablePromiseTimer.Update(-100500);
 
         if (Undoing()) {
             gameTime -= Time.fixedDeltaTime;
@@ -153,6 +155,7 @@ public class TimeManager : MonoBehaviour
 
     void Start() {
         promiseTimer = new UndoablePromiseTimer(() => gameTime);
+        stoppablePromiseTimer = new UndoablePromiseTimer(() => stoppableGameTime);
         gameTime = 0;
         timeSubstitution = DynamicTextManager.instance.Substitute("#{gameTime}", () => {
             var span = TimeSpan.FromSeconds(stoppableGameTime);
@@ -169,6 +172,10 @@ public class TimeManager : MonoBehaviour
 
     public static IPromise WaitFor(float time) {
         return promiseTimer.WaitFor(time);
+    }
+
+    public static IPromise WaitForStoppable(float time) {
+        return stoppablePromiseTimer.WaitFor(time);
     }
 
     public int totalSampleCount;
