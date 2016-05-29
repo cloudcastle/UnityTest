@@ -156,6 +156,9 @@ public class Game
         // Timestop
         var splitSecond = new Level("Split second", t);
 
+        // Portals
+        var edge = new Level("Edge", fit);
+
         currentLevel = click;
         current = null;
 

@@ -1,6 +1,7 @@
 Shader "MyUnlit" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
+		_Color ("Main Color", Color) = (1,1,1,1)
 	}
 
 	SubShader {
@@ -33,6 +34,7 @@ Shader "MyUnlit" {
 
 				sampler2D _MainTex;
 				float4 _MainTex_ST;
+				float4 _Color;
 			
 				v2f vert (appdata_t v)
 				{
@@ -48,8 +50,7 @@ Shader "MyUnlit" {
 				{
 					float2 uv2 = (i.scrPos.xy/i.scrPos.w);
 					fixed4 col = tex2D(_MainTex, uv2);
-					col.b = col.b * 1.2;
-					return col;
+					return col * _Color;
 				}
 			ENDCG
 		}
