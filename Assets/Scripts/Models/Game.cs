@@ -153,6 +153,9 @@ public class Game
         // Twins tricks
         var apart = new Level("Apart", fat);
 
+        // Timestop
+        var splitSecond = new Level("Split second", t);
+
         currentLevel = click;
         current = null;
 
