@@ -53,7 +53,9 @@ public class LevelNode : MonoBehaviour
 
     public void SetEmission(Color emission) {
         if (Extensions.Editor()) {
-            renderer.material.SetColor("_EmissionColor", emission);
+            var tempMaterial = new Material(renderer.sharedMaterial);
+            tempMaterial.SetColor("_EmissionColor", emission);
+            renderer.sharedMaterial = tempMaterial;
         } else {
             renderer.material.SetColor("_EmissionColor", emission);
         }

@@ -18,6 +18,9 @@ public class Colored : MonoBehaviour
     }
 
     public void Update() {
+        if (!enabled) {
+            return;
+        }
         if (Extensions.Editor()) {
             if (material == null) {
                 material = meshRenderer.sharedMaterial;

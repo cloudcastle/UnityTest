@@ -8,10 +8,15 @@ public class Key : Item
     KeyColor oldKeyColor;
     public KeyColor keyColor;
 
+    public Material baseMaterial;
+    public Material semitransparentMaterial;
+
     Colored colored;
+    new Renderer renderer;
 
     public override void Awake() {
         colored = GetComponent<Colored>();
+        renderer = GetComponent<Renderer>();
         if (!Extensions.Editor()) {
             base.Awake();
             onPick += keyColor.Recalculate;
@@ -39,5 +44,12 @@ public class Key : Item
         //if (!Extensions.Editor()) {
         //    gameObject.name = string.Format("{0} key{1}", keyColor.name, inventorySlot == null ? "" : " in " + inventorySlot.name);
         //}
+    }
+
+    public override void SetSemitransparent(bool on = true) {
+        var oldColor = renderer.material.color;
+        renderer.material = on ? semitransparentMaterial : baseMaterial;
+        renderer.material.color = oldColor;
+        renderer.material.ChangeAlpha(on ? 0.5f : 1);
     }
 }

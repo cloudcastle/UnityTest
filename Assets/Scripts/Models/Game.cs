@@ -108,7 +108,7 @@ public class Game
         var forgotten = new Level("Forgotten", stand, grab);
         var floor = new Level("Floor", grab);
         var pool = new Level("Pool", bridge);
-        var tool = new Level("Tool", column);
+        var tool = new Level("Tool", column, stand);
         var intersection = new Level("Intersection", tool);
         var interception = new Level("Interception", intersection/*timestop*/);
         var accuracy = new Level("Accuracy", stand, tool);
@@ -161,7 +161,9 @@ public class Game
         // Portals
         var edge = new Level("Edge", fit);
         var serve = new Level("Serve", edge, tool);
-        var flip = new Level("Flip", serve, splitSecond, gift);
+        var levitation = new Level("Levitation", splitSecond, serve);
+        var support = new Level("Support", levitation);
+        var flip = new Level("Flip", levitation);
         var collect = new Level("Collect", flip);
 
         currentLevel = click;
