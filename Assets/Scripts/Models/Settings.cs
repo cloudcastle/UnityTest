@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 
 [Serializable]
-public class Settings
+public class GameSettings
 {
     public float mouseSpeed = 1;
 }

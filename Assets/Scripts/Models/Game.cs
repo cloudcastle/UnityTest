@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-[Serializable]
+[Serializable] 
 public class Game
 {
     public static Game current;
@@ -14,7 +14,7 @@ public class Game
 
     public List<Level> completedLevels = new List<Level>();
 
-    public Settings settings = new Settings();
+    public GameSettings settings = new GameSettings();
 
     public Level currentLevel;
 
