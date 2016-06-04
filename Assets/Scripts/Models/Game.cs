@@ -104,7 +104,8 @@ public class Game
         var bridge = new Level("Bridge", string_, z, qeMouseWheel);
         var stand = new Level("Stand", bridge);
         var reach = new Level("Reach", bridge);
-        var grab = new Level("Grab", reach);
+        var slit = new Level("Slit", reach);
+        var grab = new Level("Grab", slit);
         var forgotten = new Level("Forgotten", stand, grab);
         var floor = new Level("Floor", grab);
         var pool = new Level("Pool", bridge);
