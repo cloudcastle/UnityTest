@@ -108,6 +108,7 @@ public class Game
         var grab = new Level("Grab", slit);
         var forgotten = new Level("Forgotten", stand, grab);
         var floor = new Level("Floor", grab);
+        var barehanded = new Level("Barehanded", floor);
         var pool = new Level("Pool", bridge);
         var tool = new Level("Tool", column, stand);
         var intersection = new Level("Intersection", tool);
@@ -144,6 +145,7 @@ public class Game
 
         // Slowmo
         var doubleDive = new Level("Double dive", fat);
+        var farewell = new Level("Farewell", doubleDive);
         var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
 
         // Buttons intro
@@ -154,6 +156,7 @@ public class Game
 
         // Twins tricks
         var apart = new Level("Apart", fat);
+        var invite = new Level("Invite", farewell, traverse);
 
         // Timestop
         var splitSecond = new Level("Split second", t);
