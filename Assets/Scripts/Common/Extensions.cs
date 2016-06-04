@@ -49,8 +49,9 @@ public static class Extensions
         return collection.Max(criteria);
     }
 
-    public static string ExtToString<T>(this IEnumerable<T> collection, string delimiter = ", ", string format = "[{0}]") {
-        return String.Format(format, String.Join(delimiter, collection.Select(obj => obj != null ? obj.ToString() : "null").ToArray()));
+    public static string ExtToString<T>(this IEnumerable<T> collection, string delimiter = ", ", string format = "[{0}]", Func<T, string> elementToString = null) {
+        elementToString = elementToString ?? (obj => obj.ToString());
+        return String.Format(format, String.Join(delimiter, collection.Select(obj => obj != null ? elementToString(obj) : "null").ToArray()));
     }
 
     public static T CyclicNext<T>(this List<T> list, T obj, int delta = 1) {
@@ -105,6 +106,10 @@ public static class Extensions
 
     public static string ExtToString(this Vector3 v) {
         return String.Format("({0:0.####}, {1:0.####}, {2:0.####})", v.x, v.y, v.z);
+    }
+
+    public static string ExtToString(this Vector2 v) {
+        return String.Format("({0:0.####}, {1:0.####})", v.x, v.y);
     }
 
     public static List<T> ShallowClone<T>(this List<T> listToClone) {

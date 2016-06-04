@@ -165,6 +165,7 @@ public class Game
         var support = new Level("Support", levitation);
         var flip = new Level("Flip", levitation);
         var collect = new Level("Collect", flip);
+        var exchange = new Level("Exchange", flip);
 
         currentLevel = click;
         current = null;
