@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour
     public CharacterController characterController;
     public Rewind rewind;
     public Slowmo slowmo;
+    public Gravity gravity;
 
     public UnitController controller;
 
@@ -31,6 +32,7 @@ public class Unit : MonoBehaviour
         characterController = GetComponentInChildren<CharacterController>();
         rewind = GetComponentInChildren<Rewind>();
         slowmo = GetComponentInChildren<Slowmo>();
+        gravity = GetComponentInChildren<Gravity>();
 
         all.Add(this);
     }

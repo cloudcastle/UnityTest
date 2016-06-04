@@ -14,9 +14,17 @@ public class Jump : Ability
 
     CharacterController characterController;
 
+    float HalfTickGravityCorrection() {
+        return Time.fixedDeltaTime * unit.gravity.gravity / 2; 
+    }
+
     public override void Awake() {
         base.Awake();
         characterController = GetComponent<CharacterController>();
+    }
+
+    void Start() {
+        jumpSpeed += HalfTickGravityCorrection(); 
     }
 
     void Update() {
@@ -27,7 +35,7 @@ public class Jump : Ability
     
     public void ChangeVelocity(Vector3 previousValue, Action<float> setX, Action<float> setY, Action<float> setZ) {
         if (jumpScheduled) {
-            setY(jumpSpeed);
+            setY(jumpSpeed - HalfTickGravityCorrection());
             jumpScheduled = false;
         }
     }
