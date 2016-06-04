@@ -11,12 +11,13 @@ public class MainCamera : MonoBehaviour
     {
         instance = gameObject;
         animator = GetComponent<TransformAnimator>();
+        animator.getTime = () => TimeManager.RealTime;
         GetComponent<Camera>().layerCullSpherical = true;
     }
 
     public void MoveTo(Transform t) {
         transform.SetParent(t.transform, worldPositionStays: true);
-        animator.Animate(new TimedValue<TransformState>(new TransformState(Vector3.zero, Quaternion.identity, Vector3.one), TimeManager.GameTime + animationDelay));
+        animator.Animate(new TimedValue<TransformState>(new TransformState(Vector3.zero, Quaternion.identity, Vector3.one), TimeManager.RealTime + animationDelay));
     }
 
     public void MoveToInstant(Transform t) {

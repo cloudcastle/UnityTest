@@ -18,4 +18,11 @@ public class PlayerUnit : Activatable
             Player.instance.Possess(target);
         }
     }
+
+    public override ActivatableStatus Status() {
+        if (Player.instance.possessCooldown.OnCooldown()) {
+            return ActivatableStatus.Activated;
+        }
+        return base.Status();
+    }
 }

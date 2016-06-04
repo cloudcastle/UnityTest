@@ -45,6 +45,12 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    public static float RealTime {
+        get {
+            return Time.realtimeSinceStartup;
+        }
+    }
+
     public static float StoppableGameTime {
         get {
             if (!Extensions.Editor()) {

@@ -9,6 +9,7 @@ public class Cooldown
 {
     public float duration;
     public FloatTracker tracker;
+    public Func<float> getTime = () => TimeManager.GameTime;
 
     public float onCDfrom = float.NegativeInfinity;
 
@@ -19,7 +20,7 @@ public class Cooldown
     }
 
     public bool Ready() {
-        return TimeManager.GameTime > ReadySince();
+        return getTime() > ReadySince();
     }
 
     public bool OnCooldown() {
@@ -27,7 +28,7 @@ public class Cooldown
     }
 
     public void StartCooldown() {
-        onCDfrom = TimeManager.GameTime;
+        onCDfrom = getTime();
     }
 
     private float ReadySince() {

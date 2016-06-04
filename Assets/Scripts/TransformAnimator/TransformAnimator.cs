@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using RSG;
+using System;
 
 public class TransformAnimator : Script
 {
@@ -12,6 +13,8 @@ public class TransformAnimator : Script
     public bool animating = false;
     public UndoablePromise finishAnimation = null;
 
+    public Func<float> getTime = () => TimeManager.GameTime;
+
     public override void InitInternal() {
         new ValueTracker<TimedValue<TransformState>>(v => previous = v, () => previous);
         new ValueTracker<TimedValue<TransformState>>(v => target = v, () => target);
@@ -19,7 +22,7 @@ public class TransformAnimator : Script
     }
 
     public float phase() {
-        return Mathf.Clamp((TimeManager.GameTime - previous.time) / (target.time - previous.time), 0, 1);
+        return Mathf.Clamp((getTime() - previous.time) / (target.time - previous.time), 0, 1);
     }
 
     void FixedUpdate() {
@@ -35,7 +38,7 @@ public class TransformAnimator : Script
     }
 
     public IPromise Animate(TimedValue<TransformState> target) {
-        this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localRotation, transform.localScale), TimeManager.GameTime);
+        this.previous = new TimedValue<TransformState>(new TransformState(transform.localPosition, transform.localRotation, transform.localScale), getTime());
         this.target = target;
         finishAnimation = new UndoablePromise();
         animating = true;

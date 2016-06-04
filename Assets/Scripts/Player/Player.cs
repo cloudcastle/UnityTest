@@ -22,6 +22,7 @@ public class Player : UnitController
 
     void Start() {
          possessCooldown = new Cooldown(0.25f);
+         possessCooldown.getTime = () => TimeManager.RealTime;
          var startUnit = FindObjectOfType<StartUnit>();
          if (startUnit != null) {
              Debug.Log("startUnit.unit = " + startUnit.unit);
