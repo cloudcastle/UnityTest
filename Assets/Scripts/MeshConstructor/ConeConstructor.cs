@@ -6,7 +6,7 @@ using UnityEditor.SceneManagement;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter))]
-public class Cone : MonoBehaviour
+public class ConeConstructor : MonoBehaviour
 {
     public string meshName;
     public int axisDivisions = 24;

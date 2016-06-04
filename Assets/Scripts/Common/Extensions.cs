@@ -215,4 +215,8 @@ public static class Extensions
         }
         return res;
     }
+
+    public static int Modulo(int x, int y) {
+        return (x % y + y) % y;
+    }
 }
