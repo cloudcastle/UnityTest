@@ -26,6 +26,9 @@ public class TransformAnimator : Script
     }
 
     void FixedUpdate() {
+        if (TimeManager.instance.Undoing()) {
+            return;
+        }
         if (animating) {
             if (phase() > 1 - eps) {
                 ToAnimationEnd();
