@@ -171,6 +171,9 @@ public class Game
         var collect = new Level("Collect", flip);
         var exchange = new Level("Exchange", flip);
 
+        // Timestop again
+        var claws = new Level("Claws", support);
+
         currentLevel = click;
         current = null;
 
