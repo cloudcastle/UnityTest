@@ -73,4 +73,10 @@ public class ValueTracker<T>
     void PushSampleCount() {
         TimeManager.instance.totalSampleCount += sampleCount;
     }
+
+    public void SetTrack(List<TimedValue<T>> track) {
+        this.track = new Stack<TimedValue<T>>(track);
+        this.track.Reverse();
+        sampleCount = this.track.Count;
+    }
 }

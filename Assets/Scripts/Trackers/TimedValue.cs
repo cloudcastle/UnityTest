@@ -14,4 +14,8 @@ public class TimedValue<T>
         this.value = value;
         this.time = time;
     }
+
+    public override string ToString() {
+        return String.Format("time = {0}, value = {1}", time, value);
+    }
 }

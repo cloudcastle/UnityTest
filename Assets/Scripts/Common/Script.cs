@@ -7,7 +7,7 @@ using System.Linq;
 public class Script : MonoBehaviour, IPoolable
 {
     bool inited = false;
-    void Init() {
+    public void Init() {
         if (inited) {
             return;
         }

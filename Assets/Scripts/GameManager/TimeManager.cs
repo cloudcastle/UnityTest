@@ -33,7 +33,7 @@ public class TimeManager : MonoBehaviour
     public float gameTime;
 
     [SerializeField]
-    float stoppableGameTime;
+    public float stoppableGameTime;
 
     public static float GameTime {
         get {
