@@ -7,7 +7,7 @@ using System;
 [RequireComponent(typeof(CharacterController))]
 public class Move : MonoBehaviour
 {
-    const float MAX_SPEED = 100f;
+    const float MAX_SPEED = 300f;
 
     public Vector3 velocity = Vector3.zero;
     public Vector3 angularVelocity = Vector3.zero;

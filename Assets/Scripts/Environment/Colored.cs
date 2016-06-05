@@ -28,6 +28,10 @@ public class Colored : MonoBehaviour
             if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color) {
                 UpdateRendererMaterial();
             }
+        } else {
+            if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color) {
+                UpdateRendererMaterial();
+            }
         }
     }
 

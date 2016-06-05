@@ -41,7 +41,8 @@ public class Game
         var f = new Level("F", ride);
 
         // Controls
-        var z = new Level("Z", fall, f);
+        var t = new Level("T", ride, f);
+        var z = new Level("Z", t);
 
         // Jumps Intro Part 2
         var string_ = new Level("String", z);
@@ -70,7 +71,6 @@ public class Game
         var phase = new Level("Phase", string_);
         var malapropos = new Level("Malapropos", phase);
         var meetInTheMiddle = new Level("Meet in the middle", fly, raise);
-        var t = new Level("T", ride, z);
 
         // Jumps
         var climb = new Level("Climb", gap, z, string_);
@@ -159,7 +159,7 @@ public class Game
         var invite = new Level("Invite", farewell, traverse);
 
         // Timestop
-        var splitSecond = new Level("Split second", t);
+        var splitSecond = new Level("Split second", z);
         var juggle = new Level("Juggle", t, delivery);
 
         // Portals
