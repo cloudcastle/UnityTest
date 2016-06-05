@@ -19,7 +19,9 @@ public class Item : Activatable
         new ValueTracker<bool>(v => {
             ghostForm = v;
             SetSemitransparent(ghostForm);
-            Extensions.IgnoreCollision(thrower, this, false);
+            if (thrower != null) {
+                Extensions.IgnoreCollision(thrower, this, v);
+            }
         }, () => ghostForm);
         new ValueTracker<Unit>(v => thrower = v, () => thrower);
     }
