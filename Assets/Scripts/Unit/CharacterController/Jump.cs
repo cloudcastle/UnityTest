@@ -28,7 +28,7 @@ public class Jump : Ability
     }
 
     void Update() {
-        if (characterController.isGrounded && unit.controller.Jump()) {
+        if (enabled && characterController.isGrounded && unit.controller.Jump()) {
             jumpScheduled = true;
         }
     }

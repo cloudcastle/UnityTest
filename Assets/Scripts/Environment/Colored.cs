@@ -14,7 +14,6 @@ public class Colored : MonoBehaviour
 
     void OnEnable() {
         meshRenderer = GetComponent<MeshRenderer>();
-        Update();
     }
 
     public void Update() {
@@ -28,11 +27,7 @@ public class Colored : MonoBehaviour
             if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color) {
                 UpdateRendererMaterial();
             }
-        } else {
-            if (meshRenderer.sharedMaterial == null || meshRenderer.sharedMaterial.color != color) {
-                UpdateRendererMaterial();
-            }
-        }
+        } 
     }
 
     [ContextMenu("Update renderer material")]
