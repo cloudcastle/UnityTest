@@ -23,7 +23,7 @@ public class Activator : Ability
         activatableLayerMask = LayerMask.GetMask("Ghost", "Item", "Activatable", "Unit");
     }
 
-    void Start() {
+    public override void Start() {
         stun = new Cooldown(0.2f);
     }
 

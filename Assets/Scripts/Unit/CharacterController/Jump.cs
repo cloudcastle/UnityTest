@@ -23,7 +23,7 @@ public class Jump : Ability
         characterController = GetComponent<CharacterController>();
     }
 
-    void Start() {
+    public override void InitInternal() {
         jumpSpeed += HalfTickGravityCorrection(); 
     }
 

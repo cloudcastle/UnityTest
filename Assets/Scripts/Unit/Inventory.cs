@@ -24,7 +24,7 @@ public class Inventory : Ability
 
     public ItemListShallowTracker itemTracker;
 
-    void Start() {
+    public override void InitInternal() {
         slotPool = Pool.CreatePool(slotSample);
 
         pickStun = new Cooldown(0.05f);
@@ -49,6 +49,7 @@ public class Inventory : Ability
     }
 
     public IPromise Pick(Item item, bool animate = true) {
+        Init();
         if (pickStun.OnCooldown()) {
             Debug.Log("Pick on cooldown");
             return Promise.Resolved();

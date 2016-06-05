@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using RSG;
 
-public class Ability : MonoBehaviour
+public class Ability : Script
 {
     public Unit unit;
 
@@ -12,7 +12,8 @@ public class Ability : MonoBehaviour
         get { return unit.controller; }
     }
 
-    public virtual void Awake() {
+    public override void Awake() {
+        base.Awake();
         unit = GetComponentInParent<Unit>();
     }
 }
