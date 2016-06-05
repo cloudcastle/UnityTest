@@ -122,7 +122,7 @@ public class Game
 
         // Tricks
         var bars = new Level("Bars", string_);
-        var escape = new Level("Escape", z, bars);
+        var memories = new Level("Memories", z, bars);
 
         // Twins Intro
         var you = new Level("You", pass);
