@@ -4,8 +4,17 @@ public class CameraControl : MonoBehaviour
 {
     public static CameraControl instance;
 
+    const float keyboardSpeed = 1;
+
     float zoomSpeed = 1.1f;
     Vector3 draggingWorldPoint;
+
+    float currentZoom = 1;
+
+    float minZoom = 0.1f;
+    float maxZoom = 10f;
+
+    Rect cameraBounds = new Rect(-10, -10, 20, 20);
 
     new Camera camera;
 
@@ -14,6 +23,11 @@ public class CameraControl : MonoBehaviour
 
     void Awake() {
         instance = this;
+        var nodes = FindObjectsOfType<LevelNode>();
+        cameraBounds.xMin = nodes.ExtMin(n => n.transform.position.x);
+        cameraBounds.xMax = nodes.ExtMax(n => n.transform.position.x);
+        cameraBounds.yMin = nodes.ExtMin(n => n.transform.position.y);
+        cameraBounds.yMax = nodes.ExtMax(n => n.transform.position.y);
     }
 
     void Start() {
@@ -34,28 +48,52 @@ public class CameraControl : MonoBehaviour
 
     void OnEnable() {
         camera = GetComponent<Camera>();
+        move(GameManager.game.levelGraphCameraPosition - transform.position.xy());
+        bareZoom(GameManager.game.levelGraphCameraZoom / currentZoom);
+        Debug.LogFormat("Camera settings loaded");
     }
 
     void zoom(float times) {
         var mouseWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
         var radiusVector = mouseWorldPoint - transform.position;
-        transform.Translate(radiusVector * (1 - times));
+        move(radiusVector * (1 - times));
+        bareZoom(times);
+    }
+
+    void bareZoom(float times) {
         camera.orthographicSize *= times;
+        currentZoom *= times;
+    }
+
+    void zoomLimited(float times) {
+        float oldZoom = currentZoom;
+        float newZoom = currentZoom * times;
+        newZoom = Mathf.Clamp(newZoom, minZoom, maxZoom);
+        zoom(newZoom / oldZoom);
+    }
+
+    void move(Vector2 delta) {
+        Vector2 newPosition = transform.position.xy() + delta;
+        newPosition = new Vector2(
+            Mathf.Clamp(newPosition.x, cameraBounds.xMin, cameraBounds.xMax),
+            Mathf.Clamp(newPosition.y, cameraBounds.yMin, cameraBounds.yMax)
+        );
+        transform.Translate(newPosition - transform.position.xy());
     }
 
     void Update() {
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0) {
-            zoom(1f / zoomSpeed);
+            zoomLimited(1f / zoomSpeed);
         }
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0) {
-            zoom(zoomSpeed);
+            zoomLimited(zoomSpeed);
         }
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) {
             draggingWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
         }
         if (Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2)) {
             var mouseWorldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
-            transform.Translate(draggingWorldPoint - mouseWorldPoint);
+            move(draggingWorldPoint - mouseWorldPoint);
         }
         if (Input.GetMouseButtonDown(0)) {
             if (hovered != null) {
@@ -64,6 +102,7 @@ public class CameraControl : MonoBehaviour
                 }
             }
         }
+        move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * keyboardSpeed * currentZoom);
         var oldHovered = hovered;
         this.hovered = null;
         Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);
@@ -76,5 +115,12 @@ public class CameraControl : MonoBehaviour
         if (oldHovered != hovered) {
             DynamicTextManager.instance.Invalidate();
         }
+    }
+
+    void OnDisable() {
+        GameManager.game.levelGraphCameraPosition = transform.position;
+        GameManager.game.levelGraphCameraZoom = currentZoom;
+        GameManager.instance.Save();
+        Debug.LogFormat("Camera settings saved");
     }
 }

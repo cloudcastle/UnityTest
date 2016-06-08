@@ -21,6 +21,10 @@ public static class Extensions
         return path;
     }
 
+    public static Vector2 xy(this Vector3 v) {
+        return new Vector2(v.x, v.y);
+    }
+
     public static int ExtMin<T>(this IEnumerable<T> collection, Func<T, int> criteria) {
         if (collection.Count() == 0) {
             return int.MaxValue;

@@ -13,6 +13,7 @@ public static class FileManager
         SurrogateSelector ss = new SurrogateSelector();
 
         ss.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+        ss.AddSurrogate(typeof(Vector2), new StreamingContext(StreamingContextStates.All), new Vector2SerializationSurrogate());
         ss.AddSurrogate(typeof(Ray), new StreamingContext(StreamingContextStates.All), new RaySerializationSurrogate());
 
         bf.SurrogateSelector = ss;

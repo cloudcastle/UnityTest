@@ -18,6 +18,9 @@ public class Game
 
     public Level currentLevel;
 
+    public Vector2 levelGraphCameraPosition = Vector2.zero;
+    public float levelGraphCameraZoom = 1;
+
     public Game() {
         current = this;
 
