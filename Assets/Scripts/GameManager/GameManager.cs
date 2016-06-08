@@ -85,7 +85,11 @@ public class GameManager : MonoBehaviour
         Debug.Log(string.Format("Play {0}", level));
         game.currentLevel = level;
         Save();
-        SceneManager.LoadScene(level.name);
+        if (level != null) {
+            SceneManager.LoadScene(level.name);
+        } else {
+            SceneManager.LoadScene(levelGraph);
+        }
     }
 
     public void PlayLastUnlocked() {
@@ -139,10 +143,14 @@ public class GameManager : MonoBehaviour
             );
         });
         game.completedLevels.RemoveAll(l => !game.levels.Contains(l));
-        if (!game.levels.Contains(game.currentLevel)) {
+        if (game.currentLevel != null && !game.levels.Contains(game.currentLevel)) {
             game.currentLevel = game.AvailableLevelsInUnlockOrder().First();
         }
         game.completedLevels = game.completedLevels.Distinct().ToList();
+
+        if (game.levelGraphCameraZoom == 0) {
+            game.levelGraphCameraZoom = 1;
+        }
     }
 
     void Update() {

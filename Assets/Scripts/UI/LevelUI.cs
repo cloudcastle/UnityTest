@@ -35,6 +35,8 @@ public class LevelUI : UI {
     }
 
     public void Map() {
+        GameManager.game.currentLevel = null;
+        GameManager.instance.Save();
         UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.levelGraph);
     }
 
