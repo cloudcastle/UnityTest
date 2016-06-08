@@ -13,7 +13,9 @@ public class Hotkey : MonoBehaviour {
 
     void Update() {
         if (Input.GetButtonDown(key)) {
-            button.onClick.Invoke();
+            if (GetComponentInParent<UIScreen>() == LevelUI.instance.CurrentScreen) {
+                button.onClick.Invoke();
+            }
         }
     }
 }
