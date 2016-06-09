@@ -24,7 +24,7 @@ public class Jump : Ability
     }
 
     public override void InitInternal() {
-        jumpSpeed += HalfTickGravityCorrection(); 
+        jumpSpeed += TimeManager.defaultFixedDeltaTime * unit.gravity.gravity / 2;
     }
 
     void Update() {
@@ -35,7 +35,8 @@ public class Jump : Ability
     
     public void ChangeVelocity(Vector3 previousValue, Action<float> setX, Action<float> setY, Action<float> setZ) {
         if (jumpScheduled) {
-            setY(jumpSpeed - HalfTickGravityCorrection());
+            var y = jumpSpeed - HalfTickGravityCorrection();
+            setY(y);
             jumpScheduled = false;
         }
     }

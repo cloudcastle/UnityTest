@@ -15,8 +15,17 @@ public class DebugManager : MonoBehaviour
 
     public static int cnt = 0;
 
+    public static string debugMessage = "";
+    public static Substitution debugSubstitution;
+
+    public void Message(params string[] ss) {
+        debugMessage = String.Join("\n", ss);
+        debugSubstitution.Recalculate();
+    }
+
     void Awake() {
         instance = this;
+        debugSubstitution = DynamicTextManager.instance.Substitute("#{debug}", () => debugMessage);
 
 #if UNITY_EDITOR
         Promise.EnablePromiseTracking = true;

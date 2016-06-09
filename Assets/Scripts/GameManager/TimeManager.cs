@@ -62,7 +62,7 @@ public class TimeManager : MonoBehaviour
     }
 
     public static float loosedFixedDeltaTime;
-    const float defaultFixedDeltaTime = 0.02f;
+    public const float defaultFixedDeltaTime = 0.02f;
 
     static void UpdateTimeScale() {
         float timeScale = 1;
