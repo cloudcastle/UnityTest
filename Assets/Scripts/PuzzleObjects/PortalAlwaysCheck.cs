@@ -9,4 +9,8 @@ public class PortalAlwaysCheck : MonoBehaviour
     void FixedUpdate() {
         portal.Check(target);
     }
+
+    void Update() {
+        portal.Check(target);
+    }
 }

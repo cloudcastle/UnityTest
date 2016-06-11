@@ -3,13 +3,33 @@ using System.Collections;
 
 public class LastPositionKeeper : MonoBehaviour
 {
-    public Vector3 lastPosition;
+    Vector3 prelastPosition;
+    Vector3 lastPosition;
+    float lastUpdateTime;
+
+    void Start() {
+        Reset();
+    }
 
     void FixedUpdate() {
+        RegisterPosition();
+    }
+
+    private void RegisterPosition() {
+        prelastPosition = lastPosition;
         lastPosition = transform.position;
+        lastUpdateTime = Time.fixedTime;
     }
 
     public void Reset() {
-        lastPosition = transform.position;
+        prelastPosition = lastPosition = transform.position;
+    }
+
+    public Vector3 GetPreviousPosition() {
+        if (lastUpdateTime > Time.fixedTime) {
+            return lastPosition;
+        } else {
+            return prelastPosition;
+        }
     }
 }

@@ -39,7 +39,7 @@ public class Portal : MonoBehaviour
         var keeper = obj.GetComponentInChildren<LastPositionKeeper>();
         if (keeper != null) {
             Vector3 localObjectPosition = transform.InverseTransformPoint(keeper.transform.position);
-            Vector3 previousLocalObjectPosition = transform.InverseTransformPoint(keeper.lastPosition);
+            Vector3 previousLocalObjectPosition = transform.InverseTransformPoint(keeper.GetPreviousPosition());
             if (Mathf.Sign(localObjectPosition.z) != Mathf.Sign(previousLocalObjectPosition.z)) {
                 var rigidbody = obj.GetComponent<Rigidbody>();
                 if (rigidbody != null) {
@@ -49,7 +49,7 @@ public class Portal : MonoBehaviour
                 obj.transform.SetParent(front.transform, worldPositionStays: true);
                 obj.transform.SetParent(this.other.back, worldPositionStays: false);
                 obj.transform.SetParent(null, worldPositionStays: true);
-                //Debug.LogFormat("Teleported {0} to {1}", obj.Path(), obj.transform.position);
+                keeper.Reset();
             }
         }
     }
