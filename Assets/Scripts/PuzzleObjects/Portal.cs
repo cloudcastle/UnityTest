@@ -46,9 +46,12 @@ public class Portal : MonoBehaviour
                     rigidbody.velocity = TeleportDirection(rigidbody.velocity);
                     rigidbody.angularVelocity = TeleportDirection(rigidbody.angularVelocity);
                 }
+                Vector3 oldScale = obj.transform.localScale;
                 obj.transform.SetParent(front.transform, worldPositionStays: true);
                 obj.transform.SetParent(this.other.back, worldPositionStays: false);
                 obj.transform.SetParent(null, worldPositionStays: true);
+                obj.transform.localScale = oldScale;
+                Debug.LogFormat("{0} teleported to {1}", obj, obj.transform.position);
                 keeper.Reset();
             }
         }
