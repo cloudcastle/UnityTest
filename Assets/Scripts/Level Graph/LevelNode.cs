@@ -14,6 +14,9 @@ public class LevelNode : MonoBehaviour
     public Color baseEmission;
     public Color unlockedEmission;
     public Color completedEmission;
+    public Color dependencyBaseEmission;
+    public Color dependencyUnlockedEmission;
+    public Color dependencyCompletedEmission;
     public float unhoverEmissionMuliplier = 0.7f;
     public float hoverEmissionMuliplier = 2f;
 
@@ -79,6 +82,26 @@ public class LevelNode : MonoBehaviour
     }
 #endif
 
+    public Color Emission() {
+        if (CameraControl.instance.hovered != null && CameraControl.instance.hovered.level.dependencies.Contains(level)) {
+            if (level.Completed()) {
+                return dependencyCompletedEmission * EmissionMultiplier();
+            } else if (level.Unlocked()) {
+                return dependencyUnlockedEmission * EmissionMultiplier();
+            } else {
+                return dependencyBaseEmission * EmissionMultiplier();
+            }
+        } else {
+            if (level.Completed()) {
+                return completedEmission * EmissionMultiplier();
+            } else if (level.Unlocked()) {
+                return unlockedEmission * EmissionMultiplier();
+            } else {
+                return baseEmission * EmissionMultiplier();
+            }
+        }
+    }
+
     void Update() {
         if (Extensions.Editor()) {
             this.level = GameManager.game.levels.First(l => l.name == levelName);
@@ -87,13 +110,7 @@ public class LevelNode : MonoBehaviour
             renderer.enabled = visible;
             UpdateTextMeshSize();
         } else {
-            if (level.Completed()) {
-                SetEmission(completedEmission * EmissionMultiplier());
-            } else if (level.Unlocked()) {
-                SetEmission(unlockedEmission * EmissionMultiplier());
-            } else {
-                SetEmission(baseEmission * EmissionMultiplier());
-            }
+            SetEmission(Emission());
 
             UpdateTextMeshSize();
         }

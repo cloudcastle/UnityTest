@@ -5,11 +5,6 @@ using System.Linq;
 public class LevelEdge : MonoBehaviour
 {
     public Material baseMaterial;
-    public Color baseEmission;
-    public Color unlockedEmission;
-    public Color completedEmission;
-    public float unhoverEmissionMuliplier = 0.7f;
-    public float hoverEmissionMuliplier = 2f;
 
     public LevelNode from;
     public LevelNode to;
@@ -17,14 +12,6 @@ public class LevelEdge : MonoBehaviour
 
     void OnEnable() {
         renderers = GetComponentsInChildren<MeshRenderer>();
-    }
-
-    public bool Hovered() {
-        return from.Hovered() || to.Hovered();
-    }
-
-    float EmissionMultiplier() {
-        return Hovered() ? hoverEmissionMuliplier : unhoverEmissionMuliplier;
     }
 
     public void SetEmission(Color emission) {
@@ -45,13 +32,7 @@ public class LevelEdge : MonoBehaviour
                 renderers.ToList().ForEach(r => r.enabled = from.visible && to.visible);
             }
         } else {
-            if (from.level.Completed()) {
-                SetEmission(completedEmission * EmissionMultiplier());
-            } else if (from.level.Unlocked()) {
-                SetEmission(unlockedEmission * EmissionMultiplier());
-            } else {
-                SetEmission(baseEmission * EmissionMultiplier());
-            }
+            SetEmission(from.Emission());
         }
     }
 }
