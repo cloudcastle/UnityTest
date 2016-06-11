@@ -21,6 +21,9 @@ public class CameraControl : MonoBehaviour
     RaycastHit hit;
     public LevelNode hovered;
 
+    Substitution levelNameSubstitution;
+    Substitution levelStatusSubstitution;
+
     void Awake() {
         instance = this;
         var nodes = FindObjectsOfType<LevelNode>();
@@ -31,8 +34,8 @@ public class CameraControl : MonoBehaviour
     }
 
     void Start() {
-        DynamicTextManager.instance.Substitute("#{hoveredLevelName}", () => hovered == null ? "" : hovered.levelName);
-        DynamicTextManager.instance.Substitute("#{hoveredLevelStatus}", () => {
+        levelNameSubstitution = DynamicTextManager.instance.Substitute("#{hoveredLevelName}", () => hovered == null ? "" : hovered.levelName);
+        levelStatusSubstitution = DynamicTextManager.instance.Substitute("#{hoveredLevelStatus}", () => {
             if (hovered == null) {
                 return "";
             }
@@ -50,7 +53,6 @@ public class CameraControl : MonoBehaviour
         camera = GetComponent<Camera>();
         move(GameManager.game.levelGraphCameraPosition - transform.position.xy());
         bareZoom(GameManager.game.levelGraphCameraZoom / currentZoom);
-        Debug.LogFormat("Camera settings loaded");
     }
 
     void zoom(float times) {
@@ -113,6 +115,8 @@ public class CameraControl : MonoBehaviour
             }
         }
         if (oldHovered != hovered) {
+            levelNameSubstitution.Recalculate();
+            levelStatusSubstitution.Recalculate();
             DynamicTextManager.instance.Invalidate();
         }
     }
@@ -121,6 +125,5 @@ public class CameraControl : MonoBehaviour
         GameManager.game.levelGraphCameraPosition = transform.position;
         GameManager.game.levelGraphCameraZoom = currentZoom;
         GameManager.instance.Save();
-        Debug.LogFormat("Camera settings saved");
     }
 }
