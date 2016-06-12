@@ -164,6 +164,7 @@ public class Game
         var farewell = new Level("Farewell", doubleDive);
         var invite = new Level("Invite", farewell, traverse);
         var williamTell = new Level("Willam Tell", deal);
+        var notWilliamTell = new Level("Not Willam Tell", williamTell);
 
         // Slowmo
         var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
