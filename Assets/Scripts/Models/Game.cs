@@ -184,6 +184,7 @@ public class Game
 
         // Buttons 
         var closer = new Level("Closer", close, giveALift, v);
+        var tin = new Level("Tin", walkthrough, close);
 
         currentLevel = click;
         current = null;
