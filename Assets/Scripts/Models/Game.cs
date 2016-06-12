@@ -86,7 +86,8 @@ public class Game
         var cleanHands = new Level("Clean hands", fit);
         var repick = new Level("Repick", cleanHands);
         var rightMouseButton = new Level("Right mouse button", repick);
-        var qeMouseWheel = new Level("QE mouse wheel", rightMouseButton, string_);
+        var walkthrough = new Level("Walkthrough", rightMouseButton, string_);
+        var qeMouseWheel = new Level("QE mouse wheel", walkthrough);
 
         // Keys
         var greenCabin = new Level("Green Cabin", qeMouseWheel);
@@ -102,8 +103,7 @@ public class Game
         var keyChain = new Level("Key chain", triple);
 
         // Keys Tricks
-        var walkthrough = new Level("Walkthrough", qeMouseWheel);
-        var column = new Level("Column", walkthrough, z);
+        var column = new Level("Column", qeMouseWheel);
         var bridge = new Level("Bridge", string_, z, qeMouseWheel);
         var stand = new Level("Stand", bridge);
         var reach = new Level("Reach", bridge);

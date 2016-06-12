@@ -17,6 +17,7 @@ public class LevelNode : MonoBehaviour
     public Color dependencyBaseEmission;
     public Color dependencyUnlockedEmission;
     public Color dependencyCompletedEmission;
+    public Color lockedBySelected;
     public float unhoverEmissionMuliplier = 0.7f;
     public float hoverEmissionMuliplier = 2f;
 
@@ -76,6 +77,8 @@ public class LevelNode : MonoBehaviour
             SetEmission(completedEmission);
         } else if (selectedLevel == level) {
             SetEmission(unlockedEmission);
+        } else if (selectedLevel != null && level.Depends(selectedLevel)) {
+            SetEmission(lockedBySelected);
         } else {
             SetEmission(baseEmission);
         }
