@@ -32,6 +32,9 @@ public class StopRolling : MonoBehaviour
     }
 
     void OnCollisionStay(Collision collision) {
+        if (collision.contacts.Length == 0) {
+            return;
+        }
         ContactPoint contact = collision.contacts.First();
         if (contact.normal.y > 0.99 && contact.otherCollider is MeshCollider) {
             rigidBody.angularDrag *= Extinction();

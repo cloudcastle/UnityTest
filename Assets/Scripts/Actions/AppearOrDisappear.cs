@@ -12,7 +12,15 @@ using UnityEditor.SceneManagement;
 
 public class AppearOrDisappear : Effect
 {
+    public bool initiallyAppeared = true;
+
     bool ready = true;
+
+    public override void InitInternal() {
+        new BoolTracker(x => gameObject.SetActive(x), () => gameObject.activeSelf);
+        new BoolTracker(x => ready = x, () => ready);
+        gameObject.SetActive(initiallyAppeared);
+    }
 
     public override IPromise Run()
     {

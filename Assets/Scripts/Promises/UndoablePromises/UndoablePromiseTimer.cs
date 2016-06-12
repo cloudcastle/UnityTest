@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace RSG
 {
@@ -9,7 +10,9 @@ namespace RSG
     {
         public UndoablePromiseTimer(Func<float> getCurrentTime) {
             this.getCurrentTime = getCurrentTime;
-            new ListShallowTracker<PredicateWait>((v) => waiting = v, () => waiting);
+            new ListShallowTracker<PredicateWait>((v) =>{
+                waiting = v;
+            }, () => waiting);
         }
 
         /// <summary>
@@ -41,7 +44,6 @@ namespace RSG
         /// </summary>
         public IPromise WaitUntil(Func<TimeData, bool> predicate) {
             var promise = new UndoablePromise();
-
             var wait = new PredicateWait()
             {
                 timeStarted = getCurrentTime(),

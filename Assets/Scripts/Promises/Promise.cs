@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace RSG
 {
@@ -203,8 +204,7 @@ namespace RSG
 			}
 		}
 
-		public Promise(Action<Action<PromisedT>, Action<Exception>> resolver)
-		{
+		public Promise(Action<Action<PromisedT>, Action<Exception>> resolver) {
 			this.CurState = PromiseState.Pending;
 			this.Id = ++Promise.nextPromiseId;
 

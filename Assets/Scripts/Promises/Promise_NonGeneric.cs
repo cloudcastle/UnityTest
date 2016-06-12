@@ -259,7 +259,7 @@ namespace RSG
 		/// </summary>
 		public PromiseState CurState { get; private set; }
 
-		public Promise() {
+        public Promise() {
             this.Id = ++Promise.nextPromiseId;
 			this.CurState = PromiseState.Pending;
             
@@ -269,8 +269,7 @@ namespace RSG
 			}
 		}
 
-		public Promise(Action<Action, Action<Exception>> resolver)
-		{
+		public Promise(Action<Action, Action<Exception>> resolver) {
             this.Id = ++Promise.nextPromiseId;
 			this.CurState = PromiseState.Pending;
 			if (EnablePromiseTracking)
@@ -880,7 +879,7 @@ namespace RSG
 		}
 
         public override string ToString() {
-            return string.Format("[ID = {0}, Name = {1}, State = {2}]", Id, Name, CurState);
+            return string.Format("[Type = {3}, ID = {0}, Name = {1}, State = {2}]", Id, Name, CurState, this.GetType());
         }
 	}
 }

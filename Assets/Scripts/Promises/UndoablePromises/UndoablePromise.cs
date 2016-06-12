@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace RSG
 {
@@ -122,7 +123,9 @@ namespace RSG
         private void StartTracking() {
             new ListShallowTracker<ResolveHandler>((v) => resolveHandlers = v, () => resolveHandlers);
             new ListShallowTracker<RejectHandler>((v) => rejectHandlers = v, () => rejectHandlers);
-            new ValueTracker<PromiseState>((v) => CurState = v, () => CurState);
+            new ValueTracker<PromiseState>((v) => {
+                CurState = v;
+            }, () => CurState);
         }
 
         /// <summary>
@@ -300,7 +303,7 @@ namespace RSG
         public IPromise Catch(Action<Exception> onRejected) {
             //            Argument.NotNull(() => onRejected);
 
-            var resultPromise = new Promise();
+            var resultPromise = new UndoablePromise();
             resultPromise.WithName(Name);
 
             Action resolveHandler = () => {
@@ -486,7 +489,7 @@ namespace RSG
             }
 
             var remainingCount = promisesArray.Length;
-            var resultPromise = new Promise();
+            var resultPromise = new UndoablePromise();
             resultPromise.WithName("All");
 
             promisesArray.Each((promise, index) => {
@@ -576,7 +579,7 @@ namespace RSG
                 throw new ApplicationException("At least 1 input promise must be provided for Race");
             }
 
-            var resultPromise = new Promise();
+            var resultPromise = new UndoablePromise();
             resultPromise.WithName("Race");
 
             promisesArray.Each((promise, index) => {
