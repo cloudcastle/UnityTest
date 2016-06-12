@@ -146,10 +146,6 @@ public class Game
         // Mixed
         var delivery = new Level("Delivery", qeMouseWheel);
 
-        // Slowmo
-        var doubleDive = new Level("Double dive", fat);
-        var farewell = new Level("Farewell", doubleDive);
-        var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
 
         // Buttons intro
         var open = new Level("Open", wasd);
@@ -157,18 +153,24 @@ public class Game
         // Jumps tricks
         var workaround = new Level("Workaround", open);
 
-        // Twins tricks
-        var apart = new Level("Apart", fat);
-        var invite = new Level("Invite", farewell, traverse);
-
         // Timestop
         var splitSecond = new Level("Split second", z);
         var juggle = new Level("Juggle", t, delivery);
 
+        // Twins tricks
+        var bacon = new Level("Bacon", fat, splitSecond);
+        var apart = new Level("Apart", bacon);
+        var doubleDive = new Level("Double dive", apart);
+        var farewell = new Level("Farewell", doubleDive);
+        var invite = new Level("Invite", farewell, traverse);
+
+        // Slowmo
+        var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
+
         // Portals
         var edge = new Level("Edge", fit);
         var serve = new Level("Serve", edge, tool);
-        var levitation = new Level("Levitation", splitSecond, serve);
+        var levitation = new Level("Levitation", bacon, serve);
         var support = new Level("Support", levitation);
         var flip = new Level("Flip", levitation);
         var collect = new Level("Collect", flip);
