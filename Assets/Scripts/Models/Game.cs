@@ -80,13 +80,17 @@ public class Game
         var sixBoxes = new Level("Six boxes", climb);
         var snake = new Level("Snake", spring, sixBoxes);
 
+        // Buttons intro
+        var open = new Level("Open", wasd, string_);
+        var close = new Level("Close", open);
+
         // Keys intro
         var pass = new Level("Pass", wasd);
         var fit = new Level("Fit", pass);
         var cleanHands = new Level("Clean hands", fit);
         var repick = new Level("Repick", cleanHands);
         var rightMouseButton = new Level("Right mouse button", repick);
-        var walkthrough = new Level("Walkthrough", rightMouseButton, string_);
+        var walkthrough = new Level("Walkthrough", rightMouseButton, open);
         var qeMouseWheel = new Level("QE mouse wheel", walkthrough);
 
         // Keys
@@ -147,9 +151,6 @@ public class Game
         var delivery = new Level("Delivery", qeMouseWheel);
 
 
-        // Buttons intro
-        var open = new Level("Open", wasd);
-
         // Jumps tricks
         var workaround = new Level("Workaround", open);
 
@@ -163,8 +164,8 @@ public class Game
         var doubleDive = new Level("Double dive", apart);
         var farewell = new Level("Farewell", doubleDive);
         var invite = new Level("Invite", farewell, traverse);
-        var williamTell = new Level("Willam Tell", deal);
-        var notWilliamTell = new Level("Not Willam Tell", williamTell);
+        var williamTell = new Level("Willam Tell", deal, open);
+        var notWilliamTell = new Level("Not Willam Tell", williamTell, open);
 
         // Slowmo
         var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
