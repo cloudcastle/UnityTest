@@ -182,6 +182,9 @@ public class Game
         // Timestop again
         var claws = new Level("Claws", support);
 
+        // Buttons 
+        var closer = new Level("Closer", close, giveALift, v);
+
         currentLevel = click;
         current = null;
 
