@@ -77,6 +77,7 @@ public class Item : Activatable
     void GhostFormOff() {
         Extensions.IgnoreCollision(thrower, this, false);
         SetSemitransparent(false);
+        ghostForm = false;
         if (DebugManager.debug) {
             Debug.Log(String.Format("Item {0} unghost for {1}", this, thrower));
         }
