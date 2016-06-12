@@ -42,7 +42,11 @@ public class Grounder : MonoBehaviour
     }
 
     void ApplyHit(ControllerColliderHit hit) {
-        if (hit.normal.y > 0.7f) {
+        var normal = hit.normal;
+        if (hit.collider is SphereCollider) {
+            normal = -normal;
+        }
+        if (normal.y > 0.01f) {
             Vector3 normalVelocity = Vector3.Project(move.velocity, Vector3.up);
             Vector3 tangentialVelocity = Vector3.ProjectOnPlane(move.velocity, Vector3.up);
 
@@ -68,6 +72,7 @@ public class Grounder : MonoBehaviour
             }
             
             move.velocity = normalVelocity + tangentialVelocity;
+            //Debug.LogFormat("new velocity after hit: {0}", move.velocity.ExtToString());
 
             move.angularVelocity = movingSurface != null ? movingSurface.currentAngularVelocity : Vector3.zero;
             //move.angularVelocity = move.angularVelocity.Change(x: 0, z: 0);
