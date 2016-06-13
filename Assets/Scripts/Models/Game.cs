@@ -186,6 +186,7 @@ public class Game
         // Buttons 
         var closer = new Level("Closer", close, giveALift, v);
         var tin = new Level("Tin", walkthrough, close);
+        var telekinesis = new Level("Telekinesis", tin, flip);
 
         currentLevel = click;
         current = null;
