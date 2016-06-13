@@ -54,7 +54,7 @@ public class EmptyUnitController : UnitController
         return false;
     }
 
-    public override bool Slowmo() {
+    public override bool SlowmoSwitch() {
         return false;
     }
 

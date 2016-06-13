@@ -70,7 +70,7 @@ public class TimeManager : MonoBehaviour
             if (Player.instance.Rewind()) {
                 timeScale *= Player.instance.current.rewind.timeMultiplyer;
             }
-            if (Player.instance.Slowmo()) {
+            if (Player.instance.current.slowmo.on) {
                 timeScale *= Player.instance.current.slowmo.timeMultiplyer;
             }
             if (Player.instance.current.transform.position.y < -1000f && !Player.instance.Undo()) {

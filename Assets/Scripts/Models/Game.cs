@@ -175,6 +175,8 @@ public class Game
         var edge = new Level("Edge", fit);
         var serve = new Level("Serve", edge, tool);
         var levitation = new Level("Levitation", bacon, serve);
+        var up = new Level("Up", levitation);
+        var forward = new Level("Forward", levitation);
         var support = new Level("Support", levitation);
         var flip = new Level("Flip", levitation);
         var collect = new Level("Collect", flip);

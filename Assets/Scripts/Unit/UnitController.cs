@@ -35,7 +35,7 @@ public abstract class UnitController : MonoBehaviour
 
     public abstract bool Rewind();
 
-    public abstract bool Slowmo();
+    public abstract bool SlowmoSwitch();
 
     public abstract bool Run();
 
