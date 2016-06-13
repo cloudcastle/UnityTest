@@ -347,6 +347,8 @@ GameObject:
   - 4: {fileID: 494822}
   - 33: {fileID: 3394242}
   - 23: {fileID: 2360400}
+  - 114: {fileID: 11422212}
+  - 114: {fileID: 11481928}
   m_Layer: 0
   m_Name: BlinkPhantom
   m_TagString: Untagged
@@ -723,8 +725,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154292}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 490, y: 2, z: 490}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 70, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494822}
@@ -1021,6 +1023,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useInitialValue: 0
   initialValue: {x: 0, y: 0, z: 0}
+--- !u!114 &11422212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ddaeb43b9639d479eea25b7723aad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 1
+  initialValue: 0
 --- !u!114 &11425054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1293,6 +1308,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
+--- !u!114 &11481928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d177ebb8af9a9b048ad5c05010947ae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInitialValue: 0
+  initialValue: {x: 0, y: 0, z: 0}
 --- !u!114 &11484782
 MonoBehaviour:
   m_ObjectHideFlags: 1

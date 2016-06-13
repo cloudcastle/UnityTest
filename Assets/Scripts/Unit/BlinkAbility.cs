@@ -30,7 +30,7 @@ public class BlinkAbility : Ability
     }
 
     bool CheckEyePoint() {
-        bool b = Portal.Raycast(new Ray(eye.position, eye.forward), out hit);
+        bool b = Portal.Raycast(new Ray(eye.position, eye.forward), out hit, mask: Mask());
         if (!b) {
             return false;
         }
@@ -75,6 +75,9 @@ public class BlinkAbility : Ability
     }
 
     void Update() {
+        if (TimeManager.instance.Undoing()) {
+            return;
+        }
         if (Player.instance.Blink()) {
             if (phantom.activeSelf) {
                 transform.position = phantom.transform.position;

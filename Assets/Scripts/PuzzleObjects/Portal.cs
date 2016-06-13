@@ -61,8 +61,8 @@ public class Portal : MonoBehaviour
         Debug.LogFormat("OnWillRenderObject");
     }
 
-    public static bool Raycast(Ray ray, out RaycastHit hit, Action<PortalSurface> onTeleported = null) {
-        bool result = Physics.Raycast(ray, out hit);
+    public static bool Raycast(Ray ray, out RaycastHit hit, Action<PortalSurface> onTeleported = null, int mask = ~0) {
+        bool result = Physics.Raycast(ray, out hit, float.PositiveInfinity, mask);
         if (hit.collider == null) {
             return result;
         }
@@ -73,7 +73,7 @@ public class Portal : MonoBehaviour
         if (onTeleported != null) {
             onTeleported(portalSurface);
         }
-        return Raycast(portalSurface.portal.TeleportRay(ray), out hit, onTeleported);
+        return Raycast(portalSurface.portal.TeleportRay(ray), out hit, onTeleported, mask);
     }
 
     public Vector3 TeleportPoint(Vector3 point) {
