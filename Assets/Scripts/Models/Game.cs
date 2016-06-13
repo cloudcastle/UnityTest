@@ -168,7 +168,8 @@ public class Game
         var notWilliamTell = new Level("Not Willam Tell", williamTell, open);
 
         // Slowmo
-        var doubleJump = new Level("Double jump", doubleDive/*, slowmo*/);
+        var doubleJump = new Level("Double jump", doubleDive, v);
+        var skywalker = new Level("Skywalker", v);
 
         // Portals
         var edge = new Level("Edge", fit);

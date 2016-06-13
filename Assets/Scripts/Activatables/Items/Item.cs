@@ -24,6 +24,13 @@ public class Item : Activatable
             }
         }, () => ghostForm);
         new ValueTracker<Unit>(v => thrower = v, () => thrower);
+
+        bool ghost = GetComponent<NotCollidePlayer>() != null;
+        if (ghost) {
+            GhostFor(FindObjectOfType<Unit>());
+        } else {
+            SetSemitransparent(false);
+        }
     }
 
     public override void Activate(Activator activator) {
@@ -75,6 +82,9 @@ public class Item : Activatable
     }
 
     void GhostFormOff() {
+        if (GetComponent<NotCollidePlayer>() != null) {
+            return;
+        }
         Extensions.IgnoreCollision(thrower, this, false);
         SetSemitransparent(false);
         ghostForm = false;
