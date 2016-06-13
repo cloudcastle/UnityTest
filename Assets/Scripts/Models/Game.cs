@@ -182,6 +182,7 @@ public class Game
 
         // Timestop again
         var claws = new Level("Claws", support);
+        var _2cor11_33 = new Level("2 Cor 11 33", support, gift, greenCabin);
 
         // Buttons 
         var closer = new Level("Closer", close, giveALift, v);
