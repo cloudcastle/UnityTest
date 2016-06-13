@@ -73,4 +73,12 @@ public class EmptyUnitController : UnitController
     public override bool Undo() {
         return false;
     }
+
+    public override bool BlinkPrepare() {
+        return false;
+    }
+
+    public override bool Blink() {
+        return false;
+    }
 }

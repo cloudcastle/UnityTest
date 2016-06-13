@@ -117,4 +117,12 @@ public class Player : UnitController
     public override bool Undo() {
         return Input.GetButton("Undo");
     }
+
+    public override bool BlinkPrepare() {
+        return Input.GetButton("Blink");
+    }
+
+    public override bool Blink() {
+        return Input.GetButtonUp("Blink");
+    }
 }

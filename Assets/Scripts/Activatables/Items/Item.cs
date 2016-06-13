@@ -58,13 +58,13 @@ public class Item : Activatable
     }
 
     bool OverlappingWithThrower() {
-        SpaceScanner.overlapCount = Physics.OverlapSphereNonAlloc(
+        SpaceScanner.count = Physics.OverlapSphereNonAlloc(
             transform.position,
             GetComponent<SphereCollider>().radius * transform.lossyScale.x,
             SpaceScanner.overlapResults,
             LayerMask.GetMask("Unit")
         );
-        for (int i = 0; i < SpaceScanner.overlapCount; i++) {
+        for (int i = 0; i < SpaceScanner.count; i++) {
             var unit = SpaceScanner.overlapResults[i].gameObject.GetComponent<Unit>();
             if (unit == thrower) {
                 return true;

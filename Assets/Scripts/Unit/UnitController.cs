@@ -52,4 +52,8 @@ public abstract class UnitController : MonoBehaviour
     public abstract bool NextItem();
 
     public abstract bool PreviousItem();
+
+    public abstract bool BlinkPrepare();
+
+    public abstract bool Blink();
 }
