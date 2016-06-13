@@ -10,6 +10,7 @@ public class BlinkAbility : Ability
     public GameObject phantom;
 
     const float MAX_DIST = 1000f;
+    const float BASE_DIST = 15f;
 
     int Mask() {
         return ~LayerMask.GetMask("Ghost");
@@ -28,6 +29,20 @@ public class BlinkAbility : Ability
         SpaceScanner.count = Physics.CapsuleCastNonAlloc(point + Vector3.up / 2, point - Vector3.up / 2 + Vector3.up * 0.1f, 0.5f, Vector3.forward, SpaceScanner.rayCastResults, 0, Mask());
         return SpaceScanner.count == 0;
     }
+
+    bool CheckAirPoint() {
+        bool b = Portal.Raycast(new Ray(eye.position, eye.forward), out hit, mask: Mask());
+        if (b && hit.distance < BASE_DIST) {
+            return false;
+        } 
+        var airPoint = eye.position + eye.forward * BASE_DIST;
+        if (AcceptablePoint(airPoint)) {
+            ShowPhantom(airPoint);
+            return true;
+        }
+        return false;
+    }
+
 
     bool CheckEyePoint() {
         bool b = Portal.Raycast(new Ray(eye.position, eye.forward), out hit, mask: Mask());
@@ -81,6 +96,7 @@ public class BlinkAbility : Ability
         if (Player.instance.Blink()) {
             if (phantom.activeSelf) {
                 transform.position = phantom.transform.position;
+                GetComponent<Move>().velocity = Vector3.zero;
                 HidePhantom();
             }
         }
@@ -92,6 +108,9 @@ public class BlinkAbility : Ability
             return;
         }
         if (CheckLegsPoint()) {
+            return;
+        }
+        if (CheckAirPoint()) {
             return;
         }
         HidePhantom();
