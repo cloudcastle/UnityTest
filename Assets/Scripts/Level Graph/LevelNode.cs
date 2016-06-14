@@ -26,12 +26,14 @@ public class LevelNode : MonoBehaviour
     public bool visible = true;
 
     new MeshRenderer renderer;
+    MeshRenderer textRenderer;
 
     [NonSerialized] 
     public Level level;
 
     void OnEnable() {
         this.renderer = GetComponent<MeshRenderer>();
+        this.textRenderer = textMesh.GetComponent<MeshRenderer>();
 #if UNITY_EDITOR
         Selection.selectionChanged += OnSelectionChanged;
 #endif
@@ -110,7 +112,7 @@ public class LevelNode : MonoBehaviour
             this.level = GameManager.game.levels.First(l => l.name == levelName);
             gameObject.name = levelName;
             textMesh.text = levelName;
-            renderer.enabled = visible;
+            renderer.enabled = textRenderer.enabled = visible;
             UpdateTextMeshSize();
         } else {
             SetEmission(Emission());
@@ -130,6 +132,21 @@ public class LevelNode : MonoBehaviour
         if (Extensions.Editor()) {
             Selection.objects = FindObjectsOfType<LevelEdge>().Where(e => e.from == this).Select(e => e.to.gameObject).ToArray();
         }
+    }
+
+    [ContextMenu("Hide all levels but one")]
+    void HideAll() {
+        FindObjectsOfType<LevelNode>().ForEach(node => {
+            if (node.level.dependencies.Count > 0) {
+                node.visible = false;
+            }
+        });
+    }
+
+    [ContextMenu("Show all levels unlocked by visible")]
+    void ShowUnlocked() {
+        List<LevelNode> nextTier = FindObjectsOfType<LevelNode>().Where(node => !FindObjectsOfType<LevelNode>().Any(node2 => !node2.visible && node.level.dependencies.Contains(node2.level))).ToList();
+        nextTier.ForEach(node => node.visible = true);
     }
 #endif
 }

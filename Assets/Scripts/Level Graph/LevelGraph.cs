@@ -21,6 +21,7 @@ public class LevelGraph : MonoBehaviour
             GameManager.game = new Game();
             var levels = GameManager.game.levels;
             var levelNodes = FindObjectsOfType<LevelNode>().ToList();
+            var visibleNodes = levelNodes.Where(n => n.visible).Select(n => n.level.name).ToList();
             FindObjectsOfType<LevelEdge>().ToList().ForEach(le => DestroyImmediate(le.gameObject));
 
             levels.ForEach(level => {
@@ -48,6 +49,7 @@ public class LevelGraph : MonoBehaviour
                     edge.transform.SetParent(edges);
                 });
             });
+            levelNodes.Where(n => !visibleNodes.Contains(n.levelName)).ForEach(n => n.visible = false);
             EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
 #endif
         }
