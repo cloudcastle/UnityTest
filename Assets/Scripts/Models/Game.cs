@@ -170,6 +170,8 @@ public class Game
         // Slowmo
         var doubleJump = new Level("Double jump", doubleDive, v);
         var skywalker = new Level("Skywalker", v);
+        var toss = new Level("Toss", bat, v);
+        var longDoubleJump = new Level("Long double jump", doubleJump);
 
         // Portals
         var edge = new Level("Edge", fit);
