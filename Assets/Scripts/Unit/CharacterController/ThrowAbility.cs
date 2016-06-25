@@ -84,6 +84,7 @@ public class ThrowAbility : Ability
             UpdateForce();
             if (currentForce > maxForce) {
                 Throw();
+                //currentForce = maxForce;
             } 
         } 
     }
