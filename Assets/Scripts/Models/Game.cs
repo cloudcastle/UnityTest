@@ -173,6 +173,7 @@ public class Game
         var toss = new Level("Toss", bat, v);
         var longDoubleJump = new Level("Long double jump", doubleJump);
         var duck = new Level("Duck", doubleJump);
+        var upkeep = new Level("Upkeep", apart);
 
         // Portals
         var edge = new Level("Edge", fit);
