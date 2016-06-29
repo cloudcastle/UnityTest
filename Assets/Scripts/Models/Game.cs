@@ -174,6 +174,7 @@ public class Game
         var longDoubleJump = new Level("Long double jump", doubleJump);
         var duck = new Level("Duck", doubleJump);
         var upkeep = new Level("Upkeep", apart);
+        var link = new Level("Link", upkeep);
         var boo = new Level("Boo", slit, apart);
 
         // Portals
