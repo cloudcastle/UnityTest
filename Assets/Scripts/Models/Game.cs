@@ -172,6 +172,7 @@ public class Game
         var skywalker = new Level("Skywalker", v);
         var toss = new Level("Toss", bat, v);
         var longDoubleJump = new Level("Long double jump", doubleJump);
+        var extendedJump = new Level("Extended Jump", longDoubleJump, toss);
         var duck = new Level("Duck", doubleJump);
         var upkeep = new Level("Upkeep", apart);
         var link = new Level("Link", upkeep);
