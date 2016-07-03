@@ -772,6 +772,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32bc3d34fe1e4444b803628de283cd9d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &276701256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 276701257}
+  - 114: {fileID: 276701258}
+  m_Layer: 0
+  m_Name: Sealed Box Portal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &276701257
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276701256}
+  m_LocalRotation: {x: 0.00000003161015, y: -0.000000029802322, z: 0.000000010536701,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 735801513}
+  m_RootOrder: 0
+--- !u!114 &276701258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 276701256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 1434652222}
+  children: []
 --- !u!1001 &429205490
 Prefab:
   m_ObjectHideFlags: 0
@@ -1329,6 +1371,94 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 726333118}
   m_Script: {fileID: 11500000, guid: 9273f23c83749c64a8f668961bb84244, type: 3}
+--- !u!1 &735801512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 735801513}
+  - 114: {fileID: 735801514}
+  m_Layer: 0
+  m_Name: Sealed Box Portal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &735801513
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 735801512}
+  m_LocalRotation: {x: -0.49999994, y: -0.5, z: 0.50000006, w: 0.5}
+  m_LocalPosition: {x: -34.999992, y: -20.000002, z: 5.000007}
+  m_LocalScale: {x: 1, y: 0.9999999, z: 1.0000001}
+  m_Children:
+  - {fileID: 276701257}
+  m_Father: {fileID: 763016030}
+  m_RootOrder: 2
+--- !u!114 &735801514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 735801512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 1434652222}
+  children:
+  - {fileID: 276701258}
+--- !u!1 &736843432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 736843433}
+  - 114: {fileID: 736843434}
+  m_Layer: 0
+  m_Name: Sealed Box Inner Portal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &736843433
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 736843432}
+  m_LocalRotation: {x: -0.5, y: 0.5000001, z: -0.50000006, w: 0.49999994}
+  m_LocalPosition: {x: 5, y: -0.00000021073436, z: 5}
+  m_LocalScale: {x: 0.9999999, y: 0.99999976, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1841121325}
+  m_RootOrder: 2
+--- !u!114 &736843434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 736843432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 1440936311}
+  children: []
+--- !u!4 &763016030 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 493178, guid: 4396a810424d3a54c98dcdfe81f3054e, type: 2}
+  m_PrefabInternal: {fileID: 2038038825}
 --- !u!21 &914885175
 Material:
   serializedVersion: 6
@@ -1632,6 +1762,49 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4ed8e89a0a556c343ad93f0ddc18b660, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1257657310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1257657311}
+  - 114: {fileID: 1257657312}
+  m_Layer: 0
+  m_Name: Sealed Box Portal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1257657311
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1257657310}
+  m_LocalRotation: {x: -0.49999994, y: -0.5, z: 0.50000006, w: 0.5}
+  m_LocalPosition: {x: 25, y: -19.999996, z: 4.9999995}
+  m_LocalScale: {x: 1, y: 0.9999999, z: 1.0000001}
+  m_Children:
+  - {fileID: 1474598337}
+  m_Father: {fileID: 1305653405}
+  m_RootOrder: 2
+--- !u!114 &1257657312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1257657310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 1434652222}
+  children:
+  - {fileID: 1474598338}
 --- !u!21 &1300017935
 Material:
   serializedVersion: 6
@@ -1822,6 +1995,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32bc3d34fe1e4444b803628de283cd9d, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1305653405 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 493178, guid: 4396a810424d3a54c98dcdfe81f3054e, type: 2}
+  m_PrefabInternal: {fileID: 538286625}
 --- !u!1001 &1352043656
 Prefab:
   m_ObjectHideFlags: 0
@@ -1930,6 +2107,18 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32bc3d34fe1e4444b803628de283cd9d, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1434652222 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11427122, guid: 4396a810424d3a54c98dcdfe81f3054e,
+    type: 2}
+  m_PrefabInternal: {fileID: 726333118}
+  m_Script: {fileID: 11500000, guid: 4b31c91576e1cb647b1af4a7847d7e70, type: 3}
+--- !u!114 &1440936311 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11427122, guid: 4396a810424d3a54c98dcdfe81f3054e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2085472862}
+  m_Script: {fileID: 11500000, guid: 4b31c91576e1cb647b1af4a7847d7e70, type: 3}
 --- !u!1001 &1444808927
 Prefab:
   m_ObjectHideFlags: 0
@@ -2026,6 +2215,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0f0214cf048b8d4783fb0e7d3e91058, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1474598336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1474598337}
+  - 114: {fileID: 1474598338}
+  m_Layer: 0
+  m_Name: Sealed Box Portal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474598337
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474598336}
+  m_LocalRotation: {x: 0.00000003161015, y: -0.000000029802322, z: 0.000000010536701,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1257657311}
+  m_RootOrder: 0
+--- !u!114 &1474598338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1474598336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7ba629fbd4e142ac66a8810e17b35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 1434652222}
+  children: []
 --- !u!1001 &1512129478
 Prefab:
   m_ObjectHideFlags: 0
@@ -2280,6 +2511,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f92a31eb4d9d9c4c99aa8d522cf6bd5, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1841121325 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 493178, guid: 4396a810424d3a54c98dcdfe81f3054e, type: 2}
+  m_PrefabInternal: {fileID: 261572098}
 --- !u!1001 &1880396992
 Prefab:
   m_ObjectHideFlags: 0

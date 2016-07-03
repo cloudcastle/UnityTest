@@ -35,20 +35,14 @@ public class EditManager : MonoBehaviour
                 portalNode = portalSurface.portalNode;
             } else {
                 var child = portalNode.children.FirstOrDefault(pn => pn.surface == portalSurface);
-                if (child == null) {    
-                    var childObject = new GameObject(portalSurface.portal.name);
-                    childObject.transform.SetParent(portalNode.transform);
-                    child = childObject.AddComponent<PortalNode>();
-                    child.surface = portalSurface;
-                    portalNode.children.Add(child);
-                    Debug.LogFormat("Created new portal node: {0}", child.transform.Path());
-                    if (!EditorApplication.isPlaying) {
-                        EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-                    }
+                if (child == null) {
+                    var command = new PortalNodeCreation(portalNode.transform.Path(), portalSurface.transform.Path());
+                    command.Execute();
+                    sequence.commands.Add(command);
                 }
                 portalNode = child;
             }
-        });
+        }, mask: ~LayerMask.GetMask("ItemProof"));
     }
 
     void Update() {
@@ -60,7 +54,6 @@ public class EditManager : MonoBehaviour
                 var player = Player.instance.current;
                 var eye = player.eye.transform;
                 Ray ray = new Ray(eye.position, eye.TransformDirection(Vector3.forward));
-                sequence.rays.Add(ray);
                 PortalRay(ray);
             }
         }
@@ -74,9 +67,9 @@ public class EditManager : MonoBehaviour
     [ContextMenu("Apply edit sequence")]
     void ApplyEditSequence() {
         EditSequence sequence = FileManager.LoadFromFile<EditSequence>(editSequenceFile);
-        Debug.LogFormat("Number of rays: {0}", sequence.rays.Count);
-        sequence.rays.ForEach(ray => {
-            PortalRay(ray);
+        Debug.LogFormat("Number of commands: {0}", sequence.commands.Count);
+        sequence.commands.ForEach(command => {
+            command.Execute();
         });
     }
 

@@ -203,6 +203,7 @@ public class Game
         var gate = new Level("Gate", serve);
         var unpack = new Level("Unpack", gate);
         var trip = new Level("Trip", unpack);
+        var extract = new Level("Extract", trip);
 
         currentLevel = click;
         current = null;
