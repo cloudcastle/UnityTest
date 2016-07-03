@@ -201,6 +201,8 @@ public class Game
 
         // Gates
         var gate = new Level("Gate", serve);
+        var unpack = new Level("Unpack", gate);
+        var trip = new Level("Trip", unpack);
 
         currentLevel = click;
         current = null;
