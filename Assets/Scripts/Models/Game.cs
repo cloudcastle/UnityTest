@@ -199,6 +199,9 @@ public class Game
         var tin = new Level("Tin", walkthrough, close);
         var telekinesis = new Level("Telekinesis", tin, flip);
 
+        // Gates
+        var gate = new Level("Gate", serve);
+
         currentLevel = click;
         current = null;
 

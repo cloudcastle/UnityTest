@@ -8,6 +8,7 @@ public class Portal : MonoBehaviour
     public Portal other;
 
     public PortalSurface front;
+    public GameObject closedFront;
     public Transform back;
     new public Camera camera;
     public List<Camera> cameras;
@@ -24,6 +25,7 @@ public class Portal : MonoBehaviour
             newCamera.enabled = false;
             cameras.Add(newCamera);
         }
+        Switch(other != null);
     }
 
     public Camera GetCamera(int depth) {
@@ -90,6 +92,34 @@ public class Portal : MonoBehaviour
 
     public Ray TeleportRay(Ray ray) {
         return new Ray(TeleportPoint(ray.origin), TeleportDirection(ray.direction));
+    }
+
+    public void Switch(bool on) {
+        front.gameObject.SetActive(on);
+        closedFront.SetActive(!on);
+    }
+
+    public void Disconnect() {
+        if (other == null) {
+            return;
+        }
+        other.other = null;
+        other.Switch(false);
+        other = null;
+        Switch(false);
+        Debug.LogFormat("Disconnected");
+    }
+
+    public void Connect(Portal other) {
+        if (this.other == other) {
+            return;
+        }
+        Disconnect();
+        other.other = this;
+        this.other = other;
+        Switch(true);
+        other.Switch(true);
+        Debug.LogFormat("Connected");
     }
 
     static void PrecalculateAllPortalMatrices() {
