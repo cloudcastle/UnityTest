@@ -71,7 +71,7 @@ public class Activator : Ability
             var radiusVector = activatable.transform.position - transform.position;
             var biasAngle = Vector3.Angle(transform.forward, radiusVector);
             if (biasAngle < activatable.EffectiveMaxBiasAngle(this)) {
-                Physics.Raycast(transform.position, radiusVector, out hit);
+                Physics.Raycast(transform.position, radiusVector, out hit, float.PositiveInfinity, ~LayerMask.GetMask("UnitProof"));
                 if (hit.collider != null && hit.collider.gameObject == sphereCastResults[i].gameObject) {
                     if (activatable != null && hit.distance < activatable.EffectiveMaxDistance(this)) {
                         Check(activatable, biasAngle);

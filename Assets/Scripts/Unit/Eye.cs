@@ -22,7 +22,7 @@ public class Eye : MonoBehaviour
         {
             return;
         }
-        bool b = Portal.Raycast(new Ray(transform.position, transform.forward), out hit);
+        bool b = Portal.Raycast(new Ray(transform.position, transform.forward), out hit, mask: ~LayerMask.GetMask("UnitProof"));
         if (b) {
             SetUnderSight(hit.collider.gameObject, hit.distance);
         } else {
