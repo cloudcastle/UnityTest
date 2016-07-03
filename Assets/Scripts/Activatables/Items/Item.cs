@@ -10,8 +10,18 @@ public class Item : Activatable
     public event Action<Unit> onPick = (p) => { };
     public event Action<Unit> onLose = (p) => { };
 
+    public Material baseMaterial;
+    public Material semitransparentMaterial;
+
+    new Renderer renderer;
+
     bool ghostForm = false;
     Unit thrower = null;
+
+    public override void Awake() {
+        base.Awake();
+        renderer = GetComponent<Renderer>();
+    }
 
     public override void Start() {
         base.Start();
@@ -55,6 +65,10 @@ public class Item : Activatable
     }
 
     public virtual void SetSemitransparent(bool on = true) {
+        var oldColor = renderer.material.color;
+        renderer.material = on ? semitransparentMaterial : baseMaterial;
+        renderer.material.color = oldColor;
+        renderer.material.ChangeAlpha(on ? 0.5f : 1);
     }
 
     bool OverlappingWithThrower() {

@@ -3,13 +3,13 @@ using System.Linq;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(Colored))]
-public class Key : Item
+[RequireComponent(typeof(Item))]
+public class Key : Script
 {
     KeyColor oldKeyColor;
     public KeyColor keyColor;
 
-    public Material baseMaterial;
-    public Material semitransparentMaterial;
+    public Item item;
 
     Colored colored;
     new Renderer renderer;
@@ -17,10 +17,11 @@ public class Key : Item
     public override void Awake() {
         colored = GetComponent<Colored>();
         renderer = GetComponent<Renderer>();
+        item = GetComponent<Item>();
         if (!Extensions.Editor()) {
             base.Awake();
-            onPick += keyColor.Recalculate;
-            onLose += keyColor.Recalculate;
+            item.onPick += keyColor.Recalculate;
+            item.onLose += keyColor.Recalculate;
         }
     }
 
@@ -44,12 +45,5 @@ public class Key : Item
         //if (!Extensions.Editor()) {
         //    gameObject.name = string.Format("{0} key{1}", keyColor.name, inventorySlot == null ? "" : " in " + inventorySlot.name);
         //}
-    }
-
-    public override void SetSemitransparent(bool on = true) {
-        var oldColor = renderer.material.color;
-        renderer.material = on ? semitransparentMaterial : baseMaterial;
-        renderer.material.color = oldColor;
-        renderer.material.ChangeAlpha(on ? 0.5f : 1);
     }
 }

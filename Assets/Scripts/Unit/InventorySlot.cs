@@ -81,7 +81,7 @@ public class InventorySlot : MonoBehaviour
 
         transform.localPosition = TargetPosition();
         transform.localScale = TargetScale();
-        transform.localRotation = Quaternion.identity;
+        transform.localRotation = Quaternion.Euler(0, 90, 0);
     }
 
     public Vector3 TargetPosition() {
@@ -94,7 +94,7 @@ public class InventorySlot : MonoBehaviour
 
     void OnInventoryChanged() {
         if (inventory.items.Contains(item)) {
-            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), scale: TargetScale()), TimeManager.GameTime + animationDelay));
+            transformAnimator.Animate(new TimedValue<TransformState>(new TransformState(TargetPosition(), scale: TargetScale(), rotation: transform.rotation), TimeManager.GameTime + animationDelay));
         } else {
             Free();
         }

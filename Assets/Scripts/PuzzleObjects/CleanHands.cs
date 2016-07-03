@@ -18,7 +18,7 @@ public class CleanHands : MonoBehaviour
         if (bannedColor == null) {
             return true;
         }
-        var key = item as Key;
+        var key = item.GetComponent<Key>();
         return key != null && key.keyColor == bannedColor;
     }
 
