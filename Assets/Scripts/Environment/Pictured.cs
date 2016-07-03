@@ -9,8 +9,14 @@ public class Pictured : MonoBehaviour
 
     MeshRenderer meshRenderer;
 
+    Item item;
+
     void OnEnable() {
         meshRenderer = GetComponent<MeshRenderer>();
+    }
+
+    void Awake() {
+        this.item = GetComponent<Item>();
     }
 
     public void Update() {
@@ -35,7 +41,18 @@ public class Pictured : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (Player.instance.current.activator.current == GetComponent<Item>()) {
+        AdjustRotation();
+    }
+
+    private void AdjustRotation() {
+        if (item == null) {
+            return;
+        }
+        if (item.IsPicked) {
+            transform.localRotation = Quaternion.identity;
+            return;
+        }
+        if (Player.instance.current.activator.current == item) {
             var finalRotation = Quaternion.LookRotation(Player.instance.current.activator.transform.position - transform.position);
             finalRotation *= Quaternion.Euler(Vector3.down * 90);
             transform.rotation = Quaternion.Lerp(transform.rotation, finalRotation, Time.fixedDeltaTime * 5);

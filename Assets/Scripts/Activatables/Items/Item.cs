@@ -23,6 +23,12 @@ public class Item : Activatable
         renderer = GetComponent<Renderer>();
     }
 
+    public bool IsPicked {
+        get {
+            return inventorySlot != null;
+        }
+    }
+
     public override void Start() {
         base.Start();
         new ValueTracker<InventorySlot>(v => inventorySlot = v, () => inventorySlot);

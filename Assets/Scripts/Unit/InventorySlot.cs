@@ -116,6 +116,7 @@ public class InventorySlot : MonoBehaviour
         if (item.GetComponent<LastPositionKeeper>() != null) {
             item.GetComponent<LastPositionKeeper>().Reset();
         }
+        item.inventorySlot = null;
 
         Unsubscribe(inventory);
         item = null;
