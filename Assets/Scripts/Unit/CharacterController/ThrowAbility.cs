@@ -28,12 +28,15 @@ public class ThrowAbility : Ability
         UpdateForce();
     }
 
-    void PushItem(Item item, float force) {
-        item.transform.position = unit.eye.transform.position + unit.eye.transform.forward * initialDistance;
+    void PushItem(Item item, Vector3 pushPosition, Vector3 force) {
+        item.transform.position = pushPosition;
         if (item.GetComponent<LastPositionKeeper>() != null) {
             item.GetComponent<LastPositionKeeper>().Reset();
         }
-        item.GetComponent<Rigidbody>().AddForce(force * unit.eye.transform.forward);
+        item.GetComponent<Rigidbody>().AddForce(force / 50f, ForceMode.Impulse);
+        TimeManager.WaitFor(0.01f).Then(() => {
+            Debug.LogFormat("Item pushed at velocity {0}", item.GetComponent<Rigidbody>().velocity);
+        });
     }
 
     public void Throw() {
@@ -41,15 +44,14 @@ public class ThrowAbility : Ability
         unit.inventory.Lose(target);
         target.gameObject.SetActive(false);
 
-        var throwForce = currentForce;
+        var throwForce = currentForce * unit.eye.transform.forward;
+        var pushPosition = unit.eye.transform.position + unit.eye.transform.forward * initialDistance;
 
         TimeManager.WaitFor(throwDelay).Then(() => {
             target.gameObject.SetActive(true);
-            PushItem(target, throwForce);
+            PushItem(target, pushPosition, throwForce);
             target.GhostFor(unit);
-            if (DebugManager.debug) {
-                Debug.Log(String.Format("Thrown {0} at place {1}", target, target.transform.position.ExtToString()));
-            }
+            Debug.LogFormat("Thrown {0} at place {1}", target, target.transform.position.ExtToString());
             Reset();
         });
         Reset();

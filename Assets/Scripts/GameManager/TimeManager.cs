@@ -165,7 +165,11 @@ public class TimeManager : MonoBehaviour
         gameTime = 0;
         timeSubstitution = DynamicTextManager.instance.Substitute("#{gameTime}", () => {
             var span = TimeSpan.FromSeconds(stoppableGameTime);
-            return string.Format("{0}:{1:00}", (int)span.TotalMinutes, span.Seconds);
+            var result = string.Format("{0}:{1:00}.{2:00}", (int)span.TotalMinutes, span.Seconds, span.Milliseconds/10);
+            if (Time.timeScale != 1) {
+                result += string.Format(" (x{0:f1})", Time.timeScale);
+            }
+            return result;
         });
         new BoolTracker(v => timestopped = v, () => timestopped);
         new ValueTracker<float>(v => stoppableGameTime = gameTime + v, () => stoppableGameTime - gameTime);
