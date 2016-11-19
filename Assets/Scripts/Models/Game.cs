@@ -205,7 +205,7 @@ public class Game
         var trip = new Level("Trip", unpack);
         var extract = new Level("Extract", trip);
         var parcel = new Level("Parcel", trip);
-        var spiral = new Level("Parcel", forgotten, trip);
+        var spiral = new Level("Spiral", forgotten, trip);
 
         currentLevel = click;
         current = null;
