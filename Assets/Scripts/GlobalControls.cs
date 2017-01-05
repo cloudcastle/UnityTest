@@ -11,6 +11,9 @@ public class GlobalControls : MonoBehaviour {
     public float mouseRollingForce = 1;
 
     void Update() {
+        if (TimeManager.instance.Undoing()) {
+            return;
+        }
         if (Input.GetKey(KeyCode.UpArrow)) {
             transform.position += Vector3.forward * Time.deltaTime * moveSpeed;
         }

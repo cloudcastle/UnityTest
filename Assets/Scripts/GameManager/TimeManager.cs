@@ -2,6 +2,8 @@
 using System.Collections;
 using RSG;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class TimeManager : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class TimeManager : MonoBehaviour
 
     public static IPromiseTimer promiseTimer;
     public static IPromiseTimer stoppablePromiseTimer;
+
+    public List<IUndo> undos = new List<IUndo>();
 
     Substitution timeSubstitution;
 
@@ -67,7 +71,7 @@ public class TimeManager : MonoBehaviour
     static void UpdateTimeScale() {
         float timeScale = 1;
         if (Player.instance != null) {
-            if (Player.instance.Rewind()) {
+            if (Player.instance.Rewind() && Player.instance.current.rewind != null) {
                 timeScale *= Player.instance.current.rewind.timeMultiplyer;
             }
             if (Player.instance.current.slowmo != null && Player.instance.current.slowmo.on) {
@@ -135,11 +139,12 @@ public class TimeManager : MonoBehaviour
         stoppablePromiseTimer.Update(-100500);
 
         if (Undoing()) {
+            Debug.LogFormat("Undoing");
             gameTime -= Time.fixedDeltaTime;
             if (gameTime < 0) {
                 gameTime = 0;
             }
-            onUndo();
+            Undo();
         } else {
             if (Player.instance.current.transform.position.y < -1000) {
                 Time.timeScale = 0;
@@ -193,14 +198,26 @@ public class TimeManager : MonoBehaviour
     public event Action onUndo = () => { };
     public event Action onDrop = () => { };
     public event Action onTrack = () => { };
+    public event Action beforeTrack = () => { };
     public event Action onPushSampleCount = () => { };
 
     public bool Undoing() {
-        return Player.instance.current.undo != null && Player.instance.current.undo.Undoing();
+        return undos.Any(u => u.Undoing());
     }
 
-    public void Track() {
+    void Track() {
+        beforeTrack();
         onTrack();
+    }
+
+    void Undo() {
+        onUndo();
+    }
+
+    public void UndoToTime(float time) {
+        //Debug.LogFormat("Undoing from {0} to {1}", gameTime, time);
+        gameTime = time;
+        Undo();
     }
 
     /// <summary>

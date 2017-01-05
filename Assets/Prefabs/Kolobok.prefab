@@ -125,10 +125,10 @@ GameObject:
   - component: {fileID: 23815480433158160}
   - component: {fileID: 114855477511900636}
   - component: {fileID: 54848548613110582}
-  - component: {fileID: 114108468740280000}
   - component: {fileID: 114941664285642884}
   - component: {fileID: 114675622540588544}
   - component: {fileID: 114189200893016348}
+  - component: {fileID: 114043653855488554}
   m_Layer: 0
   m_Name: Kolobok
   m_TagString: Untagged
@@ -744,6 +744,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114043653855488554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1574873554222490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8b6ab81413d65419371195403288fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
+  velocityTracker:
+    name: 
+    sampleCount: 0
+  angularVelocityTracker:
+    name: 
+    sampleCount: 0
+  isKinematicTracker:
+    name: 
+    sampleCount: 0
 --- !u!114 &114059957947756978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -778,19 +799,6 @@ MonoBehaviour:
   current: {fileID: 0}
   currentBiasAngle: 0
   maxBiasAngle: 60
---- !u!114 &114108468740280000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1574873554222490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77b442d34d972ef4dac688f30bf8d7f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unit: {fileID: 0}
-  timeMultiplyer: 10
 --- !u!114 &114189200893016348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -873,6 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444166974a5906440b87266cc377646d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unit: {fileID: 0}
   underSight: {fileID: 0}
   distance: 0
 --- !u!114 &114326729389572716
