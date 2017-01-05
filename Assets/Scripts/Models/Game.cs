@@ -15,7 +15,7 @@ public class Game
     public List<Level> completedLevels = new List<Level>();
 
     public GameSettings settings = new GameSettings();
-
+     
     public Level currentLevel;
 
     public Vector2 levelGraphCameraPosition = Vector2.zero;

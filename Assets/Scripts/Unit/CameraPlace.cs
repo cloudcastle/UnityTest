@@ -3,8 +3,6 @@ using System.Collections;
 
 public class CameraPlace : Ability
 {
-    public float verticalRotateSpeed = 6.0F;
-
     public TimedValue<Vector3> lastPosition;
     public TimedValue<Vector3> secondLastPosition;
 

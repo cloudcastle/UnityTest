@@ -31,6 +31,9 @@ public class KeyColor : MonoBehaviour
     }
 
     public void Recalculate(Unit player) {
+        if (player.inventory == null) {
+            return;
+        }
         if (player.inventory.items.Any(item => {
             var key = item.GetComponent<Key>();
             return key != null && key.keyColor == this;

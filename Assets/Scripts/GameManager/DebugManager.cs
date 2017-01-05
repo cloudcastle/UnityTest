@@ -25,12 +25,15 @@ public class DebugManager : MonoBehaviour
 
     void Awake() {
         instance = this;
-        debugSubstitution = DynamicTextManager.instance.Substitute("#{debug}", () => debugMessage);
 
 #if UNITY_EDITOR
         Promise.EnablePromiseTracking = true;
         Promise.UnhandledException += Promise_UnhandledException;
 #endif
+    }
+
+    void Start() {
+        debugSubstitution = DynamicTextManager.instance.Substitute("#{debug}", () => debugMessage);
     }
 
 #if UNITY_EDITOR

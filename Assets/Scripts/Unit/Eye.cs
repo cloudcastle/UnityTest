@@ -11,14 +11,14 @@ public class Eye : MonoBehaviour
     void SetUnderSight(GameObject go, float distance) {
         if (go != underSight) {
             underSight = go;
-            //Debug.LogFormat("Under sight: {0}", go != null ? go.transform.Path() : "None");
+            Debug.LogFormat("Under sight: {0}", go != null ? go.transform.Path() : "None");
         }
         this.distance = distance;
     }
 
     void Update()
     {
-        if (TimeManager.Paused)
+        if (TimeManager.Paused) 
         {
             return;
         }

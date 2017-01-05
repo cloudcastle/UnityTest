@@ -125,7 +125,7 @@ namespace Parabox.InteractivePrimitives
 			LocalScale = Vector3.one;
 
 			msh.RecalculateNormals();
-			msh.Optimize();
+			;
 			
 			transform.localScale = Vector3.one;
 		}

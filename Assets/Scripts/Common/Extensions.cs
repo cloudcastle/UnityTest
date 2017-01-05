@@ -10,6 +10,16 @@ using System.Linq;
 
 public static class Extensions
 {
+
+    public static Vector4 Timed(this Vector3 v, float t) {
+        return new Vector4(v.x, v.y, v.z, t);
+    }
+
+    public static Vector3 xyz(this Vector4 v) {
+        return new Vector3(v.x, v.y, v.z);
+    }
+    
+    
     public static string Path(this GameObject obj)
     {
         string path = "/" + obj.name;
@@ -67,16 +77,6 @@ public static class Extensions
         c.a = alpha;
         material.color = c;
     }
-
-#if UNITY_EDITOR
-    public static bool Editor() {
-        return Application.isEditor && !EditorApplication.isPlaying;
-    }
-#else 
-    public static bool Editor() {
-        return false;
-    }
-#endif
 
     public static List<T> GetComponentsInDirectChildren<T>(this Component component) {
         List<T> result = new List<T>();
@@ -222,5 +222,96 @@ public static class Extensions
 
     public static int Modulo(int x, int y) {
         return (x % y + y) % y;
+    }
+
+
+    public static List<T> RndSelection<T>(this List<T> collection, int cnt) {
+        if (cnt > collection.Count) {
+            return collection;
+        }
+        List<T> result = new List<T>();
+        int trash = collection.Count - cnt;
+        collection.ForEach(x => {
+            if (UnityEngine.Random.Range(0, cnt + trash) < cnt) {
+                result.Add(x);
+                --cnt;
+            } else {
+                --trash;
+            }
+        });
+        return result;
+    }
+
+    public static List<T> Range<T>(this List<T> collection, int from, int to) {
+        if (from < 0) {
+            from = 0;
+        }
+        if (to >= collection.Count) {
+            to = collection.Count - 1;
+        }
+        return collection.GetRange(from, to - from + 1);
+    }
+
+    public static Vector2 Scaled(this Vector2 v, Vector2 scale) {
+        v.Scale(scale);
+        return v;
+    }
+
+    public static Vector2 Inverse(this Vector2 v) {
+        return new Vector2(1 / v.x, 1 / v.y);
+    }
+
+    public static Vector2 Clamp(this Vector2 v, Vector2 min, Vector2 max) {
+        return new Vector2(Mathf.Clamp(v.x, min.x, max.x), Mathf.Clamp(v.y, min.y, max.y));
+    }
+
+    public static Vector2 Clamp(this Vector2 v, Vector2 max) {
+        return Clamp(v, Vector2.zero, max);
+    }
+
+    public static double Rnd(double min, double max) {
+        return (double)(UnityEngine.Random.Range((float)min, (float)max));
+    }
+
+    public static float GaussianRnd() {
+        float sum = 0;
+        for (int i = 0; i < 12; i++) {
+            sum += UnityEngine.Random.Range(-1f, 1f);
+        }
+        return sum;
+    }
+
+    public static bool Editor(this MonoBehaviour x) {
+        return Editor();
+    }
+
+    public static bool Editor() {
+#if UNITY_EDITOR
+        return !EditorApplication.isPlaying;
+#else 
+        return false;
+#endif
+    }
+
+    public static void Destroy(this Component c) {
+        if (Editor()) {
+            UnityEngine.GameObject.DestroyImmediate(c.gameObject);
+        } else {
+            c.gameObject.SetActive(false);
+            UnityEngine.GameObject.Destroy(c.gameObject);
+        }
+    }
+
+    public static string i(this string s, params object[] args) {
+        return string.Format(s, args);
+    }
+
+    public static void SetName(this MonoBehaviour mb, string newName) {
+        if (mb.name != newName) {
+            mb.name = newName;
+#if UNITY_EDITOR
+            UnityEditor.Undo.RecordObject(mb, "Auto name change");
+#endif
+        }
     }
 }
