@@ -3,49 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Unsight : MonoBehaviour {
+public class Unsight : MonoBehaviour, IUndo, IRewind {
     public List<Eye> eyes = new List<Eye>();
     public float lastAcceptableTrackedTime;
 
     void Start() {
-        //TimeManager.instance.beforeTrack += BeforeTrack;
         eyes = FindObjectsOfType<Eye>().ToList();
+        lastAcceptableTrackedTime = float.PositiveInfinity;
+        TimeManager.instance.undos.Add(this);
+        TimeManager.instance.rewinds.Add(this);
     }
 
     void CheckEyes() {
-        return;
-        for (int i = 0; i < 100; i++) {
-            var badEyes = eyes.Where(eye => eye.GetUnderSight() == gameObject).ToList();
-            if (badEyes.Any()) {
-                TimeManager.instance.UndoToTime(TimeManager.GameTime-5);
-                badEyes.ForEach(eye => {
-                    var rigidBody = eye.unit.GetComponent<Rigidbody>();
-                    if (rigidBody != null) {
-                        rigidBody.velocity = Vector3.zero;
-                        rigidBody.angularVelocity = Vector3.zero;
-                    }
-                });
-                if (eyes.Any(eye => eye.GetUnderSight() == gameObject)) {
-                    Debug.LogFormat("Still bad");
-                } else {
-                    break;
-                }
-            } else {
-                lastAcceptableTrackedTime = TimeManager.GameTime;
-                break;
-            }
-        }
+        if (eyes.Where(eye => eye.GetUnderSight() == gameObject).Any()) {
+            lastAcceptableTrackedTime = TimeManager.GameTime - 5;
+        } 
     }
 
-    //void BeforeTrack() {
-    //    //CheckEyes();
-    //}
+    public bool Undoing() {
+        if (TimeManager.GameTime < lastAcceptableTrackedTime || TimeManager.GameTime == 0) {
+            lastAcceptableTrackedTime = float.PositiveInfinity;
+        }
+        return lastAcceptableTrackedTime < float.PositiveInfinity;
+    }
+
+    public float Rewinding() {
+        return lastAcceptableTrackedTime < float.PositiveInfinity ? 5 : 1;
+    }
 
     void Update() {
         CheckEyes();
     }
-
-    //public void OnEye(Unit unit) {
-    //    GameLose.instance.Lose();
-    //}
 }

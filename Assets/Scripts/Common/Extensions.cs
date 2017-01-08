@@ -224,7 +224,6 @@ public static class Extensions
         return (x % y + y) % y;
     }
 
-
     public static List<T> RndSelection<T>(this List<T> collection, int cnt) {
         if (cnt > collection.Count) {
             return collection;

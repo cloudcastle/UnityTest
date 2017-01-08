@@ -13,6 +13,8 @@ public class TimeManager : MonoBehaviour
     public static IPromiseTimer stoppablePromiseTimer;
 
     public List<IUndo> undos = new List<IUndo>();
+    public List<ISlowmo> slowmos = new List<ISlowmo>();
+    public List<IRewind> rewinds = new List<IRewind>();
 
     Substitution timeSubstitution;
 
@@ -71,12 +73,8 @@ public class TimeManager : MonoBehaviour
     static void UpdateTimeScale() {
         float timeScale = 1;
         if (Player.instance != null) {
-            if (Player.instance.Rewind() && Player.instance.current.rewind != null) {
-                timeScale *= Player.instance.current.rewind.timeMultiplyer;
-            }
-            if (Player.instance.current.slowmo != null && Player.instance.current.slowmo.on) {
-                timeScale *= Player.instance.current.slowmo.timeMultiplyer;
-            }
+            timeScale *= instance.Rewinding();
+            timeScale *= instance.Slowmo();
             if (Player.instance.current.transform.position.y < -1000f && !Player.instance.Undo()) {
                 timeScale = 0;
             }
@@ -203,6 +201,20 @@ public class TimeManager : MonoBehaviour
 
     public bool Undoing() {
         return undos.Any(u => u.Undoing());
+    }
+
+    public float Slowmo() {
+        if (slowmos.Count == 0) {
+            return 1;
+        }
+        return slowmos.Min(u => u.SlowmoMultiplier());
+    }
+
+    public float Rewinding() {
+        if (rewinds.Count == 0) {
+            return 1;
+        }
+        return rewinds.Max(u => u.Rewinding());
     }
 
     void Track() {

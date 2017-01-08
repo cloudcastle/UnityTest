@@ -27,7 +27,7 @@ public class LevelTimedRestarter : MonoBehaviour
             return;
         }
         if (RemainingTime() < 0) {
-            GameManager.instance.Play(GameManager.instance.CurrentLevel());
+            GameManager.instance.Restart();
         }
         if (LevelRealTime() > 3) {
             timerText.gameObject.SetActive(true);
