@@ -89,10 +89,12 @@ public class GlobalControls : MonoBehaviour {
             av = av.normalized;
         }
 
+
+
         RollForce(-av / 20);
 
-        GetComponent<Rigidbody>().AddRelativeTorque(Vector3.left * Time.deltaTime * mouseRollingForce * Input.GetAxis("Mouse Y") / radius * Mathf.Rad2Deg, ForceMode.Force);
-        GetComponent<Rigidbody>().AddRelativeTorque(Vector3.up * Time.deltaTime * mouseRollingForce * Input.GetAxis("Mouse X") / radius * Mathf.Rad2Deg, ForceMode.Force);
+        GetComponent<Rigidbody>().AddRelativeTorque(Vector3.left * Time.deltaTime * mouseRollingForce * Input.GetAxis("Mouse Y")*GameManager.game.settings.mouseSpeed / radius * Mathf.Rad2Deg, ForceMode.Force);
+        GetComponent<Rigidbody>().AddRelativeTorque(Vector3.up * Time.deltaTime * mouseRollingForce * Input.GetAxis("Mouse X")*GameManager.game.settings.mouseSpeed / radius * Mathf.Rad2Deg, ForceMode.Force);
     }
 
     void RollForce(Vector3 around) {
