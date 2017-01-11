@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
@@ -45,3 +46,5 @@ public class PortalNodeCreation : Command
         parent.children.Add(child);
     }
 }
+
+#endif

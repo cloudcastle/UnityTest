@@ -5,7 +5,6 @@ using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-#endif
 
 public class EditManager : MonoBehaviour
 {
@@ -27,7 +26,6 @@ public class EditManager : MonoBehaviour
         this.on = on;
     }
 
-    #if UNITY_EDITOR
     void PortalRay(Ray ray) {
         PortalNode portalNode = null;
         Portal.Raycast(ray, out hit, portalSurface => {
@@ -88,5 +86,7 @@ public class EditManager : MonoBehaviour
             });
         });
     }
-    #endif
 }
+
+
+#endif
