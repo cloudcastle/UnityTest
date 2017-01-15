@@ -8,7 +8,7 @@ using System;
 [RequireComponent(typeof(UnitGeometryController))]
 public class Ground : MonoBehaviour
 {
-    const float groundedVerticalVelocity = -1f;
+    public float groundedVerticalVelocity = -1f;
 
     UnitGeometryController characterController;
 
