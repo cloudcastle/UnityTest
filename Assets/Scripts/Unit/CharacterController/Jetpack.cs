@@ -5,19 +5,19 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(Move))]
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(UnitGeometryController))]
 public class Jetpack : Ability
 {
     public float acceleration = 22;
     public float ignitionTime = 1;
     public float ignitionTimePassed = 0;
 
-    CharacterController characterController;
+    UnitGeometryController characterController;
     Move move;
 
     public override void Awake() {
         base.Awake();
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<UnitGeometryController>();
         move = GetComponent<Move>();
     }
 
@@ -28,7 +28,7 @@ public class Jetpack : Ability
                 move.Accelerate(acceleration * Vector3.up * Time.fixedDeltaTime);
             }
         }
-        if (characterController.isGrounded) {
+        if (characterController.IsGrounded()) {
             ignitionTimePassed = 0;
         }
     }

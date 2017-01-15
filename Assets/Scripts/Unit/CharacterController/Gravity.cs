@@ -9,11 +9,11 @@ public class Gravity : MonoBehaviour
 {
     public float gravity = 20;
 
-    CharacterController characterController;
+    UnitGeometryController characterController;
     Move move;
 
     void Awake() {
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<UnitGeometryController>();
         move = GetComponent<Move>();
     }
 
@@ -21,7 +21,7 @@ public class Gravity : MonoBehaviour
         if (TimeManager.Paused) {
             return;
         }
-        if (!characterController.isGrounded) {
+        if (!characterController.IsGrounded()) {
             move.Accelerate(Time.fixedDeltaTime * gravity * Vector3.down);
         }
     }

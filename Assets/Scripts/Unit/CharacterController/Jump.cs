@@ -5,14 +5,14 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(Move))]
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(UnitGeometryController))]
 public class Jump : Ability
 {
     public float jumpSpeed = 8;
 
     bool jumpScheduled = false;
 
-    CharacterController characterController;
+    UnitGeometryController characterController;
 
     float HalfTickGravityCorrection() {
         return Time.fixedDeltaTime * unit.gravity.gravity / 2; 
@@ -20,7 +20,7 @@ public class Jump : Ability
 
     public override void Awake() {
         base.Awake();
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<UnitGeometryController>();
     }
 
     public override void InitInternal() {
@@ -28,7 +28,7 @@ public class Jump : Ability
     }
 
     void Update() {
-        if (enabled && characterController.isGrounded && unit.controller.Jump()) {
+        if (enabled && characterController.IsGrounded() && unit.controller.Jump()) {
             jumpScheduled = true;
         }
     }

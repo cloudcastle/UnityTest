@@ -7,7 +7,7 @@ using System;
 public class JumpRB : AbilityRB
 {
     public float jumpSpeed = 8;
-    public GroundRB ground;
+    public GroundCheckRB ground;
 
     bool jumpScheduled = false;
 
@@ -21,7 +21,7 @@ public class JumpRB : AbilityRB
 
     public override void Awake() {
         base.Awake();
-        ground = GetComponent<GroundRB>();
+        ground = GetComponent<GroundCheckRB>();
     }
 
     void Update() {

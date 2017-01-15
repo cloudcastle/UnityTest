@@ -5,13 +5,9 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class GroundRB : AbilityRB
+public class GroundCheckRB : MonoBehaviour
 {
     public bool grounded;
-
-    public override void Awake() {
-        base.Awake();
-    }
 
     public void FixedUpdate() {
         var preDistance = 0.01f;
@@ -21,6 +17,7 @@ public class GroundRB : AbilityRB
         var startPosition = Vector3.up * preDistance;
         var a = startPosition + Vector3.up * delta;
         var b = startPosition - Vector3.up * delta;
-        grounded = Physics.CapsuleCast(transform.TransformPoint(a), transform.TransformPoint(b), radius, transform.TransformDirection(Vector3.down), preDistance + postDistance);
+        var result = Physics.CapsuleCastAll(transform.TransformPoint(a), transform.TransformPoint(b), radius, transform.TransformDirection(Vector3.down), preDistance + postDistance);
+        grounded = result.Count() > 1;
     }
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-[RequireComponent(typeof(CharacterController))]
 public class Rotate : Ability
 {
     public float rotateSpeed = 6.0F;

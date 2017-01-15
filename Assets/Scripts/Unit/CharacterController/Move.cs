@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CCUnitController))]
 public class Move : MonoBehaviour
 {
     const float MAX_SPEED = 300f;
@@ -18,7 +18,7 @@ public class Move : MonoBehaviour
 
     public List<Func<Vector3>> additionalVelocities = new List<Func<Vector3>>();
 
-    CharacterController controller;
+    UnitGeometryController controller;
     ChangeScale changeScale;
 
     Ground ground;
@@ -27,7 +27,7 @@ public class Move : MonoBehaviour
 
     void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        controller = GetComponent<UnitGeometryController>();
         changeScale = GetComponent<ChangeScale>();
 
         ground = GetComponent<Ground>();
@@ -61,7 +61,7 @@ public class Move : MonoBehaviour
 
     void FixedUpdate() {
         readonlyVelocity = velocity;
-        readonlyGrounded = controller.isGrounded;
+        readonlyGrounded = controller.IsGrounded();
         if (TimeManager.Paused)
         {
             return;
@@ -80,7 +80,7 @@ public class Move : MonoBehaviour
             ChangeVelocity(antigravityEffect.ChangeVelocity);
         }
 
-        controller.Move(currentScale() * TotalVelocity() * Time.fixedDeltaTime);
+        controller.SetVelocity(currentScale() * TotalVelocity());
 
         angularVelocity.x = angularVelocity.z = 0;
         transform.Rotate(Time.fixedDeltaTime * angularVelocity, Space.World);
