@@ -7,6 +7,6 @@ public class UndoImageEffect : MonoBehaviour
     public PostEffectsBase effect;
 
     void Update() {
-        effect.enabled = TimeManager.instance.Undoing() && false;
+        effect.enabled = TimeManager.instance.Undoing();
     }
 }

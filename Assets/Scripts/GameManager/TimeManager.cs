@@ -137,7 +137,6 @@ public class TimeManager : MonoBehaviour
         stoppablePromiseTimer.Update(-100500);
 
         if (Undoing()) {
-            Debug.LogFormat("Undoing");
             gameTime -= Time.fixedDeltaTime;
             if (gameTime < 0) {
                 gameTime = 0;
