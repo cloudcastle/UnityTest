@@ -15,7 +15,7 @@ public class Walk : Ability
         base.Awake();
         GetComponent<Move>().additionalVelocities.Add(() => {
             var move = new Vector3(Controller.Move().x, 0, Controller.Move().y);
-            move = transform.TransformDirection(move);
+            //move = transform.TransformDirection(move);
             if (move.magnitude > 1) {
                 move.Normalize();
             }

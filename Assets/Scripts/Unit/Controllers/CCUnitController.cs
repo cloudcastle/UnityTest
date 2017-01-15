@@ -18,6 +18,6 @@ public class CCUnitController : UnitGeometryController
     }
 
     public override void SetVelocity(Vector3 v) {
-        characterController.Move(v * Time.fixedDeltaTime);
+        characterController.Move(transform.TransformVector(v) * Time.fixedDeltaTime);
     }
 }

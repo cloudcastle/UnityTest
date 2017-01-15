@@ -21,6 +21,6 @@ public class RBUnitController : UnitGeometryController
     }
 
     public override void SetVelocity(Vector3 v) {
-        rigidBody.velocity = v;
+        rigidBody.velocity = transform.TransformVector(v);
     }
 }

@@ -14,6 +14,6 @@ public class Rotate : Ability
         {
             return;
         }
-        transform.Rotate(0, unit.controller.Mouse().x * GameManager.game.settings.mouseSpeed * rotateSpeed, 0, Space.World);
+        transform.Rotate(0, unit.controller.Mouse().x * GameManager.game.settings.mouseSpeed * rotateSpeed, 0, Space.Self);
     }
 }
