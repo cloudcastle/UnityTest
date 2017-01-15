@@ -14,6 +14,6 @@ public class GravityRB : AbilityRB
     }
 
     void FixedUpdate() {
-        rb.AddForce(gravity, ForceMode.Acceleration);
+        rb.AddForce(transform.TransformDirection(gravity), ForceMode.Acceleration);
     }
 }

@@ -12,7 +12,6 @@ public class WalkRB : AbilityRB
 
     public Vector3 Move() {
         var move = new Vector3(Controller.Move().x, 0, Controller.Move().y);
-        move = transform.TransformDirection(move);
         if (move.magnitude > 1) {
             move.Normalize();
         }
@@ -24,6 +23,7 @@ public class WalkRB : AbilityRB
 
     void FixedUpdate() {
         var move = Move();
-        rb.velocity = rb.velocity.Change(x: move.x, z: move.z);
+        var localVelocity = transform.InverseTransformVector(rb.velocity);
+        rb.velocity = transform.TransformVector(localVelocity.Change(x: move.x, z: move.z));
     }
 }

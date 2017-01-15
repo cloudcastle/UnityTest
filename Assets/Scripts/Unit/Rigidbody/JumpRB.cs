@@ -7,6 +7,7 @@ using System;
 public class JumpRB : AbilityRB
 {
     public float jumpSpeed = 8;
+    public GroundRB ground;
 
     bool jumpScheduled = false;
 
@@ -18,8 +19,13 @@ public class JumpRB : AbilityRB
         jumpSpeed += TimeManager.defaultFixedDeltaTime * Physics.gravity.magnitude / 2;
     }
 
+    public override void Awake() {
+        base.Awake();
+        ground = GetComponent<GroundRB>();
+    }
+
     void Update() {
-        if (enabled && unit.controller.Jump()) {
+        if (enabled && unit.controller.Jump() && ground.grounded) {
             jumpScheduled = true;
         }
     }
@@ -32,7 +38,7 @@ public class JumpRB : AbilityRB
 
     private void Jump() {
         var y = jumpSpeed - HalfTickGravityCorrection();
-        rb.velocity = rb.velocity.Change(y: y);
+        rb.velocity = transform.TransformVector(transform.InverseTransformVector(rb.velocity).Change(y: y));
         Debug.LogFormat("Jump, rb.velocity = {0}", rb.velocity);
         jumpScheduled = false;
     }
