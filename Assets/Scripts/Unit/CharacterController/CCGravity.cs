@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(Move))]
-public class Gravity : MonoBehaviour
+public class CCGravity : MonoBehaviour
 {
     public float gravity = 20;
 

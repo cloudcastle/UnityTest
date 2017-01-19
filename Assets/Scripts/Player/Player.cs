@@ -82,6 +82,10 @@ public class Player : UnitController
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
+    public override Vector2 MoveGravity() {
+        return new Vector2(Input.GetAxis("Horizontal 2"), Input.GetAxis("Vertical 2"));
+    }
+
     public override bool NextItem() {
         return Input.GetButtonDown("Next Item") || Input.GetAxisRaw("Mouse ScrollWheel") < 0;
     }

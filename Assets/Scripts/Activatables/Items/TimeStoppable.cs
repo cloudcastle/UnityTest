@@ -3,11 +3,11 @@
 [RequireComponent(typeof(Rigidbody))]
 public class TimeStoppable : MonoBehaviour
 {
-    Vector3 savedVelocity;
-    Vector3 savedAngularVelocity;
+    public Vector3 savedVelocity;
+    public Vector3 savedAngularVelocity;
     Rigidbody rigidBody;
 
-    bool timeStopped = false;
+    public bool timeStopped = false;
 
     void Awake() {
         rigidBody = GetComponent<Rigidbody>();
@@ -28,6 +28,7 @@ public class TimeStoppable : MonoBehaviour
             savedAngularVelocity = rigidBody.angularVelocity;
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
+            rigidBody.isKinematic = true;
             rigidBody.useGravity = false;
             timeStopped = true;
         }
@@ -45,6 +46,7 @@ public class TimeStoppable : MonoBehaviour
             rigidBody.velocity = savedVelocity;
             rigidBody.angularVelocity = savedAngularVelocity;
             rigidBody.useGravity = true;
+            rigidBody.isKinematic = false;
             timeStopped = false;
         }
     }

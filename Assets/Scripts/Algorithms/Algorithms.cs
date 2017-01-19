@@ -38,4 +38,16 @@ public class Algorithms
             });
         }
     }
+
+    public static float BinarySearch(float min, float max, Predicate<float> smallEnough, float eps = 1e-4f) {
+        var current = min;
+        var step = (max - min) / 2;
+        while (step > eps) {
+            if (smallEnough(current + step)) {
+                current += step;
+            }
+            step /= 2;
+        }
+        return current;
+    }
 }

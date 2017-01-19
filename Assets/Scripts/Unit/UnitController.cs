@@ -47,6 +47,8 @@ public abstract class UnitController : MonoBehaviour
 
     public abstract Vector2 Move();
 
+    public abstract Vector2 MoveGravity();
+
     public abstract bool Undo();
 
     public abstract bool NextItem();

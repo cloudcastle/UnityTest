@@ -38,6 +38,10 @@ public class EmptyUnitController : UnitController
         return Vector2.zero;
     }
 
+    public override Vector2 MoveGravity() {
+        return Vector2.zero;
+    }
+
     public override bool NextItem() {
         return false;
     }
