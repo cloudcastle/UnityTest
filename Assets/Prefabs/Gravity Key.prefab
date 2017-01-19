@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 114989333822451014}
   - component: {fileID: 114541776458063146}
   - component: {fileID: 114185951500273862}
+  - component: {fileID: 114588588820753422}
   m_Layer: 10
   m_Name: Gravity Key
   m_TagString: Untagged
@@ -221,6 +222,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxVelocity: 300
+--- !u!114 &114588588820753422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291676832703304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2fe42e0e1eb714ebd340f3ddde6334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: {x: 0, y: -10, z: 0}
+  rigidBody: {fileID: 0}
 --- !u!114 &114671545059185550
 MonoBehaviour:
   m_ObjectHideFlags: 1

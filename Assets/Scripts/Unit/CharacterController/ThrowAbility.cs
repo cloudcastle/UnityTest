@@ -33,7 +33,11 @@ public class ThrowAbility : Ability
         if (item.GetComponent<LastPositionKeeper>() != null) {
             item.GetComponent<LastPositionKeeper>().Reset();
         }
-        item.GetComponent<Rigidbody>().AddForce(force / 50f, ForceMode.Impulse);
+        if (item.GetComponent<TimeStoppable>() != null && item.GetComponent<TimeStoppable>().timeStopped) {
+            item.GetComponent<TimeStoppable>().savedVelocity = force / 50f;
+        } else {
+            item.GetComponent<Rigidbody>().velocity = force / 50f;
+        }
         TimeManager.WaitFor(0.01f).Then(() => {
             Debug.LogFormat("Item pushed at velocity {0}", item.GetComponent<Rigidbody>().velocity);
         });
@@ -51,7 +55,6 @@ public class ThrowAbility : Ability
             target.gameObject.SetActive(true);
             PushItem(target, pushPosition, throwForce);
             target.GhostFor(unit);
-            Debug.LogFormat("Thrown {0} at place {1}", target, target.transform.position.ExtToString());
             Reset();
         });
         Reset();

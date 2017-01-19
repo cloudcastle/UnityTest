@@ -111,7 +111,9 @@ public class InventorySlot : MonoBehaviour
         item.transform.SetParent(null, worldPositionStays: false);
 
         if (item.GetComponent<Rigidbody>() != null) {
-            item.GetComponent<Rigidbody>().isKinematic = false;
+            if (item.GetComponent<TimeStoppable>() == null || !item.GetComponent<TimeStoppable>().timeStopped) {
+                item.GetComponent<Rigidbody>().isKinematic = false;
+            }
         }
         if (item.GetComponent<LastPositionKeeper>() != null) {
             item.GetComponent<LastPositionKeeper>().Reset();

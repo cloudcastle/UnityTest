@@ -929,6 +929,131 @@ Material:
     - first:
         name: _SpecColor
       second: {r: 0, g: 0, b: 0, a: 0}
+--- !u!21 &1332696371
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ColorSphere
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _BumpMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailAlbedoMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailMask
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DetailNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EmissionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MetallicGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _OcclusionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ParallaxMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _BumpScale
+      second: 1
+    - first:
+        name: _Cutoff
+      second: 0.5
+    - first:
+        name: _DetailNormalMapScale
+      second: 1
+    - first:
+        name: _DstBlend
+      second: 0
+    - first:
+        name: _GlossMapScale
+      second: 1
+    - first:
+        name: _Glossiness
+      second: 0.5
+    - first:
+        name: _GlossyReflections
+      second: 1
+    - first:
+        name: _Metallic
+      second: 1
+    - first:
+        name: _Mode
+      second: 0
+    - first:
+        name: _OcclusionStrength
+      second: 1
+    - first:
+        name: _Parallax
+      second: 0.02
+    - first:
+        name: _SmoothnessTextureChannel
+      second: 0
+    - first:
+        name: _SpecularHighlights
+      second: 1
+    - first:
+        name: _SrcBlend
+      second: 1
+    - first:
+        name: _UVSec
+      second: 0
+    - first:
+        name: _ZWrite
+      second: 1
+    m_Colors:
+    - first:
+        name: _Color
+      second: {r: 0, g: 1, b: 0, a: 0}
+    - first:
+        name: _EmissionColor
+      second: {r: 0.008, g: 0.008, b: 0.008, a: 1}
 --- !u!1001 &1452017762
 Prefab:
   m_ObjectHideFlags: 0
@@ -1007,7 +1132,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1958174986
+--- !u!114 &1685889669 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11485212, guid: d0f0214cf048b8d4783fb0e7d3e91058,
+    type: 2}
+  m_PrefabInternal: {fileID: 1452017762}
+  m_Script: {fileID: 11500000, guid: f33fd535e524e304d9270de07df11d35, type: 3}
+--- !u!1001 &1852741004
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1024,7 +1155,68 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
       propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalRotation.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114253706006672760, guid: 7861864f4a8d1b04e998d888ab0cc634,
+        type: 2}
+      propertyPath: keyColor
+      value: 
+      objectReference: {fileID: 1685889669}
+    - target: {fileID: 23820332152348950, guid: 7861864f4a8d1b04e998d888ab0cc634,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1332696371}
+    - target: {fileID: 114588588820753422, guid: 7861864f4a8d1b04e998d888ab0cc634,
+        type: 2}
+      propertyPath: gravity.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291676832703304, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_Name
+      value: Gravity Key (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1958174986
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4018160012683498, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1056,6 +1248,20 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 89397255}
+    - target: {fileID: 114588588820753422, guid: 7861864f4a8d1b04e998d888ab0cc634,
+        type: 2}
+      propertyPath: gravity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114588588820753422, guid: 7861864f4a8d1b04e998d888ab0cc634,
+        type: 2}
+      propertyPath: gravity.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291676832703304, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7861864f4a8d1b04e998d888ab0cc634, type: 2}
   m_IsPrefabParent: 0

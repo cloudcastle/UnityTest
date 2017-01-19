@@ -33,20 +33,25 @@ public class TimeStoppable : MonoBehaviour
             timeStopped = true;
         }
         if (TimeManager.timestopped) {
-            if (rigidBody.velocity != Vector3.zero) {
-                savedVelocity = rigidBody.velocity;
-            }
-            if (rigidBody.angularVelocity != Vector3.zero) {
-                savedAngularVelocity = rigidBody.angularVelocity;
-            }
-            rigidBody.velocity = Vector3.zero;
-            rigidBody.angularVelocity = Vector3.zero;
+            //if (rigidBody.velocity != Vector3.zero) {
+            //    Debug.LogFormat("Resaving velocity");
+            //    savedVelocity = rigidBody.velocity;
+            //}
+            //if (rigidBody.angularVelocity != Vector3.zero) {
+            //    savedAngularVelocity = rigidBody.angularVelocity;
+            //}
+            //rigidBody.velocity = Vector3.zero;
+            //rigidBody.angularVelocity = Vector3.zero;
         }
         if (timeStopped && !TimeManager.timestopped) {
             rigidBody.velocity = savedVelocity;
             rigidBody.angularVelocity = savedAngularVelocity;
-            rigidBody.useGravity = true;
-            rigidBody.isKinematic = false;
+            if (GetComponent<Gravity>() == null) {
+                rigidBody.useGravity = true;
+            }
+            if (GetComponent<Item>() == null || GetComponent<Item>().inventorySlot == null) {
+                rigidBody.isKinematic = false;
+            }
             timeStopped = false;
         }
     }
