@@ -22,6 +22,6 @@ public class Slowmo : Ability, ISlowmo
     }
 
     public float SlowmoMultiplier() {
-        return on && Player.instance.current == Controller ? timeMultiplyer : 1;
+        return on && (Player.instance == Controller) ? timeMultiplyer : 1;
     }
 }
