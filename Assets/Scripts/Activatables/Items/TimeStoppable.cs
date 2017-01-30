@@ -16,7 +16,9 @@ public class TimeStoppable : MonoBehaviour
     void Start() {
         new BoolTracker(v => {
             timeStopped = v;
-            rigidBody.useGravity = !v;
+            if (GetComponent<Gravity>() == null) {
+                rigidBody.useGravity = !v;
+            }
         }, () => timeStopped);
         new Vector3Tracker(v => savedVelocity = v, () => savedVelocity);
         new Vector3Tracker(v => savedAngularVelocity = v, () => savedAngularVelocity);
@@ -29,7 +31,9 @@ public class TimeStoppable : MonoBehaviour
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
             rigidBody.isKinematic = true;
-            rigidBody.useGravity = false;
+            if (GetComponent<Gravity>() == null) {
+                rigidBody.useGravity = false;
+            }
             timeStopped = true;
         }
         if (TimeManager.timestopped) {

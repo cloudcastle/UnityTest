@@ -48,6 +48,10 @@ public class Portal : MonoBehaviour
                     rigidbody.velocity = TeleportDirection(rigidbody.velocity);
                     rigidbody.angularVelocity = TeleportDirection(rigidbody.angularVelocity);
                 }
+                var gravity = obj.GetComponent<Gravity>();
+                if (gravity != null) {
+                    gravity.gravity = TeleportDirection(gravity.gravity);
+                }
                 Vector3 oldScale = obj.transform.localScale;
                 obj.transform.SetParent(front.transform, worldPositionStays: true);
                 obj.transform.SetParent(this.other.back, worldPositionStays: false);
