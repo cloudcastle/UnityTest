@@ -94,7 +94,7 @@ public class Game
         var qeMouseWheel = new Level("QE mouse wheel", walkthrough);
 
         // Keys
-        var greenCabin = new Level("Green Cabin", qeMouseWheel);
+        var greenCabin = new Level("Green cabin", qeMouseWheel);
         var blueDoor = new Level("Blue door", greenCabin);
         var merge = new Level("Merge", greenCabin);
         var push = new Level("Push", merge);
@@ -164,8 +164,8 @@ public class Game
         var doubleDive = new Level("Double dive", apart);
         var farewell = new Level("Farewell", doubleDive);
         var invite = new Level("Invite", farewell, traverse);
-        var williamTell = new Level("Willam Tell", deal, open);
-        var notWilliamTell = new Level("Not Willam Tell", williamTell, open);
+        var williamTell = new Level("William Tell", deal, open);
+        var notWilliamTell = new Level("Not William Tell", williamTell, open);
 
         // Slowmo
         var doubleJump = new Level("Double jump", doubleDive, v);

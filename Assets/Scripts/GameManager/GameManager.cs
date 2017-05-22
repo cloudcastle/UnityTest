@@ -101,8 +101,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void NewGame() {
-        game = new Game();
-        Play(game.levels.First());
+        UI.instance.Confirm(() => {
+            game = new Game();
+            Play(game.levels.First());
+        }, "WIPE ALL PROGRESS???");
     }
 
     public void Map() {
