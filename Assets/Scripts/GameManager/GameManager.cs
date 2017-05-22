@@ -67,11 +67,15 @@ public class GameManager : MonoBehaviour
         LevelUI.instance.Game();
     }
 
-    public void Restart() {
+    public void Restart(bool confirm = true) {
         if (CurrentLevel() != null) {
-            LevelUI.instance.Confirm(() => {
+            if (confirm) {
+                LevelUI.instance.Confirm(() => {
+                    Play(CurrentLevel());
+                }, "Restart");
+            } else {
                 Play(CurrentLevel());
-            }, "Restart");
+            }
         } else {
             if (!OnMap()) {
                 LevelUI.instance.Confirm(() => {
