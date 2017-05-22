@@ -45,8 +45,9 @@ public class LevelNode : MonoBehaviour
     }
 #endif
 
-    void Start() {
+    public void Start() {
         this.level = GameManager.game.levels.First(l => l.name == levelName);
+        Update();
     }
 
     public bool Hovered() {

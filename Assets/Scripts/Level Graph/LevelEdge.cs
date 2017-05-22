@@ -22,6 +22,12 @@ public class LevelEdge : MonoBehaviour
         });
     }
 
+    void Start() {
+        from.Start();
+        to.Start();
+        Update();
+    }
+
     void Update() {
         if (Extensions.Editor()) {
             if (from != null && to != null) {
