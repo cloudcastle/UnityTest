@@ -33,6 +33,7 @@ public class LevelEdge : MonoBehaviour
             }
         } else {
             SetEmission(from.Emission());
+            renderers.ToList().ForEach(r => r.enabled = from.visible && to.visible || Cheats.on);
         }
     }
 }

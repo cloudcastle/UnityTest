@@ -115,8 +115,9 @@ public class LevelNode : MonoBehaviour
             renderer.enabled = textRenderer.enabled = visible;
             UpdateTextMeshSize();
         } else {
+            visible = level.Unlocked() || Cheats.on;
             SetEmission(Emission());
-
+            renderer.enabled = textRenderer.enabled = visible;
             UpdateTextMeshSize();
         }
     }
