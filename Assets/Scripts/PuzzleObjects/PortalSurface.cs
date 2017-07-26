@@ -19,11 +19,15 @@ public class PortalSurface : MonoBehaviour
 
     public static PortalNode renderingPortalNode = null;
 
+    public void Start() {
+        portalMaterial = Instantiate(portalMaterial);
+    }
+
     public void SetDepth(int depth) {
         var camera = portal.GetCamera(depth);
         if (camera.GetComponent<PortalCamera>().rendered) {
-            offsetRenderer.material = renderer.material = portalMaterial;
-            offsetRenderer.material.mainTexture = renderer.material.mainTexture = camera.targetTexture;
+            offsetRenderer.sharedMaterial = renderer.sharedMaterial = portalMaterial;
+            offsetRenderer.sharedMaterial.mainTexture = renderer.sharedMaterial.mainTexture = camera.targetTexture;
         } else {
             offsetRenderer.material = renderer.material = fogMaterial;
         }
