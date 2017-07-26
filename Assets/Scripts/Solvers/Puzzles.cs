@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 0168 // variable declared but not used.
+#pragma warning disable 0219 // variable declared but not used.
 
 using System.Collections;
 using System.Collections.Generic;

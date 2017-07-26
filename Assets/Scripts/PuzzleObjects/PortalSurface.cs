@@ -57,6 +57,7 @@ public class PortalSurface : MonoBehaviour
             renderingPortalNode = child;
             camera.Render();
             DebugManager.cnt++;
+            DebugManager.drawnPortals.Add(renderingPortalNode.transform.Path());
             depth -= 1;
             renderingPortalNode = parent;
             camera.GetComponent<PortalCamera>().rendered = true;

@@ -9,7 +9,7 @@ public class ValueTracker<T>
 {
     public string name;
 
-    static int cnt;
+    public static int cnt;
 
     public int sampleCount;
 

@@ -15,6 +15,8 @@ public class DebugManager : MonoBehaviour
 
     public static int cnt = 0;
 
+    public static List<string> drawnPortals = new List<string>();
+
     public static string debugMessage = "";
     public static Substitution debugSubstitution;
 
@@ -61,6 +63,7 @@ public class DebugManager : MonoBehaviour
     void Update() {
         if (debugOneFrame) {
             Debug.LogFormat("cnt = {0}", DebugManager.cnt);
+            Debug.LogFormat("drawnPortals = {0}", DebugManager.drawnPortals.ExtToString());
             debugOneFrame = false;
             debug = oldDebug;
         }
@@ -74,8 +77,9 @@ public class DebugManager : MonoBehaviour
                     }
                 });
             });
+            Debug.LogFormat("Trackers: {0}", ValueTracker<double>.cnt);
         }
-        if (Input.GetKeyDown(KeyCode.F11)) {
+        if (Input.GetKeyDown(KeyCode.O)) {
             FindObjectsOfType<LinkScript>().ToList().ForEach(link => {
                 link.AssertAcceptable();
             });
@@ -88,6 +92,7 @@ public class DebugManager : MonoBehaviour
             Debug.LogFormat("Debug: {0}", debug);
         }
         DebugManager.cnt = 0;
+        DebugManager.drawnPortals.Clear();
     }
 
     [ContextMenu("Experiment")]
