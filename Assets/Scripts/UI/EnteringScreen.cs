@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class EnteringScreen : UIScreen {
-    float delay = 0.5f;
-    const float disappearingTime = 0.25f;
+    public float delay = 1f;
+    public float disappearingTime = 1f;
     CanvasGroup group;
 
     void Awake() {

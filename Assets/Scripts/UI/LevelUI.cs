@@ -18,6 +18,10 @@ public class LevelUI : UI {
         instance = this;
     }
 
+    public void Start() {
+        enteringScreen.Show();
+    }
+
     protected override void HideAllUIScreens() {
         base.HideAllUIScreens();
         completionScreen.Hide();
