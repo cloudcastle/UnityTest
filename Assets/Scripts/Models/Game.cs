@@ -67,7 +67,7 @@ public class Game
 
         // Lifts Tricks
         var rhythm = new Level("Rhythm", order, shift);
-        var secondBeat = new Level("Second Beat", rhythm);
+        var secondBeat = new Level("Second beat", rhythm);
         var trio = new Level("Trio", secondBeat);
 
         // Moving Surfaces
