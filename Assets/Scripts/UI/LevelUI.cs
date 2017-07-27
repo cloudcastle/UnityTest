@@ -20,6 +20,7 @@ public class LevelUI : UI {
 
     public void Start() {
         enteringScreen.Show();
+        pauseScreen.Hide();
     }
 
     protected override void HideAllUIScreens() {
