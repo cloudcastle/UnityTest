@@ -16,6 +16,8 @@ public class EditManager : MonoBehaviour
 
     RaycastHit hit;
 
+    public List<GameObject> disabledSurfaces;
+
     void Start() {
         Enable(on);
         sequence = new EditSequence();
@@ -53,6 +55,16 @@ public class EditManager : MonoBehaviour
                 var eye = player.eye.transform;
                 Ray ray = new Ray(eye.position, eye.TransformDirection(Vector3.forward));
                 PortalRay(ray);
+            }
+            if (Input.GetKeyDown(KeyCode.X)) {
+                if (disabledSurfaces.Count == 0) {
+                    disabledSurfaces.AddRange(FindObjectsOfType<Door>().Select(d => d.gameObject));
+                    disabledSurfaces.AddRange(FindObjectsOfType<CleanHands>().Select(d => d.gameObject));
+                    disabledSurfaces.ForEach(ds => ds.SetActive(false));
+                } else {
+                    disabledSurfaces.ForEach(ds => ds.SetActive(true));
+                    disabledSurfaces.Clear();
+                }
             }
         }
     }
