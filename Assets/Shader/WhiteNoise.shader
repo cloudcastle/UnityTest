@@ -58,7 +58,7 @@
 				fixed4 frag (v2f i) : SV_Target
 				{
 					float r = rand(i.scrPos.xy);
-					half4 col = half4(r, r, r, r);
+					half4 col = half4(r, r, r, 0.25);
 					return col;
 				}
 			ENDCG
