@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 {
     const string GLOBAL_PITCH = "Global Pitch";
     const string MUSIC_PITCH = "Music Pitch";
+    const string SOUND_PITCH = "Sound Pitch";
 
     public static SoundManager instance;
 
@@ -50,6 +51,7 @@ public class SoundManager : MonoBehaviour
 
         pitch.time = Time.realtimeSinceStartup;
         mixer.SetFloat(GLOBAL_PITCH, pitch.value);
+        mixer.SetFloat(SOUND_PITCH, pitch.value);
         if (TimeManager.instance.Undoing()) {
             pitchableAudioSources.ForEach(pas => pas.pitch = -1);
         } else {

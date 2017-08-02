@@ -19,4 +19,10 @@ public class PitchByValue : MonoBehaviour
     public void ChangePitch(float value) {
         sound.pitch = (TimeManager.instance.Undoing() ? -1 : 1) * value / baseValue;
     }
+
+    public void PlayWithPitch(float value) {
+        sound.pitch = (TimeManager.instance.Undoing() ? -1 : 1) * value / baseValue;
+        Debug.LogFormat("Playing {0} with pitch {1}", sound.clip, sound.pitch);
+        sound.PlayOneShot(sound.clip);
+    }
 }

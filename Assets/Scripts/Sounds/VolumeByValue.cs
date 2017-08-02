@@ -15,4 +15,8 @@ public class VolumeByValue : MonoBehaviour
     public void Play(Vector3 value) {
         sound.PlayOneShot(sound.clip, value.magnitude / baseValue);
     }
+
+    public void Play(float value) {
+        sound.PlayOneShot(sound.clip, value / baseValue);
+    }
 }

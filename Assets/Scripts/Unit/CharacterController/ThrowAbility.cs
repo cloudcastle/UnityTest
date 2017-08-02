@@ -16,7 +16,7 @@ public class ThrowAbility : Ability
 
     float throwDelay = 0.04f;
 
-    public UnityEvent onThrow;
+    public FloatEvent onThrow;
 
     public FloatEvent onUpdateForce;
 
@@ -45,7 +45,6 @@ public class ThrowAbility : Ability
             item.GetComponent<Rigidbody>().velocity = force / 50f;
         }
 
-        onThrow.Invoke();
 
         TimeManager.WaitFor(0.01f).Then(() => {
             Debug.LogFormat("Item pushed at velocity {0}", item.GetComponent<Rigidbody>().velocity);
@@ -57,12 +56,14 @@ public class ThrowAbility : Ability
         unit.inventory.Lose(target);
         target.gameObject.SetActive(false);
 
+        var rawThrowForce = currentForce;
         var throwForce = currentForce * unit.eye.transform.forward;
         var pushPosition = unit.eye.transform.position + unit.eye.transform.forward * initialDistance;
 
         TimeManager.WaitFor(throwDelay).Then(() => {
             target.gameObject.SetActive(true);
             PushItem(target, pushPosition, throwForce);
+            onThrow.Invoke(rawThrowForce /maxForce);
             target.GhostFor(unit);
             Reset();
         });

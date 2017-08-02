@@ -1270,9 +1270,9 @@ MonoBehaviour:
   onThrow:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 82655530999728408}
+      - m_Target: {fileID: 114534561565126956}
         m_MethodName: Play
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1281,8 +1281,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: FloatEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   onUpdateForce:
     m_PersistentCalls:
       m_Calls:
@@ -1615,6 +1614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4092678210294526}
   - component: {fileID: 82575312857104630}
+  - component: {fileID: 114525748564962380}
   m_Layer: 14
   m_Name: Jump
   m_TagString: Untagged
@@ -1631,6 +1631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4110349580309744}
   - component: {fileID: 82655530999728408}
+  - component: {fileID: 114534561565126956}
   m_Layer: 14
   m_Name: Throw
   m_TagString: Untagged
@@ -1799,12 +1800,12 @@ AudioSource:
   m_GameObject: {fileID: 1136111141960880}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243665303423582676, guid: 77cf3b12fa06141d49a633755c1dad24,
+  OutputAudioMixerGroup: {fileID: 243852444476873050, guid: 77cf3b12fa06141d49a633755c1dad24,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: ad1573f32ebf8496a8ac4b7777e064aa, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f2359348fae2a49688bb1007d35f95b2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 3
+  m_Pitch: 2
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1964,6 +1965,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445f9c13662a6dc4096e61fbf1f9c7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114525748564962380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136111141960880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3deaaeb6cacdc40b895739b95e2119f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114534561565126956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1321922803156082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7546ed0d5b94c6a8b9dfad12688b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 82655530999728408}
+  baseValue: 1
 --- !u!114 &114743450590301930
 MonoBehaviour:
   m_ObjectHideFlags: 1
