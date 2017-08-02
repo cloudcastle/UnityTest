@@ -18,8 +18,11 @@ public class ThrowAbility : Ability
 
     public UnityEvent onThrow;
 
+    public FloatEvent onUpdateForce;
+
     public void UpdateForce() {
         LevelUI.instance.ShowForce(currentForce / maxForce);
+        onUpdateForce.Invoke(currentForce / maxForce);
     }
 
     void Reset() {
