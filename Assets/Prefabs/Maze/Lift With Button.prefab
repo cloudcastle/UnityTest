@@ -5,14 +5,14 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 434968}
-  - 33: {fileID: 3351106}
-  - 135: {fileID: 13565378}
-  - 23: {fileID: 2337276}
-  - 114: {fileID: 11432880}
-  - 114: {fileID: 11454820}
+  - component: {fileID: 434968}
+  - component: {fileID: 3351106}
+  - component: {fileID: 13565378}
+  - component: {fileID: 2337276}
+  - component: {fileID: 11432880}
+  - component: {fileID: 11454820}
   m_Layer: 8
   m_Name: Button
   m_TagString: Untagged
@@ -25,14 +25,14 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 447202}
-  - 33: {fileID: 3372714}
-  - 65: {fileID: 6522614}
-  - 23: {fileID: 2381526}
-  - 114: {fileID: 11421006}
-  - 114: {fileID: 11401638}
+  - component: {fileID: 447202}
+  - component: {fileID: 3372714}
+  - component: {fileID: 6522614}
+  - component: {fileID: 2381526}
+  - component: {fileID: 11421006}
+  - component: {fileID: 11401638}
   m_Layer: 0
   m_Name: Lift With Button
   m_TagString: Untagged
@@ -52,6 +52,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 447202}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &447202
 Transform:
   m_ObjectHideFlags: 1
@@ -65,6 +66,7 @@ Transform:
   - {fileID: 434968}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &2337276
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -74,17 +76,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 064cc975e6ebf23408d637155acaf78a, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -100,17 +107,22 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 8656a5e6f51358f4ea3f9887d1c2abb4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -200,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
+  maxBiasAngle: 60
   useActivatorMaxDistance: 1
   allowBiasedActivation: 1
   effects:

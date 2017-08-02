@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 
 public class ThrowAbility : Ability
 {
@@ -14,6 +15,8 @@ public class ThrowAbility : Ability
     public bool throwing = false;
 
     float throwDelay = 0.04f;
+
+    public UnityEvent onThrow;
 
     public void UpdateForce() {
         LevelUI.instance.ShowForce(currentForce / maxForce);
@@ -38,6 +41,9 @@ public class ThrowAbility : Ability
         } else {
             item.GetComponent<Rigidbody>().velocity = force / 50f;
         }
+
+        onThrow.Invoke();
+
         TimeManager.WaitFor(0.01f).Then(() => {
             Debug.LogFormat("Item pushed at velocity {0}", item.GetComponent<Rigidbody>().velocity);
         });

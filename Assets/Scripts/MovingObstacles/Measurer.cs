@@ -15,7 +15,7 @@ public class Measurer : MovingSurface {
     }
 
     void OnUndo() {
-        SaveCurrentTransform();
+        //SaveCurrentTransform();
     }
 
     void FixedUpdate() {
@@ -24,18 +24,19 @@ public class Measurer : MovingSurface {
     }
 
     private void MeasureVelocity() {
-        if (Time.time < lastPosition.time + 1e-5) {
-            return;
+        if (TimeManager.StoppableGameTime < lastPosition.time + 1e-5) {
+            //return;
         }
-        currentVelocity = (transform.position - lastPosition.value) / (Time.time - lastPosition.time);
+        currentVelocity = (transform.position - lastPosition.value) / (TimeManager.StoppableGameTime - lastPosition.time);
+        onVelocityChange.Invoke(currentVelocity);
         Vector3 deltaRotation = Quaternion.FromToRotation(lastForward.value, transform.forward).eulerAngles;
         deltaRotation = Extensions.NormalizeAngles(deltaRotation);
 
-        currentAngularVelocity = deltaRotation / (Time.time - lastForward.time);
+        currentAngularVelocity = deltaRotation / (TimeManager.StoppableGameTime - lastForward.time);
     }
 
     void SaveCurrentTransform() {
-        lastPosition = new TimedValue<Vector3>(transform.position, Time.time);
-        lastForward = new TimedValue<Vector3>(transform.forward, Time.time);
+        lastPosition = new TimedValue<Vector3>(transform.position, TimeManager.StoppableGameTime);
+        lastForward = new TimedValue<Vector3>(transform.forward, TimeManager.StoppableGameTime);
     }
 }

@@ -75,7 +75,7 @@ public class TimeManager : MonoBehaviour
         if (Player.instance != null) {
             timeScale *= instance.Rewinding();
             timeScale *= instance.Slowmo();
-            if (Player.instance.current.transform.position.y < -1000f && !Player.instance.Undo()) {
+            if (Player.instance.current.transform.position.y < -2000f && !Player.instance.Undo()) {
                 timeScale = 0;
             }
         }
@@ -106,6 +106,16 @@ public class TimeManager : MonoBehaviour
                 return 0;
             } else {
                 return Time.fixedDeltaTime;
+            }
+        }
+    }
+
+    public static float StoppableTimeScale {
+        get {
+            if (timestopped) {
+                return 0;
+            } else {
+                return instance.readonlyTimeScale;
             }
         }
     }
@@ -143,9 +153,6 @@ public class TimeManager : MonoBehaviour
             }
             Undo();
         } else {
-            if (Player.instance.current.transform.position.y < -1000) {
-                Time.timeScale = 0;
-            }
             Track();
             gameTime += Time.fixedDeltaTime;
             stoppableGameTime += StoppableFixedDeltaTime;

@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Move))]
 [RequireComponent(typeof(UnitGeometryController))]
 public class Jump : Ability
 {
+    public UnityEvent onJump;
+
     public float jumpSpeed = 8;
 
     bool jumpScheduled = false;
@@ -38,6 +41,7 @@ public class Jump : Ability
             var y = jumpSpeed - HalfTickGravityCorrection();
             setY(y);
             jumpScheduled = false;
+            onJump.Invoke();
         }
     }
 }
