@@ -4,6 +4,7 @@ using System;
 using RSG;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,16 +27,28 @@ public class LiftLowerWaitRaise : Effect
 
     Action state;
 
+    Action State {
+        set {
+            state = value;
+            onSpeedChanged.Invoke(value == Idle || value == Waiting ? 0 : 1);
+        }
+        get {
+            return state;
+        }
+    }
+
     float actualHeight() {
         return height - heightDelta;
     }
+
+    public FloatEvent onSpeedChanged;
 
     void Idle()
     {
     }
 
     public float TimeToGo() {
-        if (state == Waiting) {
+        if (State == Waiting) {
             return waitingDuration;
         }
         return float.PositiveInfinity;
@@ -54,7 +67,7 @@ public class LiftLowerWaitRaise : Effect
         transform.Translate(Vector3.down * delta);
         if (ready)
         {
-            state = Waiting;
+            State = Waiting;
             waitingDuration = pause;
         }
     }
@@ -64,7 +77,7 @@ public class LiftLowerWaitRaise : Effect
         waitingDuration -= TimeManager.StoppableFixedDeltaTime;
         if (waitingDuration < 0)
         {
-            state = MovingUp;
+            State = MovingUp;
             FindObjectsOfType<Rigidbody>().ToList().ForEach(rb => rb.WakeUp());
         }
     }
@@ -76,7 +89,7 @@ public class LiftLowerWaitRaise : Effect
         transform.Translate(Vector3.up * delta);
         if (Mathf.Abs(currentHeight - 0) < Mathf.Epsilon)
         {
-            state = Idle;
+            State = Idle;
         }
     }
 
@@ -85,12 +98,12 @@ public class LiftLowerWaitRaise : Effect
         if (!Ready()) {
             return Promise.Resolved();
         }
-        state = MovingDown;
+        State = MovingDown;
         return Promise.Resolved();
     }
 
     bool Ready() {
-        return state != Waiting && state != MovingDown;
+        return State != Waiting && State != MovingDown;
     }
 
     public override ActivatableStatus Status() {
@@ -100,13 +113,13 @@ public class LiftLowerWaitRaise : Effect
     public override void Awake()
     {
         base.Awake();
-        state = Idle;
+        State = Idle;
     }
 
     public override void InitInternal() {
         new FloatTracker(v => waitingDuration = v, () => waitingDuration);
         new FloatTracker(v => currentHeight = v, () => currentHeight);
-        new ValueTracker<Action>(v => state = v, () => state);
+        new ValueTracker<Action>(v => State = v, () => State);
     }
 
     void FixedUpdate()

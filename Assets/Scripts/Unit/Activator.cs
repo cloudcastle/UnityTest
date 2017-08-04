@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.Events;
 
 public class Activator : Ability
 {
@@ -17,6 +18,8 @@ public class Activator : Ability
     Collider[] sphereCastResults = new Collider[MAX_SPHERE_CAST_RESULTS];
     int activatableLayerMask;
     RaycastHit hit;
+
+    public UnityEvent onActivate;
 
     public override void Awake() {
         base.Awake();
@@ -91,6 +94,7 @@ public class Activator : Ability
         if (unit.controller.Activate()) {
             if (current != null) {
                 current.Activate(this);
+                onActivate.Invoke();
             }
         }
     }
