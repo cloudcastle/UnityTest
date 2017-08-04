@@ -27,8 +27,6 @@ public class Inventory : Ability
     public override void InitInternal() {
         slotPool = Pool.CreatePool(slotSample);
 
-        pickStun = new Cooldown(0.05f);
-
         itemTracker = new ItemListShallowTracker(
             setList: (v) => items = v,
             getList: () => items

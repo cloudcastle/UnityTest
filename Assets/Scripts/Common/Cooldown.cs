@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-[Serializable]
-public class Cooldown
+public class Cooldown : MonoBehaviour
 {
     public float duration;
     public FloatTracker tracker;
@@ -13,8 +12,7 @@ public class Cooldown
 
     public float onCDfrom = float.NegativeInfinity;
 
-    public Cooldown(float duration) {
-        this.duration = duration;
+    public void Awake() {
         tracker = new FloatTracker((v) => onCDfrom = v, () => onCDfrom);
         tracker.Init(onCDfrom);
     }

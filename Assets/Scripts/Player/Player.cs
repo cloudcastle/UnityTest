@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Player : UnitController
 {
@@ -14,6 +15,8 @@ public class Player : UnitController
 
     public Cooldown possessCooldown;
 
+    public UnityEvent onPossess;
+
     void Awake() {
         instance = this;
         mainCamera = FindObjectOfType<MainCamera>();
@@ -21,7 +24,6 @@ public class Player : UnitController
     }
 
     void Start() {
-         possessCooldown = new Cooldown(0.25f);
          possessCooldown.getTime = () => TimeManager.RealTime;
          var startUnit = FindObjectOfType<StartUnit>();
          if (startUnit != null) {
@@ -49,6 +51,8 @@ public class Player : UnitController
         GainControl(unit);
         if (animate) {
             mainCamera.MoveTo(unit.cameraPlace.transform);
+            onPossess.Invoke();
+            Debug.LogFormat("OnPossess");
         } else {
             mainCamera.MoveToInstant(unit.cameraPlace.transform);
         }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class Item : Activatable
 {
@@ -9,6 +10,7 @@ public class Item : Activatable
 
     public event Action<Unit> onPick = (p) => { };
     public event Action<Unit> onLose = (p) => { };
+    public UnityEvent onPickEvent;
 
     public Material baseMaterial;
     public Material semitransparentMaterial;
@@ -63,6 +65,8 @@ public class Item : Activatable
 
     public void Picked(Unit player) {
         onPick(player);
+        onPickEvent.Invoke();
+        Debug.LogFormat("Picked");
         SetSemitransparent(false);
     }
 

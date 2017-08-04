@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 
 // local Y should be the axis normal to clean hands field
@@ -14,6 +15,8 @@ public class CleanHands : MonoBehaviour
 
     float safetyDistance = 0.1f;
 
+    public FloatEvent onStayAtDistance;
+
     bool Drop(Item item) {
         if (bannedColor == null) {
             return true;
@@ -27,7 +30,9 @@ public class CleanHands : MonoBehaviour
         if (player != null) {
             Vector3 localPlayerPosition = transform.InverseTransformPoint(player.transform.position);
             Vector3 previousLocalPlayerPosition = transform.InverseTransformPoint(player.lastPositionKeeper.GetPreviousPosition());
-            if (Mathf.Sign(localPlayerPosition.y) != Mathf.Sign(previousLocalPlayerPosition.y) || Mathf.Abs(localPlayerPosition.y) < safetyDistance) {
+            float distance = Mathf.Abs(localPlayerPosition.y);
+            onStayAtDistance.Invoke(distance);
+            if (Mathf.Sign(localPlayerPosition.y) != Mathf.Sign(previousLocalPlayerPosition.y) || distance < safetyDistance) {
                 var dropLocalPosition = previousLocalPlayerPosition;
                 if (previousLocalPlayerPosition.y > 0) {
                     if (dropLocalPosition.y < safetyDistance) {

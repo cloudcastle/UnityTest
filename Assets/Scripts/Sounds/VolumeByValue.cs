@@ -19,4 +19,8 @@ public class VolumeByValue : MonoBehaviour
     public void Play(float value) {
         sound.PlayOneShot(sound.clip, value / baseValue);
     }
+
+    public void SetVolume(float value) {
+        sound.volume = value / baseValue;
+    }
 }

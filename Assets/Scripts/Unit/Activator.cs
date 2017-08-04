@@ -23,10 +23,6 @@ public class Activator : Ability
         activatableLayerMask = LayerMask.GetMask("Ghost", "Item", "Activatable", "Unit");
     }
 
-    public override void Start() {
-        stun = new Cooldown(0.2f);
-    }
-
     void Reset() {
         current = null;
         currentBiasAngle = float.PositiveInfinity;

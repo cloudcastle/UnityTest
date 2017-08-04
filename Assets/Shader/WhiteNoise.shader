@@ -28,7 +28,7 @@
 				struct v2f {
 					float4 vertex : SV_POSITION;
 					half2 texcoord : TEXCOORD0;
-					float4 scrPos:TEXCOORD1;
+					float4 worldPos : TEXCOORD1;
 				};		
 			
 				struct Input {
@@ -45,19 +45,21 @@
 					v2f o;
 					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 					o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
+	                o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 					UNITY_TRANSFER_FOG(o,o.vertex);
-					o.scrPos = ComputeScreenPos(o.vertex);
+					//o.scrPos = ComputeScreenPos(o.vertex);
 					return o;
 				}
 
-				float rand(float2 co)
+				float rand(float3 co)
 				{
-				    return frac(sin( dot(float3(frac(sin(co.x*12774)), frac(sin(co.y*67774)), _Time.x) ,float3(12.9898,78.233, 38.221) )) * 43758.5453);
+					co = round(co*10+0.5)/100;
+				    return frac(sin( dot(float4(frac(sin(co.x*12174)), frac(sin(co.y*67274)),frac(sin(co.z*39961)), _Time.x), float4(12.9898,78.233, 38.221,72.178)) ) * 43758.5453);
 				}
 			
 				fixed4 frag (v2f i) : SV_Target
 				{
-					float r = rand(i.scrPos.xy);
+					float r = rand(i.worldPos.xyz);
 					half4 col = half4(r, r, r, 0.25);
 					return col;
 				}
