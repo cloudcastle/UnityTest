@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class Jumper : MonoBehaviour
 {
     public float minVelocityCap = 0.5f;
     public float velocity = 15f;
     public bool autoAlign = false;
+
+    public UnityEvent onJump;
 
     void OnTriggerStay(Collider other) {
         if (other.gameObject.GetComponent<Unit>() != null) {
@@ -24,6 +27,7 @@ public class Jumper : MonoBehaviour
                 if (autoAlign) {
                     other.transform.position = transform.position;
                 }
+                onJump.Invoke();
             }
         }
     }
