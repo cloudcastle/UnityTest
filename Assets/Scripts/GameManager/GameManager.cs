@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public static Game game = new Game();
 
     public static GameManager instance;
+
+    public UnityEvent onLevelCompleted;
 
     public void Awake() {
         instance = this;
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
             Save();
         }
         LevelUI.instance.CompletionScreen();
+        onLevelCompleted.Invoke();
     }
 
     public void Pause() {
