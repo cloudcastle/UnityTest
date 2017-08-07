@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
     const string GLOBAL_PITCH = "Global Pitch";
     const string MUSIC_PITCH = "Music Pitch";
     const string SOUND_PITCH = "Sound Pitch";
+    const string MUSIC_VOLUME = "Music Volume";
+    const string SOUND_VOLUME = "Sound Volume";
 
     public static SoundManager instance;
 
@@ -27,6 +29,12 @@ public class SoundManager : MonoBehaviour
 
     public void Start() {
         pitch = new TimedFloat(1, Time.realtimeSinceStartup);
+        UpdateVolumes();
+    }
+
+    public void UpdateVolumes() {
+        mixer.SetFloat(SOUND_VOLUME, GameManager.game.settings.sound ? GameManager.game.settings.soundVolume : -80);
+        mixer.SetFloat(MUSIC_VOLUME, GameManager.game.settings.music ? GameManager.game.settings.musicVolume : -80);
     }
 
     public void LogLerpPitch() {

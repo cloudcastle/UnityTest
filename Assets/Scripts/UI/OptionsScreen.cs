@@ -13,8 +13,8 @@ public class OptionsScreen : UIScreen {
     public override void Show() {
         base.Show();
         slider.value = Mathf.Log(GameManager.game.settings.mouseSpeed);
-        soundVolumeSlider.value = Mathf.Log(GameManager.game.settings.soundVolume);
-        musicVolumeSlider.value = Mathf.Log(GameManager.game.settings.musicVolume);
+        soundVolumeSlider.value = GameManager.game.settings.soundVolume;
+        musicVolumeSlider.value = GameManager.game.settings.musicVolume;
         soundToggle.isOn = GameManager.game.settings.sound;
         musicToggle.isOn = GameManager.game.settings.music;
     }
@@ -22,10 +22,11 @@ public class OptionsScreen : UIScreen {
     public void Apply() {
         Debug.Log("Apply options");
         GameManager.game.settings.mouseSpeed = Mathf.Exp(slider.value);
-        GameManager.game.settings.soundVolume = Mathf.Exp(soundVolumeSlider.value);
-        GameManager.game.settings.musicVolume = Mathf.Exp(musicVolumeSlider.value);
+        GameManager.game.settings.soundVolume = soundVolumeSlider.value;
+        GameManager.game.settings.musicVolume = musicVolumeSlider.value;
         GameManager.game.settings.sound = soundToggle.isOn;
         GameManager.game.settings.music = musicToggle.isOn;
+        SoundManager.instance.UpdateVolumes();
         GameManager.instance.Save();
         LevelUI.instance.HideModal();
     }
