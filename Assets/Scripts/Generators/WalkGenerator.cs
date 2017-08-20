@@ -63,20 +63,32 @@ public class WalkGenerator : MonoBehaviour
         int n = 1000;
         int steps = 5000;
         int[,] map = new int[n, n];
+        float[,] densities = new float[n, n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                densities[i, j] = Random.Range(0, 1);
+            }
+        }
+
         IntVector2 start = new IntVector2(n/2, n/2);
         List<IntVector2> list = new List<IntVector2>();
+        List<IntVector2> secondary = new List<IntVector2>();
         list.Add(start);
 
         for (int t = 0; t < steps; t++) {
             if (list.Count == 0) {
-                break;
+                int id = Random.Range(0, secondary.Count);
+                list.Add(secondary[id]);
+                secondary.RemoveAt(id);
             }
             IntVector2 next = list.Rnd();
             map[next.x, next.y] = 1;
             list.Remove(next);
             AddNeighbours(map, next, list);
-            while (list.Count > 30 && Random.Range(0, 1) < Mathf.Pow(0.4f, list.Count - 10)) {
-                list.RemoveAt(Random.Range(0, list.Count));
+            while (list.Count > 2 && Random.Range(0, 1) < Mathf.Pow(0.9f, list.Count)) {
+                int id = Random.Range(0, list.Count);
+                secondary.Add(list[id]);
+                list.RemoveAt(id);
             }
         }
         for (int i = 0; i < n; i++) {

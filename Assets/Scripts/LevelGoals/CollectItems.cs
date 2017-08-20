@@ -9,9 +9,11 @@ public class CollectItems : MonoBehaviour
     public int collected;
     public int required;
 
+    public bool runOnStart = true;
+
     public Text text;
 
-    void Start() {
+    public void Run() {
         required = FindObjectsOfType<Bonus>().Count();
         new ValueTracker<int>(x => collected = x, () => collected);
         FindObjectsOfType<Bonus>().ForEach(b => b.onPicked.AddListener(() => {
@@ -20,6 +22,12 @@ public class CollectItems : MonoBehaviour
                 GameManager.instance.CompleteLevel();
             }
         }));
+    }
+
+    void Start() {
+        if (runOnStart) {
+            Run();
+        }
     }
 
     void Update() {

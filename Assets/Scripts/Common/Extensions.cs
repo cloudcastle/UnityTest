@@ -108,6 +108,14 @@ public static class Extensions
         return collection.Min(criteria);
     }
 
+    public static T MinBy<T>(this IEnumerable<T> collection, Func<T, float> criteria) {
+        if (collection.Count() == 0) {
+            return default(T);
+        }
+        var minValue = collection.Min(criteria);
+        return collection.FirstOrDefault(el => criteria(el) == minValue);
+    }
+
     public static float ExtMax<T>(this IEnumerable<T> collection, Func<T, float> criteria) {
         if (collection.Count() == 0) {
             return float.NegativeInfinity;
@@ -249,6 +257,21 @@ public static class Extensions
 
     public static T Rnd<T>(this List<T> collection) {
         return collection[UnityEngine.Random.Range(0, collection.Count)];
+    }
+
+    public static T Rnd<T>(this List<T> collection, Func<T, float> weight) {
+        float totalWeight = collection.Sum(weight);
+        float rndValue = UnityEngine.Random.Range(0, totalWeight);
+        float skipped = 0;
+        for (int i = 0; i < collection.Count; i++) {
+            skipped += weight(collection[i]);
+            if (skipped > rndValue) {
+                return collection[i];
+            }
+        }
+        Debug.LogFormat("skipped: {0}", skipped);
+        Debug.LogFormat("totalWeight: {0}", totalWeight);
+        throw new Exception("Wrong weighted rnd function!");
     }
 
     public static void TryPlay(this MonoBehaviour go, AudioSource audioSource) {

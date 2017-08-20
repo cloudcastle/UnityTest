@@ -87,7 +87,7 @@ public class Activator : Ability
             return;
         }
         Reset();
-        if (stun.OnCooldown()) {
+        if (stun && stun.OnCooldown()) {
             return;
         }
         LocateCurrentActivatable();

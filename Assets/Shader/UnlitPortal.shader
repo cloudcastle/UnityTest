@@ -41,7 +41,7 @@ Shader "MyUnlit" {
 					v2f o;
 					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 					o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
-					UNITY_TRANSFER_FOG(o,o.vertex);
+					//UNITY_TRANSFER_FOG(o,o.vertex);
 					o.scrPos = ComputeScreenPos(o.vertex);
 					return o;
 				}

@@ -10,6 +10,10 @@ public class SearchManager : MonoBehaviour
 
     void Awake() {
         instance = this;
+        UpdateSearchData();
+    }
+
+    public void UpdateSearchData() {
         portalSurfaces = FindObjectsOfType<PortalSurface>().ToList();
     }
 }

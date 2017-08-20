@@ -17,6 +17,8 @@ public class PortalSurface : MonoBehaviour
 
     public PortalNode portalNode;
 
+    public bool alwaysRecursiveRender = false;
+
     public static PortalNode renderingPortalNode = null;
 
     public void Start() {
@@ -51,7 +53,7 @@ public class PortalSurface : MonoBehaviour
             child = renderingPortalNode.children.FirstOrDefault(pn => pn.surface == this);
         }
         var camera = portal.GetCamera(depth);
-        if (depth < maxDepth && child != null) {
+        if (depth < maxDepth && (child != null || alwaysRecursiveRender)) {
             camera.transform.SetParent(Camera.current.transform);
             camera.transform.Reset();
             camera.transform.SetParent(portal.front.transform, worldPositionStays: true);
@@ -61,7 +63,9 @@ public class PortalSurface : MonoBehaviour
             renderingPortalNode = child;
             camera.Render();
             DebugManager.cnt++;
-            DebugManager.drawnPortals.Add(renderingPortalNode.transform.Path());
+            if (renderingPortalNode != null) {
+                DebugManager.drawnPortals.Add(renderingPortalNode.transform.Path());
+            }
             depth -= 1;
             renderingPortalNode = parent;
             camera.GetComponent<PortalCamera>().rendered = true;
