@@ -20,6 +20,11 @@ public class DensityWalkGenerator : MonoBehaviour
     public GameObject world;
     public List<GameObject> walls;
 
+
+    float[,] densities;
+    float[,] baseDensities;
+    int[,] map;
+
     bool Inside(int[,] map, int x, int y) {
         return 0 <= x && x < map.GetLength(0) && 0 <= y && y < map.GetLength(1);
     }
@@ -94,21 +99,43 @@ public class DensityWalkGenerator : MonoBehaviour
         AddIfNot(map, new IntVector2(next.x, next.y + 1), list);
     }
 
+    public void ReduceDensity(int x, int y, float delta) {
+        if (!Inside(map, x, y)) {
+            return;
+        }
+        densities[x, y] -= delta;
+        if (densities[x, y] < 0) {
+            densities[x, y] = 0;
+        }
+    }
+
     private void Generate() {
         world = new GameObject("World");
 
         int n = 500;
         int steps = 6000;
-        int bonuses = 300;
-        int boxes = 3000;
+        int bonuses = 30;
+        int boxes = 1000;
         int portals = 0;
 
-        int[,] map = new int[n, n];
-        float[,] densities = new float[n, n];
+
+        densities = new float[n, n];
+        baseDensities = new float[n, n];
+
+        map = new int[n, n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                densities[i, j] = Mathf.Pow(UnityEngine.Random.Range(0, 1f), 6);
-                //densities[i, j] = 1;
+                //float distance = Mathf.Sqrt(Mathf.Pow(i - n / 2, 2) + Mathf.Pow(j - n / 2, 2));
+                //densities[i, j] = 1 + Mathf.Pow(distance, distance / 50);
+                //densities[i, j] = 1 + Mathf.Pow(distance, distance / 50);
+                baseDensities[i,j] = densities[i,j];
+
+                //densities[i, j] = Mathf.Pow(UnityEngine.Random.Range(0, 1f), -6);
+                //densities[i, j] = 1-Mathf.Pow(UnityEngine.Random.Range(0, 1f), 24);
+                densities[i, j] = Mathf.Pow(2, UnityEngine.Random.Range(0, 1f)*60);
+                if (densities[i, j] <= 0) {
+                    Debug.LogFormat("ALARM");
+                }
             }
         }
 
@@ -120,8 +147,14 @@ public class DensityWalkGenerator : MonoBehaviour
 
         for (int t = 0; t < steps; t++) {
             IntVector2 next = list.Rnd(cell => densities[cell.x, cell.y]);
+            //IntVector2 next = list.MinBy(cell => densities[cell.x, cell.y]);
             if (UnityEngine.Random.Range(0, 1) < 1f) {
                 map[next.x, next.y] = 1;
+                float densityReduction = baseDensities[next.x, next.y] / 3;
+                //ReduceDensity(next.x - 1, next.y, densityReduction);
+                //ReduceDensity(next.x + 1, next.y, densityReduction);
+                //ReduceDensity(next.x, next.y - 1, densityReduction);
+                //ReduceDensity(next.x, next.y + 1, densityReduction);
             }
             list.Remove(next);
             AddNeighbours(map, next, list);
@@ -135,49 +168,49 @@ public class DensityWalkGenerator : MonoBehaviour
                 }
             }
         }
-        //HashSet<IntVector2> reached = new HashSet<IntVector2>();
-        //Thread thread = new Thread(() => {
-        //    Algorithms.Dfs(reached, new IntVector2(0, 0), cell => {
-        //        return Neighbours8(map, cell.x, cell.y, x => x == 0);
-        //    });
-        //}, 1024000000);
-        //thread.Start();
-        //thread.Join();
-        //Debug.LogFormat("Reached: {0}", reached.Count);
+        HashSet<IntVector2> reached = new HashSet<IntVector2>();
+        Thread thread = new Thread(() => {
+            Algorithms.Dfs(reached, new IntVector2(0, 0), cell => {
+                return Neighbours8(map, cell.x, cell.y, x => x == 0);
+            });
+        }, 1024000000);
+        thread.Start();
+        thread.Join();
+        Debug.LogFormat("Reached: {0}", reached.Count);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (map[i, j] == 1) {
                     Build(world, n, i, j);
                     cells.Add(new IntVector2(i,j));
-                    if (Get(map, i - 1, j) == 0) {
-                        BuildLeftWall(world, n, i, j);
-                    }
-                    if (Get(map, i, j - 1) == 0) {
-                        BuildTopWall(world, n, i, j);
-                    }
-                    if (Get(map, i + 1, j) == 0) {
-                        BuildLeftWall(world, n, i + 1, j, true);
-                    }
-                    if (Get(map, i, j + 1) == 0) {
-                        BuildTopWall(world, n, i, j + 1, true);
-                    }
+                    //if (Get(map, i - 1, j) == 0) {
+                    //    BuildLeftWall(world, n, i, j);
+                    //}
+                    //if (Get(map, i, j - 1) == 0) {
+                    //    BuildTopWall(world, n, i, j);
+                    //}
+                    //if (Get(map, i + 1, j) == 0) {
+                    //    BuildLeftWall(world, n, i + 1, j, true);
+                    //}
+                    //if (Get(map, i, j + 1) == 0) {
+                    //    BuildTopWall(world, n, i, j + 1, true);
+                    //}
                 }
-                //if (map[i, j] == 0 && !reached.Contains(new IntVector2(i, j))) {
-                //    BuildLake(world, n, i, j);
-                //}
+                if (map[i, j] == 0 && !reached.Contains(new IntVector2(i, j))) {
+                    BuildLake(world, n, i, j);
+                }
             }
         }
 
-        for (int i = 0; i < bonuses; i++) {
-            BuildBonus(world, cells.Rnd(), n);
-        }
-        for (int i = 0; i < boxes; i++) {
-            BuildBox(world, cells.Rnd(), n);
-        }
-        for (int i = 0; i < portals; i++) {
-            BuildPortalPair();
-        }
+        //for (int i = 0; i < bonuses; i++) {
+        //    BuildBonus(world, cells.Rnd(), n);
+        //}
+        //for (int i = 0; i < boxes; i++) {
+        //    BuildBox(world, cells.Rnd(), n);
+        //}
+        //for (int i = 0; i < portals; i++) {
+        //    BuildPortalPair();
+        //}
     }
 
     Portal BuildPortal() {
@@ -214,9 +247,9 @@ public class DensityWalkGenerator : MonoBehaviour
     private void Build(GameObject world, int n, int i, int j) {
         var ceil = Instantiate(planeSample, new Vector3((i - n / 2) * 10, 10, (j - n / 2) * 10), Quaternion.Euler(90, 0, 0), world.transform);
         ceil.transform.localScale = Vector3.one;
-        if (UnityEngine.Random.Range(0, 1f) < 0.1f) {
-            return;
-        }
+        //if (UnityEngine.Random.Range(0, 1f) < 0.1f) {
+        //    return;
+        //}
         var plane = Instantiate(planeSample, new Vector3((i - n / 2) * 10, 0, (j - n / 2) * 10), Quaternion.Euler(-90, 0, 0), world.transform);
         plane.transform.localScale = Vector3.one;
     }
