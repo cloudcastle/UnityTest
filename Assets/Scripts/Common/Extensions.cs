@@ -71,6 +71,9 @@ public static class Extensions
     }
 
     public static T CyclicNext<T>(this List<T> list, T element, int delta = 1) {
+        if (list.IndexOf(element) == -1) {
+            return default(T);
+        }
         return list.Cyclic(list.IndexOf(element) + delta);
     }
 
