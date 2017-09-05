@@ -26,6 +26,7 @@ public class Measurer : MovingSurface {
     private void MeasureVelocity() {
         if (TimeManager.StoppableTimeScale == 0) {
             currentVelocity = Vector3.zero;
+            onVelocityChange.Invoke(currentVelocity);
             currentAngularVelocity = Vector3.zero;
             return;
         }
