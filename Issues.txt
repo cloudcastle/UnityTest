@@ -1,22 +1,17 @@
 HIGH PRIORITY
 
-disable all actions while z
+[PHYSICS] disable other controls during z (except f)
 
 NORMAL PRIORITY
 
 [UI] level graph: show dependency direction
-[UI] [FEATURE] lifts timer interface
 [PHYSICS] bad physics for walking on items
 [GRAPHICS] Multiple semitransparent z-order bug - split big semitransparent surfaces
-[GRAPHICS] Items are semitransparent in inventory under exit button's light
 [GAMEPLAY] too big difficulty gap in lift and jump levels
-[GAMEPLAY] Rare bug with wrong undo for keys
 [GAMEPLAY] Need more control over level graph
 [GAMEPLAY] Repaint ceiling to special ceiling material
 [FEATURE] make camera smooth
 [FEATURE] Multiple profiles
-[FEATURE] [PUZZLE ELEMENT] Triggers
-[FEATURE] [PUZZLE ELEMENT] Portal boxes
 [FEATURE] [PUZZLE ELEMENT] Time machine
 [FEATURE] [PUZZLE ELEMENT] Enemies
 [FEATURE] [PUZZLE ELEMENT] Item-to-creature converters
@@ -29,15 +24,11 @@ NORMAL PRIORITY
 [FEATURE] [LEVEL] Carousel to jump far
 [FEATURE] [LEVEL] Carousel to throw clear to rotating window
 [FEATURE] music
-[FEATURE] sounds
 [DEVELOPMENT] add auto-check for scenes in build list
 [DEVELOPMENT] search debug from ms visual studio
 [DEVELOPMENT] need prefabs for all common objects
 [DEVELOPMENT] level graph scene changes magically each run
-[PHYSICS] Ball is shaking when clamped to corner
-[GRAPHICS] Ball is lighted in inventory
 [GAMEPLAY] Columns between different types of walls for key levels?
-[GAMEPLAY] No interest to level names
 [FEATURE] Mouse only controls
 [FEATURE] Minimap?
 [GAMEPLAY] No level to drop all balls to same place
@@ -46,9 +37,7 @@ NORMAL PRIORITY
 [GAMEPLAY] easier Fly
 [GAMEPLAY] easier Bridge?
 [GAMEPLAY] F: timer does not stop
-[PHYSICS] disable other controls during z (except f)
 [GAMEPLAY] Rhythm <- explain multiple lift calls, especially when button is ready again
-[GRAPHICS] Entering screen does not pause the game and you can see motion on screen edges
 [GRAPHICS] screen edges
 [GAMEPLAY] bad exit buttons on Cabin levels
 [PHYSICS] Clean Hands generates a lot of Cooldown tracker samples
@@ -58,16 +47,14 @@ NORMAL PRIORITY
 [PHYSICS] [BUG] if you undo to the near-moment when item thrown, it falls down to ground instead of being thrown with start velocity
 forgotten -> claws
 floor -> claws
-traverse cheat with workaround
 cheats with flying, i.e. exchange
 [GAMEPLAY] switch character to myself
 [PHYSICS] correct camera fly through portals when switching character
 [PHYSICS] check bounciness of glass walls and stone walls
-[UI] timestop and timespeed indicators]
 [UI] all lifts timers
 [GAMEPLAY] walkthrough, gift, tool, merge levels are too easy after harder levels
 [UI] text search level by name from level map
-z -> workaround
+[GRAPH] z -> workaround
 reset progress
 z+f tutorial
 place too hard, too long max distance from fat
