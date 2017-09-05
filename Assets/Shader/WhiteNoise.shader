@@ -53,8 +53,8 @@
 
 				float rand(float3 co)
 				{
-					co = round(co*10+0.5)/100;
-				    return frac(sin( dot(float4(frac(sin(co.x*12174)), frac(sin(co.y*67274)),frac(sin(co.z*39961)), _Time.x), float4(12.9898,78.233, 38.221,72.178)) ) * 43758.5453);
+					co = round(co*10+0.50001)/100;
+				    return frac(sin( dot(float4(frac(sin(co.x*co.x*co.x*12174)), frac(sin(co.y*co.y*co.y*67274)),frac(sin(co.z*co.z*co.z*39961)), _Time.x), float4(52.9898,28.233, 91.221,72.178)) ) * 13758.5453);
 				}
 			
 				fixed4 frag (v2f i) : SV_Target
