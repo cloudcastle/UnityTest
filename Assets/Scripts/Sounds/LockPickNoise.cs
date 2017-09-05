@@ -18,7 +18,7 @@ public class LockPickNoise : MonoBehaviour
     }
 
     public void OnStayInCleanHandsAtDistance(float distance) {
-        noise.volume = Mathf.Max(noise.volume, 0.25f * (1-distance));
+        noise.volume = Mathf.Max(noise.volume, 0.3f * (1-distance));
     }
 
     public void FixedUpdate() {
