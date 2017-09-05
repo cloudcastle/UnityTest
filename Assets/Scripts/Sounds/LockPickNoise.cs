@@ -21,8 +21,8 @@ public class LockPickNoise : MonoBehaviour
         noise.volume = Mathf.Max(noise.volume, 0.25f * (1-distance));
     }
 
-    public void Update() {
-        noise.volume = noise.volume * Mathf.Pow(0.5f, Time.deltaTime * 20);
+    public void FixedUpdate() {
+        noise.volume = noise.volume * Mathf.Pow(0.5f, Time.fixedDeltaTime * 20);
         //float distance = cleanHands.ExtMin(c => c.Distance(player.current));
         //noise.volume = Mathf.Pow(0.5f, distance);
 //        if (player.current.inventory.pickStun.OnCooldown()) {

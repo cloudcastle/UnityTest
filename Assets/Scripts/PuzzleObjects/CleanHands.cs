@@ -31,7 +31,9 @@ public class CleanHands : MonoBehaviour
             Vector3 localPlayerPosition = transform.InverseTransformPoint(player.transform.position);
             Vector3 previousLocalPlayerPosition = transform.InverseTransformPoint(player.lastPositionKeeper.GetPreviousPosition());
             float distance = Mathf.Abs(localPlayerPosition.y);
-            onStayAtDistance.Invoke(distance);
+            if (player == Player.instance.current) {
+                onStayAtDistance.Invoke(distance);
+            }
             if (Mathf.Sign(localPlayerPosition.y) != Mathf.Sign(previousLocalPlayerPosition.y) || distance < safetyDistance) {
                 var dropLocalPosition = previousLocalPlayerPosition;
                 if (previousLocalPlayerPosition.y > 0) {
