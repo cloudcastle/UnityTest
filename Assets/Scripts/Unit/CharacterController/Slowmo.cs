@@ -11,7 +11,7 @@ public class Slowmo : Ability, ISlowmo
 
     public override void InitInternal() {
         base.InitInternal();
-        new BoolTracker(x => on = x, () => on);
+        //new BoolTracker(x => on = x, () => on);
         TimeManager.instance.slowmos.Add(this);
     }
 
