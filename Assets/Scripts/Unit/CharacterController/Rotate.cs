@@ -10,7 +10,7 @@ public class Rotate : Ability
 
     void Update()
     {
-        if (TimeManager.Paused)
+        if (TimeManager.Paused || TimeManager.instance.Undoing())
         {
             return;
         }
