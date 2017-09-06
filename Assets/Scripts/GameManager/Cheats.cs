@@ -3,6 +3,10 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class Cheats : MonoBehaviour
 {
     public static bool on = false;
@@ -66,6 +70,11 @@ public class Cheats : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F10)) {
                 GameManager.instance.CompleteLevel();
             }
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Alpha2)) {
+                EditorApplication.isPaused = true;
+            }
+#endif
         }
     }
 }
