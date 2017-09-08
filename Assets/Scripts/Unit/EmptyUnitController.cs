@@ -38,6 +38,10 @@ public class EmptyUnitController : UnitController
         return Vector2.zero;
     }
 
+    public override float Fly() {
+        return 0;
+    }
+
     public override Vector2 MoveGravity() {
         return Vector2.zero;
     }
@@ -59,6 +63,10 @@ public class EmptyUnitController : UnitController
     }
 
     public override bool SlowmoSwitch() {
+        return false;
+    }
+
+    public override bool GhostSwitch() {
         return false;
     }
 

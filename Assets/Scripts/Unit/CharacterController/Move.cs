@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 
 [RequireComponent(typeof(CCUnitController))]
-public class Move : MonoBehaviour
+public class Move : Ability
 {
     const float MAX_SPEED = 300f;
 
@@ -25,8 +25,10 @@ public class Move : MonoBehaviour
     Jump jump;
     AntigravityEffect antigravityEffect;
 
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         controller = GetComponent<UnitGeometryController>();
         changeScale = GetComponent<ChangeScale>();
 
@@ -35,7 +37,9 @@ public class Move : MonoBehaviour
         antigravityEffect = GetComponent<AntigravityEffect>();
     }
 
-    void Start() {
+    public override void Start() {
+        base.Start();
+
         velocityTracker = new Vector3Tracker(
             (v) => velocity = v,
             () => velocity

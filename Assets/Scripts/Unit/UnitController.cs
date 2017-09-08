@@ -37,6 +37,8 @@ public abstract class UnitController : MonoBehaviour
 
     public abstract bool SlowmoSwitch();
 
+    public abstract bool GhostSwitch();
+
     public abstract bool Run();
 
     public abstract bool PrepareThrow();
@@ -46,6 +48,8 @@ public abstract class UnitController : MonoBehaviour
     public abstract bool ToggleTimestop();
 
     public abstract Vector2 Move();
+
+    public abstract float Fly();
 
     public abstract Vector2 MoveGravity();
 

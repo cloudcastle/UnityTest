@@ -86,6 +86,10 @@ public class Player : UnitController
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
+    public override float Fly() {
+        return Input.GetAxis("Fly");
+    }
+
     public override Vector2 MoveGravity() {
         return new Vector2(Input.GetAxis("Horizontal 2"), Input.GetAxis("Vertical 2"));
     }
@@ -104,6 +108,10 @@ public class Player : UnitController
 
     public override bool SlowmoSwitch() {
         return Input.GetButtonDown("Slowmo");
+    }
+
+    public override bool GhostSwitch() {
+        return Input.GetButtonDown("Ghost");
     }
 
     public override bool Rewind() {
