@@ -17,6 +17,9 @@ public class LevelNode : MonoBehaviour
     public Color dependencyBaseEmission;
     public Color dependencyUnlockedEmission;
     public Color dependencyCompletedEmission;
+    public Color inverseDependencyBaseEmission;
+    public Color inverseDependencyUnlockedEmission;
+    public Color inverseDependencyCompletedEmission;
     public Color lockedBySelected;
     public float unhoverEmissionMuliplier = 0.7f;
     public float hoverEmissionMuliplier = 2f;
