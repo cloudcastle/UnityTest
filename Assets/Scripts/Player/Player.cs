@@ -83,7 +83,7 @@ public class Player : UnitController
     }
 
     public override Vector2 Move() {
-        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     public override float Fly() {
