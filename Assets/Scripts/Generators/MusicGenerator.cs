@@ -18,9 +18,10 @@ public class MusicGenerator : MonoBehaviour
         public float volume;
         public int skip = 1;
 
-        public Note(AudioClip clip, float volume) {
+        public Note(AudioClip clip, float volume, int skip = 1) {
             this.clip = clip;
             this.volume = volume;
+            this.skip = skip;
         }
     }
 
@@ -38,18 +39,16 @@ public class MusicGenerator : MonoBehaviour
         return UnityEngine.Random.Range(0, 1f) < 0.0f ? new Note(x.clip, 0) : new Note(samples.CyclicNext(x.clip, UnityEngine.Random.Range(-8, 9)), x.volume);
     }
 
-    void Awake() {
-        audio = GetComponent<AudioSource>();
-        shuffled = samples.Shuffled();
-        tune = new List<Note>();
+    List<Note> BinarySemicyclicTune() {
+        var tune = new List<Note>();
         tune.Add(new Note(samples[(int)(samples.Count * UnityEngine.Random.Range(0.35f, 0.65f))], 1));
         for (int i = 0; i < 10; i++) {
             int n = tune.Count;
             for (int j = 0; j < n; j++) {
-                if (UnityEngine.Random.Range(0,1f) < 0.2f) {
+                if (UnityEngine.Random.Range(0, 1f) < 0.2f) {
                     tune.Add(RandomNote(tune[j]));
                 } else {
-                    tune.Add(tune[j]);
+                    tune.Add(new Note(tune[j].clip, tune[j].volume, tune[j].skip));
                 }
             }
             for (int j = 0; j < 10; j++) {
@@ -58,21 +57,39 @@ public class MusicGenerator : MonoBehaviour
                 if (UnityEngine.Random.Range(0, 1f) < 0.6f) {
                     break;
                 }
-            } 
-            for (int j = 0; j < 10; j++) {
-                int id = n + UnityEngine.Random.Range(0, n);
-                if (UnityEngine.Random.Range(0, 1f) < Mathf.Pow(0.5f, Power(id))) {
+            }
+            for (int j = n; j < 2*n; j++) {
+                int id = j;
+                if (UnityEngine.Random.Range(0, 1f) < 0.7f) {
+                    continue;
+                }
+                tune[id].skip = 1;
+                if (UnityEngine.Random.Range(0, 1f) < Mathf.Pow(0.7f, Power(id))) {
                     tune[id].skip = (int)Mathf.Pow(2, Power(id));
                 }
-                if (UnityEngine.Random.Range(0, 1f) < 0.6f) {
-                    break;
-                }
             }
+            //for (int j = 0; j < 10; j++) {
+            //    int id = n + UnityEngine.Random.Range(0, n);
+            //    if (UnityEngine.Random.Range(0, 1f) < Mathf.Pow(0.5f, Power(id))) {
+            //        tune[id].skip = (int)Mathf.Pow(2, Power(id));
+            //    }
+            //    if (UnityEngine.Random.Range(0, 1f) < 0.6f) {
+            //        break;
+            //    }
+            //}
+
             //int delta = UnityEngine.Random.Range(-1, 2);
             //for (int j = 0; j < n; j++) {
             //    tune[n + j] = samples.CyclicNext(tune[n + j], delta);
             //}
         }
+        return tune;
+    }
+
+    void Awake() {
+        audio = GetComponent<AudioSource>();
+        shuffled = samples.Shuffled();
+        tune = BinarySemicyclicTune();
     }
 
     int Power(int beat) {
