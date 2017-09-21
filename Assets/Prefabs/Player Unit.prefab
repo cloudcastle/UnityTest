@@ -754,7 +754,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154292}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -1, y: 1, z: -0}
+  m_LocalPosition: {x: -18, y: 11, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 494822}
@@ -1322,8 +1322,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
+  walkTransform: {fileID: 0}
+  zeroY: 0
   speed: 6
   currentSpeed: 0
+  currentVelocity: {x: 0, y: 0, z: 0}
+  inertia: 0.0003
 --- !u!114 &11471404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1537,6 +1541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   move: {fileID: 0}
+  walk: {fileID: 0}
+  fly: {fileID: 0}
   activator: {fileID: 11492236}
   eye: {fileID: 11456928}
   inventory: {fileID: 11434486}
@@ -1548,6 +1554,7 @@ MonoBehaviour:
   rewind: {fileID: 0}
   slowmo: {fileID: 0}
   gravity: {fileID: 0}
+  jetpack: {fileID: 0}
   controller: {fileID: 0}
 --- !u!114 &11499754
 MonoBehaviour:
