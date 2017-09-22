@@ -46,6 +46,9 @@ public class LevelEdge : MonoBehaviour
                 SetEmission(from.Emission());
             }
             renderers.ToList().ForEach(r => r.enabled = from.visible && to.visible || Cheats.on);
+            transform.position = (from.transform.position + to.transform.position) / 2;
+            transform.LookAt(to.transform);
+            transform.localScale = new Vector3(1, 1, (from.transform.position - to.transform.position).magnitude);
         }
     }
 }

@@ -28,8 +28,13 @@ public class LevelNode : MonoBehaviour
     public string levelName;
     public bool visible = true;
 
+    public Vector3 basePosition;
+    public Vector3 baseScale;
+
     new MeshRenderer renderer;
     MeshRenderer textRenderer;
+
+    bool inited = false;
 
     [NonSerialized] 
     public Level level;
@@ -50,6 +55,11 @@ public class LevelNode : MonoBehaviour
 
     public void Start() {
         this.level = GameManager.game.levels.First(l => l.name == levelName);
+        if (!inited) {
+            inited = true;
+            basePosition = transform.position * 2f;
+            baseScale = transform.localScale;
+        }
         Update();
     }
 
@@ -123,6 +133,10 @@ public class LevelNode : MonoBehaviour
             SetEmission(Emission());
             renderer.enabled = textRenderer.enabled = visible;
             UpdateTextMeshSize();
+
+            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = (basePosition + (mouse - basePosition) * 5f / (Mathf.Pow((mouse - basePosition).magnitude, 2)+1)).Change(z: basePosition.z + (1 + Mathf.Pow(0.9f, (mouse - basePosition).magnitude)));
+            transform.localScale = baseScale * (1 + Mathf.Pow(0.9f, (mouse - basePosition).magnitude));
         }
     }
 
