@@ -25,13 +25,16 @@ public class LevelNode : MonoBehaviour
     public float hoverEmissionMuliplier = 2f;
 
     public TextMesh textMesh;
+    public SpriteRenderer ball;
+    public SpriteRenderer light;
+    public GameObject highLight;
+
     public string levelName;
     public bool visible = true;
 
     public Vector3 basePosition;
     public Vector3 baseScale;
 
-    new MeshRenderer renderer;
     MeshRenderer textRenderer;
 
     bool inited = false;
@@ -40,7 +43,6 @@ public class LevelNode : MonoBehaviour
     public Level level;
 
     void OnEnable() {
-        this.renderer = GetComponent<MeshRenderer>();
         this.textRenderer = textMesh.GetComponent<MeshRenderer>();
 #if UNITY_EDITOR
         Selection.selectionChanged += OnSelectionChanged;
@@ -72,18 +74,18 @@ public class LevelNode : MonoBehaviour
     }
 
     public void SetEmission(Color emission) {
-        if (Extensions.Editor()) {
-            var tempMaterial = new Material(renderer.sharedMaterial);
-            tempMaterial.SetColor("_EmissionColor", emission);
-            renderer.sharedMaterial = tempMaterial;
-        } else {
-            renderer.material.SetColor("_EmissionColor", emission);
-        }
+//        if (Extensions.Editor()) {
+//            var tempMaterial = new Material(renderer.sharedMaterial);
+//            tempMaterial.SetColor("_EmissionColor", emission);
+//            //renderer.sharedMaterial = tempMaterial;
+//        } else {
+//            //renderer.material.SetColor("_EmissionColor", emission);
+//        }
     }
 
 #if UNITY_EDITOR
     void OnSelectionChanged() {
-        this.level = GameManager.game.levels.First(l => l.name == levelName);
+        this.level = GameManager.game.levels.FirstOrDefault(l => l.name == levelName);
         GameManager.game.levels.ForEach(l => l.transitiveDependencies = null);
         Level selectedLevel = null;
         if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<LevelNode>() != null) {
@@ -121,22 +123,34 @@ public class LevelNode : MonoBehaviour
         }
     }
 
+    public bool Unlocked() {
+        return level.Unlocked() || Cheats.on;
+    }
+
+    public void SetVisible(bool visible) {
+        ball.enabled = textRenderer.enabled = light.enabled = visible;
+        highLight.SetActive(visible);
+    }
+
+    public bool IsVisible() {
+        return visible && Unlocked();
+    }
+
     void Update() {
         if (Extensions.Editor()) {
-            this.level = GameManager.game.levels.First(l => l.name == levelName);
+            this.level = GameManager.game.levels.FirstOrDefault(l => l.name == levelName);
             gameObject.name = levelName;
             textMesh.text = levelName;
-            renderer.enabled = textRenderer.enabled = visible;
             UpdateTextMeshSize();
         } else {
-            visible = level.Unlocked() || Cheats.on;
             SetEmission(Emission());
-            renderer.enabled = textRenderer.enabled = visible;
+            SetVisible(IsVisible());
             UpdateTextMeshSize();
 
             Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = (basePosition + (mouse - basePosition) * 5f / (Mathf.Pow((mouse - basePosition).magnitude, 2)+1)).Change(z: basePosition.z + (1 + Mathf.Pow(0.9f, (mouse - basePosition).magnitude)));
-            transform.localScale = baseScale * (1 + Mathf.Pow(0.9f, (mouse - basePosition).magnitude));
+            transform.position = (basePosition + (mouse - basePosition) * 0f / (Mathf.Pow((mouse - basePosition).magnitude, 2)+1)).Change(z: basePosition.z + (1 + Mathf.Pow(0.9f, (mouse - basePosition).magnitude)));
+            Vector3 scale = baseScale * (1 + (CameraControl.instance.hovered == this ? 2 : 0));
+            transform.localScale = Vector3.Lerp(scale, transform.localScale, Mathf.Pow(0.5f, Time.deltaTime*10));
         }
     }
 

@@ -1,4 +1,6 @@
-﻿Shader "Custom/Ground" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/Ground" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Color ("Main Color", Color) = (1,1,1,1)
@@ -44,7 +46,7 @@
 				{
 					v2f o;
 	                o.worldPos = mul(unity_ObjectToWorld, v.vertex);
-					o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+					o.vertex = UnityObjectToClipPos(v.vertex);
 					o.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 					UNITY_TRANSFER_FOG(o,o.vertex);
 					return o;
