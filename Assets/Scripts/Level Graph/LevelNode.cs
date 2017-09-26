@@ -32,6 +32,9 @@ public class LevelNode : MonoBehaviour
     public string levelName;
     public bool visible = true;
 
+    public bool autoText = true;
+    public bool autoScaleText = true;
+
     public Vector3 basePosition;
     public Vector3 baseScale;
 
@@ -140,7 +143,9 @@ public class LevelNode : MonoBehaviour
         if (Extensions.Editor()) {
             this.level = GameManager.game.levels.FirstOrDefault(l => l.name == levelName);
             gameObject.name = levelName;
-            textMesh.text = levelName;
+            if (autoText) {
+                textMesh.text = levelName;
+            }
             UpdateTextMeshSize();
         } else {
             SetEmission(Emission());
@@ -155,6 +160,10 @@ public class LevelNode : MonoBehaviour
     }
 
     private void UpdateTextMeshSize() {
+        textMesh.transform.localScale = Vector3.one * 0.00356f;
+        if (!autoScaleText) {
+            return;
+        }
         textMesh.fontSize = (int)(1000f / Camera.main.orthographicSize + 1);
         textMesh.transform.localScale /= textMesh.GetComponent<Renderer>().bounds.extents.magnitude * 2;
     }

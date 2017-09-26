@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class CameraControl : MonoBehaviour
 {
@@ -21,12 +23,14 @@ public class CameraControl : MonoBehaviour
     RaycastHit hit;
     public LevelNode hovered;
 
+    public List<LevelNode> nodes;
+
     Substitution levelNameSubstitution;
     Substitution levelStatusSubstitution;
 
     void Awake() {
         instance = this;
-        var nodes = FindObjectsOfType<LevelNode>();
+        nodes = FindObjectsOfType<LevelNode>().ToList();
         cameraBounds.xMin = nodes.ExtMin(n => n.transform.position.x);
         cameraBounds.xMax = nodes.ExtMax(n => n.transform.position.x);
         cameraBounds.yMin = nodes.ExtMin(n => n.transform.position.y);
@@ -106,14 +110,16 @@ public class CameraControl : MonoBehaviour
         }
         move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * keyboardSpeed * currentZoom);
         var oldHovered = hovered;
-        this.hovered = null;
-        Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);
-        if (hit.collider != null) {
-            var hoveredNode = hit.collider.GetComponent<LevelNode>();
-            if (hoveredNode != null) {
-                this.hovered = hoveredNode;
-            }
-        }
+        Vector3 mouse = camera.ScreenToWorldPoint(Input.mousePosition);
+        this.hovered = nodes.MinBy(n => Vector3.Distance(n.basePosition, mouse));
+
+//        Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);
+//        if (hit.collider != null) {
+//            var hoveredNode = hit.collider.GetComponent<LevelNode>();
+//            if (hoveredNode != null) {
+//                this.hovered = hoveredNode;
+//            }
+//        }
         if (oldHovered != hovered) {
             levelNameSubstitution.Recalculate();
             levelStatusSubstitution.Recalculate();
