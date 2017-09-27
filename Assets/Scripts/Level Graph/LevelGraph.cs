@@ -14,6 +14,22 @@ public class LevelGraph : MonoBehaviour
     public Transform nodes;
     public Transform edges;
 
+    public float zoom = 1;
+
+    [ContextMenu("Zoom")]
+    void Zoom() {
+        if (Extensions.Editor()) {
+            #if UNITY_EDITOR
+            var levelNodes = FindObjectsOfType<LevelNode>().ToList();
+            levelNodes.ForEach(n => {
+                n.transform.position *= zoom;
+            });
+            zoom = 1;
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+            #endif
+        }
+    }
+
     [ContextMenu("Update level set")]
     void UpdateLevelSet() {
         if (Extensions.Editor()) {

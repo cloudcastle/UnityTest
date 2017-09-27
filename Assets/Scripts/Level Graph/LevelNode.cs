@@ -62,7 +62,7 @@ public class LevelNode : MonoBehaviour
         this.level = GameManager.game.levels.First(l => l.name == levelName);
         if (!inited) {
             inited = true;
-            basePosition = transform.position * 2f;
+            basePosition = transform.position;
             baseScale = transform.localScale;
         }
         Update();

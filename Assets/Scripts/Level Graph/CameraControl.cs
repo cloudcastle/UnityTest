@@ -107,6 +107,11 @@ public class CameraControl : MonoBehaviour
                     GameManager.instance.Play(hovered.level);
                 }
             }
+        }       
+        if (Input.GetKeyDown(KeyCode.F12)) {
+            if (hovered != null) {
+                hovered.level.ToggleCompleted();
+            }
         }
         move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * keyboardSpeed * currentZoom);
         var oldHovered = hovered;
@@ -114,7 +119,7 @@ public class CameraControl : MonoBehaviour
         LevelNode closest = nodes.Where(n => n.IsVisible()).MinBy(n => Vector2.Distance(n.basePosition, mouse));
         LevelNode closest2 = nodes.Where(n => n.IsVisible() && n != closest).MinBy(n => Vector2.Distance(n.basePosition, mouse));
 
-        if (Vector2.Distance(closest.basePosition, mouse) < 0.9f * Vector2.Distance(closest2.basePosition, mouse)) {
+        if (Vector2.Distance(closest.basePosition, mouse) < 0.7f * Vector2.Distance(closest2.basePosition, mouse)) {
             hovered = closest;
         } else {
             hovered = null;

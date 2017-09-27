@@ -33,6 +33,15 @@ public class Level
         return GameManager.game.completedLevels.Contains(this);
     }
 
+    public void ToggleCompleted() {
+        if (Completed()) {
+            GameManager.game.completedLevels.Remove(this);
+        } else {
+            GameManager.game.completedLevels.Add(this);
+        }
+        GameManager.instance.Save();
+    }
+
     public int CompletionOrder() {
         return GameManager.game.completedLevels.IndexOf(this);
     }
