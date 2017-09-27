@@ -8,13 +8,16 @@ public class Level
 {
     public string name;
 
+    public int difficulty;
+
     public List<Level> dependencies = new List<Level>();
 
     [NonSerialized]
     public HashSet<Level> transitiveDependencies;
 
-    public Level(string name, params Level[] depends) {
+    public Level(int difficulty, string name, params Level[] depends) {
         this.name = name;
+        this.difficulty = difficulty;
         dependencies = depends.ToList();
         if (Game.current != null)
         {
@@ -34,10 +37,14 @@ public class Level
     }
 
     public void ToggleCompleted() {
-        if (Completed()) {
-            GameManager.game.completedLevels.Remove(this);
-        } else {
+        ToggleCompleted(!Completed());
+    }
+
+    public void ToggleCompleted(bool value) {
+        if (value) {
             GameManager.game.completedLevels.Add(this);
+        } else {
+            GameManager.game.completedLevels.Remove(this);
         }
         GameManager.instance.Save();
     }

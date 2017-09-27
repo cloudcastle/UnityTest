@@ -11,6 +11,11 @@ public class ReplacerMenu : Editor
     private static void ReplaceJumpersToPrefabs() {
         FindObjectOfType<ReplaceToPrefabs>().Replace();
     }
+
+    [MenuItem("Custom/Rebuild Level Graph")]
+    private static void Rebuild() {
+        FindObjectOfType<LevelGraph>().UpdateLevelSet();
+    }
 }
 
 

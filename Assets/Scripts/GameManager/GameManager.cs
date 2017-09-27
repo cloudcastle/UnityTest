@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void UpdateGameVersion() {
-        UpdateList(game.levels, sample.levels, (x,y)=>x.name == y.name, x => new Level(x.name));
+        UpdateList(game.levels, sample.levels, (x,y)=>x.name == y.name, x => new Level(x.difficulty, x.name));
         game.levels.ForEach(gameLevel => {
             UpdateList(
                 gameLevel.dependencies, 

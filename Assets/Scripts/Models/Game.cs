@@ -26,187 +26,188 @@ public class Game
         current = this;
 
         // Intro
-        var click = new Level("Click");
-        var mouseMove = new Level("MouseMove", depends: click);
-        var wasd = new Level("WASD", depends: mouseMove);
-        var fall = new Level("Fall", wasd);
-        var space = new Level("Space", depends: fall);
+        var click = new Level(0, "Click");
+        var mouseMove = new Level(0, "MouseMove", depends: click);
+        var wasd = new Level(0, "WASD", depends: mouseMove);
+        var fall = new Level(0, "Fall", wasd);
+        var space = new Level(0, "Space", depends: fall);
 
         // Lifts Intro
-        var raise = new Level("Raise", depends: wasd);
-        var shift = new Level("Shift", depends: raise);
+        var raise = new Level(0, "Raise", depends: wasd);
+        var shift = new Level(0, "Shift", depends: raise);
 
         // Jumps Intro Part 1
-        var gap = new Level("Gap", shift, space);
-        var spring = new Level("Spring", gap);
+        var gap = new Level(1, "Gap", shift, space);
+        var spring = new Level(1, "Spring", gap);
 
         // Moving Surfaces Intro
-        var ride = new Level("Ride", spring);
-        var f = new Level("F", ride);
+        var ride = new Level(1, "Ride", spring);
+        var f = new Level(1, "F", ride);
 
         // Controls
-        var t = new Level("T", ride, f);
-        var z = new Level("Z", t);
+        var t = new Level(1, "T", ride, f);
+        var splitSecond = new Level(1, "Split second", t);
+        var z = new Level(2, "Z", splitSecond);
 
         // Jumps Intro Part 2
-        var string_ = new Level("String", z);
-        var cornerCase = new Level("Corner case", string_);
+        var string_ = new Level(1, "String", z);
+        var cornerCase = new Level(2, "Corner case", string_);
 
         // Lifts       
-        var order = new Level("Order", string_);
-        var precaution = new Level("Precaution", order);
-        var stairs = new Level("Stairs", precaution, f);
-        var twoPits = new Level("Two pits", precaution, f);
-        var hold = new Level("Hold", precaution, f);
+        var order = new Level(2, "Order", string_);
+        var precaution = new Level(3, "Precaution", order);
+        var stairs = new Level(4, "Stairs", precaution, f);
+        var twoPits = new Level(4, "Two pits", precaution, f);
+        var hold = new Level(4, "Hold", precaution, f);
         // Lifts II
-        var ascention = new Level("Ascention", hold);
-        var launch = new Level("Launch", hold);
-        var temple = new Level("Temple", hold);
-        var underground = new Level("Underground", hold);
-        var tower = new Level("Tower", hold);
+        var ascention = new Level(5, "Ascention", hold);
+        var launch = new Level(5, "Launch", hold);
+        var temple = new Level(5, "Temple", hold);
+        var underground = new Level(5, "Underground", hold);
+        var tower = new Level(5, "Tower", hold);
 
         // Lifts Tricks
-        var rhythm = new Level("Rhythm", order, shift);
-        var secondBeat = new Level("Second beat", rhythm);
-        var trio = new Level("Trio", secondBeat);
+        var rhythm = new Level(3, "Rhythm", order, shift);
+        var secondBeat = new Level(3, "Second beat", rhythm);
+        var trio = new Level(4, "Trio", secondBeat);
 
         // Moving Surfaces
-        var fly = new Level("Fly", string_);
-        var phase = new Level("Phase", string_);
-        var malapropos = new Level("Malapropos", phase);
-        var meetInTheMiddle = new Level("Meet in the middle", fly, raise);
+        var fly = new Level(2, "Fly", string_);
+        var phase = new Level(2, "Phase", string_);
+        var malapropos = new Level(3, "Malapropos", phase);
+        var meetInTheMiddle = new Level(2, "Meet in the middle", fly, raise);
 
         // Jumps
-        var climb = new Level("Climb", gap, z, string_);
-        var sixBoxes = new Level("Six boxes", climb);
-        var snake = new Level("Snake", spring, sixBoxes);
+        var climb = new Level(2, "Climb", gap, z, string_);
+        var sixBoxes = new Level(3, "Six boxes", climb);
+        var snake = new Level(4, "Snake", spring, sixBoxes);
 
         // Buttons intro
-        var open = new Level("Open", wasd, string_);
-        var close = new Level("Close", open);
+        var open = new Level(0, "Open", wasd);
+        var close = new Level(0, "Close", open, string_);
 
         // Keys intro
-        var pass = new Level("Pass", wasd);
-        var fit = new Level("Fit", pass);
-        var cleanHands = new Level("Clean hands", fit);
-        var repick = new Level("Repick", cleanHands);
-        var rightMouseButton = new Level("Right mouse button", repick);
-        var walkthrough = new Level("Walkthrough", rightMouseButton, open);
-        var qeMouseWheel = new Level("QE mouse wheel", walkthrough);
+        var pass = new Level(0, "Pass", wasd);
+        var fit = new Level(0, "Fit", pass);
+        var cleanHands = new Level(0, "Clean hands", fit);
+        var repick = new Level(1, "Repick", cleanHands);
+        var rightMouseButton = new Level(2, "Right mouse button", repick, open);
+        var walkthrough = new Level(1, "Walkthrough", rightMouseButton);
+        var qeMouseWheel = new Level(2, "QE mouse wheel", walkthrough, close);
 
         // Keys
-        var greenCabin = new Level("Green cabin", qeMouseWheel);
-        var blueDoor = new Level("Blue door", greenCabin);
-        var merge = new Level("Merge", greenCabin);
-        var push = new Level("Push", merge);
-        var blueCabin = new Level("Blue cabin", greenCabin);
-        var redCabin = new Level("Red cabin", greenCabin);
-        var stretch = new Level("Stretch", greenCabin);
-        var triple = new Level("Triple", greenCabin, redCabin, blueCabin);
-        var pair = new Level("Pair", triple);
-        var keySequence = new Level("Key sequence", triple);
-        var keyChain = new Level("Key chain", triple);
-
-        // Keys Tricks
-        var column = new Level("Column", qeMouseWheel);
-        var bridge = new Level("Bridge", string_, z, qeMouseWheel);
-        var stand = new Level("Stand", bridge);
-        var reach = new Level("Reach", bridge);
-        var slit = new Level("Slit", reach);
-        var grab = new Level("Grab", slit);
-        var forgotten = new Level("Forgotten", stand, grab);
-        var floor = new Level("Floor", grab);
-        var barehanded = new Level("Barehanded", floor);
-        var pool = new Level("Pool", bridge);
-        var tool = new Level("Tool", column, stand);
-        var intersection = new Level("Intersection", tool);
-        var interception = new Level("Interception", intersection/*timestop*/);
-        var accuracy = new Level("Accuracy", stand, tool);
-        var v = new Level("V", reach);
-
-        // Keys Anticolors
-        var ban = new Level("Ban", qeMouseWheel);
-        var dorBlue = new Level("Dor Blue", ban, blueDoor);
-
-        // Tricks
-        var bars = new Level("Bars", string_);
-        var memories = new Level("Memories", z, bars);
-
-        // Twins Intro
-        var you = new Level("You", pass);
-        var gift = new Level("Gift", you, walkthrough);
-        var giveALift = new Level("Give a lift", you, raise);
-        var bat = new Level("Bat", giveALift, gap);
-        var together = new Level("Together", bat, z);
-        var fat = new Level("Fat", together);
-        var place = new Level("Place", fat, gift);
-
-        // Twins
-        var traverse = new Level("Traverse", place);
-        var pisa = new Level("Pisa", z, place, string_);
-        var deal = new Level("Deal", place, column);
-        var catch_ = new Level("Catch", deal);
-        var coveredHill = new Level("Covered Hill", forgotten, deal);
-
-        // Mixed
-        var delivery = new Level("Delivery", qeMouseWheel);
-
+        var greenCabin = new Level(3, "Green cabin", qeMouseWheel);
+        var blueDoor = new Level(3, "Blue door", greenCabin);
+        var merge = new Level(3, "Merge", greenCabin);
+        var push = new Level(3, "Push", merge);
+        var blueCabin = new Level(3, "Blue cabin", greenCabin);
+        var redCabin = new Level(3, "Red cabin", greenCabin);
+        var stretch = new Level(3, "Stretch", greenCabin);
+        var triple = new Level(3, "Triple", greenCabin, redCabin, blueCabin);
+        var pair = new Level(3, "Pair", triple);
+        var keySequence = new Level(3, "Key sequence", triple);
+        var keyChain = new Level(3, "Key chain", triple);
 
         // Jumps tricks
-        var workaround = new Level("Workaround", open);
+        var workaround = new Level(2, "Workaround", gap, z, close);
+
+        // Keys Tricks
+        var column = new Level(1, "Column", qeMouseWheel);
+        var bridge = new Level(2, "Bridge", string_, z, qeMouseWheel);
+        var stand = new Level(1, "Stand", bridge);
+        var reach = new Level(1, "Reach", bridge);
+        var slit = new Level(3, "Slit", reach);
+        var grab = new Level(2, "Grab", slit);
+        var forgotten = new Level(2, "Forgotten", stand, grab);
+        var floor = new Level(2, "Floor", grab);
+        var barehanded = new Level(4, "Barehanded", floor);
+        var pool = new Level(3, "Pool", bridge);
+        var tool = new Level(1, "Tool", column, stand);
+        var intersection = new Level(3, "Intersection", tool);
+        var interception = new Level(4, "Interception", intersection/*timestop*/);
+        var accuracy = new Level(2, "Accuracy", stand, tool);
+        var v = new Level(1, "V", reach, workaround);
+
+        // Keys Anticolors
+        var ban = new Level(1, "Ban", qeMouseWheel);
+        var dorBlue = new Level(3, "Dor Blue", ban, blueDoor);
+
+        // Tricks
+        var bars = new Level(2, "Bars", string_);
+        var memories = new Level(4, "Memories", z, bars);
+
+        // Twins Intro
+        var you = new Level(2, "You", pass);
+        var gift = new Level(1, "Gift", you, walkthrough);
+        var giveALift = new Level(2, "Give a lift", you, raise);
+        var bat = new Level(1, "Bat", giveALift, gap);
+        var together = new Level(2, "Together", bat, z);
+        var fat = new Level(2, "Fat", together);
+        var place = new Level(3, "Place", fat, gift);
+
+        // Twins
+        var traverse = new Level(3, "Traverse", place);
+        var pisa = new Level(2, "Pisa", z, string_, column);
+        var deal = new Level(4, "Deal", place, column);
+        var catch_ = new Level(3, "Catch", deal);
+        var coveredHill = new Level(4, "Covered Hill", forgotten, deal);
+
+        // Mixed
+        var delivery = new Level(2, "Delivery", rightMouseButton, raise, qeMouseWheel);
+
+
 
         // Timestop
-        var splitSecond = new Level("Split second", z);
-        var juggle = new Level("Juggle", t, delivery);
+        var juggle = new Level(2, "Juggle", t, string_, delivery);
 
         // Twins tricks
-        var bacon = new Level("Bacon", fat, splitSecond);
-        var apart = new Level("Apart", bacon);
-        var doubleDive = new Level("Double dive", apart);
-        var farewell = new Level("Farewell", doubleDive);
-        var invite = new Level("Invite", farewell, traverse);
-        var williamTell = new Level("William Tell", deal, open);
-        var notWilliamTell = new Level("Not William Tell", williamTell, open);
+        var bacon = new Level(3, "Bacon", fat);
+        var apart = new Level(2, "Apart", bacon);
+        var doubleDive = new Level(2, "Double dive", apart);
+        var farewell = new Level(2, "Farewell", doubleDive);
+        var invite = new Level(3, "Invite", farewell, traverse);
+        var williamTell = new Level(4, "William Tell", deal, open);
+        var notWilliamTell = new Level(4, "Not William Tell", williamTell, open);
 
         // Slowmo
-        var doubleJump = new Level("Double jump", doubleDive, v);
-        var skywalker = new Level("Skywalker", v);
-        var toss = new Level("Toss", bat, v);
-        var longDoubleJump = new Level("Long double jump", doubleJump);
-        var extendedJump = new Level("Extended Jump", longDoubleJump, toss);
-        var duck = new Level("Duck", doubleJump);
-        var upkeep = new Level("Upkeep", apart);
-        var link = new Level("Link", upkeep);
-        var boo = new Level("Boo", slit, apart);
+        var doubleJump = new Level(3, "Double jump", doubleDive, v);
+        var skywalker = new Level(3, "Skywalker", v);
+        var toss = new Level(3, "Toss", bat, v);
+        var longDoubleJump = new Level(3, "Long double jump", doubleJump);
+        var extendedJump = new Level(3, "Extended Jump", longDoubleJump, toss);
+        var duck = new Level(3, "Duck", doubleJump);
+        var upkeep = new Level(3, "Upkeep", apart, v);
+        var link = new Level(3, "Link", upkeep);
+        var boo = new Level(3, "Boo", slit, apart, v);
 
         // Portals
-        var edge = new Level("Edge", fit);
-        var serve = new Level("Serve", edge, tool);
-        var levitation = new Level("Levitation", bacon, serve);
-        var up = new Level("Up", levitation);
-        var forward = new Level("Forward", levitation);
-        var support = new Level("Support", levitation);
-        var flip = new Level("Flip", levitation);
-        var collect = new Level("Collect", flip);
-        var exchange = new Level("Exchange", flip);
+        var edge = new Level(2, "Edge", pass);
+        var serve = new Level(1, "Serve", edge);
+        var levitation = new Level(2, "Levitation", stand);
+        var up = new Level(4, "Up", levitation);
+        var forward = new Level(4, "Forward", levitation);
+        var support = new Level(3, "Support", levitation);
+        var flip = new Level(3, "Flip", levitation);
+        var collect = new Level(3, "Collect", flip);
+        var exchange = new Level(3, "Exchange", flip);
 
         // Timestop again
-        var claws = new Level("Claws", support);
-        var _2cor11_33 = new Level("2 Cor 11 33", support, gift, greenCabin);
-        var stop = new Level("Stop", support, close);
+        var claws = new Level(3, "Claws", support);
+        var _2cor11_33 = new Level(4, "2 Cor 11 33", support, gift, greenCabin);
+        var stop = new Level(5, "Stop", support, close);
 
         // Buttons 
-        var closer = new Level("Closer", close, giveALift, v);
-        var tin = new Level("Tin", walkthrough, close);
-        var telekinesis = new Level("Telekinesis", tin, flip);
+        var closer = new Level(3, "Closer", close, giveALift, v);
+        var tin = new Level(3, "Tin", walkthrough, close);
+        var telekinesis = new Level(3, "Telekinesis", tin, flip);
 
         // Gates
-        var gate = new Level("Gate", serve);
-        var unpack = new Level("Unpack", gate);
-        var trip = new Level("Trip", unpack);
-        var extract = new Level("Extract", trip);
-        var parcel = new Level("Parcel", trip);
-        var spiral = new Level("Spiral", forgotten, trip);
+        var gate = new Level(1, "Gate", serve);
+        var unpack = new Level(2, "Unpack", gate);
+        var trip = new Level(2, "Trip", unpack);
+        var extract = new Level(2, "Extract", trip);
+        var parcel = new Level(2, "Parcel", trip);
+        var spiral = new Level(3, "Spiral", forgotten, trip);
 
         currentLevel = click;
         current = null;

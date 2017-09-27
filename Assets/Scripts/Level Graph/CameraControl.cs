@@ -113,6 +113,13 @@ public class CameraControl : MonoBehaviour
                 hovered.level.ToggleCompleted();
             }
         }
+        if (Input.GetKeyDown(KeyCode.C)) {
+            nodes.ForEach(n => {
+                if (!n.IsVisible()) {
+                    n.level.ToggleCompleted(false);
+                }
+            });
+        }
         move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * keyboardSpeed * currentZoom);
         var oldHovered = hovered;
         Vector3 mouse = camera.ScreenToWorldPoint(Input.mousePosition);

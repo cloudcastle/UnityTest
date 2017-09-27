@@ -878,6 +878,7 @@ Transform:
   - {fileID: 22406576}
   - {fileID: 458514}
   - {fileID: 22476966}
+  - {fileID: 4407421555794802}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1232,6 +1233,7 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &11425318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1394,6 +1396,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 11406322}
+  soundVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  soundToggle: {fileID: 0}
+  musicToggle: {fileID: 0}
 --- !u!114 &11436480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2206,6 +2212,7 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: 5.71
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &11478802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2290,6 +2297,7 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!114 &11483622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2393,6 +2401,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 105a0b457318bbb4ba0f4d4729590a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onLevelCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &11490780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2404,6 +2417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb00a9864479d0f448088af81140c654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!114 &11491736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2821,7 +2835,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114438}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -2830,6 +2844,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -2840,7 +2855,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 173030}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -2849,6 +2864,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
@@ -3733,6 +3749,46 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1741779534924712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4407421555794802}
+  - component: {fileID: 114008159515128208}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4407421555794802
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741779534924712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 498600}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114008159515128208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741779534924712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 347e6dedc460943459dc0601dde2e548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114076447821406824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3767,7 +3823,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Wipe Progress
 
-'
+    (hold SHIFT)'
 --- !u!114 &114084790926732534
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,9 +25,14 @@ public class LevelNode : MonoBehaviour
     public float hoverEmissionMuliplier = 2f;
 
     public TextMesh textMesh;
-    public SpriteRenderer ball;
+
+    public GameObject img;
+    public List<GameObject> balls;
     public SpriteRenderer light;
     public GameObject highLight;
+    public GameObject greenLight;
+    public GameObject goldLight;
+    public GameObject redLight;
 
     public string levelName;
     public bool visible = true;
@@ -62,7 +67,7 @@ public class LevelNode : MonoBehaviour
         this.level = GameManager.game.levels.First(l => l.name == levelName);
         if (!inited) {
             inited = true;
-            basePosition = transform.position;
+            basePosition = transform.position * 2 + (UnityEngine.Random.insideUnitSphere * 1).Change(z: 0);
             baseScale = transform.localScale;
         }
         Update();
@@ -94,15 +99,10 @@ public class LevelNode : MonoBehaviour
         if (Selection.activeGameObject != null && Selection.activeGameObject.GetComponent<LevelNode>() != null) {
             selectedLevel = Selection.activeGameObject.GetComponent<LevelNode>().level;
         }
-        if (selectedLevel != null && selectedLevel.Depends(level)) {
-            SetEmission(completedEmission);
-        } else if (selectedLevel == level) {
-            SetEmission(unlockedEmission);
-        } else if (selectedLevel != null && level.Depends(selectedLevel)) {
-            SetEmission(lockedBySelected);
-        } else {
-            SetEmission(baseEmission);
-        }
+
+        greenLight.SetActive(selectedLevel != null && selectedLevel.Depends(level));
+        redLight.SetActive(selectedLevel != null && level.Depends(selectedLevel));
+        highLight.SetActive(selectedLevel != null && (selectedLevel.dependencies.Contains(level) || level.dependencies.Contains(selectedLevel)));
     }
 #endif
 
@@ -131,8 +131,10 @@ public class LevelNode : MonoBehaviour
     }
 
     public void SetVisible(bool visible) {
-        ball.enabled = textRenderer.enabled = light.enabled = visible;
-        highLight.SetActive(visible && IsHovered2());
+        img.SetActive(visible);
+        highLight.SetActive(IsHovered2());
+        greenLight.SetActive(level.Completed());
+        goldLight.SetActive(!level.Completed());
     }
 
     public bool IsHovered() {
@@ -156,11 +158,14 @@ public class LevelNode : MonoBehaviour
     void Update() {
         if (Extensions.Editor()) {
             this.level = GameManager.game.levels.FirstOrDefault(l => l.name == levelName);
+            balls.ForEach(b => b.SetActive(false));
+            balls[level.difficulty].SetActive(true);
             gameObject.name = levelName;
             if (autoText) {
                 textMesh.text = levelName;
             }
             UpdateTextMeshSize();
+            goldLight.SetActive(false);
         } else {
             SetEmission(Emission());
             SetVisible(IsVisible());

@@ -31,7 +31,7 @@ public class LevelGraph : MonoBehaviour
     }
 
     [ContextMenu("Update level set")]
-    void UpdateLevelSet() {
+    public void UpdateLevelSet() {
         if (Extensions.Editor()) {
 #if UNITY_EDITOR
             GameManager.game = new Game();
