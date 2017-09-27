@@ -51,7 +51,11 @@ public class Game
 
         // Jumps Intro Part 2
         var string_ = new Level(1, "String", z);
-        var cornerCase = new Level(2, "Corner case", string_);
+
+        // Tricks
+        var bars = new Level(2, "Bars", string_);
+        var cornerCase = new Level(2, "Corner case", bars);
+        var memories = new Level(4, "Memories", z, cornerCase);
 
         // Lifts       
         var order = new Level(2, "Order", string_);
@@ -132,9 +136,6 @@ public class Game
         var ban = new Level(1, "Ban", qeMouseWheel);
         var dorBlue = new Level(3, "Dor Blue", ban, blueDoor);
 
-        // Tricks
-        var bars = new Level(2, "Bars", string_);
-        var memories = new Level(4, "Memories", z, bars);
 
         // Twins Intro
         var you = new Level(2, "You", pass);
@@ -182,23 +183,23 @@ public class Game
 
         // Portals
         var edge = new Level(2, "Edge", pass);
-        var serve = new Level(1, "Serve", edge);
+        var serve = new Level(1, "Serve", edge, gift);
         var levitation = new Level(2, "Levitation", stand);
         var up = new Level(4, "Up", levitation);
         var forward = new Level(4, "Forward", levitation);
         var support = new Level(3, "Support", levitation);
-        var flip = new Level(3, "Flip", levitation);
+        var flip = new Level(3, "Flip", t, grab, serve);
         var collect = new Level(3, "Collect", flip);
         var exchange = new Level(3, "Exchange", flip);
 
         // Timestop again
         var claws = new Level(3, "Claws", support);
-        var _2cor11_33 = new Level(4, "2 Cor 11 33", support, gift, greenCabin);
+        var _2cor11_33 = new Level(4, "2 Cor 11 33", support, gift, greenCabin,   flip);
         var stop = new Level(5, "Stop", support, close);
 
         // Buttons 
         var closer = new Level(3, "Closer", close, giveALift, v);
-        var tin = new Level(3, "Tin", walkthrough, close);
+        var tin = new Level(3, "Tin", walkthrough, close,   qeMouseWheel);
         var telekinesis = new Level(3, "Telekinesis", tin, flip);
 
         // Gates
