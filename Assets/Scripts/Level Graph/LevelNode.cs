@@ -153,9 +153,22 @@ public class LevelNode : MonoBehaviour
             UpdateTextMeshSize();
 
             Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = (basePosition + (mouse - basePosition) * 0f / (Mathf.Pow((mouse - basePosition).magnitude, 2)+1)).Change(z: basePosition.z + (1 + Mathf.Pow(0.9f, (mouse - basePosition).magnitude)));
-            Vector3 scale = baseScale * (1 + (CameraControl.instance.hovered == this ? 2 : 0));
-            transform.localScale = Vector3.Lerp(scale, transform.localScale, Mathf.Pow(0.5f, Time.deltaTime*10));
+            Vector3 center = CameraControl.instance.hovered == null ? new Vector3(float.PositiveInfinity, float.PositiveInfinity, 0) : CameraControl.instance.hovered.basePosition;
+            float distance = Vector3.Distance(center, basePosition);
+            float scale = 1;
+            Vector3 pos = basePosition;
+            if (CameraControl.instance.hovered) {
+                if (CameraControl.instance.hovered == this) {
+                    scale = 3;
+                }           
+                if (CameraControl.instance.hovered.level.dependencies.Contains(level) || level.dependencies.Contains(CameraControl.instance.hovered.level)) {
+                    scale = 1.7f;
+                    pos += (CameraControl.instance.hovered.basePosition - basePosition) * 0.3f;
+                }
+            }
+
+            transform.position = Vector3.Lerp(pos, transform.position, Mathf.Pow(0.5f, Time.deltaTime*10));
+            transform.localScale = Vector3.Lerp(Vector3.one * scale, transform.localScale, Mathf.Pow(0.5f, Time.deltaTime*10));
         }
     }
 
