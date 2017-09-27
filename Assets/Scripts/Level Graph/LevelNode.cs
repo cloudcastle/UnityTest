@@ -132,7 +132,21 @@ public class LevelNode : MonoBehaviour
 
     public void SetVisible(bool visible) {
         ball.enabled = textRenderer.enabled = light.enabled = visible;
-        highLight.SetActive(visible);
+        highLight.SetActive(visible && IsHovered2());
+    }
+
+    public bool IsHovered() {
+        return CameraControl.instance.hovered == this;
+    }
+
+    public bool IsHovered2() {
+        if (IsHovered()) {
+            return true;
+        }
+        if (CameraControl.instance.hovered == null) {
+            return false;
+        }
+        return CameraControl.instance.hovered.level.dependencies.Contains(level) || level.dependencies.Contains(CameraControl.instance.hovered.level);
     }
 
     public bool IsVisible() {
@@ -160,15 +174,16 @@ public class LevelNode : MonoBehaviour
             if (CameraControl.instance.hovered) {
                 if (CameraControl.instance.hovered == this) {
                     scale = 3;
+                    pos = mouse.Change(z: pos.z);
                 }           
                 if (CameraControl.instance.hovered.level.dependencies.Contains(level) || level.dependencies.Contains(CameraControl.instance.hovered.level)) {
                     scale = 1.7f;
-                    pos += (CameraControl.instance.hovered.basePosition - basePosition) * 0.3f;
+                    pos += (CameraControl.instance.hovered.transform.position - basePosition) * 0.1f;
                 }
             }
 
-            transform.position = Vector3.Lerp(pos, transform.position, Mathf.Pow(0.5f, Time.deltaTime*10));
-            transform.localScale = Vector3.Lerp(Vector3.one * scale, transform.localScale, Mathf.Pow(0.5f, Time.deltaTime*10));
+            transform.position = Vector3.Lerp(pos, transform.position, Mathf.Pow(0.5f, Time.deltaTime*30));
+            transform.localScale = Vector3.Lerp(Vector3.one * scale, transform.localScale, Mathf.Pow(0.5f, Time.deltaTime*30));
         }
     }
 

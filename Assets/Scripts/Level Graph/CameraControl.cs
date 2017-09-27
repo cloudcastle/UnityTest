@@ -111,7 +111,14 @@ public class CameraControl : MonoBehaviour
         move(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * keyboardSpeed * currentZoom);
         var oldHovered = hovered;
         Vector3 mouse = camera.ScreenToWorldPoint(Input.mousePosition);
-        this.hovered = nodes.MinBy(n => Vector3.Distance(n.basePosition, mouse));
+        LevelNode closest = nodes.Where(n => n.IsVisible()).MinBy(n => Vector2.Distance(n.basePosition, mouse));
+        LevelNode closest2 = nodes.Where(n => n.IsVisible() && n != closest).MinBy(n => Vector2.Distance(n.basePosition, mouse));
+
+        if (Vector2.Distance(closest.basePosition, mouse) < 0.9f * Vector2.Distance(closest2.basePosition, mouse)) {
+            hovered = closest;
+        } else {
+            hovered = null;
+        }
 
 //        Physics.Raycast(camera.ScreenToWorldPoint(Input.mousePosition), Vector3.forward, out hit);
 //        if (hit.collider != null) {

@@ -10,6 +10,7 @@ public class LevelEdge : MonoBehaviour
     public LevelNode to;
 
     public SpriteRenderer sprite;
+    public LineRenderer line;
 
     public void SetEmission(Color emission) {
 //        renderers.ToList().ForEach(r => {
@@ -26,12 +27,16 @@ public class LevelEdge : MonoBehaviour
     }
 
     public void SetVisible(bool visible) {
-        sprite.enabled = visible;
+        sprite.enabled = false;
+        line.enabled = visible;
     }
 
     void Update() {
         Vector3 dir = to.transform.position - from.transform.position;
         float len = dir.magnitude;
+        float baseWidth = 0.025f;
+        line.startWidth = from.transform.localScale.x * baseWidth;
+        line.endWidth = to.transform.localScale.x * baseWidth;
 
         if (from != null && to != null) {
             transform.position = (from.transform.position + to.transform.position) / 2;
